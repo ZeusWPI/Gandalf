@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Gandalf::Application.config.secret_key_base = '80a1a550def7f8d65da8b797c909d695455a7c6501d4f15837b7c5ab3cd4d10f78159381daaefc7144e5100a1eb5dfd9b7cef15b9fff2d64c30b689d2006b787'
+Isengard::Application.config.secret_key_base = 'a27fcd9aa2eabd14030493d6b5a1521ba09c9d23a1dd90b3c9d6914b8d226d1df8b46af3005f73a29c3ef1acd86de3669fbe08605d9ce8da73856c734f8a0e36'
