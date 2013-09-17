@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130917161414) do
+ActiveRecord::Schema.define(version: 20130917181103) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -34,6 +34,25 @@ ActiveRecord::Schema.define(version: 20130917161414) do
 
   add_index "people", ["username"], name: "index_people_on_username", unique: true
 
+  create_table "periods", force: true do |t|
+    t.datetime "starts"
+    t.datetime "ends"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "registrations", force: true do |t|
+    t.integer  "barcode"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "event_id"
+  end
+
+  add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
+
   create_table "role_names", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -54,6 +73,18 @@ ActiveRecord::Schema.define(version: 20130917161414) do
   add_index "roles", ["person_id", "event_id", "role_name_id"], name: "index_roles_on_person_id_and_event_id_and_role_name_id", unique: true
   add_index "roles", ["person_id"], name: "index_roles_on_person_id"
   add_index "roles", ["role_name_id"], name: "index_roles_on_role_name_id"
+
+  create_table "zone_accesses", force: true do |t|
+    t.integer  "zone_id"
+    t.integer  "period_id"
+    t.integer  "registration_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "zone_accesses", ["period_id"], name: "index_zone_accesses_on_period_id"
+  add_index "zone_accesses", ["registration_id"], name: "index_zone_accesses_on_registration_id"
+  add_index "zone_accesses", ["zone_id"], name: "index_zone_accesses_on_zone_id"
 
   create_table "zones", force: true do |t|
     t.string   "name"

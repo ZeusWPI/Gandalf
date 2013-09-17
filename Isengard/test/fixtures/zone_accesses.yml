@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  zone_id: 
+  period_id: 
+  registration_id: 
+
+two:
+  zone_id: 
+  period_id: 
+  registration_id: 
