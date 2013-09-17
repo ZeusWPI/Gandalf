@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130917181103) do
+ActiveRecord::Schema.define(version: 20130917185714) do
+
+  create_table "access_levels", force: true do |t|
+    t.string   "name"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "access_levels", ["event_id"], name: "index_access_levels_on_event_id"
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -24,6 +33,16 @@ ActiveRecord::Schema.define(version: 20130917181103) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "included_zones", force: true do |t|
+    t.integer  "zone_id"
+    t.integer  "access_level_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "included_zones", ["access_level_id"], name: "index_included_zones_on_access_level_id"
+  add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
 
   create_table "people", force: true do |t|
     t.string   "username"

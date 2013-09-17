@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  zone_id: 
+  access_level_id: 
+
+two:
+  zone_id: 
+  access_level_id: 
