@@ -1,34 +1,11 @@
 <h1>Create a new event</h1>
-<%= form_for @event, url: {action: "create"} do |event| %>
-    <p>
-        <label>Name:</label>
-        <%= event.text_field :name %>
-    </p>
-    <p>
-        <label>Organisation:</label>
-        <%= event.text_field :organisation %>
-    </p>
-    <p>
-        <label>Location:</label>
-        <%= event.text_field :location %>
-    </p>
-    <p>
-        <label>Website:</label>
-        <%= event.text_field :website %>
-    </p>
-    <p>
-        <label>Event Start:</label>
-        <%= event.datetime_select :start_date %>
-    </p>
-    <p>
-        <label>Event end:</label>
-        <%= event.datetime_select :end_date %>
-    </p>
-    <p>
-        <label>Description:</label>
-        <%= event.text_area :description %>
-    </p>
-    <p>
-        <%= event.submit "Create" %>
-    </p>
+<%= simple_form_for @event do |f| %>
+  <%= f.input :name %>
+  <%= f.input :organisation %>
+  <%= f.input :location %>
+  <%= f.input :website %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :description %>
+  <%= f.button :submit %>
 <% end %>
