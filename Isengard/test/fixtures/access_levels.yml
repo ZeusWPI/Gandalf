@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: access_levels
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  event_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
