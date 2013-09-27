@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 1.2'
 # add annotations of schema inside models
 gem 'annotate'
 
+# Use form helpers, because we live in the future now
+gem 'simple_form'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
