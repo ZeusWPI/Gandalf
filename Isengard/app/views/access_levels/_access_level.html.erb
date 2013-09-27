@@ -1,0 +1,4 @@
+<li>
+    <%= access_level.name %> (<%= link_to 'Remove', event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', method: :delete %>)
+    <%= render access_level.included_zones %>
+</li>

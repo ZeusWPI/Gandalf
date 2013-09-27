@@ -11,4 +11,5 @@
 
 class AccessLevel < ActiveRecord::Base
   belongs_to :event
+  has_many :included_zones, dependent: :destroy
 end

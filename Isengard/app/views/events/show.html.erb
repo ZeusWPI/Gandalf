@@ -1,2 +1,10 @@
 <h1><%= @event.name %></h1>
-<p>Find me in app/views/event/show.html.erb</p>
+<p><%= @event.description %></p>
+
+<h2>Manage Event Zones</h2>
+<ul><%= render @event.zones %></ul>
+<%= render "zones/form" %>
+
+<h2>Manage Access Levels</h2>
+<ul><%= render @event.access_levels %></ul>
+<%= render "access_levels/form" %>

@@ -16,10 +16,10 @@
 
 class Event < ActiveRecord::Base
 
-  has_many :access_levels
-  has_many :zones
-  has_many :registrations
-  has_many :roles
+  has_many :access_levels, dependent: :destroy
+  has_many :zones, dependent: :destroy
+  has_many :registrations, dependent: :destroy
+  has_many :roles, dependent: :destroy
 
   validates :description, presence: true
   validates :end_date, presence: true

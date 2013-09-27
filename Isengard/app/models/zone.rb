@@ -11,4 +11,6 @@
 
 class Zone < ActiveRecord::Base
   belongs_to :event
+  has_many :included_zones, dependent: :destroy
+  has_many :zone_accesses, dependent: :destroy
 end
