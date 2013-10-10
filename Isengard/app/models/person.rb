@@ -10,4 +10,6 @@
 #
 
 class Person < ActiveRecord::Base
+  has_many :roles, dependent: :destroy
+  has_many :events, through: :roles
 end
