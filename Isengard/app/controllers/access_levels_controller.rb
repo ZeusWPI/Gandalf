@@ -23,4 +23,12 @@ class AccessLevelsController < ApplicationController
     respond_with @event
   end
 
+  def update
+    access_level = AccessLevel.find params.require(:id)
+    access_level.update params.require(:access_level).permit(:included_zones)
+    access_level.save!
+    @event = access_level.event
+    respond_with @event
+  end
+
 end
