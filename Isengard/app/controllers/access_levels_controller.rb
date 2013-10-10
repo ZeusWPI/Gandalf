@@ -1,6 +1,6 @@
 class AccessLevelsController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :js
 
   def show
     @access_level = AccessLevel.find params.require(:id)
@@ -22,5 +22,6 @@ class AccessLevelsController < ApplicationController
     access_level.destroy
     respond_with @event
   end
+
 
 end
