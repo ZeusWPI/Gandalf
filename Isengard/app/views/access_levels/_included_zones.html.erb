@@ -1,4 +1,0 @@
-<%= simple_form_for [access_level.event, access_level] do |f| %>
-    <%= f.collection_check_boxes :included_zones, access_level.event.zones, :id, :name %>
-    <%= f.button :submit %>
-<% end %>

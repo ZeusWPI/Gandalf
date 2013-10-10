@@ -25,8 +25,10 @@ class AccessLevelsController < ApplicationController
 
   def update
     access_level = AccessLevel.find params.require(:id)
-    access_level.update params.require(:access_level).permit(:included_zones)
-    access_level.save!
+    zones = params.require(:access_level).require(:zones)
+    # Features introduced in new versions apparently suck pretty hard
+    # manually parse the output here from collection_check_boxes, because rails
+    access_level.set_zones_by_ids zones[0..-2].map { |z| z.split.first.to_i }
     @event = access_level.event
     respond_with @event
   end

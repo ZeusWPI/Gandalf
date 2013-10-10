@@ -1,0 +1,4 @@
+<%= form_for [access_level.event, access_level], remote: true do |f| %>
+  <# holy cow, how many hacks do I have to use here, this should be way more dev-friendly #>
+  <%= f.collection_check_boxes :zones, access_level.event.zones, lambda {|z| [z.id, access_level.id]}, :name,  checked: access_level.zones.map {|z| [z.id, access_level.id]} %>
+<% end %>
