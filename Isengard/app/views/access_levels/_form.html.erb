@@ -1,4 +1,5 @@
 <%= simple_form_for [@event, @event.access_levels.build] do |f| %>
     <%= f.input :name %>
+    <%= f.input :capacity %>
     <%= f.button :submit %>
 <% end %>
