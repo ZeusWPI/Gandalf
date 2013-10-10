@@ -12,4 +12,11 @@
 class AccessLevel < ActiveRecord::Base
   belongs_to :event
   has_many :included_zones, dependent: :destroy
+  has_many :zones, through: :included_zones
+
+  def set_zones_by_ids zones
+    self.zones = self.event.zones.find zones
+    self.save
+  end
+
 end
