@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131005173608) do
+ActiveRecord::Schema.define(version: 20131010193505) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "capacity"
   end
 
   add_index "access_levels", ["event_id"], name: "index_access_levels_on_event_id"

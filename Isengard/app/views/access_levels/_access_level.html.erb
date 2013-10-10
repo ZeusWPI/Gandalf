@@ -1,8 +1,5 @@
 <li>
     <%= access_level.name %>
-    (<%= link_to 'Remove', event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', method: :delete %>):
-    <ul>
-        <%= render partial: "zones/included_zone", collection: access_level.included_zones, locals: {access_level: access_level} %>
-        <li><%= render partial: "zones/add_included_zone", locals: {access_level: access_level} %></li>
-    </ul>
+    (<%= link_to 'Remove', event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', method: :delete %>)
+    <%= render partial: 'access_levels/zones', locals: {access_level: access_level} %>
 </li>

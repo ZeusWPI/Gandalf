@@ -13,7 +13,7 @@ class ZonesController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     @zone = @event.zones.create params.require(:zone).permit(:name)
-    respond_with @event
+    redirect_to @event
   end
 
   def destroy

@@ -16,10 +16,12 @@ Isengard::Application.routes.draw do
   resources :events do
     resources :zones
     resources :access_levels do
-      resources :included_zones
+      resources :zones 
     end
     resources :role_names
   end
+
+  patch "events/:event_id/access_level/:access_level_id/set_zones", to: "access_levels#set_zones", as: "set_zones_for_access_level"
 
   # Example resource route with options:
   #   resources :products do
