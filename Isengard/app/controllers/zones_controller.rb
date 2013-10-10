@@ -12,8 +12,12 @@ class ZonesController < ApplicationController
 
   def create
     @event = Event.find params.require(:event_id)
-    @zone = @event.zones.create params.require(:zone).permit(:name)
-    respond_with @event
+    access_level = AccessLevel.find params.require(:access_level_id)
+    zones = params.require(:access_level).require(:zones)
+    # Features introduced in new versions apparently suck pretty hard
+    # manually parse the output here from collection_check_boxes, because rails
+    access_level.set_zones_by_ids zones[0..-2].map { |z| z.split.first.to_i }
+    redirect_to @event
   end
 
   def destroy
