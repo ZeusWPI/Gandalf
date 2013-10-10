@@ -15,7 +15,10 @@ Isengard::Application.routes.draw do
   #   resources :products
   resources :events do
     resources :zones
-    resources :access_levels
+    resources :access_levels do
+      resources :included_zones
+    end
+    resources :role_names
   end
 
   # Example resource route with options:

@@ -1,0 +1,4 @@
+<%= simple_form_for [access_level.event, access_level, access_level.included_zones.build] do |f| %>
+    <%= f.input :zone_id, collection: Zone.all, label_method: :name, value_method: :id %>
+    <%= f.button :submit %>
+<% end %>
