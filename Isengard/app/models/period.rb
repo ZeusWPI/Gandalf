@@ -11,4 +11,5 @@
 #
 
 class Period < ActiveRecord::Base
+  has_many :zone_access
 end
