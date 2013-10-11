@@ -1,11 +1,61 @@
 <h1>Create a new event</h1>
-<%= simple_form_for @event do |f| %>
-  <%= f.input :name %>
-  <%= f.input :organisation %>
-  <%= f.input :location %>
-  <%= f.input :website %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-  <%= f.input :description %>
-  <%= f.button :submit %>
+<%= form_for @event  do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>:
+    <div class="row">
+      <div class="col-lg-3"><%= f.text_field :name, class: 'form-control col-lg-4' %></div></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :organisation %>:
+    <div class="row">
+      <div class="col-lg-3"><%= f.text_field :organisation, class: 'form-control col-md-4' %></div></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :location %>:
+    <div class="row">
+      <div class="col-lg-3"><%= f.text_field :location, class: 'form-control' %></div></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website %>:
+    <div class="row">
+      <div class="col-lg-3"><%= f.text_field :website, class: 'form-control' %></div></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start_date %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          <%= f.text_field :start_date, class: 'form-control', id: "start" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_date %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          <%= f.text_field :end_date, class: 'form-control', id: "end" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.text_field :description, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>

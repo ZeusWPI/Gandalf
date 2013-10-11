@@ -7,5 +7,16 @@ ready = ->
   $('.edit_access_level > :checkbox').change ->
     $(this).parent().submit()
 
+  # Fancy fields
+  datePickerOptions = {
+    autoclose: true,
+    weekStart: 1,
+    startDate: $.format.date(Date(), "yyyy-MM-dd HH:mm")
+  };
+
+  $('#start').datetimepicker(datePickerOptions);
+  $('#end').datetimepicker(datePickerOptions);
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
