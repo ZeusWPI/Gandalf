@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010193505) do
+ActiveRecord::Schema.define(version: 20131017145131) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(version: 20131010193505) do
   end
 
   add_index "access_levels", ["event_id"], name: "index_access_levels_on_event_id"
+
+  create_table "accesses", force: true do |t|
+    t.integer  "period_id"
+    t.integer  "registration_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "access_level_id"
+  end
+
+  add_index "accesses", ["access_level_id"], name: "index_accesses_on_access_level_id"
+  add_index "accesses", ["period_id"], name: "index_accesses_on_period_id"
+  add_index "accesses", ["registration_id"], name: "index_accesses_on_registration_id"
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -60,7 +72,10 @@ ActiveRecord::Schema.define(version: 20131010193505) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
+
+  add_index "periods", ["event_id"], name: "index_periods_on_event_id"
 
   create_table "registrations", force: true do |t|
     t.integer  "barcode"
@@ -93,18 +108,6 @@ ActiveRecord::Schema.define(version: 20131010193505) do
   add_index "roles", ["person_id", "event_id", "role_name_id"], name: "index_roles_on_person_id_and_event_id_and_role_name_id", unique: true
   add_index "roles", ["person_id"], name: "index_roles_on_person_id"
   add_index "roles", ["role_name_id"], name: "index_roles_on_role_name_id"
-
-  create_table "zone_accesses", force: true do |t|
-    t.integer  "zone_id"
-    t.integer  "period_id"
-    t.integer  "registration_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "zone_accesses", ["period_id"], name: "index_zone_accesses_on_period_id"
-  add_index "zone_accesses", ["registration_id"], name: "index_zone_accesses_on_registration_id"
-  add_index "zone_accesses", ["zone_id"], name: "index_zone_accesses_on_zone_id"
 
   create_table "zones", force: true do |t|
     t.string   "name"

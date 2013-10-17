@@ -23,6 +23,8 @@ class Event < ActiveRecord::Base
   has_many :roles, dependent: :destroy
   has_many :people, through: :roles
 
+  has_many :periods, dependent: :destroy
+
   validates :description, presence: true
   validates :end_date, presence: true
   validates :location, presence: true

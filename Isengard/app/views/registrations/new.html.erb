@@ -1,0 +1,25 @@
+<%= simple_form_for [@event, @event.registrations.build] do |f| %>
+    <%= f.input :email %>
+    <%= f.input :name %>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <% @event.periods.each do |p| %>
+                <th><%= p.name %></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @event.access_levels.each do |al| %>
+            <tr>
+                <th><%= al.name %></th>
+                <% @event.periods.each do |p| %>
+                <td><input type="checkbox" name="registration[checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
+                <% end %>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= f.button :submit %>
+<% end %>
