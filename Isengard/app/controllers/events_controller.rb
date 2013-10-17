@@ -14,6 +14,16 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
+  def edit
+    @event = Event.find params[:id]
+  end
+
+  def update
+    @event = Event.find params[:id]
+    @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description)
+    respond_with @event
+  end
+
   def create
     @event = Event.create params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description)
     respond_with @event
