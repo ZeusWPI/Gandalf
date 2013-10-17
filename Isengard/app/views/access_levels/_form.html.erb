@@ -1,5 +1,20 @@
-<%= simple_form_for [@event, @event.access_levels.build] do |f| %>
-    <%= f.input :name %>
-    <%= f.input :capacity %>
-    <%= f.button :submit %>
+<%= form_for [@event, @event.access_levels.build] do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :capacity %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.number_field :capacity, class: 'form-control', min: 0 %>
+      </div>
+    </div>
+  </div>
+  <%= f.button :submit, class: 'btn btn-group btn-primary' %>
 <% end %>

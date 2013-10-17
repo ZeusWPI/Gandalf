@@ -1,4 +1,15 @@
-<%= simple_form_for [@event, @event.zones.build] do |f| %>
-    <%= f.input :name %>
-    <%= f.button :submit %>
+<%= form_for [@event, @event.zones.build] do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="input-group">
+          <%= f.text_field :name, class: 'input-medium form-control' %>
+          <span class="input-group-btn">
+            <%= f.button :submit, class: 'btn btn-group btn-primary' %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

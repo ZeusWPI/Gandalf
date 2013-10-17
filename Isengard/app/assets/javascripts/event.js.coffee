@@ -7,5 +7,19 @@ ready = ->
   $('.edit_access_level > :checkbox').change ->
     $(this).parent().submit()
 
+  # Fancy fields
+  datePickerOptions = {
+    autoclose: true,
+    weekStart: 1,
+    startDate: $.format.date(Date(), "yyyy-MM-dd HH:mm")
+  };
+
+  $('#start').datetimepicker(datePickerOptions);
+  $('#end').datetimepicker(datePickerOptions);
+
+  # Adds Bootstrap error classes to all faulty fields
+  $(".field_with_errors").parent().filter(".form-group").addClass("has-error");
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
+

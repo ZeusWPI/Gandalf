@@ -8,57 +8,53 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
+
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#">Gandalf</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="nav-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-              </li>
-            </ul>
-            <form class="navbar-form pull-right">
-              <button type="submit" class="btn">Sign in</button>
-            </form>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
+    <nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">Gandalf</a>
     </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="<%= events_path %>">Events</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="<%= new_event_path %>">Create event</a></li>
+        </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
+      <%= yield %>
+    </div>
 
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <%= yield %>
-      </div>
+    <hr>
 
-      <hr>
+    <footer>
+    <p>&copy; Company 2013</p>
+    </footer>
+  </div> <!-- /container -->
 
-      <footer>
-      <p>&copy; Company 2013</p>
-      </footer>
-
-    </div> <!-- /container -->
-
-
-  </body>
+</body>
 </html>

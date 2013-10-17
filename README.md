@@ -15,3 +15,8 @@ Uruk-hai is the little server that syncs the little Hobbitses.
 
 ## 3. Hobbit
 The Hobbits are mini servers that have a printer and a barcode scanner.
+
+# Contributors (in order of contribution)
+1. Felix Van der Jeugt
+2. Toon Willems
+3. Tom Naessens

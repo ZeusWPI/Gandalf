@@ -1,5 +1,5 @@
-<li>
-    <%= access_level.name %>
-    (<%= link_to 'Remove', event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', method: :delete %>)
-    <%= render partial: 'access_levels/zones', locals: {access_level: access_level} %>
-</li>
+<tr>
+  <td><%= access_level.name %></td>
+  <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
+  <td><%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', method: :delete %></td>
+</tr>

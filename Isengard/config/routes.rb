@@ -3,7 +3,7 @@ Isengard::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -16,7 +16,7 @@ Isengard::Application.routes.draw do
   resources :events do
     resources :zones
     resources :access_levels do
-      resources :zones 
+      resources :zones
     end
     resources :role_names
     resources :registrations
