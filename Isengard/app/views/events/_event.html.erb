@@ -3,4 +3,8 @@
   <td><%= event.location %></td>
   <td><%= event.start_date.strftime("%c") %></td>
   <td><%= event.end_date.strftime("%c") %></td>
+  <td>
+    <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_event_path(event) %>
+    <%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_path(event), confirm: 'Are you sure?', method: :delete %>
+  </td>
 </tr>
