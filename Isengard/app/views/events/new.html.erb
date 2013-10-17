@@ -1,4 +1,19 @@
 <h1>Create a new event</h1>
+<% if @event.errors.any? %>
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
+    </div>
+    <div class="panel-body">
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
 <%= form_for @event  do |f| %>
   <div class="form-group">
     <%= f.label :name %>:
