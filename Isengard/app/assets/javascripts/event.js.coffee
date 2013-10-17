@@ -11,6 +11,7 @@ ready = ->
   datePickerOptions = {
     autoclose: true,
     weekStart: 1,
+    language: 'nl',
     startDate: $.format.date(Date(), "yyyy-MM-dd HH:mm")
   };
 
