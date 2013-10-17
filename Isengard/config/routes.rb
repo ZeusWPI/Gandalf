@@ -16,7 +16,7 @@ Isengard::Application.routes.draw do
   resources :events do
     resources :zones
     resources :access_levels do
-      resources :zones 
+      resources :zones
     end
     resources :role_names
   end
