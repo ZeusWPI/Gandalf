@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: zone_accesses
+# Table name: accesses
 #
 #  id              :integer          not null, primary key
 #  zone_id         :integer
@@ -10,8 +10,8 @@
 #  updated_at      :datetime
 #
 
-class ZoneAccess < ActiveRecord::Base
-  belongs_to :zone
+class Access < ActiveRecord::Base
+  belongs_to :access_level
   belongs_to :period
   belongs_to :registration
 end

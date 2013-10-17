@@ -13,5 +13,5 @@
 
 class Registration < ActiveRecord::Base
   belongs_to :event
-  has_many :zone_accesses, dependent: :destroy
+  has_many :accesses, dependent: :destroy
 end

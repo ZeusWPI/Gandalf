@@ -1,13 +1,25 @@
 <%= simple_form_for [@event, @event.registrations.build] do |f| %>
     <%= f.input :email %>
     <%= f.input :name %>
-    <div id="zone_accesses">
-        <div class="zone_access">
-            <input type="text" class="period" name="registration[zone_accesses][1][period]" />
-            <input type="text" class="zone" name="registration[zone_accesses][1][zone]" />
-        </div>
-    </div>
-    <input type="hidden" id="counter" value="1" />
-    <input type="button" id="add-period" />
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <% @event.periods.each do |p| %>
+                <th><%= p.name %></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @event.access_levels.each do |al| %>
+            <tr>
+                <th><%= al.name %></th>
+                <% @event.periods.each do |p| %>
+                <td><input type="checkbox" name="registration[checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
+                <% end %>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
     <%= f.button :submit %>
 <% end %>
