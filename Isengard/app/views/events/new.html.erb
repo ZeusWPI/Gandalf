@@ -1,4 +1,7 @@
 <h1>Create a new event</h1>
+
+<%= form_errors @event %>
+
 <%= form_for @event  do |f| %>
   <div class="form-group">
     <%= f.label :name %>:

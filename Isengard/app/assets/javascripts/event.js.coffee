@@ -17,6 +17,9 @@ ready = ->
   $('#start').datetimepicker(datePickerOptions);
   $('#end').datetimepicker(datePickerOptions);
 
+  # Adds Bootstrap error classes to all faulty fields
+  $(".field_with_errors").parent().filter(".form-group").addClass("has-error");
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
 
