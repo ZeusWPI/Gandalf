@@ -42,6 +42,9 @@ group :development do
   gem 'rails-erd'
 end
 
+# Let's use devise for users
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
