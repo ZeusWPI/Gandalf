@@ -1,0 +1,30 @@
+<%= form_for [@event, @event.periods.build] do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :starts %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.datetime_field :starts, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :ends %>:
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.datetime_field :ends, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.button :submit, class: 'btn btn-group btn-primary' %>
+<% end %>

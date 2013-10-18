@@ -35,3 +35,20 @@
 
 <%= render "access_levels/form" %>
 
+<h2>Manage Access Periods</h2>
+<div class="row">
+  <div class="col-lg-5">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <th>Name</th>
+          <th>Starts</th>
+          <th>Ends</th>
+        </thead>
+        <%= render @event.periods %>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= render "periods/form" %>
