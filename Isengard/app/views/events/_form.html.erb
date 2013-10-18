@@ -31,7 +31,7 @@
       <div class="col-lg-3">
         <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-          <%= f.text_field :start_date, class: 'form-control', id: "start", value: f.object.start_date.strftime("%Y-%m-%d %H:%M") %>
+          <%= f.text_field :start_date, class: 'form-control', id: "start", value: f.object.start_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
       <div class="col-lg-3">
         <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-          <%= f.text_field :end_date, class: 'form-control', id: "end", value: f.object.end_date.strftime("%Y-%m-%d %H:%M") %>
+          <%= f.text_field :end_date, class: 'form-control', id: "end", value: f.object.end_date.try { |d| d.strftime("%Y-%m-%d %H:%M") }%>
         </div>
       </div>
     </div>
