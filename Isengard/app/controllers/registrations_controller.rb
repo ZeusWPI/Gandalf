@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
         end
       end
     end
-    respond_with @event
+    render 'registrations/confirm'
   end
 
 end
