@@ -8,11 +8,16 @@
     </div>
   </div>
 
+  <input type="checkbox">All day</input>
+
   <div class="form-group">
     <%= f.label :starts %>:
     <div class="row">
       <div class="col-lg-3">
-        <%= f.datetime_field :starts, class: 'form-control' %>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          <%= f.text_field :starts, class: 'form-control', id: "period-start", value: f.object.starts.try { |d| d.strftime("%Y-%m-%d %H:%M") }%>
+        </div>
       </div>
     </div>
   </div>
@@ -21,7 +26,10 @@
     <%= f.label :ends %>:
     <div class="row">
       <div class="col-lg-3">
-        <%= f.datetime_field :ends, class: 'form-control' %>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          <%= f.text_field :ends, class: 'form-control', id: "period-end", value: f.object.ends.try { |d| d.strftime("%Y-%m-%d %H:%M") }%>
+        </div>
       </div>
     </div>
   </div>
