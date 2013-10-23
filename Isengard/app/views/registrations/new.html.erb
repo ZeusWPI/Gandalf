@@ -1,25 +1,44 @@
-<%= simple_form_for [@event, @event.registrations.build] do |f| %>
-    <%= f.input :email %>
-    <%= f.input :name %>
+<%= form_for [@event, @event.registrations.build] do |f| %>
+  <div class="registration">
+    <div class="form-group">
+      <%= f.label :email %>
+      <div class="row">
+        <div class="col-lg-3">
+          <input type="text" class="form-control" name="registrations[][email]" />
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <%= f.label :name %>
+      <div class="row">
+        <div class="col-lg-3">
+          <input type="text" class="form-control" name="registrations[][name]" />
+        </div>
+      </div>
+    </div>
+  
     <table>
-        <thead>
-            <tr>
-                <th></th>
-                <% @event.periods.each do |p| %>
-                <th><%= p.name %></th>
-                <% end %>
-            </tr>
-        </thead>
-        <tbody>
-            <% @event.access_levels.each do |al| %>
-            <tr>
-                <th><%= al.name %></th>
-                <% @event.periods.each do |p| %>
-                <td><input type="checkbox" name="registration[checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
-                <% end %>
-            </tr>
+      <thead>
+        <tr>
+          <th></th>
+          <% @event.periods.each do |p| %>
+            <th><%= p.name %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.access_levels.each do |al| %>
+          <tr>
+            <th><%= al.name %></th>
+            <% @event.periods.each do |p| %>
+              <td><input type="checkbox" name="registrations[][checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
             <% end %>
-        </tbody>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
-    <%= f.button :submit %>
+  </div>
+  <button id="add-registration">Add registration</button>
+  <%= f.button :submit %>
 <% end %>
