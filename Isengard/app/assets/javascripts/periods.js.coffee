@@ -15,8 +15,8 @@ ready = ->
     autoclose: true,
     weekStart: 1,
     language: 'nl',
-    startDate: $.format.date(Date(), "yyyy-MM-dd")
-    #showTimePicker: false
+    startDate: $.format.date(Date(), "yyyy-MM-dd"),
+    format: 'yyyy-mm-dd'
   };
 
   $('#period-start').datetimepicker(datePickerOptions);
