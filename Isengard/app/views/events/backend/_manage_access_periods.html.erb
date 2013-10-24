@@ -1,0 +1,18 @@
+<div class="col-lg-6">
+  <h2>Manage Access Periods</h2>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <th>Name</th>
+            <th>Starts</th>
+            <th>Ends</th>
+          </thead>
+          <%= render @event.periods %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <%= render "periods/form" %>
+</div>
