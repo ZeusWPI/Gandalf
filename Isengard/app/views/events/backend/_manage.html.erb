@@ -1,5 +1,23 @@
 <div class="row">
-  <%= render "events/backend/manage_zones" %>
-  <%= render "events/backend/manage_access_levels" %>
-  <%-# render "events/backend/manage_access_periods" -%>
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#basic" data-toggle="tab">Basic</a></li>
+    <li class="dropdown">
+    <a href="#" id="advanced_drop" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="advanced_drop">
+      <li><a href="#zones" tabindex="-1" data-toggle="tab">Zones</a></li>
+      <li><a href="#access_periods" tabindex="-1" data-toggle="tab">Access Periods</a></li>
+    </ul>
+    </li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active in" id="basic">
+      <%= render "events/backend/manage_access_levels" %>
+    </div>
+    <div class="tab-pane" id="zones">
+      <%= render "events/backend/manage_zones" %>
+    </div>
+    <div class="tab-pane" id="access_periods">
+      <%= render "events/backend/manage_access_periods" %>
+    </div>
+  </div>
 </div>
