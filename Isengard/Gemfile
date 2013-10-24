@@ -44,6 +44,11 @@ end
 
 # Let's use devise for users
 gem 'devise'
+gem 'devise_cas_authenticatable'
+
+# CanCan is used for authorization
+gem 'cancan'
+gem 'httparty'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

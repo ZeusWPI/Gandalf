@@ -1,5 +1,9 @@
 class EventsController < ApplicationController
 
+  # order is important here, we need to be authenticated before we can check permission
+  before_filter :authenticate_user!, except: [:show, :index]
+  load_and_authorize_resource only: [:new, :show, :update, :edit]
+
   respond_to :html
 
   def index
@@ -7,25 +11,22 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find params.require(:id)
   end
 
   def new
-    @event = Event.new
   end
 
   def edit
-    @event = Event.find params[:id]
   end
 
   def update
-    @event = Event.find params[:id]
     @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description)
     respond_with @event
   end
 
   def create
-    @event = Event.create params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description)
+    authorize! :create, Event
+    @event = Event.create(params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description).merge club: current_user.club)
     respond_with @event
   end
 

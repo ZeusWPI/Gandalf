@@ -28,23 +28,17 @@
           <% if user_signed_in? %>
             <li>
             <p class="navbar-text">
-              <%= current_user.email %>
+              <%= current_user.username %>
             </p>
             </li>
             <li>
-              <%= link_to "Logout", destroy_user_session_path(user_session), method: :delete %>
+              <%= link_to "Logout", destroy_user_session_path(current_user), method: :delete %>
             </li>
           <% else %>
-            <%= form_for  User.new, as: "user", url: session_path("user"), html: {class: "navbar-form navbar-left"} do |f| %>
-              <div class="form-group">
-                <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
-              </div>
-              <div class="form-group">
-                <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
-              </div>
-              <%= f.submit "Login", class: "btn btn-primary"  %>
-            <% end %>
-        <% end %>
+            <li>
+              <%= link_to "Login", new_user_session_path %>
+            </li>
+          <% end %>
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
         <ul class="dropdown-menu">
