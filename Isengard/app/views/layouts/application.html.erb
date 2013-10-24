@@ -11,25 +11,34 @@
 
   <body>
     <nav class="navbar navbar-default" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Toggle navigation</span>
-      </button>
-      <a class="navbar-brand" href="<%= root_path %>">Gandalf</a>
-    </div>
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">Gandalf</a>
+      </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="<%= events_path %>">Events</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="<%= events_path %>">Events</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if can? :manage, Event %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="<%= new_event_path %>">Create event</a></li>
+            </ul>
+          </li>
+          <% end %>
+
           <% if user_signed_in? %>
             <li>
-            <p class="navbar-text">
-              <%= current_user.username %>
-            </p>
+              <p class="navbar-text">
+                Logged in as <%= current_user.username %>
+              </p>
             </li>
             <li>
               <%= link_to "Logout", destroy_user_session_path(current_user), method: :delete %>
@@ -39,14 +48,8 @@
               <%= link_to "Login", new_user_session_path %>
             </li>
           <% end %>
-        <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="<%= new_event_path %>">Create event</a></li>
         </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+      </div><!-- /.navbar-collapse -->
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->

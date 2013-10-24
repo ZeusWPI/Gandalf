@@ -1,0 +1,4 @@
+<% if can? :manage, event %>
+  <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> edit'), edit_event_path(event) %>
+  <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> delete'), event_path(event), confirm: 'Are you sure?', method: :delete %>
+<% end %>
