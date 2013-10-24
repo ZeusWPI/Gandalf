@@ -7,17 +7,6 @@ ready = ->
   $('.edit_access_level > :checkbox').change ->
     $(this).parent().submit()
 
-  #for bootstrap 3 use 'shown.bs.tab' instead of 'shown' in the next line
-  $('a[data-toggle="tab"]').on "shown.bs.tab", (e) ->
-    #save the latest tab; use cookies if you like 'em better:
-    location.hash = $(e.target).attr('href').substr(1)
-    localStorage.setItem "lastTab", location.hash
-
-
-  #go to the latest tab, if it exists:
-  lastTab = localStorage.getItem("lastTab")
-  $('#myTab a[href='+lastTab+']').tab "show"  if lastTab
-
   # Fancy fields
   datePickerOptions = {
     autoclose: true,
