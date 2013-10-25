@@ -2,8 +2,9 @@
 
 <div class="row">
   <ul id="myTab" class="nav nav-tabs">
-    <li class="active"><a href="#basic" data-toggle="tab">Basic</a></li>
+    <li class="active"><a href="#general" data-toggle="tab">General</a></li>
     <li><a href="#registrations" data-toggle="tab">Registrations</a></li>
+    <li><a href="#basic" data-toggle="tab">Access levels</a></li>
     <li class="dropdown">
       <a href="#" id="advanced_drop" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="advanced_drop">
@@ -15,11 +16,14 @@
   </ul>
 
   <div id="myTabContent" class="tab-content">
-    <div class="tab-pane active in" id="basic">
-      <%= render "events/backend/manage_access_levels", advanced: false %>
+    <div class="tab-pane active in" id="general">
+      <%= render "events/backend/manage_edit_general" %>
     </div>
     <div class="tab-pane" id="registrations">
       <%= render "events/backend/manage_registrations" %>
+    </div>
+    <div class="tab-pane" id="basic">
+      <%= render "events/backend/manage_access_levels", advanced: false %>
     </div>
     <div class="tab-pane" id="access_levels_advanced">
       <%= render "events/backend/manage_access_levels", advanced: true %>
