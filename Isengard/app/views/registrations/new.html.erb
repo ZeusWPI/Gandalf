@@ -2,32 +2,45 @@
   <div class="form-group">
     <%= f.label :name %>:
     <div class="row">
-      <div class="col-lg-3"><%= f.text_field :name, class: 'form-control col-md-4' %></div></div>
+      <div class="col-lg-3"><%= f.text_field :name, class: 'form-control col-md-4' %></div>
+    </div>
   </div>
+
   <div class="form-group">
     <%= f.label :email %>
     <div class="row">
-      <div class="col-lg-3"><%= f.email_field :email, class: 'form-control col-md-4' %></div></div>
+      <div class="col-lg-3"><%= f.email_field :email, class: 'form-control col-md-4' %></div>
+    </div>
   </div>
-  <table>
-      <thead>
-          <tr>
+
+
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
               <th></th>
               <% @event.periods.each do |p| %>
-              <th><%= p.name %></th>
+                <th><%= p.name %></th>
               <% end %>
-          </tr>
-      </thead>
-      <tbody>
-          <% @event.access_levels.each do |al| %>
-          <tr>
-              <th><%= al.name %></th>
-              <% @event.periods.each do |p| %>
-              <td><input type="checkbox" name="registration[checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
-              <% end %>
-          </tr>
-          <% end %>
-      </tbody>
-  </table>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @event.access_levels.each do |al| %>
+              <tr>
+                <th><%= al.name %></th>
+                <% @event.periods.each do |p| %>
+                  <td><input type="checkbox" name="registration[checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <%= f.button :submit %>
 <% end %>

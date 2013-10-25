@@ -1,0 +1,17 @@
+<div class="col-lg-6">
+  <h2>Manage Event Zones</h2>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <th>Name</th>
+            <th>Actions</th>
+          </thead>
+          <%= render @event.zones %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <%= render "zones/form" %>
+</div>
