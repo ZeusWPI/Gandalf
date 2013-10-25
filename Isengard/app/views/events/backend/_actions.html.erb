@@ -1,5 +1,5 @@
-<%= link_to raw('<i class="glyphicon glyphicon-log-in"></i> register'), new_event_registration_path(event) %>
+<%= link_to raw('<span class="glyphicon glyphicon-log-in"></span> Register'), new_event_registration_path(event), class: "btn btn-default btn-xs" %>
 <% if can? :manage, event %>
-  <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> edit'), event_path(event) %>
-  <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> delete'), event_path(event), confirm: 'Are you sure?', method: :delete %>
+  <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), event_path(event), class: "btn btn-default btn-xs" %>
+  <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), event_path(event), class: "btn btn-danger btn-xs", confirm: 'Are you sure?', method: :delete %>
 <% end %>
