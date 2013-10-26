@@ -42,11 +42,11 @@
                 </p>
               </li>
               <li>
-                <%= button_to "Logout", destroy_user_session_path(current_user), method: :delete, class: "btn btn-default navbar-btn" %>
+                <%= link_to "Logout", destroy_user_session_path(current_user), method: :delete %>
               </li>
             <% else %>
               <li>
-                <%= button_to "Login", new_user_session_path, class: "btn btn-default navbar-btn" %>
+                <%= link_to "Login", new_user_session_path %>
               </li>
             <% end %>
           </ul>
