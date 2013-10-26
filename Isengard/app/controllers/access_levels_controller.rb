@@ -20,9 +20,9 @@ class AccessLevelsController < ApplicationController
     access_level = AccessLevel.find params.require(:id)
     # Save the name so we can respond it as we still have to
     # be able to delete it
-    @name = access_level.name
+    @id = access_level.id
     access_level.destroy
-    respond_with @name
+    respond_with @id
   end
 
   def set_zones

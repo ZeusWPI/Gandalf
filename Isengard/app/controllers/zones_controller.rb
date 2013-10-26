@@ -18,9 +18,9 @@ class ZonesController < ApplicationController
 
   def destroy
     zone = Zone.find params.require(:id)
-    @name = zone.name
+    @id = zone.id
     zone.destroy
-    respond_with @name
+    respond_with @id
   end
 
 end
