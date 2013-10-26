@@ -8,6 +8,9 @@ Devise.setup do |config|
 
   config.cas_base_url = "https://login.ugent.be"
 
+  config.cas_logout_url_param = 'destination'
+  config.cas_destination_logout_param_name = 'url'
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
