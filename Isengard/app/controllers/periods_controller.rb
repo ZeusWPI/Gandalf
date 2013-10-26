@@ -1,6 +1,6 @@
 class PeriodsController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :js
 
   def show
     @period = Period.find params.require(:id)
@@ -13,13 +13,13 @@ class PeriodsController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     @period = @event.periods.create params.require(:period).permit(:name, :starts, :ends)
-    redirect_to @event
+    respond_with @period
   end
 
   def destroy
     period = Period.find params.require(:id)
-    @event = period.event
+    @id = period.id
     period.destroy
-    respond_with @event
+    respond_with @id
   end
 end
