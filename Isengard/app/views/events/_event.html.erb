@@ -1,5 +1,6 @@
 <tr>
   <td><%= link_to event.name, event_path(event)%></td>
+  <td><%= event.organisation %></td>
   <td><%= event.location %></td>
   <td><%= event.start_date.strftime("%c") %></td>
   <td><%= event.end_date.strftime("%c") %></td>
