@@ -1,6 +1,6 @@
 class ZonesController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :js
 
   def show
     @zone = Zone.find params.require(:id)
@@ -13,14 +13,14 @@ class ZonesController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     @zone = @event.zones.create params.require(:zone).permit(:name)
-    redirect_to @event
+    respond_with @zone
   end
 
   def destroy
     zone = Zone.find params.require(:id)
-    @event = zone.event
+    @name = zone.name
     zone.destroy
-    respond_with @event
+    respond_with @name
   end
 
 end

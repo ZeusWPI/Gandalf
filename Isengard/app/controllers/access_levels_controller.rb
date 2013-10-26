@@ -18,7 +18,6 @@ class AccessLevelsController < ApplicationController
 
   def destroy
     access_level = AccessLevel.find params.require(:id)
-    @event = access_level.event
     # Save the name so we can respond it as we still have to
     # be able to delete it
     @name = access_level.name
