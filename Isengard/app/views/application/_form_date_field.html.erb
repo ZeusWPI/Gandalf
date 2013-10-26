@@ -1,11 +1,7 @@
 <div class="form-group">
   <%= f.label tag %>:
-  <div class="row">
-    <div class="col-lg-3">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        <%= f.text_field tag, class: 'form-control', id: id, value: value%>
-      </div>
-    </div>
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    <%= f.text_field tag, class: 'form-control', id: id, value: value%>
   </div>
 </div>
