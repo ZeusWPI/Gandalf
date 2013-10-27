@@ -18,7 +18,6 @@ class RegistrationsController < ApplicationController
         end
       end
     end
-    respond_with @registration
   end
 
 end
