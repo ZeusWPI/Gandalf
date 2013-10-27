@@ -4,9 +4,9 @@
     <li class="active"><a href="#general" data-toggle="tab">General</a></li>
     <li><a href="#register" data-toggle="tab">Register</a></li>
     <% if can? :manage, @event %>
-      <li><a href="#edit_general" data-toggle="tab">Edit information</a></li>
+      <li><a href="#edit" data-toggle="tab">Edit information</a></li>
       <li><a href="#registrations" data-toggle="tab">Registrations</a></li>
-      <li><a href="#basic" data-toggle="tab">Access levels</a></li>
+      <li><a href="#access_levels_basic" data-toggle="tab">Access levels</a></li>
       <li class="dropdown">
         <a href="#" id="advanced_drop" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="advanced_drop">
@@ -32,13 +32,13 @@
       <%= render partial: "registrations/form" %>
     </div>
     <% if can? :manage, @event %>
-      <div class="tab-pane" id="edit_general">
+      <div class="tab-pane" id="edit">
         <%= render "events/backend/manage_edit_general" %>
       </div>
       <div class="tab-pane" id="registrations">
         <%= render "events/backend/manage_registrations" %>
       </div>
-      <div class="tab-pane" id="basic">
+      <div class="tab-pane" id="access_levels_basic">
         <%= render "events/backend/manage_access_levels", advanced: false %>
       </div>
       <div class="tab-pane" id="access_levels_advanced">
