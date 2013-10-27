@@ -1,3 +1,5 @@
 $("<%= escape_javascript render @access_level, advanced: false %>").appendTo("#table-access-levels");
 $("<%= escape_javascript render @access_level, advanced: true %>").appendTo("#table-access-levels-advanced");
 $("#new_access_level")[0].reset();
+
+$("#new_registration").replaceWith("<%= escape_javascript render partial: "registrations/form" %>");

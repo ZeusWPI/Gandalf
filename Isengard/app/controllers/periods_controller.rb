@@ -17,9 +17,10 @@ class PeriodsController < ApplicationController
   end
 
   def destroy
+    @event = Event.find params.require(:event_id)
     period = Period.find params.require(:id)
     @id = period.id
     period.destroy
-    respond_with @id
+    respond_with @id, @event
   end
 end
