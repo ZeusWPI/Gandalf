@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :js
 
   def new
     @event = Event.find params.require(:event_id)
@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
         end
       end
     end
-    respond_with @event
+    respond_with @registration
   end
 
 end

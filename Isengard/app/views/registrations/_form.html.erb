@@ -1,4 +1,4 @@
-<%= form_for [@event, @event.registrations.build] do |f| %>
+<%= form_for [@event, @event.registrations.build], remote: true do |f| %>
   <%= form_text_field f, :name %>
   <%= form_email_field f, :email %>
 
