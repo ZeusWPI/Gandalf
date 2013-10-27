@@ -1,4 +1,4 @@
-<tr class="access-level-<%= access_level.id %>">
+<tr class="access-level<% if advanced %>-advanced<% end %>-<%= access_level.id %>">
   <td><%= access_level.name %></td>
   <% if advanced %>
     <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>

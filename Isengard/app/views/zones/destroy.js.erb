@@ -1,1 +1,5 @@
 $("#zone-<%= @id %>").remove();
+
+// Update the access levels
+$("tr[class^=access-level-advanced]").remove();
+$("<%= escape_javascript render @event.access_levels, advanced: true %>").appendTo("#table-access-levels-advanced");
