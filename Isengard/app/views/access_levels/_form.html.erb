@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-6">
-    <%= form_for [@event, @event.access_levels.build] do |f| %>
+    <%= form_for [@event, @event.access_levels.build], remote: true do |f| %>
       <%= form_text_field f, :name %>
       <%= form_number_field f, :capacity %>
       <%= f.button :submit, class: 'btn btn-group btn-primary' %>

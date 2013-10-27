@@ -13,14 +13,16 @@ class AccessLevelsController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity)
-    respond_with @event
+    respond_with @access_level
   end
 
   def destroy
     access_level = AccessLevel.find params.require(:id)
-    @event = access_level.event
+    # Save the name so we can respond it as we still have to
+    # be able to delete it
+    @id = access_level.id
     access_level.destroy
-    respond_with @event
+    respond_with @id
   end
 
   def set_zones

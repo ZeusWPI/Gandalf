@@ -22,7 +22,7 @@ ready = ->
   $('#period-start').datetimepicker(datePickerOptions);
   $('#period-end').datetimepicker(datePickerOptions);
 
-  $('.new_period > :checkbox').change ->
+  $('#new_period :checkbox').change ->
     if $(this).is(':checked')
       $('#period-start').datetimepicker("remove")
       $('#period-end').datetimepicker("remove")

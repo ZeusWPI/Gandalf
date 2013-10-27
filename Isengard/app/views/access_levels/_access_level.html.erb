@@ -1,5 +1,7 @@
-<tr>
+<tr class="access-level<% if advanced %>-advanced<% end %>-<%= access_level.id %>">
   <td><%= access_level.name %></td>
-  <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
-  <td><%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', method: :delete %></td>
+  <% if advanced %>
+    <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
+  <% end %>
+  <td><%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', remote: true, method: :delete %></td>
 </tr>

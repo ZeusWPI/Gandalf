@@ -1,6 +1,6 @@
-<tr>
+<tr id="period-<%= period.id %>">
   <td><%= period.name %></td>
   <td><%= period.starts.strftime("%c") %></td>
   <td><%= period.ends.strftime("%c") %></td>
-  <td><%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_period_path(period.event, period), confirm: 'Warning: Removing a period should never be done when registrations have started!', method: :delete %></td>
+  <td><%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_period_path(period.event, period), confirm: 'Warning: Removing a period should never be done when registrations have started!', remote: true, method: :delete %></td>
 </tr>
