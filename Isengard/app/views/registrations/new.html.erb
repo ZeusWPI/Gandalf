@@ -1,46 +1,39 @@
-<%= form_for [@event, @event.registrations.build] do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>:
-    <div class="row">
-      <div class="col-lg-3"><%= f.text_field :name, class: 'form-control col-md-4' %></div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %>
-    <div class="row">
-      <div class="col-lg-3"><%= f.email_field :email, class: 'form-control col-md-4' %></div>
-    </div>
-  </div>
+<div class="row">
+  <div class="col-lg-4">
+    <%= form_for [@event, @event.registrations.build] do |f| %>
+      <%= form_text_field f, :name %>
+      <%= form_email_field f, :email %>
 
 
-  <div class="row">
-    <div class="col-lg-3">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th></th>
-              <% @event.periods.each do |p| %>
-                <th><%= p.name %></th>
-              <% end %>
-            </tr>
-          </thead>
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th></th>
+                  <% @event.periods.each do |p| %>
+                    <th><%= p.name %></th>
+                  <% end %>
+                </tr>
+              </thead>
 
-          <tbody>
-            <% @event.access_levels.each do |al| %>
-              <tr>
-                <th><%= al.name %></th>
-                <% @event.periods.each do |p| %>
-                  <td><input type="checkbox" name="registration[checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
+              <tbody>
+                <% @event.access_levels.each do |al| %>
+                  <tr>
+                    <th><%= al.name %></th>
+                    <% @event.periods.each do |p| %>
+                      <td><input type="checkbox" name="registration[checkboxes][<%= al.id %>][<%= p.id %>]" /></td>
+                    <% end %>
+                  </tr>
                 <% end %>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <%= f.button :submit %>
-<% end %>
+      <%= f.button :submit, class: 'btn btn-group btn-primary' %>
+    <% end %>
+  </div>
+</div>

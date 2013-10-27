@@ -1,15 +1,8 @@
-<%= form_for [@event, @event.zones.build], remote: true do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>:
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="input-group">
-          <%= f.text_field :name, class: 'input-medium form-control' %>
-          <span class="input-group-btn">
-            <%= f.button :submit, class: 'btn btn-group btn-primary' %>
-          </span>
-        </div>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_for [@event, @event.zones.build], remote: true do |f| %>
+      <%= form_text_field f, :name %>
+      <%= f.button :submit, class: 'btn btn-group btn-primary' %>
+    <% end %>
   </div>
-<% end %>
+</div>
