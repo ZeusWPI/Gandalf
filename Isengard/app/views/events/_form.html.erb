@@ -1,62 +1,18 @@
 <%= form_errors @event %>
 
-<%= form_for @event  do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>:
-    <div class="row">
-      <div class="col-lg-3"><%= f.text_field :name, class: 'form-control col-lg-4' %></div></div>
-  </div>
+<div class="row">
+  <div class="col-lg-4">
+     <%= form_for @event do |f| %>
 
-  <div class="form-group">
-    <%= f.label :organisation %>:
-    <div class="row">
-      <div class="col-lg-3"><%= f.text_field :organisation, class: 'form-control col-md-4' %></div></div>
-  </div>
+       <%= form_text_field f, :name %>
+       <%= form_text_field f, :organisation %>
+       <%= form_text_field f, :location %>
+       <%= form_text_field f, :website %>
+       <%= form_date_field f, :start_date, "start", f.object.start_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
+       <%= form_date_field f, :end_date, "end", f.object.end_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
+       <%= form_text_area f, :description %>
 
-  <div class="form-group">
-    <%= f.label :location %>:
-    <div class="row">
-      <div class="col-lg-3"><%= f.text_field :location, class: 'form-control' %></div></div>
+       <%= f.button :submit, class: 'btn btn-primary' %>
+    <% end %>
   </div>
-
-  <div class="form-group">
-    <%= f.label :website %>:
-    <div class="row">
-      <div class="col-lg-3"><%= f.text_field :website, class: 'form-control' %></div></div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :start_date %>:
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-          <%= f.text_field :start_date, class: 'form-control', id: "start", value: f.object.start_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :end_date %>:
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-          <%= f.text_field :end_date, class: 'form-control', id: "end", value: f.object.end_date.try { |d| d.strftime("%Y-%m-%d %H:%M") }%>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :description %>:
-    <div class="row">
-      <div class="col-lg-3">
-        <%= f.text_area :description, class: 'form-control' %>
-      </div>
-    </div>
-  </div>
-
-  <%= f.button :submit, class: 'btn btn-primary' %>
-<% end %>
+</div>
