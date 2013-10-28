@@ -1,5 +1,5 @@
 <h1><%= @event.name %></h1>
-<% if can? :manage, @event %>
+<% if can? :crud, @event %>
   <p>
     <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), event_path(@event), class: "btn btn-danger btn-xs", confirm: 'Are you sure?', method: :delete %>
   </p>
@@ -9,7 +9,7 @@
   <ul id="myTab" class="nav nav-tabs">
     <li class="active"><a href="#general" data-toggle="tab">General</a></li>
     <li><a href="#register" data-toggle="tab">Register</a></li>
-    <% if can? :manage, @event %>
+    <% if can? :crud, @event %>
       <li><a href="#edit" data-toggle="tab">Edit information</a></li>
       <li><a href="#registrations" data-toggle="tab">Registrations</a></li>
       <li><a href="#access_levels_basic" data-toggle="tab">Access levels</a></li>
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <% if can? :manage, @event %>
+    <% if can? :crud, @event %>
       <div class="tab-pane" id="edit">
         <%= render "events/backend/manage_edit_general" %>
       </div>

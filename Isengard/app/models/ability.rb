@@ -3,13 +3,19 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
     club = user.try(:club)
     if !club.blank?
       can :create, Event
       can :show, Event
-      can :manage, Event, club: club
+      can :crud, Event, club: club
     else
       can :show, Event
+    end
+    # add register permission
+    can :register, Event do |event| 
+      event.registration_open_date <= DateTime.now && event.registration_close_date >= DateTime.now
     end
     # Define abilities for the passed in user here. For example:
     #
