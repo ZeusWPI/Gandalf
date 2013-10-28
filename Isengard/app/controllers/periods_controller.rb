@@ -13,13 +13,12 @@ class PeriodsController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     @period = @event.periods.create params.require(:period).permit(:name, :starts, :ends)
-    respond_with @period
   end
 
   def destroy
+    @event = Event.find params.require(:event_id)
     period = Period.find params.require(:id)
     @id = period.id
     period.destroy
-    respond_with @id
   end
 end

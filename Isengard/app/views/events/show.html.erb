@@ -1,13 +1,65 @@
-<div class="row">
-  <div class="col-lg-9">
-    <h1><%= @event.name %></h1>
-    <p><%= @event.description %></p>
-    <p>
-      <%= render "events/backend/actions", event: @event %>
-    </p>
-  </div>
-</div>
-
+<h1><%= @event.name %></h1>
 <% if can? :manage, @event %>
-  <%= render "events/backend/manage" %>
+  <p>
+    <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), event_path(@event), class: "btn btn-danger btn-xs", confirm: 'Are you sure?', method: :delete %>
+  </p>
 <% end %>
+
+<div class="row">
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+    <li><a href="#register" data-toggle="tab">Register</a></li>
+    <% if can? :manage, @event %>
+      <li><a href="#edit" data-toggle="tab">Edit information</a></li>
+      <li><a href="#registrations" data-toggle="tab">Registrations</a></li>
+      <li><a href="#access_levels_basic" data-toggle="tab">Access levels</a></li>
+      <li class="dropdown">
+        <a href="#" id="advanced_drop" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="advanced_drop">
+          <li><a href="#access_levels_advanced" tabindex="-1" data-toggle="tab">Access levels</a></li>
+          <li><a href="#zones" tabindex="-1" data-toggle="tab">Zones</a></li>
+          <li><a href="#access_periods" tabindex="-1" data-toggle="tab">Access Periods</a></li>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane active in" id="general">
+      <h3>Description</h3>
+      <div class="row">
+        <div class="col-lg-9">
+          <p><%= @event.description %></p>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="register">
+      <h3>Register</h3>
+      <div class="row">
+        <div class="col-lg-6" id="registration-form">
+          <%= render partial: "registrations/form" %>
+        </div>
+      </div>
+    </div>
+    <% if can? :manage, @event %>
+      <div class="tab-pane" id="edit">
+        <%= render "events/backend/manage_edit_general" %>
+      </div>
+      <div class="tab-pane" id="registrations">
+        <%= render "events/backend/manage_registrations" %>
+      </div>
+      <div class="tab-pane" id="access_levels_basic">
+        <%= render "events/backend/manage_access_levels", advanced: false %>
+      </div>
+      <div class="tab-pane" id="access_levels_advanced">
+        <%= render "events/backend/manage_access_levels", advanced: true %>
+      </div>
+      <div class="tab-pane" id="zones">
+        <%= render "events/backend/manage_zones" %>
+      </div>
+      <div class="tab-pane" id="access_periods">
+        <%= render "events/backend/manage_access_periods" %>
+      </div>
+    </div>
+  <% end %>
+</div>

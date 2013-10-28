@@ -21,6 +21,9 @@ ready = ->
   # Adds Bootstrap error classes to all faulty fields
   $(".field_with_errors").parent().filter(".form-group").addClass("has-error");
 
+  if window.location.hash
+    $("a[data-toggle=tab][href="+window.location.hash+"]").tab('show');
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
 

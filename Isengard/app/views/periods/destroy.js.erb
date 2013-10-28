@@ -1,1 +1,2 @@
 $("#period-<%= @id %>").remove();
+$("#new_registration").replaceWith("<%= escape_javascript render partial: "registrations/form" %>");
