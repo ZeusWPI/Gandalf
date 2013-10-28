@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    alias_action :create, :read, :update, :destroy, :to => :crud
+    alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
     club = user.try(:club)
     if !club.blank?
