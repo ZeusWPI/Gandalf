@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description)
+    @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description, :registration_close_date, :registration_open_date)
     respond_with @event
   end
 

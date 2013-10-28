@@ -1,4 +1,14 @@
 <div class="col-lg-6">
+  <h3>Manage Registration Dates</h3>
+  <div class="row">
+    <div class="col-lg-9">
+      <%= form_for @event do |f| %>
+         <%= form_date_field f, :registration_open_date, "registration-start", f.object.registration_open_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
+         <%= form_date_field f, :registration_close_date, "registration-end", f.object.registration_close_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
+         <%= f.button :submit, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
   <h3>Registrations</h3>
   <div class="row">
     <div class="col-lg-9">
