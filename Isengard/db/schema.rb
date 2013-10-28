@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028192621) do
+ActiveRecord::Schema.define(version: 20131028200013) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20131028192621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.integer  "paid"
+    t.integer  "paid_cents"
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"

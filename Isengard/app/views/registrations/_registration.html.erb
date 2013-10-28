@@ -1,5 +1,5 @@
 <tr>
   <td><%= registration.name %></td>
   <td><%= registration.email %></td>
-  <td><%= registration.paid %></td>
+  <td><%= number_to_currency(registration.paid, unit: '&euro;') %></td>
 </tr>
