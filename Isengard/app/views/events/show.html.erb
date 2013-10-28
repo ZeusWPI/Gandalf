@@ -8,7 +8,9 @@
 <div class="row">
   <ul id="myTab" class="nav nav-tabs">
     <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-    <li><a href="#register" data-toggle="tab">Register</a></li>
+    <% if can? :register, @event %>
+      <li><a href="#register" data-toggle="tab">Register</a></li>
+    <% end %>
     <% if can? :crud, @event %>
       <li><a href="#edit" data-toggle="tab">Edit information</a></li>
       <li><a href="#registrations" data-toggle="tab">Registrations</a></li>
