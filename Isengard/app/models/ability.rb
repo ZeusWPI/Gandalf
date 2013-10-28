@@ -15,7 +15,11 @@ class Ability
     end
     # add register permission
     can :register, Event do |event| 
-      event.registration_open_date <= DateTime.now && event.registration_close_date >= DateTime.now
+      if !(event.registration_open_date.blank? || event.registration_close_date.blank?)
+        event.registration_open_date <= DateTime.now && event.registration_close_date >= DateTime.now
+      else
+        true
+      end
     end
     # Define abilities for the passed in user here. For example:
     #
