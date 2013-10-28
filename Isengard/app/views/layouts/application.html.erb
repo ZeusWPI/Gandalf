@@ -26,7 +26,7 @@
             <li><a href="<%= events_path %>">Events</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <% if can? :manage, Event %>
+            <% if can? :crud, Event %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -56,18 +56,7 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
-      <% if flash[:error] %>
-        <div class="alert alert-danger alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <%= flash[:error] %>
-        </div>
-      <% end %>
-      <% if flash[:notice] %>
-        <div class="alert alert-info alert-dismissable">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <%= flash[:notice] %>
-        </div>
-        <% end %>
+      <%= render partial: 'flash' %>
       <%= yield %>
     </div>
 
