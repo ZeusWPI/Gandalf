@@ -24,5 +24,8 @@ module ApplicationHelper
     render partial: "form_number_field", locals: {f: f, tag: tag}
   end
 
+  def form_collection_select(f, *args)
+    render partial: "form_collection_select", locals: {f: f, args: args}
+  end
 
 end

@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @registration = @event.registrations.build
   end
 
   def new
