@@ -14,4 +14,8 @@
 class Registration < ActiveRecord::Base
   belongs_to :event
   has_many :accesses, dependent: :destroy
+
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :student_number, presence: true, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }
 end

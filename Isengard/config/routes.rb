@@ -21,7 +21,13 @@ Isengard::Application.routes.draw do
       resources :zones
     end
     resources :role_names
-    resources :registrations
+    resources :registrations do
+      collection do
+        post 'basic'
+        post 'advanced'
+      end
+    end
+
     resources :periods
   end
 
