@@ -26,6 +26,6 @@ ready = ->
   if window.location.hash
     $("a[data-toggle=tab][href="+window.location.hash+"]").tab('show')
 
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
-

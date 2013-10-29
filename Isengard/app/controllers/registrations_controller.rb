@@ -11,8 +11,7 @@ class RegistrationsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :register, @event
     @registration = @event.registrations.create params.require(:registration).permit(:email, :name)
-    # TODO: respond with registration
-    respond_with @event
+    respond_with @registration
   end
 
   def advanced

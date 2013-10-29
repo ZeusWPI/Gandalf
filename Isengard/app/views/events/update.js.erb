@@ -1,0 +1,7 @@
+$('#edit-event-form').replaceWith("<%= escape_javascript render partial: 'form' %>");
+// TODO: move this javascript into correct handler
+$(".field_with_errors").parent().filter(".form-group").addClass("has-error");
+$('#edit-event-form button').hide();
+$('#edit-event-form .form-group').on('input', function() {
+  $('#edit-event-form button').show()
+});
