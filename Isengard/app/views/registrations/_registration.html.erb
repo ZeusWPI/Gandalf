@@ -1,4 +1,4 @@
 <tr>
   <td><%= registration.name %></td>
-  <td><%= registration.email %></td>
+  <td><%= registration.access_levels.first.try(:name) %></td>
 </tr>

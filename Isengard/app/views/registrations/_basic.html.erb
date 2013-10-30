@@ -1,11 +1,12 @@
 <div id="basic-registration-form">
+  <% @registration ||= Registration.new %>
   <%= form_errors @registration %>
   <%= form_for [@event, @registration], url: basic_event_registrations_path(@event), remote: true  do |f| %>
     <%= form_text_field f, :name %>
     <%= form_email_field f, :email %>
     <%= form_text_field f, :student_number %>
 
-    <%= form_collection_select f, :accesses, @event.access_levels, :id, :name %>
+    <%= form_collection_select f, :access_levels, @event.access_levels, :id, :name %>
     <%= f.button :submit, class: 'btn btn-group btn-primary' %>
   <% end %>
 </div>
