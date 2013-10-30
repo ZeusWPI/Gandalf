@@ -19,8 +19,8 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 en:
-  helpers:
-    label:
+  activerecord:
+    attributes:
       registration:
         access_levels: "Ticket"
 
