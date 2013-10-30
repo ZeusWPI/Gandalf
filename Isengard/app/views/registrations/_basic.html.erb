@@ -1,4 +1,5 @@
 <div id="basic-registration-form">
+  <% @registration ||= Registration.new %>
   <%= form_errors @registration %>
   <%= form_for [@event, @registration], url: basic_event_registrations_path(@event), remote: true  do |f| %>
     <%= form_text_field f, :name %>
