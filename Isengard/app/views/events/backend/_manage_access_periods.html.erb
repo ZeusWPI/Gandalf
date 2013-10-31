@@ -1,19 +1,22 @@
-<div class="col-lg-6">
-  <h3>Manage Access Periods</h3>
-  <div class="row">
-    <div class="col-lg-9">
-      <div class="table-responsive">
-        <table class="table" id="table-periods">
-          <thead>
-            <th>Name</th>
-            <th>Starts</th>
-            <th>Ends</th>
-          </thead>
-          <%= render @event.periods %>
-        </table>
-      </div>
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Manage Access Periods</h3>
+    <div class="table-responsive">
+      <table class="table" id="table-periods">
+        <thead>
+          <th>Name</th>
+          <th>Starts</th>
+          <th>Ends</th>
+        </thead>
+        <%= render @event.periods %>
+      </table>
     </div>
   </div>
-  <h3>Add Access Period</h3>
-  <%= render "periods/form" %>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <h3>Add Access Period</h3>
+    <%= render "periods/form" %>
+  </div>
 </div>
