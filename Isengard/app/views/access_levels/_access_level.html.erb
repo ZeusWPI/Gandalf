@@ -1,12 +1,6 @@
 <tr class="access-level<% if advanced %>-advanced<% end %>-<%= access_level.id %>">
   <td><%= access_level.name %></td>
-  <td>
-    <% if access_level.capacity %>
-      <%= access_level.capacity %>
-    <% else %>
-       /
-    <% end %>
-  </td>
+  <td><%= access_level.capacity.presence || "/" %></td>
   <% if advanced %>
     <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
   <% end %>
