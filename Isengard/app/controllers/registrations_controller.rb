@@ -31,10 +31,7 @@ class RegistrationsController < ApplicationController
   def update
     @registration = Registration.find params.require(:id)
     authorize! :update, @registration
-    logger.debug(@registration)
     @registration.update params.require(:registration).permit(:paid_cents)
-    Rails.logger.info(@registration.errors.inspect)
-    logger.debug(@registration)
     @event = @registration.event
     respond_with @event
   end
