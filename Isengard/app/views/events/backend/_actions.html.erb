@@ -4,5 +4,5 @@
 
 <% if can? :crud, event %>
   <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), event_path(event, anchor: "edit"), class: "btn btn-default btn-xs" %>
-  <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), event_path(event), class: "btn btn-danger btn-xs", confirm: 'Are you sure?', method: :delete %>
+  <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(event) %>
 <% end %>

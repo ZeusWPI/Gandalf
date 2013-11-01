@@ -12,4 +12,5 @@
       <a class="btn btn-default btn-xs registration-lock"><span class="glyphicon glyphicon-lock"></span></a>
     <% end %>
   </td>
+  <td><%= registration.access_levels.first.try(:name) %></td>
 </tr>

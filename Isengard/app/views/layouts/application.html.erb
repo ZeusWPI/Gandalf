@@ -14,8 +14,10 @@
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="<%= root_path %>">Gandalf</a>
         </div>
@@ -42,11 +44,15 @@
                 </p>
               </li>
               <li>
-                <%= link_to "Logout", destroy_user_session_path(current_user), method: :delete %>
+                <p class="navbar-text">
+                  <%= link_to "Logout", destroy_user_session_path(current_user), method: :delete %>
+                </p>
               </li>
             <% else %>
               <li>
-                <%= link_to "Login", new_user_session_path %>
+                <p class="navbar-text">
+                  <%= link_to "Login", new_user_session_path %>
+                </p>
               </li>
             <% end %>
           </ul>
@@ -56,8 +62,12 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
-      <%= render partial: 'flash' %>
-      <%= yield %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render partial: 'flash' %>
+          <%= yield %>
+        </div>
+      </div>
     </div>
 
     <hr>
