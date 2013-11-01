@@ -28,12 +28,11 @@ ready = ->
 
   $("#delete-confirm").on "show.bs.modal", ->
     $submit = $(this).find(".btn-danger")
-    href = $submit.attr("href")
-    $submit.attr "href", href+$(this).data("id")
+    $submit.attr "href", $(this).data("link")
 
   $(".delete-confirm").click (e) ->
     e.preventDefault()
-    $("#delete-confirm").data("id", $(this).data("id")).modal "show"
+    $("#delete-confirm").data("link", $(this).data("link")).modal "show"
 
 
 $(document).ready(ready)

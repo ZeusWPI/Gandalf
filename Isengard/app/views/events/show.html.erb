@@ -1,6 +1,6 @@
 <h1><%= @event.name %>
   <% if can? :crud, @event %>
-    <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-id" => @event.id %>
+    <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(@event) %>
   <% end %>
 </h1>
 
