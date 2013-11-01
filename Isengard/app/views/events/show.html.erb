@@ -1,6 +1,6 @@
 <h1><%= @event.name %>
   <% if can? :crud, @event %>
-      <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), event_path(@event), class: "btn btn-danger btn-xs", confirm: 'Are you sure?', method: :delete %>
+    <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(@event) %>
   <% end %>
 </h1>
 
@@ -66,3 +66,5 @@
     </div>
   <% end %>
 </div>
+
+<%= render "events/delete_modal" %>

@@ -26,6 +26,14 @@ ready = ->
   if window.location.hash
     $("a[data-toggle=tab][href="+window.location.hash+"]").tab('show')
 
+  $("#delete-confirm").on "show.bs.modal", ->
+    $submit = $(this).find(".btn-danger")
+    $submit.attr "href", $(this).data("link")
+
+  $(".delete-confirm").click (e) ->
+    e.preventDefault()
+    $("#delete-confirm").data("link", $(this).data("link")).modal "show"
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
