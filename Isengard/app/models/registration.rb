@@ -20,18 +20,20 @@ class Registration < ActiveRecord::Base
   validates :email, presence: true
   validates :student_number, presence: true, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }
 
-  before_save :set_cents
-
   def paid
-    if paid_cents
-      paid_cents / 100.0
-    else
-      0
-    end
+    if read_attribute(:paid) then read_attribute(:paid) / 100.0 else 0 end
   end
 
-  def set_cents
-    self.paid_cents = (self.paid_cents * 100).to_int
+  def paid=(amount)
+    write_attribute(:paid, (Float(amount) * 100).to_int)
+  end
+
+  def price
+    if read_attribute(:price) then read_attribute(:price) / 100.0 else 0 end
+  end
+
+  def price=(amount)
+    write_attribute(:price, (Float(amount) * 100).to_int)
   end
 
   def is_paid

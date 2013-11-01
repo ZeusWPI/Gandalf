@@ -5,8 +5,9 @@
     <%= form_for [registration.event, registration], method: :patch, remote: true do |f| %>
 
       &euro;
-      <%= f.text_field :paid_cents, value: f.object.paid, disabled: true, class: :disabling %>
-      <%= check_box_tag('is_paid', '1', f.object.is_paid, class: 'disabling', disabled: true) %>
+      <%= f.text_field :paid, value: f.object.paid, disabled: true, class: 'disabling registration-paid' %>
+      <%= check_box_tag('is_paid', '1', f.object.is_paid, class: 'disabling registration-box', disabled: true) %>
+      <%= f.hidden_field :price, value: f.object.price, disabled: true, class: 'registration-price' %>
 
       <a class="hide btn btn-default btn-xs registration-save"><span class="glyphicon glyphicon-floppy-save"></span></a>
       <a class="btn btn-default btn-xs registration-lock"><span class="glyphicon glyphicon-lock"></span></a>

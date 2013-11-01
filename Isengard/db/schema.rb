@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131029161350) do
+ActiveRecord::Schema.define(version: 20131101233145) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20131029161350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.integer  "paid_cents"
+    t.integer  "paid"
     t.string   "student_number"
     t.integer  "price"
   end

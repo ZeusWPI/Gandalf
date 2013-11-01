@@ -20,7 +20,7 @@ ready = ->
   $('#registration-start').datetimepicker(datePickerOptions)
   $('#registration-end').datetimepicker(datePickerOptions)
 
-  # Manual registration paying
+  # Manual registration locking
   $('.registration-lock').click ->
     form = $(this).parent()
     form.find('.registration-save').removeClass('hide')
@@ -33,6 +33,14 @@ ready = ->
     form.find('.registration-lock').removeClass('hide')
     form.submit()
     form.find('.disabling').prop('disabled', true)
+
+  # Using the checkbox to set the paid amount to the price (or zero)
+  $('.registration-box').change ->
+    form = $(this).parent()
+    if $(this).is(':checked')
+      form.find('.registration-paid').val(form.find('.registration-price').val())
+    else
+      form.find('.registration-paid').val(0)
 
   # Adds Bootstrap error classes to all faulty fields
   $(".field_with_errors").parent().filter(".form-group").addClass("has-error")
