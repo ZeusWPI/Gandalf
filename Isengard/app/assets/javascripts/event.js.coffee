@@ -20,6 +20,20 @@ ready = ->
   $('#registration-start').datetimepicker(datePickerOptions)
   $('#registration-end').datetimepicker(datePickerOptions)
 
+  # Manual registration paying
+  $('.registration-lock').click ->
+    form = $(this).parent();
+    form.find('.registration-save').removeClass('hide');
+    form.find('.registration-lock').addClass('hide');
+    form.find('.disabling').prop('disabled', false);
+  
+  $('.registration-save').click ->
+    form = $(this).parent();
+    form.find('.registration-save').addClass('hide');
+    form.find('.registration-lock').removeClass('hide');
+    form.submit();
+    form.find('.disabling').prop('disabled', true);
+
   # Adds Bootstrap error classes to all faulty fields
   $(".field_with_errors").parent().filter(".form-group").addClass("has-error")
 
