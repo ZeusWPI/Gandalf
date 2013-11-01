@@ -22,7 +22,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to :back
+    redirect_to action: :index
   end
 
   def registration_times
