@@ -22,21 +22,21 @@ ready = ->
 
   # Manual registration locking
   $('.registration-lock').click ->
-    form = $(this).parent()
-    form.find('.registration-save').removeClass('hide')
-    form.find('.registration-lock').addClass('hide')
-    form.find('.disabling').prop('disabled', false)
-  
-  $('.registration-save').click ->
-    form = $(this).parent()
-    form.find('.registration-save').addClass('hide')
-    form.find('.registration-lock').removeClass('hide')
-    form.submit()
-    form.find('.disabling').prop('disabled', true)
+    form = $(this).closest('form')
+    if form.find('.disabling').first().is(':disabled')
+      form.find('.disabling').prop('disabled', false)
+      form.find('.glyphicon').removeClass('glyphicon-lock')
+      form.find('.glyphicon').addClass('glyphicon-floppy-save')
+    else
+      form.submit()
+      form.find('.disabling').prop('disabled', true)
+      form.find('.glyphicon').addClass('glyphicon-lock')
+      form.find('.glyphicon').addClass('glyphicon-lock')
+      form.find('.glyphicon').removeClass('glyphicon-floppy-save')
 
   # Using the checkbox to set the paid amount to the price (or zero)
   $('.registration-box').change ->
-    form = $(this).parent()
+    form = $(this).closest('form')
     if $(this).is(':checked')
       form.find('.registration-paid').val(form.find('.registration-price').val())
     else
