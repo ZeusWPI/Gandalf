@@ -12,7 +12,7 @@ class AccessLevelsController < ApplicationController
 
   def create
     @event = Event.find params.require(:event_id)
-    @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity)
+    @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity, :price)
   end
 
   def destroy
