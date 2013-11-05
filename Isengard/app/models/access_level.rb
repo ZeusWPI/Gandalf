@@ -19,4 +19,12 @@ class AccessLevel < ActiveRecord::Base
     self.save
   end
 
+  def price
+    (read_attribute(:price) || 0) / 100.0
+  end
+
+  def price=(value)
+    write_attribute(:price, (value.to_f * 100).to_int)
+  end
+
 end
