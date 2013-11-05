@@ -14,6 +14,9 @@ class AccessLevel < ActiveRecord::Base
   has_many :included_zones, dependent: :destroy
   has_many :zones, through: :included_zones
 
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :capacity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones
     self.save
