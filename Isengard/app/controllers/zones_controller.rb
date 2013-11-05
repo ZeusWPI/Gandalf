@@ -2,6 +2,10 @@ class ZonesController < ApplicationController
 
   respond_to :html, :js
 
+  def index
+    @event = Event.find params.require(:event_id)
+  end
+
   def show
     @zone = Zone.find params.require(:id)
   end
