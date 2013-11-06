@@ -13,6 +13,7 @@ class Ability
     else
       can :show, Event
     end
+
     # add register permission
     can :register, Event do |event| 
       if !(event.registration_open_date.blank? || event.registration_close_date.blank?)
@@ -21,6 +22,15 @@ class Ability
         true
       end
     end
+
+    # can you register for an access level
+    can :register, AccessLevel do |access_level|
+      # not if you can't register for the event
+      return false unless can? :register, access_level.event
+      # if the access level is public or you're a member
+      access_level.public or access_level.event.club == club
+    end
+
 
     # add modify registrations permission for club members
     can :update, Registration do |registration|

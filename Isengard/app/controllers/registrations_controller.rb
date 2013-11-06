@@ -10,8 +10,10 @@ class RegistrationsController < ApplicationController
   def basic
     @event = Event.find params.require(:event_id)
     authorize! :register, @event
+    requested_access_level = @event.access_levels.find(params.require(:registration).require(:access_levels))
+    authorize! :register, requested_access_level
     @registration = @event.registrations.create params.require(:registration).permit(:email, :name, :student_number)
-    @registration.access_levels << @event.access_levels.find(params.require(:registration).require(:access_levels))
+    @registration.access_levels << requested_access_level
     respond_with @registration
   end
 
