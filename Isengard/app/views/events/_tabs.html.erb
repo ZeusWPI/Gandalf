@@ -3,24 +3,23 @@
     <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(@event) %>
   <% end %>
 </h1>
-
 <div class="row">
   <div class="col-lg-12">
     <ul class="nav nav-tabs">
-      <li><%= link_to "General", event_path(@event) %></li>
+      <li <%= raw 'class="active"' if current_page?(event_path(@event)) %>><%= link_to "General", event_path(@event) %></li>
       <% if can? :register, @event %>
-        <li><%= link_to "Register", new_event_registration_path(@event) %></li>
+        <li <%= raw 'class="active"' if current_page?(new_event_registration_path(@event)) %>><%= link_to "Register", new_event_registration_path(@event) %></li>
       <% end %>
       <% if can? :crud, @event %>
-        <li><%= link_to "Edit event", edit_event_path(@event) %></li>
-        <li><%= link_to "Registrations", event_registrations_path(@event) %></li>
-        <li><%= link_to "Tickets", event_access_levels_path(@event, advanced: false) %></li>
-        <li class="dropdown">
+        <li <%= raw 'class="active"' if current_page?(edit_event_path(@event)) %>><%= link_to "Edit event", edit_event_path(@event) %></li>
+        <li <%= raw 'class="active"' if current_page?(event_registrations_path(@event)) %>><%= link_to "Registrations", event_registrations_path(@event) %></li>
+        <li <%= raw 'class="active"' if current_page?(event_access_levels_path(@event)) && !@advanced %>><%= link_to "Tickets", event_access_levels_path(@event, advanced: false) %></li>
+        <li class="dropdown<%= raw ' active"' if (current_page?(event_access_levels_path(@event)) && @advanced) || current_page?(event_zones_path(@event)) || current_page?(event_periods_path(@event)) %>">
           <a href="#" id="advanced_drop" data-toggle="dropdown" class="dropdown-toggle">Advanced <b class="caret"></b></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="advanced_drop">
-            <li><%= link_to "Tickets", event_access_levels_path(@event, advanced: true) %></li>
-            <li><%= link_to "Zones", event_zones_path(@event) %></li>
-            <li><%= link_to "Access periods", event_periods_path(@event) %></li>
+            <li <%= raw 'class="active"' if current_page?(event_access_levels_path(@event)) && @advanced %>><%= link_to "Tickets", event_access_levels_path(@event, advanced: true) %></li>
+            <li <%= raw 'class="active"' if current_page?(event_zones_path(@event)) %>><%= link_to "Zones", event_zones_path(@event) %></li>
+            <li <%= raw 'class="active"' if current_page?(event_periods_path(@event)) %>><%= link_to "Access periods", event_periods_path(@event) %></li>
           </ul>
         </li>
       <% end %>
