@@ -1,5 +1,7 @@
 class AccessLevelsController < ApplicationController
 
+  before_filter :authenticate_user!
+
   respond_to :html, :js
 
   def show
@@ -18,6 +20,7 @@ class AccessLevelsController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity, :price)
+    respond_with @event
   end
 
   def destroy

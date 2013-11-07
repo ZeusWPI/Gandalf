@@ -3,11 +3,11 @@
 # Table name: accesses
 #
 #  id              :integer          not null, primary key
-#  zone_id         :integer
 #  period_id       :integer
 #  registration_id :integer
 #  created_at      :datetime
 #  updated_at      :datetime
+#  access_level_id :integer
 #
 
 class Access < ActiveRecord::Base

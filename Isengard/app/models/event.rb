@@ -2,16 +2,19 @@
 #
 # Table name: events
 #
-#  id           :integer          not null, primary key
-#  name         :string(255)
-#  start_date   :datetime
-#  end_date     :datetime
-#  location     :string(255)
-#  website      :string(255)
-#  description  :text
-#  organisation :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                      :integer          not null, primary key
+#  name                    :string(255)
+#  start_date              :datetime
+#  end_date                :datetime
+#  location                :string(255)
+#  website                 :string(255)
+#  description             :text
+#  organisation            :string(255)
+#  created_at              :datetime
+#  updated_at              :datetime
+#  club                    :string(255)
+#  registration_open_date  :datetime
+#  registration_close_date :datetime
 #
 
 class Event < ActiveRecord::Base
