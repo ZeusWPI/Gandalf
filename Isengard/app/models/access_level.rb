@@ -7,6 +7,9 @@
 #  event_id   :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  capacity   :integer
+#  price      :integer
+#  public     :boolean
 #
 
 class AccessLevel < ActiveRecord::Base
@@ -14,8 +17,10 @@ class AccessLevel < ActiveRecord::Base
   has_many :included_zones, dependent: :destroy
   has_many :zones, through: :included_zones
 
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
-  validates :capacity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :name, presence: true
+  validates :public, presence: true
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :capacity, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones

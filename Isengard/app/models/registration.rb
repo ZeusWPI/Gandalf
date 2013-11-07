@@ -2,13 +2,16 @@
 #
 # Table name: registrations
 #
-#  id         :integer          not null, primary key
-#  barcode    :integer
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  event_id   :integer
+#  id             :integer          not null, primary key
+#  barcode        :integer
+#  name           :string(255)
+#  email          :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  event_id       :integer
+#  paid           :integer
+#  student_number :string(255)
+#  price          :integer
 #
 
 class Registration < ActiveRecord::Base
@@ -19,6 +22,8 @@ class Registration < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
   validates :student_number, presence: true, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }
+  validates :paid, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def paid
     if read_attribute(:paid) then read_attribute(:paid) / 100.0 else 0 end
