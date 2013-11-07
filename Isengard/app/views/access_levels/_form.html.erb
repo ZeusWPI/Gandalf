@@ -1,4 +1,3 @@
-<%= form_errors @event %>
 <%= form_for [@event, @event.access_levels.build], remote: true do |f| %>
   <%= form_text_field f, :name %>
   <%= form_number_field f, :capacity %>
