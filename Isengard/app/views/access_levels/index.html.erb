@@ -1,19 +1,21 @@
+<%= render partial: "events/tabs" %>
+
 <div class="row">
   <div class="col-sm-6">
     <h3>Manage Access Levels</h3>
     <div class="table-responsive">
-      <table class="table" id="table-access-levels<% if advanced %>-advanced<% end %>">
+      <table class="table" id="table-access-levels">
         <thead>
           <th>Name</th>
           <th>Capacity</th>
           <th>Price</th>
           <th>Availability</th>
-          <% if advanced %>
+          <% if @advanced %>
             <th>Zones</th>
           <% end %>
           <th>Actions</th>
         </thead>
-        <%= render @event.access_levels, advanced: advanced %>
+        <%= render @event.access_levels, advanced: @advanced %>
       </table>
     </div>
   </div>

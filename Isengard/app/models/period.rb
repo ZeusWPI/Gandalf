@@ -8,6 +8,7 @@
 #  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  event_id   :integer
 #
 
 class Period < ActiveRecord::Base

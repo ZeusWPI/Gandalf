@@ -1,70 +1,8 @@
-<h1><%= @event.name %>
-  <% if can? :crud, @event %>
-    <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(@event) %>
-  <% end %>
-</h1>
+<%= render partial: "tabs" %>
 
 <div class="row">
-  <div class="col-lg-12">
-    <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-      <% if can? :register, @event %>
-        <li><a href="#register" data-toggle="tab">Register</a></li>
-      <% end %>
-      <% if can? :crud, @event %>
-        <li><a href="#edit" data-toggle="tab">Edit information</a></li>
-        <li><a href="#registrations" data-toggle="tab">Registrations</a></li>
-        <li><a href="#access_levels_basic" data-toggle="tab">Access levels</a></li>
-        <li class="dropdown">
-          <a href="#" id="advanced_drop" class="dropdown-toggle" data-toggle="dropdown">Advanced <b class="caret"></b></a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="advanced_drop">
-            <li><a href="#access_levels_advanced" tabindex="-1" data-toggle="tab">Access levels</a></li>
-            <li><a href="#zones" tabindex="-1" data-toggle="tab">Zones</a></li>
-            <li><a href="#access_periods" tabindex="-1" data-toggle="tab">Access Periods</a></li>
-          </ul>
-        </li>
-      <% end %>
-    </ul>
+  <div class="col-sm-9">
+    <h3>Description</h3>
+    <p><%= @event.description %></p>
   </div>
 </div>
-
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane active in" id="general">
-    <div class="row">
-      <div class="col-sm-9">
-        <h3>Description</h3>
-        <p><%= @event.description %></p>
-      </div>
-    </div>
-  </div>
-  <div class="tab-pane" id="register">
-    <div class="row">
-      <div class="col-sm-4" id="registration-form">
-        <h3>Register</h3>
-        <%= render partial: "registrations/form" %>
-      </div>
-    </div>
-  </div>
-  <% if can? :crud, @event %>
-    <div class="tab-pane" id="edit">
-      <%= render "events/backend/manage_edit_general" %>
-    </div>
-    <div class="tab-pane" id="registrations">
-      <%= render "events/backend/manage_registrations" %>
-    </div>
-    <div class="tab-pane" id="access_levels_basic">
-      <%= render "events/backend/manage_access_levels", advanced: false %>
-    </div>
-    <div class="tab-pane" id="access_levels_advanced">
-      <%= render "events/backend/manage_access_levels", advanced: true %>
-    </div>
-    <div class="tab-pane" id="zones">
-      <%= render "events/backend/manage_zones" %>
-    </div>
-    <div class="tab-pane" id="access_periods">
-      <%= render "events/backend/manage_access_periods" %>
-    </div>
-  <% end %>
-</div>
-
-<%= render "events/delete_modal" %>

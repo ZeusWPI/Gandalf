@@ -13,4 +13,6 @@ class Zone < ActiveRecord::Base
   belongs_to :event
   has_many :included_zones, dependent: :destroy
   has_many :access_levels, through: :included_zones
+
+  validates :name, presence: true
 end

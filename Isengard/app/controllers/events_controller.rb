@@ -7,7 +7,12 @@ class EventsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @events = Event.all.order(:name)
+    @events = Event.where('end_date > ?', DateTime.now).order(:name)
+    if user_signed_in?
+      @events += Event.accessible_by(current_ability).to_a
+    end
+    @events.uniq!
+
   end
 
   def show

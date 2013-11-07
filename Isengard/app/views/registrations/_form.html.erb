@@ -1,5 +1,10 @@
-<% if @event.periods.blank? %>
-  <%= render partial: "registrations/basic" %>
-<% else %>
-  <%= render partial: "registrations/advanced" %>
-<% end %>
+<div class="row">
+  <div class="col-sm-4" id="registration-form">
+    <h3>Register</h3>
+    <% if @event.periods.blank? %>
+      <%= render partial: "registrations/basic" %>
+    <% else %>
+      <%= render partial: "registrations/advanced" %>
+    <% end %>
+  </div>
+</div>

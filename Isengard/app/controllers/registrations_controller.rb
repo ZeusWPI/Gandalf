@@ -2,6 +2,10 @@ class RegistrationsController < ApplicationController
 
   respond_to :html, :js
 
+  def index
+    @event = Event.find params.require(:event_id)
+  end
+
   def new
     @event = Event.find params.require(:event_id)
     @registration = Registration.new

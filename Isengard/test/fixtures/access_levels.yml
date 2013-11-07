@@ -7,6 +7,9 @@
 #  event_id   :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  capacity   :integer
+#  price      :integer
+#  public     :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
