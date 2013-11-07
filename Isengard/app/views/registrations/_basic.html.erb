@@ -6,7 +6,7 @@
     <%= form_email_field f, :email %>
     <%= form_text_field f, :student_number %>
 
-    <%= form_collection_select f, :access_levels, @event.access_levels, :id, :name %>
+    <%= form_collection_select f, :access_levels, @event.access_levels.find_all { |al| can? :register, al }, :id, :name %>
     <%= f.button :submit, class: 'btn btn-group btn-primary' %>
   <% end %>
 </div>

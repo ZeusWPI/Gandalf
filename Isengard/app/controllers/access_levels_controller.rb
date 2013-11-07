@@ -19,7 +19,7 @@ class AccessLevelsController < ApplicationController
 
   def create
     @event = Event.find params.require(:event_id)
-    @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity, :price)
+    @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity, :price, :public)
     respond_with @event
   end
 

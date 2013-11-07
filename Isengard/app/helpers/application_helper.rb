@@ -28,4 +28,8 @@ module ApplicationHelper
     render partial: "form_collection_select", locals: {f: f, args: args}
   end
 
+  def form_check_box(f, tag)
+    render partial: "form_check_box", locals: {f: f, tag: tag}
+  end
+
 end
