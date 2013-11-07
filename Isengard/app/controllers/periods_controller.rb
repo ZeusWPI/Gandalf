@@ -2,6 +2,10 @@ class PeriodsController < ApplicationController
 
   respond_to :html, :js
 
+  def index
+    @event = Event.find params.require(:event_id)
+  end
+
   def show
     @period = Period.find params.require(:id)
   end

@@ -6,6 +6,11 @@ class AccessLevelsController < ApplicationController
     @access_level = AccessLevel.find params.require(:id)
   end
 
+  def index
+    @event = Event.find params.require(:event_id)
+    @advanced = params[:advanced] == 'true'
+  end
+
   def new
     @access_level = AccessLevel.new
   end
