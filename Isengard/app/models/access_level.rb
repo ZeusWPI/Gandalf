@@ -32,6 +32,7 @@ class AccessLevel < ActiveRecord::Base
   end
 
   def price=(value)
+    if value.is_a? String then value.sub!(',', '.') end
     write_attribute(:price, (value.to_f * 100).to_int)
   end
 
