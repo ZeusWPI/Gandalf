@@ -1,23 +1,23 @@
 <tr>
   <td><%= registration.name %></td>
   <td><%= registration.email %></td>
+  <td><%= registration.access_levels.first.try :name %></td>
   <td>
     <%= form_for [registration.event, registration], method: :patch, remote: true, html: { class: 'inline-form' } do |f| %>
 
-      <div class="input-group">
+      <div class="input-group input-group-sm <%= f.object.is_paid ? 'has-success' : 'has-error' %>">
         <span class="input-group-addon">&euro;</span>
         <%= f.text_field :paid, value: number_with_precision(f.object.paid, precision: 2), disabled: true, class: 'disabling registration-paid form-control' %>
         <%= f.hidden_field :price, value: f.object.price, disabled: true, class: 'registration-price' %>
         <span class="input-group-addon">
-          <%= check_box_tag('is_paid', '1', f.object.is_paid, class: 'disabling registration-box input-append', disabled: true) %>
+          <%= check_box_tag 'is_paid', '1', f.object.is_paid, class: 'disabling registration-box input-append', disabled: true %>
         </span>
         <span class="input-group-btn">
-          <a class="btn btn-default registration-lock">
+          <button class="btn btn-default registration-lock">
             <span class="glyphicon glyphicon-lock"></span>
-          </a>
+          </button>
         </span>
       </div>
     <% end %>
   </td>
-  <td><%= registration.access_levels.first.try(:name) %></td>
 </tr>
