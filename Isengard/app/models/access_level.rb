@@ -14,8 +14,12 @@
 
 class AccessLevel < ActiveRecord::Base
   belongs_to :event
+
   has_many :included_zones, dependent: :destroy
   has_many :zones, through: :included_zones
+
+  has_many :accesses, dependent: :destroy
+  has_many :registrations, through: :accesses
 
   validates :name, presence: true
   validates :public, presence: true
