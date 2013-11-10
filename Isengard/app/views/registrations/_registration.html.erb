@@ -6,7 +6,7 @@
 
       <div class="input-group">
         <span class="input-group-addon">&euro;</span>
-        <%= f.text_field :paid, value: f.object.paid, disabled: true, class: 'disabling registration-paid form-control' %>
+        <%= f.text_field :paid, value: number_with_precision(f.object.paid, precision: 2), disabled: true, class: 'disabling registration-paid form-control' %>
         <%= f.hidden_field :price, value: f.object.price, disabled: true, class: 'registration-price' %>
         <span class="input-group-addon">
           <%= check_box_tag('is_paid', '1', f.object.is_paid, class: 'disabling registration-box input-append', disabled: true) %>
