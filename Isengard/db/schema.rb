@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 20131105182128) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.string   "student_number"
     t.integer  "paid"
+    t.string   "student_number"
     t.integer  "price"
   end
 
