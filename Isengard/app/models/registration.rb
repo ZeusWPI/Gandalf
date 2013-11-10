@@ -26,19 +26,21 @@ class Registration < ActiveRecord::Base
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def paid
-    if read_attribute(:paid) then read_attribute(:paid) / 100.0 else 0 end
+    (read_attribute(:paid) || 0) / 100.0
   end
 
-  def paid=(amount)
-    write_attribute(:paid, (Float(amount) * 100).to_int)
+  def paid=(value)
+    if value.is_a? String then value.sub!(',', '.') end
+    write_attribute(:paid, (value.to_f * 100).to_int)
   end
 
   def price
-    if read_attribute(:price) then read_attribute(:price) / 100.0 else 0 end
+    (read_attribute(:price) || 0) / 100.0
   end
 
-  def price=(amount)
-    write_attribute(:price, (Float(amount) * 100).to_int)
+  def price=(value)
+    if value.is_a? String then value.sub!(',', '.') end
+    write_attribute(:price, (value.to_f * 100).to_int)
   end
 
   def is_paid
