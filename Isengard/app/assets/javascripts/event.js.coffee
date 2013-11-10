@@ -21,7 +21,7 @@ ready = ->
   $('#registration-end').datetimepicker(datePickerOptions)
 
   # Manual registration locking
-  $('.registration-lock').click ->
+  $('#table-registrations').on 'click', '.registration-lock', ->
     form = $(this).closest('form')
     if form.find('.disabling').first().is(':disabled')
       form.find('.disabling').prop('disabled', false)
@@ -29,13 +29,9 @@ ready = ->
       form.find('.glyphicon').addClass('glyphicon-floppy-save')
     else
       form.submit()
-      form.find('.disabling').prop('disabled', true)
-      form.find('.glyphicon').addClass('glyphicon-lock')
-      form.find('.glyphicon').addClass('glyphicon-lock')
-      form.find('.glyphicon').removeClass('glyphicon-floppy-save')
 
   # Using the checkbox to set the paid amount to the price (or zero)
-  $('.registration-box').change ->
+  $('#table-registrations').on 'change', '.registration-box', ->
     form = $(this).closest('form')
     if $(this).is(':checked')
       form.find('.registration-paid').val(form.find('.registration-price').val())

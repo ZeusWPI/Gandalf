@@ -38,13 +38,8 @@ class RegistrationsController < ApplicationController
   def update
     @registration = Registration.find params.require(:id)
     authorize! :update, @registration
-    begin
-      raise "Invalid update" unless @registration.update params.require(:registration).permit(:paid)
-      flash[:notice] = "succesfully updated"
-    rescue
-      flash[:error] = "something went wrong"
-    end
-    respond_with @registration.event
+    @registration.update params.require(:registration).permit(:paid)
+    respond_with @registration
   end
 
 end
