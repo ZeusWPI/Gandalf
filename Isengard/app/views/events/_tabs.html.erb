@@ -26,3 +26,7 @@
     </ul>
   </div>
 </div>
+
+<% if can? :crud, @event %>
+  <%= render "events/delete_modal" %>
+<% end %>
