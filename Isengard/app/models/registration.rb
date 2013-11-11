@@ -25,6 +25,15 @@ class Registration < ActiveRecord::Base
   validates :paid, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  after_save do |record|
+    record.access_levels.each do |access_level|
+      unless access_level.registrations.count <= access_level.capacity
+        record.errors.add :access_levels, "type is sold out."
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
+
   def paid
     (read_attribute(:paid) || 0) / 100.0
   end
