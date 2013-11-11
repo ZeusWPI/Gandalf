@@ -56,4 +56,9 @@ class Registration < ActiveRecord::Base
     self.price == self.paid
   end
 
+  def payment_code
+    base = "GAN#{self.event.id}D#{self.id}A#{(self.event.id + self.id) % 9}L"
+    base += (base.sum % 99).to_s + 'F'
+  end
+
 end
