@@ -18,7 +18,7 @@ class RegistrationsController < ApplicationController
     authorize! :register, requested_access_level
     @registration = @event.registrations.create params.require(:registration).permit(:email, :name, :student_number)
     @registration.access_levels << requested_access_level
-    @registration.update price: requested_access_level.price
+    @registration.update paid: 0, price: requested_access_level.price
     respond_with @registration
   end
 
