@@ -1,3 +1,4 @@
+# coding: utf-8
 # == Schema Information
 #
 # Table name: access_levels
@@ -28,6 +29,10 @@ class AccessLevel < ActiveRecord::Base
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones
     self.save
+  end
+
+  def name_with_price
+   "#{name} - €#{'%0.2f' % price}"
   end
 
   def price
