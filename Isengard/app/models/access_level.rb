@@ -32,7 +32,11 @@ class AccessLevel < ActiveRecord::Base
   end
 
   def name_with_price
-   "#{name} - €#{'%0.2f' % price}"
+    if price > 0
+      "#{name} - €#{'%0.2f' % price}"
+    else
+       self.name
+    end
   end
 
   def price
