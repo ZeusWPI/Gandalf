@@ -6,7 +6,9 @@
     <p><%= @event.description %></p>
   </div>
 
-  <div class="col-sm-4">
-    <%= render partial: "registrations/form" %>
-  </div>
+  <% if can? :register, @event %>
+    <div class="col-sm-4">
+      <%= render partial: "registrations/form" %>
+    </div>
+  <% end %>
 </div>
