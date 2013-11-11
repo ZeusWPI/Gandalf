@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Dear <%= @registration.name %>,</h1>
+    <p>You receive this mail because someone registered with this email-address. If you did not register, feel free to ignore this mail.</p>
+    <p>So assume that you did register. Then we expect you to pay your tickets as soon as possible by transferring <%= number_with_precision @registration.price, precision: 2 %> to <%= @registration.event.bank_number || "our bank account" %>. Use "<%= @registration.payment_code %>" in the description of your transfer.</p>
+    <p>Thank you for coming.</p>
+    <p>Yours sincerely,<br />Gandalf</p>
+  </body>
+</html>

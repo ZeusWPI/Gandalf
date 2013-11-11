@@ -13,12 +13,20 @@ class RegistrationsController < ApplicationController
 
   def basic
     @event = Event.find params.require(:event_id)
+
+    # Check if the user can register
     authorize! :register, @event
     requested_access_level = @event.access_levels.find(params.require(:registration).require(:access_levels))
     authorize! :register, requested_access_level
+
+    # Make the registration
     @registration = @event.registrations.create params.require(:registration).permit(:email, :name, :student_number)
     @registration.access_levels << requested_access_level
     @registration.update paid: 0, price: requested_access_level.price
+
+    # Send the confirmation email.
+    RegistrationMailer.confirm_registration(@registration).deliver
+
     respond_with @registration
   end
 
