@@ -1,8 +1,12 @@
 <%= render partial: "tabs" %>
 
 <div class="row">
-  <div class="col-sm-9">
+  <div class="col-sm-6">
     <h3>Description</h3>
     <p><%= @event.description %></p>
+  </div>
+
+  <div class="col-sm-4">
+    <%= render partial: "registrations/form" %>
   </div>
 </div>
