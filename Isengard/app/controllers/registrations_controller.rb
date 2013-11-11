@@ -1,5 +1,7 @@
 class RegistrationsController < ApplicationController
 
+  require 'csv'
+
   respond_to :html, :js
 
   def index
@@ -48,6 +50,16 @@ class RegistrationsController < ApplicationController
     authorize! :update, @registration
     @registration.update params.require(:registration).permit(:paid)
     respond_with @registration
+  end
+
+  def upload
+    @event = Event.find params.require(:event_id)
+    @strings = []
+    CSV.parse(params.require(:csv_file).read.upcase, col_sep: ';', headers: :first_row) do |row|
+      @strings << row.inspect
+      # TODO take amount paid from row['BEDRAG'] or something similar
+      # TODO search payment code in row.to_s
+    end
   end
 
 end

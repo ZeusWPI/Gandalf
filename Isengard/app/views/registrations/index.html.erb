@@ -12,6 +12,16 @@
 </div>
 
 <div class="row">
+  <div class="col-sm-4">
+    <h3>Upload Transfer CSV</h3>
+    <%= form_tag({ action: :upload }, multipart: true) do %>
+      <%= file_field_tag :csv_file %>
+      <%= button_tag :submit, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-sm-8">
     <h3>Registrations</h3>
     <div class="table-responsive">

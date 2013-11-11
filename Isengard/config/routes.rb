@@ -25,6 +25,7 @@ Isengard::Application.routes.draw do
       collection do
         post 'basic'
         post 'advanced'
+        post 'upload'
       end
     end
 
