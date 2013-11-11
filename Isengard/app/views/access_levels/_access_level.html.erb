@@ -1,6 +1,6 @@
 <tr class="access-level-<%= access_level.id %>">
   <td><%= access_level.name %></td>
-  <td><%= access_level.capacity.presence || "/" %></td>
+  <td><%= access_level.registrations.count %>/<%= access_level.capacity.presence || "(0)" %> <% if access_level.capacity.presence and (access_level.capacity <= access_level.registrations.count) %><span class="label label-warning">Full!</span><% end %></td>
   <td>&euro;<%= number_with_precision access_level.price || "0", precision: 2  %></td>
   <td><%= if access_level.public then "public" else "private" end %></td>
   <% if advanced %>
