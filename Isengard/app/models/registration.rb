@@ -29,9 +29,9 @@ class Registration < ActiveRecord::Base
     record.access_levels.each do |access_level|
       unless access_level.registrations.count <= access_level.capacity
         record.errors.add :access_levels, "type is sold out."
+        raise ActiveRecord::Rollback
       end
     end
-    not record.errors.any?
   end
 
   def paid
