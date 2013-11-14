@@ -4,8 +4,8 @@
   <div class="col-sm-4">
     <h3>Manage Registration Dates</h3>
     <%= form_for @event, url: event_set_registration_times_path(@event), method: :patch do |f| %>
-       <%= form_date_field f, :registration_open_date, "registration-start", f.object.registration_open_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
-       <%= form_date_field f, :registration_close_date, "registration-end", f.object.registration_close_date.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
+       <%= form_date_field f, :registration_open_date, "registration-start", nice_time(f.object.registration_open_date) %>
+       <%= form_date_field f, :registration_close_date, "registration-end", nice_time(f.object.registration_close_date) %>
        <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   </div>

@@ -1,13 +1,46 @@
 <%= render partial: "tabs" %>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <h3>Description</h3>
-    <p><%= @event.description %></p>
+    <table class="table">
+      <tr>
+        <th>Organisation</th>
+        <td><%= @event.organisation %></td>
+      </tr>
+      <tr>
+        <th>Location</th>
+        <td><%= @event.location %></td>
+      </tr>
+      <tr>
+        <th>Start date</th>
+        <td><%= nice_time @event.start_date %></td>
+      </tr>
+      <tr>
+        <th>End date</th>
+        <td><%= nice_time @event.end_date %></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+           <%= @event.description %>
+        </td>
+      </tr>
+      <tr>
+        <th>Website</th>
+        <td><%= link_to @event.website, @event.website %></td>
+      </tr>
+    </table>
+
+    <h3>Tickets</h3>
+    <ul class="list-group">
+      <% @event.access_levels.each do |al| %>
+        <li class="list-group-item"><%= al.name_with_price %></li>
+      <% end %>
+    </ul>
   </div>
 
   <% if can? :register, @event %>
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-sm-offset-2">
       <%= render partial: "registrations/form" %>
     </div>
   <% end %>

@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def nice_time(f)
+    f.try { |d| d.strftime("%Y-%m-%d %H:%M") }
+  end
+
   def form_errors(object)
     render partial: "form_errors", locals: {object: object}
   end
