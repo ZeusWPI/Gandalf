@@ -54,11 +54,24 @@ class RegistrationsController < ApplicationController
 
   def upload
     @event = Event.find params.require(:event_id)
+    sep = params.require('separator')
+    paid = params.require('amount_column').upcase
+    fails = []
     @strings = []
-    CSV.parse(params.require(:csv_file).read.upcase, col_sep: ';', headers: :first_row) do |row|
-      @strings << row.inspect
-      # TODO take amount paid from row['BEDRAG'] or something similar
-      # TODO search payment code in row.to_s
+    CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
+      match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F/.match(row.to_s)
+      unless match
+        @strings << "no code found in #{row.to_s}"
+        fails << row
+        next
+      end
+      registration = Registration.find match[:id]
+      unless registration.payment_code == match.to_s
+        @strings << "incorrect code in #{row.to_s}"
+        fails << row
+        next
+      end
+      @strings << "#{registration.name} paid #{row[paid]}"
     end
   end
 

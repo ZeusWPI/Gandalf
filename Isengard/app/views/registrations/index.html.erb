@@ -15,7 +15,18 @@
   <div class="col-sm-4">
     <h3>Upload Transfer CSV</h3>
     <%= form_tag({ action: :upload }, multipart: true) do %>
-      <%= file_field_tag :csv_file %>
+      <div class="form-group">
+        <label>CSV file:</label>
+        <%= file_field_tag :csv_file %>
+      </div>
+      <div class="form-group">
+        <label>Column separator:</label>
+        <%= text_field_tag :separator, ';', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label>Amount column header:</label>
+        <%= text_field_tag :amount_column, 'Bedrag', class: 'form-control' %>
+      </div>
       <%= button_tag :submit, class: "btn btn-primary" %>
     <% end %>
   </div>
