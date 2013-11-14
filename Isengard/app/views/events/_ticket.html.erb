@@ -1,0 +1,6 @@
+<li class="list-group-item">
+  <%= al.name_with_price %>
+  <% if al.event.show_ticket_count %>
+    <span class="label label-<%= color_for_tickets_left(al) %> pull-right"><%= "#{al.tickets_left} tickets left" if al.capacity.presence %></span>
+  <% end %>
+</li>
