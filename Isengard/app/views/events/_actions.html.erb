@@ -1,5 +1,5 @@
 <% if can? :register, event %>
-  <%= link_to raw('<span class="glyphicon glyphicon-log-in"></span> Register'), new_event_registration_path(event), class: "btn btn-default btn-xs" %>
+  <%= link_to raw('<span class="glyphicon glyphicon-log-in"></span> Register'), event_path(event), class: "btn btn-default btn-xs" %>
 <% end %>
 
 <% if can? :crud, event %>
