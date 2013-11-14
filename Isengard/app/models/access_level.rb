@@ -24,7 +24,7 @@ class AccessLevel < ActiveRecord::Base
 
   validates :name, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :capacity, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :capacity, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
 
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones
@@ -35,8 +35,12 @@ class AccessLevel < ActiveRecord::Base
     if price > 0
       "#{name} - €#{'%0.2f' % price}"
     else
-       self.name
+       name
     end
+  end
+
+  def tickets_left
+    capacity - registrations.count if capacity.presence
   end
 
   def price

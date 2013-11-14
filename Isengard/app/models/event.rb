@@ -15,6 +15,7 @@
 #  club                    :string(255)
 #  registration_open_date  :datetime
 #  registration_close_date :datetime
+#  show_ticket_count       :boolean          default(TRUE)
 #
 
 class Event < ActiveRecord::Base

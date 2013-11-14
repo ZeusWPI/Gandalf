@@ -6,6 +6,7 @@
     <%= form_for @event, url: event_set_registration_times_path(@event), method: :patch do |f| %>
        <%= form_date_field f, :registration_open_date, "registration-start", nice_time(f.object.registration_open_date) %>
        <%= form_date_field f, :registration_close_date, "registration-end", nice_time(f.object.registration_close_date) %>
+       <%= form_check_box f, :show_ticket_count %>
        <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   </div>

@@ -31,12 +31,14 @@
       </tr>
     </table>
 
-    <h3>Tickets</h3>
-    <ul class="list-group">
-      <% @event.access_levels.each do |al| %>
-        <li class="list-group-item"><%= al.name_with_price %></li>
-      <% end %>
-    </ul>
+    <% if not @event.access_levels.blank? %>
+      <h3>Tickets</h3>
+      <ul class="list-group">
+        <% @event.access_levels.each do |al| %>
+          <%= render partial: "events/ticket", locals: {al: al} %>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 
   <% if can? :register, @event %>
