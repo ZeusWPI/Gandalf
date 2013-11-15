@@ -27,7 +27,9 @@ class RegistrationsController < ApplicationController
     @registration.update paid: 0, price: requested_access_level.price
 
     # Send the confirmation email.
-    RegistrationMailer.confirm_registration(@registration).deliver
+    unless @registration.errors.any?
+      RegistrationMailer.confirm_registration(@registration).deliver
+    end
 
     respond_with @registration
   end
