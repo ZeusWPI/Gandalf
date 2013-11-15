@@ -35,21 +35,27 @@ class Registration < ActiveRecord::Base
   end
 
   def paid
-    (read_attribute(:paid) || 0) / 100.0
+    from_cents read_attribute(:paid)
   end
 
   def paid=(value)
-    if value.is_a? String then value.sub!(',', '.') end
-    write_attribute(:paid, (value.to_f * 100).to_int)
+    write_attribute :paid, to_cents(value)
+  end
+
+  def to_pay
+    self.price - self.paid
+  end
+
+  def to_pay=(value)
+    self.paid = self.price - (to_cents(value) / 100.0)
   end
 
   def price
-    (read_attribute(:price) || 0) / 100.0
+    from_cents read_attribute(:price)
   end
 
   def price=(value)
-    if value.is_a? String then value.sub!(',', '.') end
-    write_attribute(:price, (value.to_f * 100).to_int)
+    write_attribute(:price, to_cents(value))
   end
 
   def is_paid
@@ -59,6 +65,17 @@ class Registration < ActiveRecord::Base
   def payment_code
     base = "GAN#{self.event.id}D#{self.id}A#{(self.event.id + self.id) % 9}L"
     base += (base.sum % 99).to_s + 'F'
+  end
+
+  private
+
+  def from_cents(value)
+    (value || nil) / 100.0
+  end
+
+  def to_cents(value)
+    if value.is_a? String then value.sub!(',', '.') end
+    (value.to_f * 100).to_int
   end
 
 end
