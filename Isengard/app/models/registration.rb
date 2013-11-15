@@ -27,7 +27,7 @@ class Registration < ActiveRecord::Base
 
   after_save do |record|
     record.access_levels.each do |access_level|
-      unless access_level.registrations.count <= access_level.capacity
+      if access_level.capacity != nil and access_level.registrations.count > access_level.capacity
         record.errors.add :access_levels, "type is sold out."
         raise ActiveRecord::Rollback
       end
@@ -54,6 +54,11 @@ class Registration < ActiveRecord::Base
 
   def is_paid
     self.price == self.paid
+  end
+
+  def payment_code
+    base = "GAN#{self.event.id}D#{self.id}A#{(self.event.id + self.id) % 9}L"
+    base += (base.sum % 99).to_s + 'F'
   end
 
 end

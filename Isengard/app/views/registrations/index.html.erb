@@ -10,6 +10,25 @@
        <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   </div>
+
+  <div class="col-sm-4">
+    <h3>Upload Transfer CSV</h3>
+    <%= form_tag({ action: :upload }, multipart: true) do %>
+      <div class="form-group">
+        <label>CSV file:</label>
+        <%= file_field_tag :csv_file %>
+      </div>
+      <div class="form-group">
+        <label>Column separator:</label>
+        <%= text_field_tag :separator, ';', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label>Amount column header:</label>
+        <%= text_field_tag :amount_column, 'Bedrag', class: 'form-control' %>
+      </div>
+      <%= button_tag :submit, class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
 
 <div class="row">
@@ -21,6 +40,7 @@
           <th>Name</th>
           <th>E-mail</th>
           <th>Access level</th>
+          <th>Payment code</th>
           <th>Paid</th>
         </thead>
         <%= render @event.registrations %>

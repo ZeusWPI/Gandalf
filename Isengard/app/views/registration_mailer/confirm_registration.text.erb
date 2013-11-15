@@ -1,0 +1,10 @@
+Dear <%= @registration.name %>,
+
+you receive this mail because someone registered with this email-address. If you did not register, feel free to ignore this mail.
+So assume that you did register. Then we expect you to pay your tickets as soon as possible (at least 3 days before the event) by transferring <%= number_with_precision @registration.price, precision: 2 %> to <%= @registration.event.bank_number || "our bank account" %>. Use "<%= @registration.payment_code %>" in the description of your transfer.
+
+Thank you for coming.
+
+Yours sincerely,
+Gandalf
+

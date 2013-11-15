@@ -42,13 +42,13 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description)
+    @event.update params.require(:event).permit(:name, :organisation, :bank_number, :location, :website, :start_date, :end_date, :description)
     respond_with @event
   end
 
   def create
     authorize! :create, Event
-    @event = Event.create(params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description).merge club: current_user.club)
+    @event = Event.create(params.require(:event).permit(:name, :organisation, :location, :bank_number, :website, :start_date, :end_date, :description).merge club: current_user.club)
     respond_with @event
   end
 
