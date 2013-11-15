@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   def registration_times
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
-    if @event.update params.require(:event).permit(:registration_close_date, :registration_open_date)
+    if @event.update params.require(:event).permit(:registration_close_date, :registration_open_date, :show_ticket_count)
       flash[:notice] = "succesfully updated registration times"
     else
       flash[:error] = "something went wrong"
