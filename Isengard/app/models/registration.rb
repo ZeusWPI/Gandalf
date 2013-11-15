@@ -70,7 +70,7 @@ class Registration < ActiveRecord::Base
   private
 
   def from_cents(value)
-    (value || nil) / 100.0
+    (value || 0) / 100.0
   end
 
   def to_cents(value)
