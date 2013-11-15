@@ -57,21 +57,42 @@ class RegistrationsController < ApplicationController
     sep = params.require('separator')
     paid = params.require('amount_column').upcase
     fails = []
-    @strings = []
+    counter = 0
     CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
       match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F/.match(row.to_s)
-      unless match
-        @strings << "no code found in #{row.to_s}"
-        fails << row
-        next
-      end
+      next unless match # seems like this is not a Gandalf transfer.
+
       registration = Registration.find match[:id]
+
+      # if it's not a real code, FAIL
       unless registration.payment_code == match.to_s
-        @strings << "incorrect code in #{row.to_s}"
         fails << row
         next
       end
-      @strings << "#{registration.name} paid #{row[paid]}"
+
+      # if we can't read the amount of money, FAIL
+      amount = row[paid].sub(',', '.')
+      begin
+        amount = Float(amount)
+      rescue
+        fails << row
+        next
+      end
+
+      registration.paid += amount
+      registration.save
+      counter += 1
+    end
+    flash[:notice] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} succesfully."
+    if fails.any?
+      flash[:error] = "The rows listed below contained an invalid code, please fix them by hand."
+      @csvheaders = fails.first.headers
+      @csvfails = fails
+      logger.debug(@csvheaders)
+      logger.debug(@csvfails)
+      render 'upload'
+    else
+      render 'index'
     end
   end
 

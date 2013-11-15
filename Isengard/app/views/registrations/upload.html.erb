@@ -1,5 +1,22 @@
 
-<h3>See your csv</h3>
-<%= @strings.each do |str| %>
-  <%= str %><br />
-<% end %>
+<h3>Failed rows</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% @csvheaders.each do |header| %>
+        <th><%= header.to_s %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @csvfails.each do |row| %>
+      <tr>
+        <% @csvheaders.each do |header| %>
+          <td><%= row[header] %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
