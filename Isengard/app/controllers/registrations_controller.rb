@@ -50,7 +50,7 @@ class RegistrationsController < ApplicationController
   def update
     @registration = Registration.find params.require(:id)
     authorize! :update, @registration
-    @registration.update params.require(:registration).permit(:paid)
+    @registration.update params.require(:registration).permit(:to_pay)
     respond_with @registration
   end
 
