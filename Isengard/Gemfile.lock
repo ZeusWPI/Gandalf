@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/nudded/barby
+  revision: f505a0eaac76c59cb1f20f2817cada167dacb1f2
+  specs:
+    barby (0.5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,7 +35,6 @@ GEM
       rake
     arel (4.0.0)
     atomic (1.1.12)
-    barby (0.5.1)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
@@ -102,6 +107,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    rmagick (2.13.2)
     ruby-graphviz (1.0.9)
     rubycas-client (2.3.9)
       activesupport
@@ -154,7 +160,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  barby
+  barby!
   cancan
   coffee-rails (~> 4.0.0)
   devise
@@ -164,6 +170,7 @@ DEPENDENCIES
   jquery-rails
   rails (= 4.0.0)
   rails-erd
+  rmagick
   sass-rails (~> 4.0.0)
   sdoc
   simple_form

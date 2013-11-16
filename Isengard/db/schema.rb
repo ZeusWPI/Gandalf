@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131114205015) do
+ActiveRecord::Schema.define(version: 20131116135918) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20131114205015) do
   add_index "periods", ["event_id"], name: "index_periods_on_event_id"
 
   create_table "registrations", force: true do |t|
-    t.integer  "barcode"
+    t.string   "barcode"
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
