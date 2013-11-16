@@ -7,8 +7,8 @@
     <%= form_text_field f, :bank_number %>
     <%= form_text_field f, :location %>
     <%= form_text_field f, :website %>
-    <%= form_date_field f, :start_date, "start", nice_time(f.object.start_date) %>
-    <%= form_date_field f, :end_date, "end", nice_time(f.object.end_date) %>
+    <%= form_date_field f, :start_date, "start", datepicker_time(f.object.start_date) %>
+    <%= form_date_field f, :end_date, "end", datepicker_time(f.object.end_date) %>
     <%= form_text_area f, :description %>
 
     <%= f.button :submit, class: 'btn btn-primary' %>

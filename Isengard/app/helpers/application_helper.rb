@@ -1,6 +1,10 @@
 module ApplicationHelper
 
   def nice_time(f)
+    f.try { |d| d.strftime("%a %d %b %Y %H:%M") }
+  end
+
+  def datepicker_time(f)
     f.try { |d| d.strftime("%Y-%m-%d %H:%M") }
   end
 
