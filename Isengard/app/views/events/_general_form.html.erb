@@ -1,10 +1,8 @@
 <div id="edit-event-form">
-  <%= form_errors @event %>
   <%= form_for @event do |f| %>
 
     <%= form_text_field f, :name %>
     <%= form_text_field f, :organisation %>
-    <%= form_text_field f, :bank_number %>
     <%= form_text_field f, :location %>
     <%= form_text_field f, :website %>
     <%= form_date_field f, :start_date, "start", datepicker_time(f.object.start_date) %>

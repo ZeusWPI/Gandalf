@@ -2,16 +2,6 @@
 
 <div class="row">
   <div class="col-sm-4">
-    <h3>Manage Registration Dates</h3>
-    <%= form_for @event, url: event_set_registration_times_path(@event), method: :patch do |f| %>
-       <%= form_date_field f, :registration_open_date, "registration-start", datepicker_time(f.object.registration_open_date) %>
-       <%= form_date_field f, :registration_close_date, "registration-end", datepicker_time(f.object.registration_close_date) %>
-       <%= form_check_box f, :show_ticket_count %>
-       <%= f.button :submit, class: "btn btn-primary" %>
-    <% end %>
-  </div>
-
-  <div class="col-sm-4">
     <h3>Upload Transfer CSV</h3>
     <%= form_tag({ action: :upload }, multipart: true) do %>
       <div class="form-group">
