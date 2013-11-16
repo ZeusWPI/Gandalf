@@ -16,6 +16,7 @@
 #  registration_open_date  :datetime
 #  registration_close_date :datetime
 #  show_ticket_count       :boolean          default(TRUE)
+#  bank_number             :string(255)
 #
 
 class Event < ActiveRecord::Base
