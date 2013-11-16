@@ -1,6 +1,6 @@
 <div id="edit-event-form">
   <%= form_errors @event %>
-  <%= form_for @event, remote: true do |f| %>
+  <%= form_for @event do |f| %>
 
     <%= form_text_field f, :name %>
     <%= form_text_field f, :organisation %>
