@@ -54,6 +54,11 @@ gem 'httparty'
 group :production do
   gem 'unicorn'
 end
+
+# Barcodes
+gem 'barby', git: "git://github.com/nudded/barby"
+gem 'rmagick', require: 'RMagick'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
