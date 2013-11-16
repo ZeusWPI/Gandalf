@@ -56,6 +56,9 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find params.require(:id)
     authorize! :update, @registration
     @registration.update params.require(:registration).permit(:to_pay)
+    if @registration.is_paid
+      RegistrationMailer.ticket(@registration).deliver
+    end
     respond_with @registration
   end
 
