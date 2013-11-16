@@ -54,6 +54,10 @@ gem 'httparty'
 group :production do
   gem 'unicorn'
 end
+
+# Barcodes
+gem 'barby'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

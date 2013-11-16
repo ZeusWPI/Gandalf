@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20131114205015) do
     t.string   "club"
     t.datetime "registration_open_date"
     t.datetime "registration_close_date"
-    t.boolean  "show_ticket_count",       default: true
     t.string   "bank_number"
+    t.boolean  "show_ticket_count",       default: true
   end
 
   add_index "events", ["club"], name: "index_events_on_club"
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 20131114205015) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.integer  "paid"
     t.string   "student_number"
+    t.integer  "paid"
     t.integer  "price"
   end
 

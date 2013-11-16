@@ -29,6 +29,7 @@ GEM
       rake
     arel (4.0.0)
     atomic (1.1.12)
+    barby (0.5.1)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
@@ -153,6 +154,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  barby
   cancan
   coffee-rails (~> 4.0.0)
   devise
