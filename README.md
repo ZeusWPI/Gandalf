@@ -20,3 +20,4 @@ The Hobbits are mini servers that have a printer and a barcode scanner.
 1. Felix Van der Jeugt
 2. Toon Willems
 3. Tom Naessens
+4. Maarten Herthoge
