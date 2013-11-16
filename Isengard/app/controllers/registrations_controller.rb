@@ -2,7 +2,7 @@ class RegistrationsController < ApplicationController
 
   require 'csv'
 
-  respond_to :html, :js
+  respond_to :html
 
   def index
     @event = Event.find params.require(:event_id)
@@ -27,16 +27,20 @@ class RegistrationsController < ApplicationController
     @registration.update paid: 0, price: requested_access_level.price
 
     # Send the confirmation email.
-    unless @registration.errors.any?
+    if not @registration.errors.any?
       @registration.barcode = 12.times.map { SecureRandom.random_number(10) }.join
       @registration.save
       RegistrationMailer.confirm_registration(@registration).deliver
-    end
-    if @registration.is_paid
-      RegistrationMailer.ticket(@registration).deliver
-    end
 
-    respond_with @registration
+      if @registration.is_paid
+        RegistrationMailer.ticket(@registration).deliver
+      end
+
+      flash[:notice] = "Registration succesfull. Check your mailbox!"
+      respond_with @event
+    else
+      render "events/show"
+    end
   end
 
   def advanced
