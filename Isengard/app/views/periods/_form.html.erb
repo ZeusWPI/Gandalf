@@ -8,8 +8,8 @@
     </label>
   </div>
 
-  <%= form_date_field f, :starts, "period-start", f.object.starts.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
-  <%= form_date_field f, :ends, "period-end", f.object.ends.try { |d| d.strftime("%Y-%m-%d %H:%M") } %>
+  <%= form_date_field f, :starts, "period-start", datepicker_time(f.object.starts) %>
+  <%= form_date_field f, :ends, "period-end", datepicker_time(f.object.ends) %>
 
   <%= f.button :submit, class: 'btn btn-group btn-primary' %>
 <% end %>
