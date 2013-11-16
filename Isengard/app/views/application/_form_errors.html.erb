@@ -7,8 +7,15 @@
       <ul>
         <% object.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
-      <% end %>
+        <% end %>
       </ul>
+    </div>
+  </div>
+<% else %>
+  <div id="flash">
+      <div class="alert alert-info alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      Form succesfully submitted!
     </div>
   </div>
 <% end %>
