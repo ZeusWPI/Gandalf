@@ -1,5 +1,0 @@
-<% unless @registration.errors.any? %>
-  $('#flash').replaceWith("<%= escape_javascript render partial: 'flash', locals: { flash: { notice: 'Registration succesful' } }  %>")
-  <% @registration = Registration.new %>
-<% end %>
-$('#basic-registration-form').replaceWith('<%= escape_javascript render partial: 'registrations/basic' %>');
