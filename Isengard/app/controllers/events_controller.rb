@@ -32,7 +32,9 @@ class EventsController < ApplicationController
   def update
     authorize! :update, @event
 
-    @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
+    if @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
+      flash[:notice] = "Succesfully updated event"
+    end
 
     render action: :edit
   end
