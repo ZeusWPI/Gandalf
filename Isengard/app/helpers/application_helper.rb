@@ -20,6 +20,10 @@ module ApplicationHelper
     render partial: "form_text_area", locals: {f: f, tag: tag}
   end
 
+  def form_fancy_text_area(f, tag)
+    render partial: "form_fancy_text_area", locals: {f: f, tag: tag}
+  end
+
   def form_email_field(f, tag)
     render partial: "form_email_field", locals: {f: f, tag: tag}
   end
