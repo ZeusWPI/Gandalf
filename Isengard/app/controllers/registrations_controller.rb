@@ -2,7 +2,7 @@ class RegistrationsController < ApplicationController
 
   require 'csv'
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @event = Event.find params.require(:event_id)
@@ -11,6 +11,13 @@ class RegistrationsController < ApplicationController
   def new
     @event = Event.find params.require(:event_id)
     @registration = Registration.new
+  end
+
+  def destroy
+    @event = Event.find params.require(:event_id)
+    registration = Registration.find params.require(:id)
+    @id = registration.id
+    registration.destroy
   end
 
   def basic
