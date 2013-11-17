@@ -57,6 +57,7 @@ end
 
 # Barcodes
 gem 'barcodes'
+gem 'rmagick', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

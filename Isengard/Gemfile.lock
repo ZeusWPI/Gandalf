@@ -181,6 +181,7 @@ DEPENDENCIES
   jquery-rails
   rails (= 4.0.0)
   rails-erd
+  rmagick
   sass-rails (~> 4.0.0)
   sdoc
   simple_form
