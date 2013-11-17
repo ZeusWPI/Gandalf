@@ -6,14 +6,6 @@ GIT
       prawn
       rmagick
 
-GIT
-  remote: git@github.com:galetahub/ckeditor.git
-  revision: 6ac7f1eb21cbf439fabeccc63ea804fd8589d68a
-  specs:
-    ckeditor (4.0.6)
-      mime-types
-      orm_adapter
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -51,6 +43,8 @@ GEM
     builder (3.1.4)
     cancan (1.6.10)
     choice (0.1.6)
+    ckeditor_rails (4.2.2)
+      railties (>= 3.0)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -189,7 +183,7 @@ DEPENDENCIES
   annotate
   barcodes!
   cancan
-  ckeditor!
+  ckeditor_rails
   coffee-rails (~> 4.0.0)
   devise
   devise_cas_authenticatable
