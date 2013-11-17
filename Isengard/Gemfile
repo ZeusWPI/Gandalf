@@ -62,6 +62,9 @@ gem 'barcodes', git: "git://github.com/nudded/barcodes"
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 
+# WYSIWYG
+gem 'ckeditor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -43,6 +43,9 @@ GEM
     builder (3.1.4)
     cancan (1.6.10)
     choice (0.1.6)
+    ckeditor (4.0.6)
+      mime-types
+      orm_adapter
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -181,6 +184,7 @@ DEPENDENCIES
   annotate
   barcodes!
   cancan
+  ckeditor
   coffee-rails (~> 4.0.0)
   devise
   devise_cas_authenticatable
