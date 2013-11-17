@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131116135918) do
+ActiveRecord::Schema.define(version: 20131117175200) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20131116135918) do
     t.datetime "registration_close_date"
     t.boolean  "show_ticket_count",       default: true
     t.string   "bank_number"
+    t.string   "contact_email"
   end
 
   add_index "events", ["club"], name: "index_events_on_club"

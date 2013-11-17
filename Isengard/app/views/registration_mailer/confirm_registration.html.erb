@@ -13,10 +13,10 @@
 
 	<p><strong>Please pay at least 3 days before the event.</strong> You will receive your ticket by mail once we processed your payment.</p>
 
-	<p>If you have any problems, you can contact us via mail: <a href="mailto:ict@fkserv.ugent.be">ict@fkserv.ugent.be</a></p>
+	<p>If you have any problems, you can contact us via mail: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
 
-	<p>Kind regards,<br /><%= @registration.event.organisation %></p>  
-	
+	<p>Kind regards,<br /><%= @registration.event.organisation %></p>
+
   </body>
 </html>
 

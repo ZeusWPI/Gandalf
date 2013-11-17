@@ -6,7 +6,7 @@ To receive your ticket by mail, please transfer <%= number_with_precision @regis
 
 Please pay at least 3 days before the event. You will receive your ticket by mail once we processed your payment.
 
-If you have any problems, you can contact us via mail: ict@fkserv.ugent.be
+If you have any problems, you can contact us via mail: <%= @registration.event.contact_email %>
 
 Kind regards,
 <%= @registration.event.organisation %>
