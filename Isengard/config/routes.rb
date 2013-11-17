@@ -21,6 +21,10 @@ Isengard::Application.routes.draw do
     end
     resources :role_names
     resources :registrations do
+      member do
+        get 'resend'
+      end
+
       collection do
         post 'basic'
         post 'advanced'
