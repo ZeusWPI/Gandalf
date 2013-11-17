@@ -3,7 +3,7 @@
 # Table name: registrations
 #
 #  id             :integer          not null, primary key
-#  barcode        :integer
+#  barcode        :string(255)
 #  name           :string(255)
 #  email          :string(255)
 #  created_at     :datetime

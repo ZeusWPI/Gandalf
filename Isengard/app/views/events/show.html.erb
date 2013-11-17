@@ -29,6 +29,10 @@
         <th>Website</th>
         <td><%= link_to @event.website, @event.website %></td>
       </tr>
+      <tr>
+        <th>Contact e-mail</th>
+        <td><%= mail_to @event.contact_email, @event.contact_email %></td>
+      </tr>
     </table>
 
     <% if not @event.access_levels.blank? %>

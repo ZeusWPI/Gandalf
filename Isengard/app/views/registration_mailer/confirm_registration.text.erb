@@ -8,7 +8,7 @@ Om uw ticket te ontvangen via e-mail, schrijft u <%= number_with_precision @regi
 
 U wordt vriendelijk verzocht om ten laatste 3 dagen voor het evenement te betalen. Eens we uw betaling verwerkt hebben, zal u uw ticket via e-mail ontvangen.
 
-Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: ict@fkserv.ugent.be
+Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= @registration.event.contact_email %>
 
 Met vriendelijke groet,
 <%= @registration.event.organisation %>
@@ -23,7 +23,7 @@ To receive your ticket by mail, please transfer <%= number_with_precision @regis
 
 Please pay at least 3 days before the event. You will receive your ticket by mail once we processed your payment.
 
-If you have any problems, you can contact us via mail: ict@fkserv.ugent.be
+If you have any problems, you can contact us via mail: <%= @registration.event.contact_email %>
 
 Kind regards,
 <%= @registration.event.organisation %>

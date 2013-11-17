@@ -17,6 +17,7 @@
 #  registration_close_date :datetime
 #  show_ticket_count       :boolean          default(TRUE)
 #  bank_number             :string(255)
+#  contact_email           :string(255)
 #
 
 class Event < ActiveRecord::Base
@@ -33,6 +34,7 @@ class Event < ActiveRecord::Base
   validates :description, presence: true
   validates :end_date, presence: true
   validates :location, presence: true
+  validates :contact_email, presence: true
   validates :name, presence: true
   validates :organisation, presence: true
   validates :start_date, presence: true

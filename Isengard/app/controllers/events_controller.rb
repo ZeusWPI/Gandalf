@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
 
-  respond_to :html, :js
+  respond_to :html
 
   def index
     @events = Event.where('end_date > ?', DateTime.now).order(:name)
@@ -32,17 +32,17 @@ class EventsController < ApplicationController
   def update
     authorize! :update, @event
 
-    if @event.update params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
+    if @event.update params.require(:event).permit(:name, :organisation, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
       flash[:notice] = "Succesfully updated event"
     end
 
-    redirect_to edit_event_path(@event)
+    render action: :edit
   end
 
   def create
     authorize! :create, Event
 
-    @event = Event.create(params.require(:event).permit(:name, :organisation, :location, :website, :start_date, :end_date, :description).merge club: current_user.club)
+    @event = Event.create(params.require(:event).permit(:name, :organisation, :location, :website, :contact_email, :start_date, :end_date, :description).merge club: current_user.club)
 
     respond_with @event
   end
