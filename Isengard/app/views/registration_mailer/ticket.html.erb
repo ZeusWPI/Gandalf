@@ -6,6 +6,7 @@
   <body>
     <h1>Dear <%= @registration.name %>,</h1>
     Below is the barcode you need to enter. Print this email and bring it with you.
-    <%= image_tag attachments['barcode.png'].url %>
+    <br />
+    <%= image_tag attachments['barcode.pdf'].url %>
   </body>
 </html>

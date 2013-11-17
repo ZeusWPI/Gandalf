@@ -56,8 +56,7 @@ group :production do
 end
 
 # Barcodes
-gem 'barby', git: "git://github.com/nudded/barby"
-gem 'rmagick', require: 'RMagick'
+gem 'barcodes'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
