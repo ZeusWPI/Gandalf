@@ -7,6 +7,7 @@ class RegistrationMailer < ActionMailer::Base
   end
 
   def ticket(registration)
+    require 'barcodes'
     @registration = registration
 
     barcode = Barcodes.create('EAN13', data: registration.barcode)
