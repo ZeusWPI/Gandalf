@@ -1,7 +1,7 @@
 <%= render partial: "events/tabs" %>
 
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <h3>Description</h3>
     <table class="table">
       <tr>
@@ -33,16 +33,20 @@
 
     <% if not @event.access_levels.blank? %>
       <h3>Tickets</h3>
-      <ul class="list-group">
-        <% @event.access_levels.each do |al| %>
-          <%= render partial: "events/ticket", locals: {al: al} %>
-        <% end %>
-      </ul>
+      <div class="row">
+        <div class="col-sm-6">
+          <ul class="list-group">
+            <% @event.access_levels.each do |al| %>
+              <%= render partial: "events/ticket", locals: {al: al} %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     <% end %>
   </div>
 
   <% if can? :register, @event %>
-    <div class="col-sm-4 col-sm-offset-2">
+    <div class="col-sm-4">
       <%= render partial: "registrations/form" %>
     </div>
   <% end %>
