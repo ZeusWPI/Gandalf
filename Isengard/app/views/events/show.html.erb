@@ -35,7 +35,7 @@
       </tr>
     </table>
 
-    <% if not @event.access_levels.blank? %>
+    <% unless @event.access_levels.blank? %>
       <h3>Tickets</h3>
       <div class="row">
         <div class="col-sm-8">
@@ -49,7 +49,7 @@
     <% end %>
   </div>
 
-  <% if can? :register, @event %>
+  <% if can? :register, @event and not @event.access_levels.blank? %>
     <div class="col-sm-4 col-sm-offset-1">
       <%= render partial: "registrations/form" %>
     </div>
