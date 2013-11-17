@@ -40,4 +40,7 @@ module ApplicationHelper
     render partial: "form_check_box", locals: {f: f, tag: tag}
   end
 
+  def bootstrap_pagination(collection)
+    render partial: "bootstrap_pagination", locals: {collection: collection}
+  end
 end

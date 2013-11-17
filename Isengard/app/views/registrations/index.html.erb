@@ -24,6 +24,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h3>Registrations</h3>
+    <%= bootstrap_pagination @registrations %>
     <div class="table-responsive">
       <table class="table table-striped" id="table-registrations">
         <thead>
@@ -34,8 +35,9 @@
           <th width="250">To pay</th>
           <th>Actions</th>
         </thead>
-        <%= render @event.registrations %>
+        <%= render @registrations %>
       </table>
     </div>
+    <%= bootstrap_pagination @registrations %>
   </div>
 </div>
