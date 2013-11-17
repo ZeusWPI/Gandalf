@@ -36,7 +36,7 @@ class EventsController < ApplicationController
       flash[:notice] = "Succesfully updated event"
     end
 
-    render action: :edit
+    redirect_to edit_event_path(@event)
   end
 
   def create
