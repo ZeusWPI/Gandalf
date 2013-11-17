@@ -9,9 +9,9 @@
 
 	<p>Bedankt voor het bestellen van een ticket voor <%= @registration.event.name %> van <%= @registration.event.organisation %>. Als u zich niet opgegeven hebt voor dit ticket, dan heeft iemand anders uw e-mailadres gebruikt om dit te registreren. Mocht dit het geval zijn, mag u deze deze e-mail negeren.</p>
 
-	<p>Om uw ticket te ontvangen via e-mail, schrijft u <%= number_with_precision @registration.to_pay, precision: 2 %> euro over aan <%= @registration.event.bank_number || "our bank account" %>. Plaats de code "<%= @registration.payment_code %>" in de mededeling van de overschrijving (zonder aanhalingstekens). Als u de code vergeet mee te geven of niet correct vermeldt in de beschrijving, dan kunnen wij uw betaling niet verwerken en zal u uw ticket niet ontvangen.</p>
+	<p>Om uw ticket te ontvangen via e-mail, schrijft u <%= number_with_precision @registration.to_pay, precision: 2 %> euro over op het rekeningnummer <%= @registration.event.bank_number || "our bank account" %>. Plaats de code "<%= @registration.payment_code %>" in de mededeling van de overschrijving (zonder aanhalingstekens). Als u de code vergeet mee te geven of niet correct vermeldt in de beschrijving, dan kunnen wij uw betaling niet verwerken en zal u uw ticket niet ontvangen.</p>
 
-	<p>U wordt vriendelijk verzocht om ten laatste 3 dagen voor het evenement te betalen. Eens we uw betaling verwerkt hebben, zal u uw ticket via e-mail ontvangen.</p>
+	<p><strong>Gelieve ten laatste 3 dagen voor het evenement te betalen.</strong> Eens we uw betaling verwerkt hebben, zal u uw ticket via e-mail ontvangen.</p>
 
 	<p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
 
