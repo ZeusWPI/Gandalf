@@ -63,7 +63,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 
 # WYSIWYG
-gem 'ckeditor'
+gem "ckeditor", :git => "git@github.com:galetahub/ckeditor.git"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
