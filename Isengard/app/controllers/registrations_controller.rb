@@ -46,10 +46,11 @@ class RegistrationsController < ApplicationController
     if not @registration.errors.any?
       @registration.barcode = 12.times.map { SecureRandom.random_number(10) }.join
       @registration.save
-      RegistrationMailer.confirm_registration(@registration).deliver
 
       if @registration.is_paid
         RegistrationMailer.ticket(@registration).deliver
+      else
+        RegistrationMailer.confirm_registration(@registration).deliver
       end
 
       flash[:notice] = "Registration succesfull. Check your mailbox!"
