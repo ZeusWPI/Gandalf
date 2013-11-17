@@ -13,12 +13,12 @@
 
 	<p>U wordt vriendelijk verzocht om ten laatste 3 dagen voor het evenement te betalen. Eens we uw betaling verwerkt hebben, zal u uw ticket via e-mail ontvangen.</p>
 
-	<p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <a href="mailto:ict@fkserv.ugent.be">ict@fkserv.ugent.be</a></p>
+	<p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
 
 	<p>Met vriendelijke groet,<br /><%= @registration.event.organisation %></p>
-  
+
 	<p><br /><br />-------------------------------------<br /><br /></p>
-  
+
 	<p>Dear <%= @registration.name %>,</p>
 
 	<p>Thank you for buying a ticket for <%= @registration.event.name %> of <%= @registration.event.organisation %>. If you did not register for this ticket, someone else used your email address to register. If this is the case, please ignore this email.</p>
