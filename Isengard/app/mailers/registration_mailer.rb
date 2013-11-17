@@ -1,4 +1,7 @@
 class RegistrationMailer < ActionMailer::Base
+
+  helper ApplicationHelper
+
   default from: "noreply@event.fkgent.be"
 
   def confirm_registration(registration)
