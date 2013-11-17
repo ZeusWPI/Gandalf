@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/nudded/barcodes
+  revision: 0aee74c9696dff0078c7f24361dead48de7b15e9
+  specs:
+    barcodes (0.0.11)
+      prawn
+      rmagick
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,9 +39,6 @@ GEM
       rake
     arel (4.0.0)
     atomic (1.1.12)
-    barcodes (0.0.11)
-      prawn
-      rmagick
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
@@ -171,7 +176,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  barcodes
+  barcodes!
   cancan
   coffee-rails (~> 4.0.0)
   devise
@@ -181,7 +186,6 @@ DEPENDENCIES
   jquery-rails
   rails (= 4.0.0)
   rails-erd
-  rmagick
   sass-rails (~> 4.0.0)
   sdoc
   simple_form
