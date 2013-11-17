@@ -20,6 +20,15 @@ class RegistrationsController < ApplicationController
     registration.destroy
   end
 
+  def resend
+    @registration = Registration.find params.require(:id)
+    if @registration.is_paid
+      RegistrationMailer.ticket(@registration).deliver
+    else
+      RegistrationMailer.confirm_registration(@registration).deliver
+    end
+  end
+
   def basic
     @event = Event.find params.require(:event_id)
 
