@@ -9,10 +9,8 @@ class RegistrationMailer < ActionMailer::Base
   def ticket(registration)
     @registration = registration
 
-    require 'barby/barcode/ean_13'
-    require 'barby/outputter/rmagick_outputter'
-    barcode = Barby::EAN13.new(registration.barcode)
-    attachments.inline['barcode.png'] = Barby::RmagickOutputter.new(barcode).to_png
+    barcode = Barcodes.create('EAN13', data: registration.barcode)
+    attachments.inline['barcode.pdf'] = Barcodes::Renderer::Pdf.new(barcode).render
 
     mail to: "#{registration.name} <#{registration.email}>", subject: "Ticket for #{registration.event.name}"
   end
