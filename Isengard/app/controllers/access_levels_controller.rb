@@ -26,10 +26,14 @@ class AccessLevelsController < ApplicationController
   def destroy
     @event = Event.find params.require(:event_id)
     access_level = AccessLevel.find params.require(:id)
-    # Save the name so we can respond it as we still have to
-    # be able to delete it
-    @id = access_level.id
-    access_level.destroy
+    unless access_level.registration.any?
+      # Save the name so we can respond it as we still have to
+      # be able to delete it
+      @id = access_level.id
+      access_level.destroy
+    else
+      render :index
+    end
   end
 
   def set_zones
