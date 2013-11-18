@@ -26,6 +26,12 @@ class AccessLevel < ActiveRecord::Base
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :capacity, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
 
+  validate do |access_level|
+    if access_level.price > 0 and access_level.event.bank_number.blank?
+      access_level.errors.add :event_id, "has no bank number."
+    end
+  end
+
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones
     self.save
