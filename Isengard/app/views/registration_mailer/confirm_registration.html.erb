@@ -23,7 +23,7 @@
 
 	<p>Thank you for buying a ticket for <%= @registration.event.name %> of <%= @registration.event.organisation %>. If you did not register for this ticket, someone else used your email address to register. If this is the case, please ignore this email.</p>
 
-	<p>To receive your ticket by mail, please transfer <%= number_with_precision @registration.to_pay, precision: 2 %> euro to <%= @registration.event.bank_number || "our bank account" %>. Place "<%= @registration.payment_code %>" in the description of your transfer (without the brackets). If you forget this code or you do not copy it correctly, we cannot process your payment and you will not receive your ticket.</p>
+	<p>To receive your ticket by mail, please transfer <%= number_with_precision @registration.to_pay, precision: 2 %> euro to <%= @registration.event.bank_number || "our bank account" %>. Place "<%= @registration.payment_code %>" in the description of your transfer (without the quotation marks). If you forget this code or you do not copy it correctly, we cannot process your payment and you will not receive your ticket.</p>
 
 	<p><strong>Please pay at least 3 days before the event.</strong> You will receive your ticket by mail once we processed your payment.</p>
 
