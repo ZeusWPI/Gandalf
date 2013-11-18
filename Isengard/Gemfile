@@ -65,6 +65,9 @@ gem 'will_paginate-bootstrap'
 # WYSIWYG
 gem 'ckeditor_rails'
 
+# Statistics
+gem 'chartkick'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
