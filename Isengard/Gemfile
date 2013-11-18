@@ -65,6 +65,10 @@ gem 'will_paginate-bootstrap'
 # WYSIWYG
 gem 'ckeditor_rails'
 
+# Attachements
+gem 'paperclip', '~> 3.0'
+gem 'spreadsheet'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
