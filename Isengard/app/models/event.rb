@@ -51,15 +51,15 @@ class Event < ActiveRecord::Base
 
     sheet.update_row 0, "Naam", "Email", "Studentnummer", "Ticket"
     registrations.select(&:is_paid).each.with_index do |reg, i|
-      sheet.update_row(i+1, reg.name, reg.email, reg.student_number, reg.access_levels.first.name)
+      sheet.update_row i + 1, reg.name, reg.email, reg.student_number, reg.access_levels.first.name
     end
-    data = File.new "export.xls", "w"
+    data = Tempfile.new(["export", ".xls"])
 
     xls.write(data)
 
     self.export = data
     self.save!
-    data.unlink
+    data.close
   end
 
 end
