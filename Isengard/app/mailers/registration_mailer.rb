@@ -12,7 +12,7 @@ class RegistrationMailer < ActionMailer::Base
   def ticket(registration)
     @registration = registration
 
-    barcode = Barcodes.create('EAN13', {data: registration.barcode, :bar_width => 40, :bar_height => 1000 })
+    barcode = Barcodes.create('EAN13', data: registration.barcode, bar_width: 40, bar_height: 1000 )
     attachments.inline['barcode.png'] = Barcodes::Renderer::Image.new(barcode).render
 
     mail to: "#{registration.name} <#{registration.email}>", subject: "Ticket for #{registration.event.name}"
