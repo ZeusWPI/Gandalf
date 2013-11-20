@@ -56,4 +56,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def generate_export
+    @event = Event.find params.require(:id)
+    @event.export_status = "generating"
+    @event.save
+    @event.generate_xls
+  end
+
 end

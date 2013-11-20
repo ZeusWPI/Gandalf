@@ -17,6 +17,7 @@ Isengard::Application.routes.draw do
   resources :events do
     member do
       get 'export_status'
+      post 'generate_export'
     end
 
     resources :zones

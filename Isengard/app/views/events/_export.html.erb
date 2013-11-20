@@ -1,3 +1,2 @@
-<div id="export-link">
-  <p> Download as <%= link_to 'xls', @event.export.url %> (Generated on: <%= @event.export_updated_at.strftime("%d/%m/%Y %H:%M") %>)</p>
-</div>
+  <p> Download as <%= link_to 'xls', @event.export.url %> (Generated on: <%= @event.export_updated_at.strftime("%d/%m/%Y %H:%M") %>) 
+  <%= link_to raw('<i class="glyphicon glyphicon-refresh"></i>'), generate_export_event_path(@event),method: :post, remote: true, id: "refresh-export" %></p>
