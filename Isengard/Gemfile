@@ -65,6 +65,9 @@ gem 'will_paginate-bootstrap'
 # WYSIWYG
 gem 'ckeditor_rails'
 
+# Statistics
+gem 'chartkick'
+
 # Attachements
 gem 'paperclip', '~> 3.0'
 gem 'spreadsheet'

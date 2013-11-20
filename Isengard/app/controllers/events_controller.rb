@@ -47,6 +47,14 @@ class EventsController < ApplicationController
     respond_with @event
   end
 
+  def statistics
+    @event = Event.find params.require(:id)
+    authorize! :view_stats, @event
+    @data = @event.access_levels.map do |al|
+      {name: al.name, data: al.registrations.group('date(registrations.created_at)').count}
+    end
+  end
+
   def export_status
     @event = Event.find params.require(:id)
     if @event.export_status == 'done'

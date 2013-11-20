@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20131120115935) do
     t.string   "bank_number"
     t.boolean  "show_ticket_count",       default: true
     t.string   "contact_email"
+    t.boolean  "show_statistics"
     t.string   "export_file_name"
     t.string   "export_content_type"
     t.integer  "export_file_size"
@@ -115,8 +116,8 @@ ActiveRecord::Schema.define(version: 20131120115935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.string   "student_number"
     t.integer  "paid"
+    t.string   "student_number"
     t.integer  "price"
   end
 
