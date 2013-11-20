@@ -24,6 +24,10 @@
 <div class="row">
   <div class="col-sm-12">
     <h3>Registrations</h3>
+    <div id="export-link">
+      <%= render 'events/export' %>
+    </div>
+    <%= tag :div, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
     <%= bootstrap_pagination @registrations %>
     <div class="table-responsive">
       <table class="table table-striped" id="table-registrations">
@@ -41,3 +45,4 @@
     <%= bootstrap_pagination @registrations %>
   </div>
 </div>
+

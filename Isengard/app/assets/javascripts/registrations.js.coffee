@@ -22,5 +22,6 @@ ready = ->
     else
       form.find('.registration-paid').val(form.find('.registration-price').val())
 
+
 $(document).ready(ready)
 $(document).on('page:load', ready)

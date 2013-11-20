@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @events = Event.where('end_date > ?', DateTime.now).order(:name)
@@ -45,6 +45,22 @@ class EventsController < ApplicationController
     @event = Event.create(params.require(:event).permit(:name, :organisation, :location, :website, :contact_email, :start_date, :end_date, :description).merge club: current_user.club)
 
     respond_with @event
+  end
+
+  def export_status
+    @event = Event.find params.require(:id)
+    if @event.export_status == 'done'
+      render partial: 'events/export'
+    else
+      redirect_to :back, status: :not_found
+    end
+  end
+
+  def generate_export
+    @event = Event.find params.require(:id)
+    @event.export_status = "generating"
+    @event.save
+    @event.generate_xls
   end
 
 end
