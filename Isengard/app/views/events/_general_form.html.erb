@@ -1,5 +1,4 @@
 <div id="edit-event-form">
-  <%= form_errors @event %>
   <%= form_for @event do |f| %>
 
     <%= form_text_field f, :name %>
@@ -7,9 +6,10 @@
     <%= form_text_field f, :bank_number %>
     <%= form_text_field f, :location %>
     <%= form_text_field f, :website %>
+    <%= form_email_field f, :contact_email %>
     <%= form_date_field f, :start_date, "start", datepicker_time(f.object.start_date) %>
     <%= form_date_field f, :end_date, "end", datepicker_time(f.object.end_date) %>
-    <%= form_text_area f, :description %>
+    <%= form_fancy_text_area f, :description %>
 
     <%= f.button :submit, class: 'btn btn-primary' %>
   <% end %>

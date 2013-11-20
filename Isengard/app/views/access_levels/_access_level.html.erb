@@ -9,5 +9,5 @@
   <% if advanced %>
     <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
   <% end %>
-  <td><%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', remote: true, method: :delete %></td>
+  <td><%= unless access_level.registrations.any? then link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', remote: true, method: :delete end %></td>
 </tr>

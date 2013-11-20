@@ -2,16 +2,6 @@
 
 <div class="row">
   <div class="col-sm-4">
-    <h3>Manage Registration Dates</h3>
-    <%= form_for @event, url: event_set_registration_times_path(@event), method: :patch do |f| %>
-       <%= form_date_field f, :registration_open_date, "registration-start", datepicker_time(f.object.registration_open_date) %>
-       <%= form_date_field f, :registration_close_date, "registration-end", datepicker_time(f.object.registration_close_date) %>
-       <%= form_check_box f, :show_ticket_count %>
-       <%= f.button :submit, class: "btn btn-primary" %>
-    <% end %>
-  </div>
-
-  <div class="col-sm-4">
     <h3>Upload Transfer CSV</h3>
     <%= form_tag({ action: :upload }, multipart: true) do %>
       <div class="form-group">
@@ -34,6 +24,11 @@
 <div class="row">
   <div class="col-sm-12">
     <h3>Registrations</h3>
+    <div id="export-link">
+      <%= render 'events/export' %>
+    </div>
+    <%= tag :div, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
+    <%= bootstrap_pagination @registrations %>
     <div class="table-responsive">
       <table class="table table-striped" id="table-registrations">
         <thead>
@@ -42,9 +37,12 @@
           <th>Access level</th>
           <th>Payment code</th>
           <th width="250">To pay</th>
+          <th>Actions</th>
         </thead>
-        <%= render @event.registrations %>
+        <%= render @registrations %>
       </table>
     </div>
+    <%= bootstrap_pagination @registrations %>
   </div>
 </div>
+

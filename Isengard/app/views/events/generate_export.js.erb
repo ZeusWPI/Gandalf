@@ -1,0 +1,15 @@
+$('#refresh-export').hide()
+var export_status_url = $('#export_status_url').data('url')
+$('#export-link').text("Generating xls...");
+if (export_status_url)  {
+  console.log(export_status_url);
+  poll = function() {
+    console.log("polling");
+    setTimeout( function() {
+      $.get(export_status_url)
+      .done(function(html) { $('#export-link').html(html)})
+      .fail(function(data) { console.log(data); poll()})
+    }, 3000)
+  }
+  poll();
+}

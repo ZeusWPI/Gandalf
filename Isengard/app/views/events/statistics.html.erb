@@ -1,0 +1,9 @@
+
+<%= render partial: "events/tabs" %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Statistics</h3>
+    <%= line_chart @data, library: {hAxis: {format: 'MMM d'}} %>
+  </div>
+</div>

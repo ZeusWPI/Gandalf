@@ -1,6 +1,15 @@
+GIT
+  remote: git://github.com/nudded/barcodes
+  revision: 0aee74c9696dff0078c7f24361dead48de7b15e9
+  specs:
+    barcodes (0.0.11)
+      prawn
+      rmagick
+
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
     actionmailer (4.0.0)
       actionpack (= 4.0.0)
       mail (~> 2.5.3)
@@ -25,6 +34,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    afm (0.2.0)
     annotate (2.5.0)
       rake
     arel (4.0.0)
@@ -32,7 +42,14 @@ GEM
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
+    chartkick (1.2.0)
     choice (0.1.6)
+    ckeditor_rails (4.2.2)
+      railties (>= 3.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.3)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -40,6 +57,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    daemons (1.1.9)
+    delayed_job (4.0.0)
+      activesupport (>= 3.0, < 4.1)
+    delayed_job_active_record (4.0.0)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -52,6 +75,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    hashery (2.1.1)
     hike (1.2.3)
     httparty (0.11.0)
       multi_json (~> 1.0)
@@ -74,7 +98,21 @@ GEM
     multi_json (1.7.9)
     multi_xml (0.5.5)
     orm_adapter (0.4.0)
+    paperclip (3.5.2)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
+    pdf-reader (1.3.3)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.0)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     polyglot (0.3.3)
+    prawn (0.12.0)
+      pdf-reader (>= 0.9.0)
+      ttfunk (~> 1.0.2)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -101,7 +139,10 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    rmagick (2.13.2)
     ruby-graphviz (1.0.9)
+    ruby-ole (1.2.11.7)
+    ruby-rc4 (0.1.5)
     rubycas-client (2.3.9)
       activesupport
     sass (3.2.10)
@@ -115,6 +156,8 @@ GEM
     simple_form (3.0.0)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
+    spreadsheet (0.9.4)
+      ruby-ole (>= 1.0)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -135,6 +178,7 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.0.3)
     turbolinks (1.3.0)
       coffee-rails
     tzinfo (0.3.37)
@@ -147,26 +191,39 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    will_paginate (3.0.4)
+    will_paginate-bootstrap (1.0.0)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   annotate
+  barcodes!
   cancan
+  chartkick
+  ckeditor_rails
   coffee-rails (~> 4.0.0)
+  daemons
+  delayed_job (~> 4.0)
+  delayed_job_active_record
   devise
   devise_cas_authenticatable
   httparty
   jbuilder (~> 1.2)
   jquery-rails
+  paperclip (~> 3.0)
   rails (= 4.0.0)
   rails-erd
   sass-rails (~> 4.0.0)
   sdoc
   simple_form
+  spreadsheet
   sqlite3
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
   unicorn
+  will_paginate (~> 3.0)
+  will_paginate-bootstrap

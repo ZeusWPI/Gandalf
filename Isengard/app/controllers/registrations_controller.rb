@@ -6,11 +6,28 @@ class RegistrationsController < ApplicationController
 
   def index
     @event = Event.find params.require(:event_id)
+    @registrations = @event.registrations.paginate(page: params[:page], per_page: 15)
   end
 
   def new
     @event = Event.find params.require(:event_id)
     @registration = Registration.new
+  end
+
+  def destroy
+    @event = Event.find params.require(:event_id)
+    registration = Registration.find params.require(:id)
+    @id = registration.id
+    registration.destroy
+  end
+
+  def resend
+    @registration = Registration.find params.require(:id)
+    if @registration.is_paid
+      RegistrationMailer.ticket(@registration).deliver
+    else
+      RegistrationMailer.confirm_registration(@registration).deliver
+    end
   end
 
   def basic
@@ -27,11 +44,21 @@ class RegistrationsController < ApplicationController
     @registration.update paid: 0, price: requested_access_level.price
 
     # Send the confirmation email.
-    unless @registration.errors.any?
-      RegistrationMailer.confirm_registration(@registration).deliver
-    end
+    if not @registration.errors.any?
+      @registration.barcode = 12.times.map { SecureRandom.random_number(10) }.join
+      @registration.save
 
-    respond_with @registration
+      if @registration.is_paid
+        RegistrationMailer.ticket(@registration).deliver
+      else
+        RegistrationMailer.confirm_registration(@registration).deliver
+      end
+
+      flash[:notice] = "Registration succesfull. Check your mailbox!"
+      respond_with @event
+    else
+      render "events/show"
+    end
   end
 
   def advanced
@@ -51,6 +78,9 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find params.require(:id)
     authorize! :update, @registration
     @registration.update params.require(:registration).permit(:to_pay)
+    if @registration.is_paid
+      RegistrationMailer.ticket(@registration).deliver
+    end
     respond_with @registration
   end
 

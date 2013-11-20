@@ -15,18 +15,30 @@ Isengard::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :events do
-    patch 'registration_times', as: 'set_registration_times'
+    member do
+      get 'export_status'
+      post 'generate_export'
+    end
+
     resources :zones
     resources :access_levels do
       resources :zones
     end
     resources :role_names
     resources :registrations do
+      member do
+        get 'resend'
+      end
+
       collection do
         post 'basic'
         post 'advanced'
         post 'upload'
       end
+    end
+
+    member do
+      get 'statistics'
     end
 
     resources :periods
