@@ -46,6 +46,8 @@ class Event < ActiveRecord::Base
   has_attached_file :export
 
   def generate_xls
+    self.export_status = 'generating'
+    self.save
     xls = Spreadsheet::Workbook.new
     sheet = xls.create_worksheet
 
@@ -58,8 +60,10 @@ class Event < ActiveRecord::Base
     xls.write(data)
 
     self.export = data
+    self.export_status = 'done'
     self.save!
     data.close
   end
+  handle_asynchronously :generate_xls
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120112719) do
+ActiveRecord::Schema.define(version: 20131120115935) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20131120112719) do
     t.string   "export_content_type"
     t.integer  "export_file_size"
     t.datetime "export_updated_at"
+    t.string   "export_status"
   end
 
   add_index "events", ["club"], name: "index_events_on_club"

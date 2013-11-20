@@ -22,5 +22,15 @@ ready = ->
     else
       form.find('.registration-paid').val(form.find('.registration-price').val())
 
+  export_status_url = $('#export_status_url').data('url')
+  if (export_status_url) 
+    poll = ->
+      setTimeout( ->
+        $.get(export_status_url)
+          .done((html) -> $('#export-link').html(html))
+          .fail((data) -> console.log(data); poll())
+      , 3000)
+    poll()
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
