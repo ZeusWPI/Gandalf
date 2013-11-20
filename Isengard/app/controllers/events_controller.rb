@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @events = Event.where('end_date > ?', DateTime.now).order(:name)
@@ -53,6 +53,22 @@ class EventsController < ApplicationController
     @data = @event.access_levels.map do |al|
       {name: al.name, data: al.registrations.group('date(registrations.created_at)').count}
     end
+  end
+
+  def export_status
+    @event = Event.find params.require(:id)
+    if @event.export_status == 'done'
+      render partial: 'events/export'
+    else
+      redirect_to :back, status: :not_found
+    end
+  end
+
+  def generate_export
+    @event = Event.find params.require(:id)
+    @event.export_status = "generating"
+    @event.save
+    @event.generate_xls
   end
 
 end

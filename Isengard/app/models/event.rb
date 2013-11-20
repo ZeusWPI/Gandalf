@@ -15,9 +15,13 @@
 #  club                    :string(255)
 #  registration_open_date  :datetime
 #  registration_close_date :datetime
-#  show_ticket_count       :boolean          default(TRUE)
 #  bank_number             :string(255)
+#  show_ticket_count       :boolean          default(TRUE)
 #  contact_email           :string(255)
+#  export_file_name        :string(255)
+#  export_content_type     :string(255)
+#  export_file_size        :integer
+#  export_updated_at       :datetime
 #
 
 class Event < ActiveRecord::Base
@@ -38,5 +42,28 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :organisation, presence: true
   validates :start_date, presence: true
+
+  has_attached_file :export
+
+  def generate_xls
+    self.export_status = 'generating'
+    self.save
+    xls = Spreadsheet::Workbook.new
+    sheet = xls.create_worksheet
+
+    sheet.update_row 0, "Naam", "Email", "Studentnummer", "Ticket"
+    registrations.select(&:is_paid).each.with_index do |reg, i|
+      sheet.update_row i + 1, reg.name, reg.email, reg.student_number, reg.access_levels.first.name
+    end
+    data = Tempfile.new(["export", ".xls"])
+
+    xls.write(data)
+
+    self.export = data
+    self.export_status = 'done'
+    self.save!
+    data.close
+  end
+  handle_asynchronously :generate_xls
 
 end
