@@ -97,6 +97,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.7.9)
     multi_xml (0.5.5)
+    mysql2 (0.3.13)
     orm_adapter (0.4.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -213,6 +214,7 @@ DEPENDENCIES
   httparty
   jbuilder (~> 1.2)
   jquery-rails
+  mysql2
   paperclip (~> 3.0)
   rails (= 4.0.0)
   rails-erd
