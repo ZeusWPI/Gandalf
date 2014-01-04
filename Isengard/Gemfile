@@ -89,3 +89,7 @@ gem 'delayed_job_active_record'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :production do
+  gem 'mysql2' # Database
+end
