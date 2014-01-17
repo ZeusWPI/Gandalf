@@ -115,7 +115,7 @@ class RegistrationsController < ApplicationController
       registration.save
       counter += 1
     end
-    flash[:notice] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} succesfully."
+    flash[:notice] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
     if fails.any?
       flash[:error] = "The rows listed below contained an invalid code, please fix them by hand."
       @csvheaders = fails.first.headers
