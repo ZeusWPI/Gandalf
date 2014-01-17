@@ -6,7 +6,7 @@ Bedankt voor het bestellen van een ticket voor <%= @registration.event.name %> v
 
 Om uw ticket te ontvangen via e-mail, schrijft u <%= number_with_precision @registration.to_pay, precision: 2 %> euro over op het rekeningnummer <%= @registration.event.bank_number || "our bank account" %>. Plaats de code "<%= @registration.payment_code %>" in de mededeling van de overschrijving (zonder aanhalingstekens). Als u de code vergeet mee te geven of niet correct vermeldt in de beschrijving, dan kunnen wij uw betaling niet verwerken en zal u uw ticket niet ontvangen.
 
-U wordt vriendelijk verzocht om ten laatste 3 dagen voor het evenement te betalen. Eens we uw betaling verwerkt hebben, zal u uw ticket via e-mail ontvangen.
+Gelieve ten laatste 3 dagen voor het evenement te betalen. Indien dit niet meer lukt, gelieve ons te contacteren via <%= mail_to @registration.event.contact_email, @registration.event.contact_email %> om een andere betalingswijze af te spreken. Eens we uw betaling verwerkt hebben, zal u uw ticket via e-mail ontvangen.
 
 Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= @registration.event.contact_email %>
 
@@ -21,7 +21,7 @@ Thank you for buying a ticket for <%= @registration.event.name %> of <%= @regist
 
 To receive your ticket by mail, please transfer <%= number_with_precision @registration.to_pay, precision: 2 %> euro to <%= @registration.event.bank_number || "our bank account" %>. Place "<%= @registration.payment_code %>" in the description of your transfer (without the quotation marks). If you forget this code or you do not copy it correctly, we cannot process your payment and you will not receive your ticket.
 
-Please pay at least 3 days before the event. You will receive your ticket by mail once we processed your payment.
+Please pay at least 3 days before the event. If this is no longer possible, please contact us via <%= mail_to @registration.event.contact_email, @registration.event.contact_email %> to agree upon a different payment method. You will receive your ticket by mail once we processed your payment.
 
 If you have any problems, you can contact us via mail: <%= @registration.event.contact_email %>
 
