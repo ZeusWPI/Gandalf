@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     authorize! :update, @event
 
     if @event.update params.require(:event).permit(:name, :organisation, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
-      flash[:notice] = "Successfully updated event."
+      flash.now[:notice] = "Successfully updated event."
     end
 
     render action: :edit
@@ -57,6 +57,19 @@ class EventsController < ApplicationController
 
   def scan
     @event = Event.find params.require(:id)
+  end
+
+  def check_in
+    @event = Event.find params.require(:id)
+    @registration = Registration.find_by_barcode params.require(:code)
+
+    if @registration
+      flash.now[:notice] = "Success"
+    else
+      flash.now[:error] = "Not found"
+    end
+
+    render action: :scan
   end
 
   def export_status
