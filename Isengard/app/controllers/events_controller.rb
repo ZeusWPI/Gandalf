@@ -65,12 +65,11 @@ class EventsController < ApplicationController
 
     if registration
       if registration.checked_in_at
-        flash.now[:error] = "Person already checked in!"
+        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(registration.checked_in_at) + "!"
       else
-
-      flash.now[:notice] = "Success"
-      registration.checked_in_at = Time.now
-      registration.save!
+        flash.now[:notice] = "Success"
+        registration.checked_in_at = Time.now
+        registration.save!
       end
     else
       flash.now[:error] = "Barcode not found"
