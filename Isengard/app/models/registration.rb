@@ -12,6 +12,7 @@
 #  paid           :integer
 #  student_number :string(255)
 #  price          :integer
+#  checked_in_at  :integer
 #
 
 class Registration < ActiveRecord::Base

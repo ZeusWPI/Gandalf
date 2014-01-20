@@ -55,6 +55,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def scan
+    @event = Event.find params.require(:id)
+  end
+
   def export_status
     @event = Event.find params.require(:id)
     if @event.export_status == 'done'

@@ -39,6 +39,7 @@ Isengard::Application.routes.draw do
 
     member do
       get 'statistics'
+      get 'scan'
     end
 
     resources :periods
