@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable
 
-  after_create :fetch_club
+  after_create :fetch_club, :cas_extra_attributes=
 
   # return the club this user can manage
   def fetch_club
@@ -42,4 +42,13 @@ class User < ActiveRecord::Base
       self.save!
     end
   end
+  
+  # this should add all extra CAS attributes returned by the server to the current session
+	# extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
+  def cas_extra_attributes=(extra_attributes)
+    extra_attributes.each do |name, value|
+			session['cas_' + name] = value
+    end
+  end
+  
 end
