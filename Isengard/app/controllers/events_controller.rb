@@ -61,12 +61,19 @@ class EventsController < ApplicationController
 
   def check_in
     @event = Event.find params.require(:id)
-    @registration = Registration.find_by_barcode params.require(:code)
+    registration = Registration.find_by_barcode params.require(:code)
 
-    if @registration
+    if registration
+      if registration.checked_in_at
+        flash.now[:error] = "Person already checked in!"
+      else
+
       flash.now[:notice] = "Success"
+      registration.checked_in_at = Time.now
+      registration.save!
+      end
     else
-      flash.now[:error] = "Not found"
+      flash.now[:error] = "Barcode not found"
     end
 
     render action: :scan

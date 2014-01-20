@@ -1,7 +1,6 @@
 <%= content_tag_for :tr, registration do %>
   <td><%= registration.name %></td>
   <td><%= registration.email %></td>
-  <td><%= registration.barcode %></td>
   <td><%= registration.access_levels.first.try :name %></td>
   <td><%= registration.payment_code %></td>
   <td>
