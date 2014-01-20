@@ -12,7 +12,7 @@
 #  paid           :integer
 #  student_number :string(255)
 #  price          :integer
-#  checked_in_at  :integer
+#  checked_in_at  :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
