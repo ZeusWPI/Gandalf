@@ -1,0 +1,24 @@
+<%= render partial: "events/tabs" %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Scan</h3>
+
+    <%= render partial: 'flash' %>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= form_tag check_in_event_path(@event),
+          url: scan_event_path(@event),
+          remote: false do %>
+          <div class="form-group">
+            <label for="code">Barcode:</label>
+            <input required class="form-control" id="code" name="code" type="text">
+          </div>
+
+          <button class="btn btn-group btn-primary" name="button" type="submit">submit</button>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
