@@ -47,4 +47,26 @@ class User < ActiveRecord::Base
       self.save!
     end
   end
+
+  # this should add all extra CAS attributes returned by the server to the current session
+  # extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
+  def cas_extra_attributes=(extra_attributes)
+    extra_attributes.each do |name, value|
+      # I prefer a case over reflection
+      case name.to_sym
+      when :givenname
+        self.cas_givenname = value
+      when :surname
+        self.surname = value
+      when :ugentStudentID
+        self.cas_ugentStudentID = value
+      when :mail
+        self.cas_mail = value
+      when :uid
+        self.cas_uid = value
+      end
+    end
+    self.save!
+  end
+
 end

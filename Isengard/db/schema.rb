@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120195025) do
+ActiveRecord::Schema.define(version: 20140121123250) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -156,6 +156,11 @@ ActiveRecord::Schema.define(version: 20140120195025) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "club"
+    t.string   "cas_givenname"
+    t.string   "cas_surname"
+    t.string   "cas_ugentStudentID"
+    t.string   "cas_mail"
+    t.string   "cas_uid"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true
