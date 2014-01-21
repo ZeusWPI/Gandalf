@@ -13,6 +13,11 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  club                :string(255)
+#  cas_givenname       :string(255)
+#  cas_surname         :string(255)
+#  cas_ugentStudentID  :string(255)
+#  cas_mail            :string(255)
+#  cas_uid             :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -20,7 +25,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable
 
-  after_create :fetch_club, :cas_extra_attributes
+  after_create :fetch_club
 
   # return the club this user can manage
   def fetch_club
@@ -42,13 +47,26 @@ class User < ActiveRecord::Base
       self.save!
     end
   end
-  
+
   # this should add all extra CAS attributes returned by the server to the current session
-	# extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
-  def cas_extra_attributes(extra_attributes)
+  # extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
+  def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
-			session['cas_' + name] = value
+      # I prefer a case over reflection
+      case name.to_sym
+      when :givenname
+        self.cas_givenname = value
+      when :surname
+        self.surname = value
+      when :ugentStudentID
+        self.cas_ugentStudentID = value
+      when :mail
+        self.cas_mail = value
+      when :uid
+        self.cas_uid = value
+      end
     end
+    self.save!
   end
-  
+
 end
