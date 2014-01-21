@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class EventsController < ApplicationController
 
   # order is important here, we need to be authenticated before we can check permission
@@ -61,15 +63,17 @@ class EventsController < ApplicationController
 
   def check_in
     @event = Event.find params.require(:id)
-    registration = Registration.find_by_barcode params.require(:code)
+    @registration = Registration.find_by_barcode params.require(:code)
 
-    if registration
-      if registration.checked_in_at
-        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(registration.checked_in_at) + "!"
+    if @registration
+      if @registration.checked_in_at
+        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(@registration.checked_in_at) + "!"
+      elsif not @registration.is_paid
+        flash.now[:warning] = "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
       else
-        flash.now[:notice] = "Success"
-        registration.checked_in_at = Time.now
-        registration.save!
+        flash.now[:success] = "Person has been scanned!"
+        @registration.checked_in_at = Time.now
+        @registration.save!
       end
     else
       flash.now[:error] = "Barcode not found"

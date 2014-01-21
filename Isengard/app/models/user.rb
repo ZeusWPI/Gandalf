@@ -13,6 +13,11 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  club                :string(255)
+#  cas_givenname       :string(255)
+#  cas_surname         :string(255)
+#  cas_ugentStudentID  :string(255)
+#  cas_mail            :string(255)
+#  cas_uid             :string(255)
 #
 
 class User < ActiveRecord::Base
