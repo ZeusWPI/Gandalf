@@ -34,6 +34,8 @@ class Registration < ActiveRecord::Base
     end
   end
 
+  default_scope order: "paid DESC, name ASC"
+  
   def paid
     from_cents read_attribute(:paid)
   end
