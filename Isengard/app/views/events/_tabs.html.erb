@@ -22,6 +22,7 @@
             <li <%= raw 'class="active"' if current_page?(event_periods_path(@event)) %>><%= link_to "Access periods", event_periods_path(@event) %></li>
           </ul>
         </li>
+        <li <%= raw 'class="active"' if current_page?(scan_event_path(@event)) %>><%= link_to "Scan", scan_event_path(@event) %></li>
       <% end %>
     </ul>
   </div>

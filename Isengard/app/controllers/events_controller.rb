@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class EventsController < ApplicationController
 
   # order is important here, we need to be authenticated before we can check permission
@@ -33,7 +35,7 @@ class EventsController < ApplicationController
     authorize! :update, @event
 
     if @event.update params.require(:event).permit(:name, :organisation, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
-      flash[:notice] = "Successfully updated event."
+      flash.now[:notice] = "Successfully updated event."
     end
 
     render action: :edit
@@ -53,6 +55,31 @@ class EventsController < ApplicationController
     @data = @event.access_levels.map do |al|
       {name: al.name, data: al.registrations.group('date(registrations.created_at)').count}
     end
+  end
+
+  def scan
+    @event = Event.find params.require(:id)
+  end
+
+  def check_in
+    @event = Event.find params.require(:id)
+    @registration = Registration.find_by_barcode params.require(:code)
+
+    if @registration
+      if @registration.checked_in_at
+        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(@registration.checked_in_at) + "!"
+      elsif not @registration.is_paid
+        flash.now[:warning] = "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
+      else
+        flash.now[:success] = "Person has been scanned!"
+        @registration.checked_in_at = Time.now
+        @registration.save!
+      end
+    else
+      flash.now[:error] = "Barcode not found"
+    end
+
+    render action: :scan
   end
 
   def export_status
