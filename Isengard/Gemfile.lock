@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/nudded/barcodes
-  revision: 0aee74c9696dff0078c7f24361dead48de7b15e9
+  revision: a990e2b596025f5414f820f15c84b99e9eaf416b
   specs:
     barcodes (0.0.11)
       prawn
@@ -111,9 +111,10 @@ GEM
       ruby-rc4
       ttfunk
     polyglot (0.3.3)
-    prawn (0.12.0)
-      pdf-reader (>= 0.9.0)
-      ttfunk (~> 1.0.2)
+    prawn (0.14.0)
+      pdf-reader (~> 1.2)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
