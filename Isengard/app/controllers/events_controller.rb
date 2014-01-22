@@ -63,7 +63,7 @@ class EventsController < ApplicationController
 
   def check_in
     @event = Event.find params.require(:id)
-    @registration = Registration.find_by_barcode params.require(:code)
+    @registration = @event.registrations.find_by_barcode params.require(:code)
 
     if @registration
       if @registration.checked_in_at
