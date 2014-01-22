@@ -26,7 +26,7 @@ class AccessLevelsController < ApplicationController
   def destroy
     @event = Event.find params.require(:event_id)
     access_level = AccessLevel.find params.require(:id)
-    unless access_level.registration.any?
+    unless access_level.registrations.any?
       # Save the name so we can respond it as we still have to
       # be able to delete it
       @id = access_level.id
