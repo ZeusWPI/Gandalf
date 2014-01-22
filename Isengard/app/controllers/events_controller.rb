@@ -63,7 +63,15 @@ class EventsController < ApplicationController
 
   def check_in
     @event = Event.find params.require(:id)
-    @registration = @event.registrations.find_by_barcode params.require(:code)
+    barcode = params.require(:code)
+
+    unless is_barcode_valid?(barcode)
+      flash.now[:error] = "Invalid barcode."
+      render action: :scan
+      return
+    end
+
+    @registration = @event.registrations.find_by_barcode barcode[0..-2]
 
     if @registration
       if @registration.checked_in_at
@@ -80,6 +88,35 @@ class EventsController < ApplicationController
     end
 
     render action: :scan
+  end
+
+  private
+  def is_barcode_valid?(barcode)
+    return false unless barcode.length == 13
+    return false unless Integer(barcode) rescue false
+
+    code = barcode[0..-2]
+    checksum = barcode[-1].to_i
+
+    sum = 0
+    index = 1
+    code.reverse.each_char do |char|
+      if ('0'..'9').include? char
+        if index.even?
+          sum += char.to_i
+        else
+          sum += char.to_i * 3
+        end
+      end
+      index += 1
+    end
+
+    value = 10 - (sum % 10)
+    if value == 10
+      value = 0
+    end
+
+    return value == checksum
   end
 
   def export_status
