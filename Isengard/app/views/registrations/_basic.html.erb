@@ -3,9 +3,9 @@
   <%= render partial: 'flash' %>
 
   <%= form_for [@event, @registration], url: basic_event_registrations_path(@event) do |f| %>
-    <%= form_text_field f, :name, (current_user.cas_givenname + ' ' + current_user.cas_surname if current_user and current_user.cas_givenname and current_user.cas_surname) %>
-    <%= form_email_field f, :email, (current_user.cas_mail if current_user) %>
-    <%= form_text_field f, :student_number, (current_user.cas_ugentStudentID if current_user) %>
+    <%= form_text_field f, :name %>
+    <%= form_email_field f, :email %>
+    <%= form_text_field f, :student_number %>
 
     <%= form_collection_select f, :access_levels, @event.access_levels.find_all { |al| can? :register, al }, :id, :name_with_price %>
     <%= f.button :submit, class: 'btn btn-group btn-primary' %>
