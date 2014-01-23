@@ -28,20 +28,22 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+codenight:
+  name: Codenight
   start_date: 2013-09-17 16:25:51
   end_date: 2013-09-17 16:25:51
-  location: MyString
-  website: MyString
-  description: MyText
-  organisation: MyString
+  location: Zeus Keldahr
+  website: zeus.ugent.be
+  description: THEY'RE TAKING THE HOBBITS TO ISENGARD
+  organisation: zeus
+  club: zeus
 
-two:
-  name: MyString
+galabal:
+  name: Galabal
   start_date: 2013-09-17 16:25:51
   end_date: 2013-09-17 16:25:51
-  location: MyString
-  website: MyString
-  description: MyText
-  organisation: MyString
+  location: FK
+  website: www.fkgent.be
+  description: Super awesome galabal
+  organisation: Super awesome FK
+  club: fkgent

@@ -18,11 +18,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  barcode: 1
-  name: MyString
-  email: MyString
+  barcode: 123456789123
+  name: Tom Naessens
+  email: siloxtom@gmail.com
 
 two:
-  barcode: 1
-  name: MyString
-  email: MyString
+  barcode: 222222222222
+  name: Maarten Herthoge
+  email: m.herthoge.be@gmail.com

@@ -1,13 +1,19 @@
 require 'test_helper'
 
 class EventControllerTest < ActionController::TestCase
+
+  def setup
+    @controller = EventsController.new
+    sign_in users(:tom)
+  end
+
   test "should get show" do
-    get :show
+    get :show, id: events(:codenight).id
     assert_response :success
   end
 
   test "should get create" do
-    get :create
+    post :create, id: events(:codenight).id, event: events(:codenight).attributes
     assert_response :success
   end
 
@@ -16,8 +22,8 @@ class EventControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit
+  test "should get update" do
+    get :update, id: events(:codenight).id, event: events(:codenight).attributes
     assert_response :success
   end
 

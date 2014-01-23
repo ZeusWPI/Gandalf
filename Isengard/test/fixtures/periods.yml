@@ -16,9 +16,9 @@
 one:
   starts: 2013-09-17 20:09:09
   ends: 2013-09-17 20:09:09
-  name: MyString
+  name: Period1
 
 two:
   starts: 2013-09-17 20:09:09
   ends: 2013-09-17 20:09:09
-  name: MyString
+  name: Period2
