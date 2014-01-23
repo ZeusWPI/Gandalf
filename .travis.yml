@@ -2,8 +2,10 @@ language: ruby
 rvm:
   - 2.0.0-p247
 
-before_script:
+before_install:
   - "cd Isengard"
+
+before_script:
   - "RAILS_ENV=test bundle exec rake db:setup"
 
 notifications:
