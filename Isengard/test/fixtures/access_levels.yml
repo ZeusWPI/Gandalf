@@ -15,9 +15,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  event_id: 
+  name: Lid
+  event_id: 1
 
 two:
-  name: MyString
-  event_id: 
+  name: VIP
+  event_id: 1
+  price: 10

@@ -13,8 +13,8 @@
 
 one:
   name: MyString
-  event_id: 
+  event_id: 1
 
 two:
   name: MyString
-  event_id: 
+  event_id: 2

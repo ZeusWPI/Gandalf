@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+  - 2.0.0-p247
+
+before_install:
+  - "cd Isengard"
+
+before_script:
+  - "RAILS_ENV=test bundle exec rake db:setup"
+
+notifications:
+  email:
+    - gandalf@zeus.ugent.be
+  irc: "wina.ugent.be#hydra"
