@@ -101,12 +101,10 @@ class EventsController < ApplicationController
     sum = 0
     index = 1
     code.reverse.each_char do |char|
-      if ('0'..'9').include? char
-        if index.even?
-          sum += char.to_i
-        else
-          sum += char.to_i * 3
-        end
+      if index.even?
+        sum += char.to_i
+      else
+        sum += char.to_i * 3
       end
       index += 1
     end

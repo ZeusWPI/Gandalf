@@ -29,6 +29,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 codenight:
+  id: 1
   name: Codenight
   start_date: 2013-09-17 16:25:51
   end_date: 2013-09-17 16:25:51
@@ -39,6 +40,7 @@ codenight:
   club: zeus
 
 galabal:
+  id: 2
   name: Galabal
   start_date: 2013-09-17 16:25:51
   end_date: 2013-09-17 16:25:51

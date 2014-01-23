@@ -14,11 +14,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   starts: 2013-09-17 20:09:09
   ends: 2013-09-17 20:09:09
   name: Period1
 
 two:
+  id: 2
   starts: 2013-09-17 20:09:09
   ends: 2013-09-17 20:09:09
   name: Period2

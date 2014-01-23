@@ -15,10 +15,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   name: Lid
   event_id: 1
+  price: 0
 
 two:
+  id: 2
   name: VIP
-  event_id: 1
+  event_id: 2
   price: 10
