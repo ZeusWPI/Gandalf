@@ -26,8 +26,15 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
 #
-two: {}
-#  column: value
+
+tom:
+  username: tnnaesse
+  club: zeus
+
+maarten:
+  username: mherthoge
+  club: fkgent
+
+matthias:
+  username: mjherthog

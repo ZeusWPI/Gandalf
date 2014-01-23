@@ -11,7 +11,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
+  name: Rol een!
 
 two:
-  name: MyString
+  name: Rol twee!
