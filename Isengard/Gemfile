@@ -78,6 +78,9 @@ gem 'delayed_job', '~> 4.0'
 gem 'delayed_job_active_record'
 #
 
+# Coveralls
+gem 'coveralls', require: false
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
