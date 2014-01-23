@@ -32,7 +32,7 @@ class AccessLevel < ActiveRecord::Base
     end
   end
 
-  default_scope order: "price, name"
+  default_scope { order "price, name" }
 
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones
