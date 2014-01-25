@@ -54,7 +54,7 @@ class RegistrationsController < ApplicationController
         RegistrationMailer.confirm_registration(@registration).deliver
       end
 
-      flash[:notice] = "Registration successful. Please check your mailbox for your ticket or further payment information."
+      flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."
       respond_with @event
     else
       render "events/show"
@@ -115,7 +115,7 @@ class RegistrationsController < ApplicationController
       registration.save
       counter += 1
     end
-    flash[:notice] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
+    flash[:success] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
     if fails.any?
       flash[:error] = "The rows listed below contained an invalid code, please fix them by hand."
       @csvheaders = fails.first.headers
