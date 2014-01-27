@@ -37,6 +37,12 @@ class EventControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "validate correct barcode" do
+    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    assert_response :success
+    assert(flash[:success].include? "Person has been scanned")
+  end
+
   test "dont check in twice" do
     post :check_in, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
