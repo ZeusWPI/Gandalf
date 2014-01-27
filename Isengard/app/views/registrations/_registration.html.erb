@@ -2,7 +2,7 @@
   <td><%= registration.name %></td>
   <td><%= registration.email %></td>
   <td><%= registration.access_levels.first.try :name %></td>
-  <td><%= registration.try :comment %></td>
+  <td><%= registration.comment %></td>
   <td><%= registration.payment_code %></td>
   <td>
     <%= form_for [registration.event, registration], method: :patch, remote: true, html: { class: 'inline-form' } do |f| %>
