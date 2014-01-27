@@ -22,6 +22,18 @@ ready = ->
     else
       form.find('.registration-paid').val(form.find('.registration-price').val())
 
+  hideCommentFieldIfNeeded = (value) ->
+    val = parseInt(value)
+    if (window.ticketsWithComments.indexOf(val) == -1)
+      $("#registration_comment").parent().hide();
+    else
+      $("#registration_comment").parent().show();
+
+  $("#registration_access_levels").on 'change', ->
+    hideCommentFieldIfNeeded($(this).val())
+
+  hideCommentFieldIfNeeded($("#registration_access_levels").val())
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

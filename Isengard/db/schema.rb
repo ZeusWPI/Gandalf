@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127185822) do
+ActiveRecord::Schema.define(version: 20140127192155) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 20140127185822) do
     t.datetime "updated_at"
     t.integer  "capacity"
     t.integer  "price"
-    t.boolean  "public",     default: true
+    t.boolean  "public",      default: true
+    t.boolean  "has_comment"
   end
 
   add_index "access_levels", ["event_id"], name: "index_access_levels_on_event_id"
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(version: 20140127185822) do
     t.integer  "paid"
     t.integer  "price"
     t.datetime "checked_in_at"
+    t.text     "comment"
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
