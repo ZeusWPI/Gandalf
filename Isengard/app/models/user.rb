@@ -18,6 +18,7 @@
 #  cas_ugentStudentID  :string(255)
 #  cas_mail            :string(255)
 #  cas_uid             :string(255)
+#  admin               :boolean
 #
 
 class User < ActiveRecord::Base

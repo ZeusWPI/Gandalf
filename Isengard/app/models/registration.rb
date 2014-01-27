@@ -9,10 +9,11 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer
-#  paid           :integer
 #  student_number :string(255)
+#  paid           :integer
 #  price          :integer
 #  checked_in_at  :datetime
+#  comment        :text
 #
 
 class Registration < ActiveRecord::Base
