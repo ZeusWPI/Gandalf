@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
       when :givenname
         self.cas_givenname = value
       when :surname
-        self.surname = value
+        self.cas_surname = value
       when :ugentStudentID
         self.cas_ugentStudentID = value
       when :mail
