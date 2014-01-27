@@ -14,8 +14,13 @@ class Ability
       can :show, Event
     end
 
+    # Admins can do anything!
+    if user.admin?
+      can :manage, Event
+    end
+
     # add register permission
-    can :register, Event do |event| 
+    can :register, Event do |event|
       if !(event.registration_open_date.blank? || event.registration_close_date.blank?)
         event.registration_open_date <= DateTime.now && event.registration_close_date >= DateTime.now
       else
@@ -50,12 +55,12 @@ class Ability
     #     can :read, :all
     #   end
     #
-    # The first argument to `can` is the action you are giving the user 
+    # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
     # here are :read, :create, :update and :destroy.
     #
-    # The second argument is the resource the user can perform the action on. 
+    # The second argument is the resource the user can perform the action on.
     # If you pass :all it will apply to every resource. Otherwise pass a Ruby
     # class of the resource.
     #

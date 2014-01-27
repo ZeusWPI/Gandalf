@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140123171729) do
+ActiveRecord::Schema.define(version: 20140127185822) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20140123171729) do
     t.string   "export_content_type"
     t.integer  "export_file_size"
     t.datetime "export_updated_at"
-    t.boolean  "show_statistics"
     t.string   "export_status"
+    t.boolean  "show_statistics"
   end
 
   add_index "events", ["club"], name: "index_events_on_club"
@@ -116,8 +116,8 @@ ActiveRecord::Schema.define(version: 20140123171729) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.integer  "paid"
     t.string   "student_number"
+    t.integer  "paid"
     t.integer  "price"
     t.datetime "checked_in_at"
   end
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 20140123171729) do
     t.string   "cas_ugentStudentID"
     t.string   "cas_mail"
     t.string   "cas_uid"
+    t.boolean  "admin"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true
