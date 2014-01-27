@@ -63,23 +63,4 @@ class EventControllerTest < ActionController::TestCase
     assert_response :success
     assert(flash[:warning].include? "Person has not paid yet!")
   end
-
-  test "dont allow invalid barcodes" do
-    post :check_in, id: events(:codenight).id, code: 'a'
-    assert_response :success
-    assert(flash[:error].include? "Invalid barcode")
-    post :check_in, id: events(:codenight).id, code: '2'
-    assert_response :success
-    assert(flash[:error].include? "Invalid barcode")
-    post :check_in, id: events(:codenight).id, code: '123456789a230'
-    assert_response :success
-    assert(flash[:error].include? "Invalid barcode")
-    post :check_in, id: events(:codenight).id, code: '1234567891230'
-    assert_response :success
-    assert(flash[:error].include? "Invalid barcode")
-    post :check_in, id: events(:codenight).id, code: '1234567801239380'
-    assert_response :success
-    assert(flash[:error].include? "Invalid barcode")
-  end
-
 end
