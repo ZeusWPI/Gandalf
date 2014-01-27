@@ -10,5 +10,12 @@ before_script:
 
 notifications:
   email:
-    - gandalf@zeus.ugent.be
-  irc: "wina.ugent.be#hydra"
+    recipients:
+      - gandalf@zeus.ugent.be
+  irc: 
+    channels:
+      - "wina.ugent.be#hydra"
+    on_success: change
+    on_failure: always
+
+
