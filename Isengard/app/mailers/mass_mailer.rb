@@ -5,7 +5,7 @@ class MassMailer < ActionMailer::Base
     mail(to: "Undisclosed recipients <#{from}>",
       subject: subject,
       body: body,
-      content_type: 'text/html',
+      content_type: 'text/plain',
       bcc: to)
   end
 end
