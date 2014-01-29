@@ -84,6 +84,18 @@ class RegistrationsController < ApplicationController
     respond_with @registration
   end
 
+  def email
+    @event = Event.find params.require(:event_id)
+    to_id = params['to'].to_i
+    if to_id == -1
+      to = @event.registrations.pluck(:email)
+    else
+      to = @event.access_levels.find_by_id(to_id).registrations.pluck(:email)
+    end
+    MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver
+    redirect_to event_registrations_path(@event)
+  end
+
   def upload
     @event = Event.find params.require(:event_id)
     sep = params.require('separator')

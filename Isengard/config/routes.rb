@@ -34,6 +34,7 @@ Isengard::Application.routes.draw do
         post 'basic'
         post 'advanced'
         post 'upload'
+        post 'email'
       end
     end
 
