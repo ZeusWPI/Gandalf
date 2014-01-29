@@ -12,6 +12,9 @@ notifications:
   email:
     recipients:
       - gandalf@zeus.ugent.be
+    on_success: change
+    on_failure: always
+
   irc: 
     channels:
       - "wina.ugent.be#hydra"
