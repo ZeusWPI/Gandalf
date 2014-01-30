@@ -14,8 +14,6 @@ SimpleCov.start
 
 
 class ActiveSupport::TestCase
-  include Devise::TestHelpers
-
   ActiveRecord::Migration.check_pending!
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -26,3 +24,4 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EventControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
 
   def setup
     @controller = EventsController.new
