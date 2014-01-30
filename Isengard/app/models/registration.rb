@@ -24,7 +24,7 @@ class Registration < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
   validates :student_number, presence: true, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }
-  validates :paid, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   after_save do |record|
