@@ -1,7 +1,3 @@
-ENV["RAILS_ENV"] ||= "test"
-require File.expand_path('../../config/environment', __FILE__)
-require 'rails/test_help'
-
 # Coverage testing
 require 'simplecov'
 require 'coveralls'
@@ -12,6 +8,9 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
 ]
 SimpleCov.start
 
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path('../../config/environment', __FILE__)
+require 'rails/test_help'
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
