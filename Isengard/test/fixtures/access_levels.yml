@@ -11,6 +11,7 @@
 #  price       :integer
 #  public      :boolean          default(TRUE)
 #  has_comment :boolean
+#  hidden      :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

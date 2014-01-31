@@ -34,8 +34,8 @@ class Ability
     can :register, AccessLevel do |access_level|
       # not if you can't register for the event
       return false unless can? :register, access_level.event
-      # if the access level is public or you're a member
-      access_level.public or access_level.event.club == club
+      # if the access level is not hidden and it's public or you're a member
+      not access_level.hidden and (access_level.public or access_level.event.club == club)
     end
 
     # add modify registrations permission for club members

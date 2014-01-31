@@ -46,4 +46,11 @@ class AccessLevelsController < ApplicationController
     redirect_to @event
   end
 
+  def toggle_visibility
+    @event = Event.find params.require(:event_id)
+    @access_level = AccessLevel.find params.require(:id)
+    @access_level.hidden = not(@access_level.hidden)
+    @access_level.save
+  end
+
 end

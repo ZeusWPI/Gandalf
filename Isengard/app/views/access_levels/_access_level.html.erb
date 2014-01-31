@@ -1,4 +1,4 @@
-<tr class="access-level-<%= access_level.id %>">
+<tr class="<%= dom_id(access_level) %>">
   <td><%= access_level.name %></td>
   <td>
     <%= access_level.registrations.count %>/<%= access_level.capacity.presence || "&infin;".html_safe %>
@@ -10,5 +10,11 @@
   <% if advanced %>
     <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
   <% end %>
-  <td><%= unless access_level.registrations.any? then link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', remote: true, method: :delete end %></td>
+  <td>
+    <% if access_level.registrations.any? %>
+      <%= link_to raw(visibility_icon(access_level)), toggle_visibility_event_access_level_path(access_level.event, access_level), remote: true %>
+    <% else %>
+      <%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', remote: true, method: :delete %>
+    <% end %>
+  </td>
 </tr>

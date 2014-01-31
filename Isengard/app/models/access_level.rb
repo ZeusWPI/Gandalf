@@ -12,6 +12,7 @@
 #  price       :integer
 #  public      :boolean          default(TRUE)
 #  has_comment :boolean
+#  hidden      :boolean
 #
 
 class AccessLevel < ActiveRecord::Base
