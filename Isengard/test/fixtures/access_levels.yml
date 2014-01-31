@@ -26,3 +26,19 @@ two:
   name: VIP
   event_id: 2
   price: 10
+
+# Capacity stuff testing
+unlimited:
+  id: 3
+  name: Unlimited
+  event_id: 1
+  price: 0
+
+<% 3.times do |n| %>
+limited_<%= n %>:
+  id: <%= 100 + n %>
+  name: <%= "Limited#{n}" %>
+  price: 0
+  event_id: 1
+  capacity: <%= 3 + n %>
+<% end %>

@@ -24,3 +24,10 @@ two:
   starts: 2013-09-17 20:09:09
   ends: 2013-09-17 20:09:09
   name: Period2
+
+capacity_period:
+  id: 3
+  starts: 2013-09-17 20:09:09
+  ends: 2013-09-17 20:09:09
+  name: Capacity Period
+

@@ -22,3 +22,12 @@ two:
   period_id: 2
   registration_id: 2
   access_level_id: 2
+
+# Make three accesses to each Limited access level
+<% 9.times do |n| %>
+access_<%= n %>:
+  id: <%= 100 + n %>
+  period_id: 3
+  registration_id: <%= 100 + n %>
+  access_level_id: <%= 100 + (n % 3) %>
+<% end %>
