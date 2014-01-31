@@ -23,6 +23,9 @@ Isengard::Application.routes.draw do
     resources :zones
     resources :access_levels do
       resources :zones
+      member do
+        get 'toggle_visibility'
+      end
     end
     resources :role_names
     resources :registrations do
