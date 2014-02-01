@@ -31,6 +31,7 @@ Isengard::Application.routes.draw do
     resources :registrations do
       member do
         get 'resend'
+        get 'info'
       end
 
       collection do
