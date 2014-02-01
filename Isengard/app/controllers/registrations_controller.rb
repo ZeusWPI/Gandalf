@@ -21,6 +21,10 @@ class RegistrationsController < ApplicationController
     registration.destroy
   end
 
+  def info
+    @registration = Registration.find params.require(:id)
+  end
+
   def resend
     @registration = Registration.find params.require(:id)
     if @registration.is_paid
