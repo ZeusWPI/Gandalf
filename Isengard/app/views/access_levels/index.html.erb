@@ -1,7 +1,7 @@
 <%= render partial: "events/tabs" %>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-8">
     <h3>Manage tickets</h3>
     <div class="table-responsive">
       <table class="table" id="table-access-levels">
@@ -11,6 +11,7 @@
           <th>Price</th>
           <th>Availability</th>
           <th>Allows comments</th>
+          <th>Hidden</th>
           <% if @advanced %>
             <th>Zones</th>
           <% end %>

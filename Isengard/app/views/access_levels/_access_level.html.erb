@@ -1,20 +1,20 @@
-<tr class="<%= dom_id(access_level) %>">
+<tr id="<%= dom_id(access_level) %>">
   <td><%= access_level.name %></td>
   <td>
     <%= access_level.registrations.count %>/<%= access_level.capacity.presence || "&infin;".html_safe %>
     <span class="label label-<%= color_for_tickets_left(access_level) %> pull-right"><%= "#{pluralize(access_level.tickets_left, "ticket")} left" if access_level.capacity.presence %></span>
   </td>
   <td>&euro;<%= number_with_precision access_level.price || "0", precision: 2  %></td>
-  <td><%= if access_level.public then "public" else "private" end %></td>
-  <td><%= if access_level.has_comment then "yes" else "no" end %></td>
+  <td><%= access_level.public ? 'Public' : 'Private' %></td>
+  <td><%= access_level.has_comment ? 'Yes' : 'No' %></td>
+  <td><%= access_level.hidden ? 'Yes' : 'No' %></td>
   <% if advanced %>
     <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
   <% end %>
   <td>
-    <% if access_level.registrations.any? %>
-      <%= link_to raw(visibility_icon(access_level)), toggle_visibility_event_access_level_path(access_level.event, access_level), remote: true %>
-    <% else %>
-      <%= link_to raw('<i class="glyphicon glyphicon-trash"></i>'), event_access_level_path(access_level.event, access_level), confirm: 'Are you sure?', remote: true, method: :delete %>
+    <%= link_to raw(visibility_icon(access_level)), toggle_visibility_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
+    <% unless access_level.registrations.any? %>
+      <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-danger', confirm: 'Are you sure?', remote: true, method: :delete %>
     <% end %>
   </td>
 </tr>

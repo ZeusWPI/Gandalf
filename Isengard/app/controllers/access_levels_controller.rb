@@ -48,6 +48,7 @@ class AccessLevelsController < ApplicationController
 
   def toggle_visibility
     @event = Event.find params.require(:event_id)
+    @advanced = params[:advanced] == 'true'
     @access_level = AccessLevel.find params.require(:id)
     @access_level.hidden = not(@access_level.hidden)
     @access_level.save
