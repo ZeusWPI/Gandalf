@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     @registration = @event.registrations.build
 
     if current_user
-      @registration.name = current_user.cas_givenname + ' ' + current_user.cas_surname if current_user.cas_surname and current_user.cas_givenname
+      @registration.name = current_user.username
       @registration.student_number = current_user.cas_ugentStudentID
       @registration.email = current_user.cas_mail
     end

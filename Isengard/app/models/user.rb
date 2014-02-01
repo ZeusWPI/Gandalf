@@ -53,7 +53,8 @@ class User < ActiveRecord::Base
   # extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
-      # I prefer a case over reflection
+      # I prefer a case over reflection; this is safer if we suddenly get an
+      # extra attribute without column
       case name.to_sym
       when :givenname
         self.cas_givenname = value
@@ -68,6 +69,15 @@ class User < ActiveRecord::Base
       end
     end
     self.save!
+  end
+
+  # return Givenname + surname or username if these don't exist
+  def display_name
+    if cas_surname and cas_givenname
+      cas_givenname + ' ' + cas_surname
+    else
+      username
+    end
   end
 
 end
