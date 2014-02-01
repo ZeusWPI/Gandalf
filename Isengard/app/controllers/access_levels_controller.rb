@@ -33,7 +33,7 @@ class AccessLevelsController < ApplicationController
     @updated_access_level = AccessLevel.find params.require(:id)
 
     if @updated_access_level.update params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment)
-      flash.now[:success] = "Succesfully updated access level."
+      flash.now[:success] = "Ticket succesfully updated!"
       @access_level = AccessLevel.new
     end
   end
