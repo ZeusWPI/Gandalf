@@ -12,13 +12,13 @@ notifications:
   email:
     recipients:
       - gandalf@zeus.ugent.be
-    on_success: change
+    on_success: never
     on_failure: always
 
   irc: 
     channels:
       - "wina.ugent.be#hydra"
-    on_success: change
+    on_success: zeus
     on_failure: always
 
 
