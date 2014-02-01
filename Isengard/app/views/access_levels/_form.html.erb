@@ -1,4 +1,7 @@
-<%= form_for [@event, @event.access_levels.build], remote: true do |f| %>
+<%= form_errors @event %>
+<%= render partial: 'flash' %>
+
+<%= form_for [@event, @access_level], remote: true do |f| %>
   <%= form_text_field f, :name %>
   <%= form_number_field f, :capacity %>
   <%= form_text_field f, :price %>
