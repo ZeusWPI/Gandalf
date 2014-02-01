@@ -1,0 +1,7 @@
+<% if @updated_access_level.errors.any? %>
+  $('.edit_access_level').prepend("<%= escape_javascript form_errors(@updated_access_level) %>")
+<% else %>
+  $("#<%= dom_id(@updated_access_level) %>").replaceWith("<%= escape_javascript render @updated_access_level, advanced: @advanced %>");
+  $(".edit_access_level").replaceWith("<%= escape_javascript render partial: "access_levels/form" %>")
+  $("h3").html("Add ticket")
+<% end %>

@@ -11,9 +11,6 @@ class AccessLevelsController < ApplicationController
   def index
     @event = Event.find params.require(:event_id)
     @advanced = params[:advanced] == 'true'
-  end
-
-  def new
     @access_level = AccessLevel.new
   end
 
@@ -21,6 +18,24 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment)
     respond_with @access_level
+  end
+
+  def edit
+    @event = Event.find params.require(:event_id)
+    @access_level = AccessLevel.find params.require(:id)
+  end
+
+  def update
+    @event = Event.find params.require(:event_id)
+
+    authorize! :update, @event
+
+    @updated_access_level = AccessLevel.find params.require(:id)
+
+    if @updated_access_level.update params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment)
+      flash.now[:success] = "Succesfully updated access level."
+      @access_level = AccessLevel.new
+    end
   end
 
   def destroy
