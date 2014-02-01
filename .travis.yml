@@ -18,7 +18,7 @@ notifications:
   irc: 
     channels:
       - "wina.ugent.be#hydra"
-    on_success: zeus
+    on_success: never
     on_failure: always
 
 
