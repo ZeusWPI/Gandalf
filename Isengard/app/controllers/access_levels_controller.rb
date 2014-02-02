@@ -1,6 +1,6 @@
 class AccessLevelsController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :parse_advanced
 
   respond_to :html, :js
 
@@ -10,7 +10,6 @@ class AccessLevelsController < ApplicationController
 
   def index
     @event = Event.find params.require(:event_id)
-    @advanced = params[:advanced] == 'true'
   end
 
   def new
@@ -48,10 +47,13 @@ class AccessLevelsController < ApplicationController
 
   def toggle_visibility
     @event = Event.find params.require(:event_id)
-    @advanced = params[:advanced] == 'true'
     @access_level = AccessLevel.find params.require(:id)
     @access_level.hidden = not(@access_level.hidden)
     @access_level.save
+  end
+
+  def parse_advanced
+    @advanced = params[:advanced] == 'true'
   end
 
 end

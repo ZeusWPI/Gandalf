@@ -1,12 +1,9 @@
-$('.form-errors').remove()
 <% if @access_level.errors.any? %>
-  $('#new_access_level').prepend("<%= escape_javascript form_errors(@access_level) %>")
+  $('#access-level-errors').html("<%= escape_javascript form_errors(@access_level) %>")
 <% else %>
-  if (document.URL.split('=')[1] == 'true') {
-    $("<%= escape_javascript render @access_level, advanced: true %>").appendTo("#table-access-levels")
-  } else {
-    $("<%= escape_javascript render @access_level, advanced: false %>").appendTo("#table-access-levels")
-  }
+  $('#access-level-errors').html('')
+  $('#new_access_level')[0].reset()
 
-  $("#new_access_level")[0].reset()
+  <%# break advanced deliberately, how we currently do it will not continue working! %>
+  $('#table-access-levels tr:last').before('<%= escape_javascript render @access_level, advanced: false %>')
 <% end %>
