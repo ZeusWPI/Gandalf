@@ -44,9 +44,10 @@ class User < ActiveRecord::Base
     # this will only return the club name if control-hash matches
     if resp.body != 'FAIL'
       hash = JSON[resp.body]
-      clubs = hash['data']
 
-      #dig = digest(Rails.application.config.fk_auth_salt, username, hash['kringname'])
+      clubs_dig = hash['data'].map { |c| c['internalName'] }
+      dig = digest(Rails.application.config.fk_auth_salt, username, clubs_dig)
+
       #self.club = hash['kringname'] if hash['controle'] == dig
       self.save!
     end
