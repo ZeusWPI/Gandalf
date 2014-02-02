@@ -10,12 +10,27 @@ url = 'https://raw2.github.com/ZeusWPI/hydra/master/iOS/Resources/Associations.j
 hash = JSON HTTParty.get(url)
 
 hash.each do |club|
-  next if club['internalName'] == club['parentAssociation'] or club['parentAssociation'] != 'FKCENTRAAL'
+  next unless club['parentAssociation'] == 'FKCENTRAAL'
 
   club = Club.new do |c|
-    c.internal_name = club['internalName']
+    c.internal_name = club['internalName'].downcase
     c.display_name = club['displayName']
     c.full_name = club['fullName'] unless club['fullName'].blank?
   end
   club.save
 end
+
+# Zeus peoples
+club = Club.new do |c|
+  c.internal_name = 'zeus'
+  c.display_name = 'Zeus WPI'
+  c.full_name = nil
+end
+club.save
+
+club = Club.new do |c|
+  c.internal_name = 'zeus2'
+  c.display_name = 'Zeus WPI'
+  c.full_name = 'Zeus Is De Max'
+end
+club.save

@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
 
       # Process clubs if the controle is correct
       if hash['controle'] == dig
-        self.club = hash['kringname']
+        self.clubs = Club.where(internal_name: clubs_dig)
       end
       self.save!
     end
