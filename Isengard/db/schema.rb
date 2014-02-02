@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131141855) do
+ActiveRecord::Schema.define(version: 20140202130119) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(version: 20140131141855) do
   add_index "accesses", ["access_level_id"], name: "index_accesses_on_access_level_id"
   add_index "accesses", ["period_id"], name: "index_accesses_on_period_id"
   add_index "accesses", ["registration_id"], name: "index_accesses_on_registration_id"
+
+  create_table "clubs", force: true do |t|
+    t.string   "internal_name"
+    t.string   "display_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clubs_users", force: true do |t|
+    t.integer "club_id"
+    t.integer "user_id"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -158,7 +170,6 @@ ActiveRecord::Schema.define(version: 20140131141855) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "club"
     t.string   "cas_givenname"
     t.string   "cas_surname"
     t.string   "cas_ugentStudentID"

@@ -12,7 +12,6 @@
 #  last_sign_in_ip     :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  club                :string(255)
 #  cas_givenname       :string(255)
 #  cas_surname         :string(255)
 #  cas_ugentStudentID  :string(255)
