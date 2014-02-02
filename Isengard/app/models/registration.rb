@@ -71,6 +71,28 @@ class Registration < ActiveRecord::Base
     base += (base.sum % 99).to_s + 'F'
   end
 
+  def barcode_with_check_digit
+    sum = 0
+    index = 1
+    barcode.reverse.each_char do |char|
+      if ('0'..'9').include? char
+        if index.even?
+          sum += char.to_i
+        else
+          sum += char.to_i * 3
+        end
+      end
+      index += 1
+    end
+
+    value = 10 - (sum % 10)
+    if value == 10
+      value = 0
+    end
+
+    barcode+value.to_s
+  end
+
   private
 
   def from_cents(value)
