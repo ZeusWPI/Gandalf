@@ -35,7 +35,6 @@ codenight:
   location: Zeus Keldahr
   website: zeus.ugent.be
   description: THEY'RE TAKING THE HOBBITS TO ISENGARD
-  organisation: zeus
   club: zeus
 
 galabal:
@@ -46,5 +45,4 @@ galabal:
   location: FK
   website: www.fkgent.be
   description: Super awesome galabal
-  organisation: Super awesome FK
-  club: fkgent
+  club: fk

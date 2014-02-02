@@ -43,7 +43,7 @@ class Event < ActiveRecord::Base
   validates :location, presence: true
   validates :contact_email, presence: true
   validates :name, presence: true
-  validates :organisation, presence: true
+  validates :club, presence: true
   validates :start_date, presence: true
 
   has_attached_file :export
