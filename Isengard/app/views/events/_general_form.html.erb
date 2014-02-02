@@ -2,7 +2,8 @@
   <%= form_for @event do |f| %>
 
     <%= form_text_field f, :name %>
-    <%= form_text_field f, :organisation %>
+    <%= form_simple_select f, :organisation, current_user.club.split %>
+    <%= form_text_field f, :bank_number %>
     <%= form_text_field f, :location %>
     <%= form_text_field f, :website %>
     <%= form_email_field f, :contact_email %>
