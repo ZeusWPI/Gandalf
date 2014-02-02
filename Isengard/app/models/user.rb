@@ -48,7 +48,10 @@ class User < ActiveRecord::Base
       clubs_dig = hash['data'].map { |c| c['internalName'] }
       dig = digest(Rails.application.config.fk_auth_salt, username, clubs_dig)
 
-      #self.club = hash['kringname'] if hash['controle'] == dig
+      # Process clubs if the controle is correct
+      if hash['controle'] == dig
+        self.club = hash['kringname']
+      end
       self.save!
     end
   end

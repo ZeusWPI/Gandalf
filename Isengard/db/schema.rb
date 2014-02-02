@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140202130119) do
   add_index "accesses", ["registration_id"], name: "index_accesses_on_registration_id"
 
   create_table "clubs", force: true do |t|
+    t.string   "full_name"
     t.string   "internal_name"
     t.string   "display_name"
     t.datetime "created_at"
