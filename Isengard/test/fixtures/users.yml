@@ -30,11 +30,13 @@
 
 tom:
   username: tnnaesse
-  club: zeus
+  clubs:
+    - zeus
 
 maarten:
   username: mherthoge
-  club: fkgent
+  clubs:
+    - fk
 
 matthias:
   username: mjherthog
