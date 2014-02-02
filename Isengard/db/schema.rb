@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 20140131141855) do
     t.string   "export_content_type"
     t.integer  "export_file_size"
     t.datetime "export_updated_at"
-    t.boolean  "show_statistics"
     t.string   "export_status"
+    t.boolean  "show_statistics"
   end
 
   add_index "events", ["club"], name: "index_events_on_club"
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(version: 20140131141855) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.integer  "paid"
     t.string   "student_number"
+    t.integer  "paid"
     t.integer  "price"
     t.datetime "checked_in_at"
     t.text     "comment"
