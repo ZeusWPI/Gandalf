@@ -27,10 +27,3 @@ club = Club.new do |c|
   c.full_name = nil
 end
 club.save
-
-club = Club.new do |c|
-  c.internal_name = 'zeus2'
-  c.display_name = 'Zeus WPI'
-  c.full_name = 'Zeus Is De Max'
-end
-club.save

@@ -6,10 +6,10 @@ class Ability
     alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
     clubs = user.try(:clubs)
-    if !clubs.empty?
+    if !clubs.blank?
       can :create, Event
       can :show, Event
-      can :crud, Event, ["? IN (?)", :club_id, clubs.map { |c| c.id }] do |e|
+      can :crud, Event, ["? IN (?)", :club_id, clubs.pluck(:id)] do |e|
         clubs.include? e.club
       end
     else
