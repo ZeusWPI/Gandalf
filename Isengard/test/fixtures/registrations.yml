@@ -20,7 +20,8 @@
 
 one:
   id: 1
-  barcode: 123456789123
+  barcode: 1234567891231
+  barcode_data: 123456789123
   name: Tom Naessens
   email: siloxtom@gmail.com
   student_number: 1
@@ -30,7 +31,8 @@ one:
 
 two:
   id: 2
-  barcode: 222222222222
+  barcode: 2222222222222
+  barcode_data: 22222222222
   name: Maarten Herthoge
   email: m.herthoge.be@gmail.com
   student_number: 2

@@ -71,20 +71,20 @@ class EventsController < ApplicationController
     @event = Event.find params.require(:id)
     barcode = params.require(:code)
 
-    @registration = @event.registrations.find_by_barcode barcode[0..-2]
+    @registration = @event.registrations.find_by_barcode barcode
 
     if @registration
       if @registration.checked_in_at
-        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(@registration.checked_in_at) + "!"
+        flash[:warning] = "Person already checked in at " + view_context.nice_time(@registration.checked_in_at) + "!"
       elsif not @registration.is_paid
-        flash.now[:warning] = "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
+        flash[:warning] = "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
       else
-        flash.now[:success] = "Person has been scanned!"
+        flash[:success] = "Person has been scanned!"
         @registration.checked_in_at = Time.now
         @registration.save!
       end
     else
-      flash.now[:error] = "Barcode not found"
+      flash[:error] = "Barcode not found"
     end
 
     render action: :scan

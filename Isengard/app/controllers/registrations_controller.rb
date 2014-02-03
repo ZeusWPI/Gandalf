@@ -49,8 +49,7 @@ class RegistrationsController < ApplicationController
 
     # Send the confirmation email.
     if not @registration.errors.any?
-      @registration.barcode = 12.times.map { SecureRandom.random_number(10) }.join
-      @registration.save
+      @registration.generate_barcode
 
       if @registration.is_paid
         RegistrationMailer.ticket(@registration).deliver
