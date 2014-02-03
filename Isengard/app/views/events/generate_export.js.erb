@@ -1,13 +1,20 @@
 $('#refresh-export').hide()
 var export_status_url = $('#export_status_url').data('url')
-$('#export-link').text("Generating xls...");
+$('#export-link').html(
+    "<span class='btn btn-default'>Generating xls</span>"
+);
 if (export_status_url)  {
+  var i = 1;
+
   poll = function() {
     setTimeout( function() {
+      $('#export-link span.btn-default').text("Generating xls" + Array(i+1).join('.'));
+      i = (i+1) % 4;
+
       $.get(export_status_url)
       .done(function(html) { $('#export-link').html(html)})
-      .fail(function(data) { console.log(data); poll()})
-    }, 3000)
+      .fail(function(data) { poll()})
+    }, 1000)
   }
   poll();
 }
