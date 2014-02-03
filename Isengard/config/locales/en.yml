@@ -24,3 +24,7 @@ en:
       registration:
         access_levels: "Ticket"
 
+  helpers:
+    label:
+      event:
+        club_id: "Organisation"
