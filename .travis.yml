@@ -12,8 +12,8 @@ notifications:
   email:
     recipients:
       - gandalf@zeus.ugent.be
-    on_success: never
-    on_failure: always
+    on_success: change
+    on_failure: change
 
   irc: 
     channels:
