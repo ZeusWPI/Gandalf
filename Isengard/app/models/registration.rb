@@ -14,6 +14,7 @@
 #  price          :integer
 #  checked_in_at  :datetime
 #  comment        :text
+#  barcode_data   :string(255)
 #
 
 class Registration < ActiveRecord::Base
