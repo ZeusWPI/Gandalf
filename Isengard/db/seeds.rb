@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 url = 'http://student.ugent.be/hydra/api/1.1/Associations.json'
-hash = JSON HTTParty.get(url)
+hash = JSON(HTTParty.get(url).body)
 
 hash.each do |club|
   next unless club['parentAssociation'] == 'FKCENTRAAL'
