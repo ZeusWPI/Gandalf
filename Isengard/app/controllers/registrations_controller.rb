@@ -134,6 +134,7 @@ class RegistrationsController < ApplicationController
       end
 
       registration.paid += amount
+      puts registration.inspect
       registration.save
       counter += 1
     end
