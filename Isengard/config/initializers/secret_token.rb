@@ -11,6 +11,6 @@
 # if you're sharing your code publicly.
 #
 Isengard::Application.config.secret_key_base = 'a27fcd9aa2eabd14030493d6b5a1521ba09c9d23a1dd90b3c9d6914b8d226d1df8b46af3005f73a29c3ef1acd86de3669fbe08605d9ce8da73856c734f8a0e36'
-Isengard::Application.config.fk_auth_url = 'http://fkgent.be/api_isengard.php'
+Isengard::Application.config.fk_auth_url = 'http://fkgent.be/api_isengard_v2.php'
 Isengard::Application.config.fk_auth_salt = '#development#'
 Isengard::Application.config.fk_auth_key = '#development#'

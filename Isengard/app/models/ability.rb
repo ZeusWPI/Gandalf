@@ -5,11 +5,13 @@ class Ability
     user ||= User.new
     alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
-    club = user.try(:club)
-    if !club.blank?
+    clubs = user.try(:clubs)
+    if !clubs.blank?
       can :create, Event
       can :show, Event
-      can :crud, Event, club: club
+      can :crud, Event, ["? IN (?)", :club_id, clubs.pluck(:id)] do |e|
+        clubs.include? e.club
+      end
     else
       can :show, Event
     end
@@ -35,17 +37,17 @@ class Ability
       # not if you can't register for the event
       return false unless can? :register, access_level.event
       # if the access level is not hidden and it's public or you're a member
-      not access_level.hidden and (access_level.public or access_level.event.club == club)
+      not access_level.hidden and (access_level.public or clubs.include? access_level.event.club)
     end
 
     # add modify registrations permission for club members
     can :update, Registration do |registration|
-      registration.event.club == club
+      clubs.include? registration.event.club
     end
 
     # can view statistics?
     can :view_stats, Event do |event|
-      event.club == club or event.show_statistics
+      clubs.include? event.club or event.show_statistics
     end
 
     # Define abilities for the passed in user here. For example:

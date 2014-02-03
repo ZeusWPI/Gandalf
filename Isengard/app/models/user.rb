@@ -12,7 +12,6 @@
 #  last_sign_in_ip     :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  club                :string(255)
 #  cas_givenname       :string(255)
 #  cas_surname         :string(255)
 #  cas_ugentStudentID  :string(255)
@@ -27,6 +26,8 @@ class User < ActiveRecord::Base
   devise :cas_authenticatable
 
   after_create :fetch_club
+
+  has_and_belongs_to_many :clubs
 
   # return the club this user can manage
   def fetch_club
@@ -43,8 +44,14 @@ class User < ActiveRecord::Base
     # this will only return the club name if control-hash matches
     if resp.body != 'FAIL'
       hash = JSON[resp.body]
-      dig = digest(Rails.application.config.fk_auth_salt, username, hash['kringname'])
-      self.club = hash['kringname'] if hash['controle'] == dig
+
+      clubs_dig = hash['data'].map { |c| c['internalName'] }
+      dig = digest(Rails.application.config.fk_auth_salt, username, clubs_dig)
+
+      # Process clubs if the controle is correct
+      if hash['controle'] == dig
+        self.clubs = Club.where(internal_name: clubs_dig)
+      end
       self.save!
     end
   end

@@ -39,6 +39,19 @@ ActiveRecord::Schema.define(version: 20140203091810) do
   add_index "accesses", ["period_id"], name: "index_accesses_on_period_id"
   add_index "accesses", ["registration_id"], name: "index_accesses_on_registration_id"
 
+  create_table "clubs", force: true do |t|
+    t.string   "full_name"
+    t.string   "internal_name"
+    t.string   "display_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clubs_users", id: false, force: true do |t|
+    t.integer "club_id"
+    t.integer "user_id"
+  end
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -62,10 +75,8 @@ ActiveRecord::Schema.define(version: 20140203091810) do
     t.string   "location"
     t.string   "website"
     t.text     "description"
-    t.string   "organisation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "club"
     t.datetime "registration_open_date"
     t.datetime "registration_close_date"
     t.string   "bank_number"
@@ -76,10 +87,9 @@ ActiveRecord::Schema.define(version: 20140203091810) do
     t.integer  "export_file_size"
     t.datetime "export_updated_at"
     t.string   "export_status"
+    t.integer  "club_id"
     t.boolean  "show_statistics"
   end
-
-  add_index "events", ["club"], name: "index_events_on_club"
 
   create_table "included_zones", force: true do |t|
     t.integer  "zone_id"
@@ -159,7 +169,6 @@ ActiveRecord::Schema.define(version: 20140203091810) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "club"
     t.string   "cas_givenname"
     t.string   "cas_surname"
     t.string   "cas_ugentStudentID"
