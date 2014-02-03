@@ -16,7 +16,7 @@
 	  </tr>
 	  <tr>
         <td><strong>Organisation</strong></td>
-        <td><%= @registration.event.organisation %></td>
+        <td><%= @registration.event.club.name %></td>
       </tr>
       <tr>
         <td><strong>Location</strong></td>
@@ -46,7 +46,7 @@
 
 	<p>If you have any problems, you can contact us via mail: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
 
-	<p>Kind regards,<br /><%= @registration.event.organisation %></p>
+	<p>Kind regards,<br /><%= @registration.event.club.name %></p>
 
   </body>
 </html>
