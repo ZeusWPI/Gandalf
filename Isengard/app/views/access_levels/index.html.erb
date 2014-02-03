@@ -17,15 +17,13 @@
           <% end %>
           <th>Actions</th>
         </thead>
+        <tbody>
         <%= render @event.access_levels, advanced: @advanced %>
+        <%= render "access_levels/form", object: @event.access_levels.build, button_name: "Add Ticket"%>
+        </tbody>
       </table>
+      <div id='access-level-errors' class='form-errors'>
+      </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-4">
-    <h3>Add ticket</h3>
-    <%= render "access_levels/form" %>
   </div>
 </div>

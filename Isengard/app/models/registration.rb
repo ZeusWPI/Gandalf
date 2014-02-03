@@ -71,26 +71,11 @@ class Registration < ActiveRecord::Base
     base += (base.sum % 99).to_s + 'F'
   end
 
-  def barcode_with_check_digit
-    sum = 0
-    index = 1
-    barcode.reverse.each_char do |char|
-      if ('0'..'9').include? char
-        if index.even?
-          sum += char.to_i
-        else
-          sum += char.to_i * 3
-        end
-      end
-      index += 1
-    end
-
-    value = 10 - (sum % 10)
-    if value == 10
-      value = 0
-    end
-
-    barcode+value.to_s
+  def generate_barcode
+    self.barcode_data = 12.times.map { SecureRandom.random_number(10) }.join
+    calculated_barcode = Barcodes.create('EAN13', data: self.barcode_data)
+    self.barcode = calculated_barcode.caption_data
+    self.save!
   end
 
   private

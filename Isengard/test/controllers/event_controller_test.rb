@@ -64,4 +64,14 @@ class EventControllerTest < ActionController::TestCase
     assert_response :success
     assert(flash[:warning].include? "Person has not paid yet!")
   end
+
+  test "scan page should include check digit" do
+    post :check_in, id: events(:codenight), code: '1234567891231'
+    assert_response :success
+    # expect at least one <th> with value "Barcode:" and the full code with checkdigit
+    assert_select "tr" do
+      assert_select "th", "Barcode:"
+      assert_select "td", "1234567891231"
+    end
+  end
 end

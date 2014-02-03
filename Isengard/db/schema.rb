@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202223201) do
+ActiveRecord::Schema.define(version: 20140203091810) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -86,9 +86,9 @@ ActiveRecord::Schema.define(version: 20140202223201) do
     t.string   "export_content_type"
     t.integer  "export_file_size"
     t.datetime "export_updated_at"
-    t.boolean  "show_statistics"
     t.string   "export_status"
     t.integer  "club_id"
+    t.boolean  "show_statistics"
   end
 
   create_table "included_zones", force: true do |t|
@@ -128,11 +128,12 @@ ActiveRecord::Schema.define(version: 20140202223201) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.integer  "paid"
     t.string   "student_number"
+    t.integer  "paid"
     t.integer  "price"
     t.datetime "checked_in_at"
     t.text     "comment"
+    t.string   "barcode_data"
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
