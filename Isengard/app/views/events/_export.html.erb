@@ -1,6 +1,6 @@
 <% if @event.export.present? %>
-  <%= link_to raw('<i class="glyphicon glyphicon-download"></i> Download as xls'), @event.export.url, class: 'btn btn-xs btn-primary' %> (Generated on <%= nice_time @event.export_updated_at %>)
+  <%= link_to raw('<i class="glyphicon glyphicon-download"></i> Download as xls'), @event.export.url, class: 'btn btn-default', data: { toggle: 'tooltip' }, title: "Generated on #{nice_time @event.export_updated_at}" %>
+  <%= link_to raw('<i class="glyphicon glyphicon-refresh"></i> Update xls'), generate_export_event_path(@event), class: 'btn btn-default', method: :post, remote: true, id: "refresh-export" %>
 <% else %>
-  No excel yet generated.
+  <%= link_to raw('<i class="glyphicon glyphicon-refresh"></i> Generate xls'), generate_export_event_path(@event), class: 'btn btn-default', method: :post, remote: true, id: "refresh-export" %>
 <% end %>
-<%= link_to raw('<i class="glyphicon glyphicon-refresh"></i> Refresh'), generate_export_event_path(@event), class: 'btn btn-xs btn-default', method: :post, remote: true, id: "refresh-export" %>

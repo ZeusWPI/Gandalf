@@ -1,35 +1,13 @@
 <%= render partial: "events/tabs" %>
 
 <div class="row">
-  <div class="col-sm-4">
-    <h3>Upload Transfer CSV</h3>
-    <%= form_tag({ action: :upload }, multipart: true) do %>
-      <div class="form-group">
-        <label>CSV file:</label>
-        <%= file_field_tag :csv_file %>
-      </div>
-      <div class="form-group">
-        <label>Column separator:</label>
-        <%= text_field_tag :separator, ';', class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <label>Amount column header:</label>
-        <%= text_field_tag :amount_column, 'Bedrag', class: 'form-control' %>
-      </div>
-      <%= button_tag :submit, class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
-
-<div class="row">
   <div class="col-sm-12">
-    <h3>Registrations
-    <button class="btn btn-primary" data-toggle="modal" data-target="#mail-modal">
-      Send Email
-    </button></h3>
-    <div id="export-link">
+    <h3>Registrations</h3>
+    <%= link_to raw('<i class="glyphicon glyphicon-upload"></i> Upload CSV'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#upload-modal' %>
+    <%= link_to raw('<i class="glyphicon glyphicon-envelope"></i> Send email'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#mail-modal' %>
+    <span id="export-link">
       <%= render 'events/export' %>
-    </div>
+    </span>
     <%= tag :div, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
     <%= bootstrap_pagination @registrations %>
     <div class="table-responsive">
@@ -50,4 +28,5 @@
 </div>
 
 <%= render partial: 'registrations/email_modal' %>
+<%= render partial: 'registrations/upload_modal' %>
 <%= render partial: 'registrations/info_modal' %>
