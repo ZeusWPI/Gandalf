@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-url = 'https://raw2.github.com/ZeusWPI/hydra/master/iOS/Resources/Associations.json'
+url = 'http://student.ugent.be/hydra/api/1.1/Associations.json'
 hash = JSON HTTParty.get(url)
 
 hash.each do |club|
