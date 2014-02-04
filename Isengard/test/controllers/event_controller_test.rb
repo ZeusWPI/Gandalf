@@ -15,7 +15,7 @@ class EventControllerTest < ActionController::TestCase
 
   test "should get create" do
     post :create, id: events(:codenight).id, event: events(:codenight).attributes
-    assert_response :success
+    assert_response :redirect
   end
 
   test "should get new" do
@@ -41,13 +41,19 @@ class EventControllerTest < ActionController::TestCase
   test "toggle registration open" do
     e = events(:codenight)
 
+    user = users(:tom)
+    ability = Ability.new(user)
+
     assert e.registration_open
+    assert ability.can?(:register, e)
 
     post :toggle_registration_open, id: e.id
     assert_not e.reload.registration_open
+    assert_not ability.can?(:register, e)
 
     post :toggle_registration_open, id: e.id
     assert e.reload.registration_open
+    assert ability.can?(:register, e)
   end
 
   test "validate correct barcode" do
