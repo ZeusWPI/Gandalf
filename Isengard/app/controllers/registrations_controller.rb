@@ -109,7 +109,7 @@ class RegistrationsController < ApplicationController
       match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F/.match(row.to_s)
       next unless match # seems like this is not a Gandalf transfer.
 
-      registration = Registration.find_by_id :id
+      registration = Registration.find_by_id match[:id]
 
       # If the registration doesn't exist
       if registration.nil?
@@ -141,8 +141,6 @@ class RegistrationsController < ApplicationController
       flash[:error] = "The rows listed below contained an invalid code, please fix them by hand."
       @csvheaders = fails.first.headers
       @csvfails = fails
-      logger.debug(@csvheaders)
-      logger.debug(@csvfails)
       render 'upload'
     else
       render 'index'
