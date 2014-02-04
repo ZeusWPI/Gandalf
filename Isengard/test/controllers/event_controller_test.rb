@@ -38,6 +38,18 @@ class EventControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "toggle registration open" do
+    e = events(:codenight)
+
+    assert e.registration_open
+
+    post :toggle_registration_open, id: e.id
+    assert_not e.reload.registration_open
+
+    post :toggle_registration_open, id: e.id
+    assert e.reload.registration_open
+  end
+
   test "validate correct barcode" do
     post :check_in, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
