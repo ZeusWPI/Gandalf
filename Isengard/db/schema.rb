@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20140203091810) do
   add_index "accesses", ["access_level_id"], name: "index_accesses_on_access_level_id", using: :btree
   add_index "accesses", ["period_id"], name: "index_accesses_on_period_id", using: :btree
   add_index "accesses", ["registration_id"], name: "index_accesses_on_registration_id", using: :btree
-<<<<<<< Updated upstream
 
   create_table "clubs", force: true do |t|
     t.string   "full_name"
@@ -52,8 +51,6 @@ ActiveRecord::Schema.define(version: 20140203091810) do
     t.integer "club_id"
     t.integer "user_id"
   end
-=======
->>>>>>> Stashed changes
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",                    default: 0, null: false
@@ -78,10 +75,6 @@ ActiveRecord::Schema.define(version: 20140203091810) do
     t.string   "location"
     t.string   "website"
     t.text     "description",             limit: 16777215
-<<<<<<< Updated upstream
-=======
-    t.string   "organisation"
->>>>>>> Stashed changes
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "registration_open_date"
@@ -98,11 +91,6 @@ ActiveRecord::Schema.define(version: 20140203091810) do
     t.integer  "club_id"
   end
 
-<<<<<<< Updated upstream
-=======
-  add_index "events", ["club"], name: "index_events_on_club", using: :btree
-
->>>>>>> Stashed changes
   create_table "included_zones", force: true do |t|
     t.integer  "zone_id"
     t.integer  "access_level_id"
