@@ -6,7 +6,8 @@ class RegistrationsControllerTest < ActionController::TestCase
   test "uploading partially failed registrations" do
 
     # Quick check for the used fixture
-    assert_equal 0, registrations(:three).paid
+    three = registrations(:three)
+    assert_equal 0, three.paid
 
     # Posting the csv file
     post :upload, {
@@ -26,7 +27,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_equal 'The rows listed below contained an invalid code, please fix them by hand.', flash[:error]
 
     # Check if the success registration got changed.
-    assert_equal 1, registrations(:three).paid
+    assert_equal 0.01, three.reload.paid
 
   end
 

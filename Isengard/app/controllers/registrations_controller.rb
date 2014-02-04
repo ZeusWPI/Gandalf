@@ -134,7 +134,6 @@ class RegistrationsController < ApplicationController
       end
 
       registration.paid += amount
-      puts registration.inspect
       registration.save
       counter += 1
     end
@@ -143,8 +142,6 @@ class RegistrationsController < ApplicationController
       flash[:error] = "The rows listed below contained an invalid code, please fix them by hand."
       @csvheaders = fails.first.headers
       @csvfails = fails
-      logger.debug(@csvheaders)
-      logger.debug(@csvfails)
       render 'upload'
     else
       render 'index'
