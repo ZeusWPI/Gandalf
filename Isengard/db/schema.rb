@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 20140203091810) do
     t.integer  "club_id"
   end
 
+  add_index "events", ["club"], name: "index_events_on_club", using: :btree
+
   create_table "included_zones", force: true do |t|
     t.integer  "zone_id"
     t.integer  "access_level_id"
