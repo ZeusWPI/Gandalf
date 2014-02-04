@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable
 
-  after_create :fetch_club
+  after_initialize :fetch_club
 
   has_and_belongs_to_many :clubs
 
