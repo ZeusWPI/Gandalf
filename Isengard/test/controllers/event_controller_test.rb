@@ -15,7 +15,7 @@ class EventControllerTest < ActionController::TestCase
 
   test "should get create" do
     post :create, id: events(:codenight).id, event: events(:codenight).attributes
-    assert_response :success
+    assert_response :redirect
   end
 
   test "should get new" do

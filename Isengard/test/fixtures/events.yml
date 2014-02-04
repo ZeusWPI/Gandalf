@@ -30,6 +30,7 @@
 codenight:
   id: 1
   name: Codenight
+  contact_email: blargh@gmail.com
   start_date: 2013-09-17 16:25:51
   end_date: 2013-09-17 16:25:51
   location: Zeus Keldahr
@@ -40,9 +41,11 @@ codenight:
 galabal:
   id: 2
   name: Galabal
+  contact_email: blargh2@gmail.com
   start_date: 2013-09-17 16:25:51
   end_date: 2013-09-17 16:25:51
   location: FK
   website: www.fkgent.be
   description: Super awesome galabal
   club: fk
+  bank_number: 55
