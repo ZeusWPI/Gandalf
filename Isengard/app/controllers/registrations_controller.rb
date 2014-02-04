@@ -143,6 +143,7 @@ class RegistrationsController < ApplicationController
       @csvfails = fails
       render 'upload'
     else
+      @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
       render 'index'
     end
   end
