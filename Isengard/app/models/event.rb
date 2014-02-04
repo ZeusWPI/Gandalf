@@ -20,9 +20,10 @@
 #  export_content_type     :string(255)
 #  export_file_size        :integer
 #  export_updated_at       :datetime
-#  show_statistics         :boolean
 #  export_status           :string(255)
 #  club_id                 :integer
+#  show_statistics         :boolean
+#  registration_open       :boolean          default(TRUE)
 #
 
 class Event < ActiveRecord::Base
@@ -69,4 +70,8 @@ class Event < ActiveRecord::Base
   end
   handle_asynchronously :generate_xls
 
+  def toggle_registration_open
+    self.registration_open = !self.registration_open
+    self.save
+  end
 end

@@ -47,6 +47,15 @@ class EventsController < ApplicationController
     render action: :edit
   end
 
+  def toggle_registration_open
+    @event = Event.find params.require(:id)
+    authorize! :update, @event
+
+    @event.toggle_registration_open
+
+    redirect_to action: :edit
+  end
+
   def create
     authorize! :create, Event
 

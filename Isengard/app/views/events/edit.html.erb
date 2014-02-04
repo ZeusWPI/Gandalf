@@ -15,6 +15,17 @@
 
     <br />
 
+    <h4>Manually close registrations</h4>
+    <% if @event.registration_open %>
+      <p class="text-warning"><strong>Warning!</strong> Closing the registrations will override the settings above.</p>
+      <%= link_to raw('<i class="glyphicon glyphicon-remove"></i> Close the registrations'), toggle_registration_open_event_path(@event), method: 'post', class: 'btn btn-danger' %>
+    <% else %>
+      <%= link_to raw('<i class="glyphicon glyphicon-ok"></i> Open the registrations'), toggle_registration_open_event_path(@event), method: 'post', class: 'btn btn-default' %>
+    <% end %>
+
+    <br />
+    <br />
+
     <h4>Payment information</h4>
     <%= render partial: "events/payment_form" %>
   </div>

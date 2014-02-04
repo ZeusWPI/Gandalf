@@ -18,6 +18,7 @@ Isengard::Application.routes.draw do
     member do
       get 'export_status'
       post 'generate_export'
+      post 'toggle_registration_open'
     end
 
     resources :zones

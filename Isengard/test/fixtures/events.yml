@@ -20,9 +20,10 @@
 #  export_content_type     :string(255)
 #  export_file_size        :integer
 #  export_updated_at       :datetime
-#  show_statistics         :boolean
 #  export_status           :string(255)
 #  club_id                 :integer
+#  show_statistics         :boolean
+#  registration_open       :boolean          default(TRUE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
