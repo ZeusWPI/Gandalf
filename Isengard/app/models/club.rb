@@ -16,6 +16,8 @@ class Club < ActiveRecord::Base
 
   has_and_belongs_to_many :users
 
+  validates :internal_name, uniqueness: true
+
   def name
     full_name ? full_name : display_name
   end
