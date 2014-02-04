@@ -24,7 +24,7 @@ class Ability
     # add register permission
     can :register, Event do |event|
       if !event.registration_open
-        return false
+        false
       elsif !event.registration_open_date.blank? && !event.registration_close_date.blank?
         event.registration_open_date <= DateTime.now && event.registration_close_date >= DateTime.now
       elsif !event.registration_open_date.blank? && event.registration_close_date.blank?
