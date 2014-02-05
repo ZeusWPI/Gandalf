@@ -7,7 +7,7 @@ pidfile 'tmp/puma.pid'
 
 preload_app!
 
-bind 'unix://var/run/unicorn/puma.sock'
+bind 'unix:///var/run/unicorn/puma.sock'
 
 on_worker_boot do
   ActiveRecord::Base.connection_pool.disconnect!
