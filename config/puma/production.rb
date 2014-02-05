@@ -8,6 +8,10 @@ preload_app!
 
 bind 'unix:///var/run/unicorn/puma.sock'
 
+on_restart do
+  ENV['BUNDLE_GEMFILE'] = File.join('production', 'current', 'Gemfile')
+end
+
 on_worker_boot do
   ActiveRecord::Base.connection_pool.disconnect!
 
