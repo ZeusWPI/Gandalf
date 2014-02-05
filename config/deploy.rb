@@ -28,6 +28,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     invoke 'unicorn:restart'
+    invoke 'delayed_job:restart'
   end
 
   after :publishing, :restart
