@@ -12,7 +12,7 @@ on_worker_boot do
   ActiveRecord::Base.connection_pool.disconnect!
 
   ActiveSupport.on_load(:active_record) do
-    Activerecord::Base.establish_connection
+    ActiveRecord::Base.establish_connection
   end
 end
 
