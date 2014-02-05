@@ -5,6 +5,7 @@ namespace :puma do
   set :puma_state, -> {"#{shared_path}/sockets/puma.state" }
   set :puma_socket, ->  { "unix://#{shared_path}/sockets/puma.sock" }
 
+
   desc 'Start puma'
   task :start do
     on roles :app do
@@ -12,7 +13,24 @@ namespace :puma do
         execute :bundle, :exec, fetch(:puma_cmd), start_options
       end
     end
+  end
 
+  desc 'Puma status'
+  task :status do
+    on roles :app do
+      within release_path do
+        execute :bundle, :exec, fetch(:pumactl_cmd), "-S", state_path, "status"
+      end
+    end
+  end
+
+  desc 'Puma stats'
+  task :stats do
+    on roles :app do
+      within release_path do
+        execute :bundle, :exec, fetch(:pumactl_cmd), "--pidfile", "#{shared_path}/sockets/puma.pid", "stats"
+      end
+    end
   end
 
   desc 'Stop puma'
@@ -28,11 +46,9 @@ namespace :puma do
   task :restart do
     on roles :app do
       within release_path do
-        if test :bundle, :exec, fetch(:pumactl_cmd), "-S", state_path, "restart"
-          info "restarting"
-        else
-          info "Failed to restart puma\nAssuming not started. Starting instead."
-          invoke :start
+        if ! test :bundle, :exec, fetch(:pumactl_cmd), "-S", state_path, "restart"
+          warn "Failed to restart puma\nAssuming not started. Starting instead."
+          execute :bundle, :exec, fetch(:puma_cmd), start_options
         end
       end
     end
@@ -51,7 +67,7 @@ end
 
 def start_options
   if config_file
-    "-q -d -e #{puma_env} -C #{config_file}"
+    "-q -d -e #{puma_env} -C #{config_file} -S #{state_path} --pidfile #{shared_path}/sockets/puma.pid"
   else
     "-q -d -e #{puma_env} -b '#{puma_socket}' -S #{state_path} --control 'unix://#{shared_path}/sockets/pumactl.sock'"
   end
@@ -70,7 +86,7 @@ def puma_env
 end
 
 def state_path
-  (config_file ? configuration.options[:state] : nil) || puma_state
+  (config_file ? configuration.options[:state] : nil) || fetch(:puma_state)
 end
 
 def configuration

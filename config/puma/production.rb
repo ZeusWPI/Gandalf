@@ -3,7 +3,6 @@ workers 4
 
 environment 'production'
 daemonize
-pidfile 'tmp/puma.pid'
 
 preload_app!
 

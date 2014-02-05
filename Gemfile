@@ -51,7 +51,7 @@ gem 'cancan'
 gem 'httparty'
 
 
-group :production do
+group :production, :deployment do
   gem 'puma'
 end
 
@@ -85,7 +85,6 @@ gem 'coveralls', require: false
 gem 'capistrano', '~> 3.1'
 gem 'capistrano-rails', '~> 1.1'
 gem 'capistrano-rvm'
-gem 'capistrano-puma'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
