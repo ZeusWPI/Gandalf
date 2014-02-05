@@ -1,6 +1,0 @@
-Description;Amount
-Not a code;17.00
-Fail Non-existing GAN0D3A4L80F;1,00
-Fail Check-sum GAN1D3A4L81F;1,02
-Fail Not even money GAN1D3A4L80F;hello
-Should be succes GAN1D3A4L80F;0,01
