@@ -105,46 +105,56 @@ class RegistrationsController < ApplicationController
     paid = params.require('amount_column').upcase
     fails = []
     counter = 0
-    CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
-      match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F/.match(row.to_s)
-      next unless match # seems like this is not a Gandalf transfer.
 
-      registration = Registration.find_by_id match[:id]
+    begin
+      CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
+        match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F/.match(row.to_s)
+        next unless match # seems like this is not a Gandalf transfer.
 
-      # If the registration doesn't exist
-      if registration.nil?
-        fails << row
-        next
+        registration = Registration.find_by_id match[:id]
+
+        # If the registration doesn't exist
+        if registration.nil?
+          fails << row
+          next
+        end
+
+        # if it's not a real code, FAIL
+        unless registration.payment_code == match.to_s
+          fails << row
+          next
+        end
+
+        # if we can't read the amount of money, FAIL
+        amount = row[paid].sub(',', '.')
+        begin
+          amount = Float(amount)
+        rescue
+          fails << row
+          next
+        end
+
+        registration.paid += amount
+        registration.save
+        counter += 1
       end
 
-      # if it's not a real code, FAIL
-      unless registration.payment_code == match.to_s
-        fails << row
-        next
+      flash.now[:success] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
+      if fails.any?
+        flash.now[:error] = "The rows listed below contained an invalid code, please fix them by hand."
+        @csvheaders = fails.first.headers
+        @csvfails = fails
+        render 'upload'
+      else
+        @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
+        render 'index'
       end
-
-      # if we can't read the amount of money, FAIL
-      amount = row[paid].sub(',', '.')
-      begin
-        amount = Float(amount)
-      rescue
-        fails << row
-        next
-      end
-
-      registration.paid += amount
-      registration.save
-      counter += 1
-    end
-    flash[:success] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
-    if fails.any?
-      flash[:error] = "The rows listed below contained an invalid code, please fix them by hand."
-      @csvheaders = fails.first.headers
-      @csvfails = fails
-      render 'upload'
-    else
+    rescue CSV::MalformedCSVError
+      flash.now[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
+      @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
       render 'index'
     end
+
   end
 
 end
