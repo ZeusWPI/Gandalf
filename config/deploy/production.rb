@@ -5,7 +5,8 @@ server 'zeus.ugent.be', user: 'gandalf', roles: %w{web app db},
     port: 2222
   }
 
- set :rails_env, 'production'
+set :rails_env, 'production'
+set :unicorn_pid, '/var/run/unicorn/gandalf-staging.pid'
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options

@@ -1,6 +1,8 @@
 preload_app true
 listen "/var/run/unicorn/gandalf-staging.sock"
 
+pid '/var/run/unicorn/gandalf-staging.pid'
+
 worker_processes 4
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
