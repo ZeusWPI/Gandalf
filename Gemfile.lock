@@ -55,6 +55,8 @@ GEM
     capistrano-rvm (0.1.1)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano3-unicorn (0.0.6)
+      capistrano (>= 3.0.0)
     chartkick (1.2.0)
     choice (0.1.6)
     ckeditor_rails (4.2.2)
@@ -244,6 +246,7 @@ DEPENDENCIES
   capistrano (~> 3.1)
   capistrano-rails (~> 1.1)
   capistrano-rvm
+  capistrano3-unicorn
   chartkick
   ckeditor_rails
   coffee-rails (~> 4.0.0)
