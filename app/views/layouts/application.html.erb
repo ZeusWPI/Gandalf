@@ -30,6 +30,17 @@
           <ul class="nav navbar-nav">
             <li><a href="<%= events_path %>">Events</a></li>
           </ul>
+
+          <div class="hidden-xs navbar-form navbar-right">
+            <div class="form-group">
+            <% if user_signed_in? %>
+              <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control",  method: :delete %>
+            <% else %>
+              <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
+            <% end %>
+            </div>
+          </div>
+
           <ul class="nav navbar-nav navbar-right">
             <% if can? :crud, Event %>
             <li class="dropdown">
@@ -39,26 +50,23 @@
               </ul>
             </li>
             <% end %>
-
             <% if user_signed_in? %>
-              <li>
-                <p class="navbar-text">
-                  Logged in as <%= current_user.display_name %>
-                </p>
-              </li>
-              <li>
-                <p class="navbar-text">
-                  <%= link_to "Logout", destroy_user_session_path(current_user), method: :delete %>
-                </p>
-              </li>
-            <% else %>
-              <li>
-                <p class="navbar-text">
-                  <%= link_to "Login", new_user_session_path %>
-                </p>
-              </li>
+            <li>
+              <a>Logged in as <%= current_user.display_name %></a>
+            </li>
             <% end %>
           </ul>
+
+          <div class="visible-xs navbar-form">
+            <div class="form-group">
+            <% if user_signed_in? %>
+              <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control",  method: :delete %>
+            <% else %>
+              <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
+            <% end %>
+            </div>
+          </div>
+
         </div><!-- /.navbar-collapse -->
       </div><!-- /.navbar-collapse -->
     </nav>
