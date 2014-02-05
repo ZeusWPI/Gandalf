@@ -42,6 +42,21 @@ GEM
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
     cancan (1.6.10)
+    capistrano (3.1.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.1.1)
+      capistrano (~> 3.0)
+      sshkit (>= 1.2.0)
+    capistrano-rails (1.1.1)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.1)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano3-unicorn (0.0.6)
+      capistrano (>= 3.0.0)
     chartkick (1.2.0)
     choice (0.1.6)
     ckeditor_rails (4.2.2)
@@ -105,6 +120,9 @@ GEM
     multi_json (1.7.9)
     multi_xml (0.5.5)
     mysql2 (0.3.13)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.8.0)
     orm_adapter (0.4.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -184,6 +202,10 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.7)
+    sshkit (1.3.0)
+      net-scp (>= 1.1.2)
+      net-ssh
+      term-ansicolor
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     therubyracer (0.12.0)
@@ -221,6 +243,10 @@ DEPENDENCIES
   annotate
   barcodes!
   cancan
+  capistrano (~> 3.1)
+  capistrano-rails (~> 1.1)
+  capistrano-rvm
+  capistrano3-unicorn
   chartkick
   ckeditor_rails
   coffee-rails (~> 4.0.0)

@@ -22,3 +22,7 @@ coverage
 /erd.pdf
 
 public/system
+
+# secrets!
+config/database.yml
+config/initializers/secret_token.rb

@@ -81,6 +81,12 @@ gem 'delayed_job_active_record'
 # Coveralls
 gem 'coveralls', require: false
 
+# Deployment
+gem 'capistrano', '~> 3.1'
+gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano-rvm'
+gem 'capistrano3-unicorn'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -92,6 +98,7 @@ gem 'coveralls', require: false
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+#
 
 group :production do
   gem 'mysql2' # Database
