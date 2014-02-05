@@ -52,7 +52,7 @@ gem 'httparty'
 
 
 group :production do
-  gem 'unicorn'
+  gem 'puma'
 end
 
 # Barcodes
@@ -85,7 +85,7 @@ gem 'coveralls', require: false
 gem 'capistrano', '~> 3.1'
 gem 'capistrano-rails', '~> 1.1'
 gem 'capistrano-rvm'
-gem 'capistrano3-unicorn'
+gem 'capistrano-puma'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

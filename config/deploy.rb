@@ -19,6 +19,8 @@ set :linked_files, %w{config/database.yml config/initializers/secret_token.rb}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
+#
+set :log_level, :info
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
