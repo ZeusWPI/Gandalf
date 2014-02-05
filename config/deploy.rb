@@ -1,7 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, 'Isengard'
+set :application, 'Gandalf'
 set :repo_url, 'git@github.com:ZeusWPI/Gandalf.git'
 
 # Default branch is :master

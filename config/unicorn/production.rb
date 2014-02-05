@@ -1,4 +1,3 @@
-env "production"
 preload_app true
 listen "/var/run/unicorn/gandalf-staging.sock"
 
