@@ -1,7 +1,7 @@
 preload_app true
-listen "/var/run/unicorn/gandalf-staging.sock"
+listen "/var/run/unicorn/gandalf.sock"
 
-pid '/var/run/unicorn/gandalf-staging.pid'
+pid '/var/run/unicorn/gandalf.pid'
 
 worker_processes 4
 before_fork do |server, worker|
