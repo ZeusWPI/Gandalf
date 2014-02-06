@@ -1,11 +1,14 @@
 class RegistrationsController < ApplicationController
 
+  before_action :authenticate_user!, only: [:index, :destroy, :resend, :update, :email, :upload]
+
   require 'csv'
 
   respond_to :html, :js
 
   def index
     @event = Event.find params.require(:event_id)
+    authorize! :read, @event
     @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
   end
 
@@ -16,6 +19,7 @@ class RegistrationsController < ApplicationController
 
   def destroy
     @event = Event.find params.require(:event_id)
+    authorize! :destroy, @event
     registration = Registration.find params.require(:id)
     @id = registration.id
     registration.destroy
@@ -23,10 +27,12 @@ class RegistrationsController < ApplicationController
 
   def info
     @registration = Registration.find params.require(:id)
+    authorize! :read, @registration.event
   end
 
   def resend
     @registration = Registration.find params.require(:id)
+    authorize! :update, @registration.event
     if @registration.is_paid
       RegistrationMailer.ticket(@registration).deliver
     else
@@ -65,6 +71,7 @@ class RegistrationsController < ApplicationController
   end
 
   def advanced
+    # TODO can can
     @event = Event.find params.require(:event_id)
     @registration = @event.registrations.create params.require(:registration).permit(:email, :name)
     params.require(:registration).require(:checkboxes).each do |access_level, periods|
@@ -89,6 +96,7 @@ class RegistrationsController < ApplicationController
 
   def email
     @event = Event.find params.require(:event_id)
+    authorize! :read, @event
     to_id = params['to'].to_i
     if to_id == -1
       to = @event.registrations.pluck(:email)
@@ -101,6 +109,7 @@ class RegistrationsController < ApplicationController
 
   def upload
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     sep = params.require('separator')
     paid = params.require('amount_column').upcase
     fails = []

@@ -5,6 +5,9 @@ class RegistrationsControllerTest < ActionController::TestCase
 
   test "uploading partially failed registrations" do
 
+    # Must be logged in
+    sign_in users(:tom)
+
     # Quick check for the used fixture
     three = registrations(:three)
     assert_equal 0, three.paid
