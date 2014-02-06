@@ -25,9 +25,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable
 
-  if Rails.env.production?
-    after_initialize :fetch_club, :fetch_enrolled_clubs
-  end
+  after_create :fetch_club, :fetch_enrolled_clubs
 
   has_and_belongs_to_many :clubs
   has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: "Club"
