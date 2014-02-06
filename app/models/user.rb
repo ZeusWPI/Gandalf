@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable
 
-  after_initialize :fetch_club
+  after_create :fetch_club, :fetch_enrolled_clubs
 
   has_and_belongs_to_many :clubs
   has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: "Club"
@@ -94,9 +94,11 @@ class User < ActiveRecord::Base
                  {key: Rails.application.config.enrollment_key, ugent_nr: self.cas_ugentStudentID})
 
     if resp.code == 200
-      clubs = JSON[resp.body]
-      self.enrolled_clubs = Club.where(internal_name: clubs)
-      self.save!
+      clubs = JSON[resp.body].map(&:downcase)
+      if !clubs.empty?
+        self.enrolled_clubs = Club.where(internal_name: clubs)
+        self.save!
+      end
     end
 
   end
