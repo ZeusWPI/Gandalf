@@ -34,7 +34,7 @@ class UserTest < ActiveSupport::TestCase
 
     tom.fetch_club
     assert_not tom.clubs.empty?
-    assert Club.find_by_internal_name('zeus') == tom.clubs.first
+    assert_equal tom.clubs, [clubs(:zeus)]
 
     maarten = users(:maarten)
     maarten.clubs = []
@@ -43,7 +43,7 @@ class UserTest < ActiveSupport::TestCase
 
     maarten.fetch_club
     assert_not maarten.clubs.empty?
-    assert Club.find_by_internal_name('fkcentraal') == maarten.clubs.first
+    assert_equal maarten.clubs, [clubs(:fk)]
 
     toon = users(:toon)
     toon.clubs = []
