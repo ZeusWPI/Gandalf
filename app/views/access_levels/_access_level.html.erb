@@ -6,6 +6,7 @@
   </td>
   <td>&euro; <%= number_with_precision access_level.price || "0", precision: 2  %></td>
   <td><%= access_level.public ? 'Public' : 'Private' %></td>
+  <td><%= access_level.member_only ? 'Yes' : 'No' %></td>
   <td><%= access_level.has_comment ? 'Yes' : 'No' %></td>
   <td><%= access_level.hidden ? 'Yes' : 'No' %></td>
   <% if advanced %>
