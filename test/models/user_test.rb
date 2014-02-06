@@ -26,6 +26,34 @@ class UserTest < ActiveSupport::TestCase
 
   verify_fixtures User
 
+  test "clubs is set after fetching" do
+    tom = users(:tom)
+    tom.clubs = []
+
+    assert tom.clubs.empty?
+
+    tom.fetch_club
+    assert_not tom.clubs.empty?
+    assert_equal tom.clubs, [clubs(:zeus)]
+
+    maarten = users(:maarten)
+    maarten.clubs = []
+
+    assert maarten.clubs.empty?
+
+    maarten.fetch_club
+    assert_not maarten.clubs.empty?
+    assert_equal maarten.clubs, [clubs(:fk)]
+
+    toon = users(:toon)
+    toon.clubs = []
+
+    assert toon.clubs.empty?
+
+    toon.fetch_club
+    assert toon.clubs.empty?
+  end
+
   test "enrolled clubs is set after fetching" do
     tom = users(:tom)
     tom.fetch_enrolled_clubs
