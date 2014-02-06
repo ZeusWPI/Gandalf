@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
 
   # fetch clubs where user is enrolled in
   def fetch_enrolled_clubs
-    resp = HTTParty.get("registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
+    resp = HTTParty.get("http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
                  {key: Rails.application.config.enrollment_key, ugent_nr: self.cas_ugentStudentID})
 
     if resp.code == 200

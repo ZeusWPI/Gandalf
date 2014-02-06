@@ -30,6 +30,7 @@
 
 tom:
   username: tnnaesse
+  cas_ugentStudentId: 00800857
   clubs:
     - zeus
 
