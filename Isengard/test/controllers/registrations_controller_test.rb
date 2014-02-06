@@ -18,7 +18,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       separator: ';',
       amount_column: 'Amount',
       csv_file: fixture_file_upload('files/unsuccesful_registration_payments.csv') }
-    
+
     # Check if the correct rows failed.
     assert_not_nil assigns(:csvfails)
     assigns(:csvfails).each do |csvfail|
