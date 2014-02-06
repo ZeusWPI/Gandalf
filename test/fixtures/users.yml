@@ -35,9 +35,12 @@ tom:
     - zeus
 
 maarten:
-  username: mherthoge
+  username: mherthog
   clubs:
     - fk
 
+toon:
+  username: tvwillem
+
 matthias:
-  username: mjherthog
+  username: mjhertho
