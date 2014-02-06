@@ -96,9 +96,11 @@ class User < ActiveRecord::Base
                  {key: Rails.application.config.enrollment_key, ugent_nr: self.cas_ugentStudentID})
 
     if resp.code == 200
-      clubs = JSON[resp.body]
-      self.enrolled_clubs = Club.where(internal_name: clubs)
-      self.save!
+      clubs = JSON[resp.body].map(&:downcase)
+      if !clubs.empty?
+        self.enrolled_clubs = Club.where(internal_name: clubs)
+        self.save!
+      end
     end
 
   end
