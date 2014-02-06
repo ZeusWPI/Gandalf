@@ -21,8 +21,8 @@
 #  export_file_size        :integer
 #  export_updated_at       :datetime
 #  export_status           :string(255)
-#  club_id                 :integer
 #  show_statistics         :boolean
+#  club_id                 :integer
 #  registration_open       :boolean          default(TRUE)
 #
 

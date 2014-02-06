@@ -15,6 +15,8 @@ class Club < ActiveRecord::Base
   has_many :events
 
   has_and_belongs_to_many :users
+  # enrolled_members, not admins
+  has_and_belongs_to_many :members, join_table: :enrolled_clubs_members
 
   validates :internal_name, uniqueness: true
 
