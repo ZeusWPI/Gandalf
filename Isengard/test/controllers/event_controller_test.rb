@@ -60,6 +60,8 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "dont check in unpaid tickets" do
+    sign_out users(:tom)
+    sign_in users(:maarten)
     post :check_in, id: events(:galabal).id, code: '2222222222222'
     assert_response :success
     assert(flash[:warning].include? "Person has not paid yet!")

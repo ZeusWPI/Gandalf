@@ -1,6 +1,6 @@
 class AccessLevelsController < ApplicationController
 
-  before_filter :authenticate_user!, :parse_advanced
+  before_filter :authenticate_user!, except: [:show, :new]
 
   respond_to :html, :js
 
@@ -10,6 +10,7 @@ class AccessLevelsController < ApplicationController
 
   def index
     @event = Event.find params.require(:event_id)
+    authorize! :read, @event
   end
 
   def new
@@ -18,12 +19,14 @@ class AccessLevelsController < ApplicationController
 
   def edit
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     @access_level = @event.access_levels.find(params.require(:id))
     respond_with @access_level
   end
 
   def update
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     @access_level = @event.access_levels.find(params.require(:id))
     @access_level.update params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment, :hidden)
 
@@ -32,12 +35,14 @@ class AccessLevelsController < ApplicationController
 
   def create
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment, :hidden)
     respond_with @access_level
   end
 
   def destroy
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     access_level = AccessLevel.find params.require(:id)
     unless access_level.registrations.any?
       # Save the name so we can respond it as we still have to
@@ -51,6 +56,7 @@ class AccessLevelsController < ApplicationController
 
   def set_zones
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     access_level = AccessLevel.find params.require(:access_level_id)
     zones = params.require(:access_level).require(:zones)
     # Features introduced in new versions apparently suck pretty hard
@@ -61,6 +67,7 @@ class AccessLevelsController < ApplicationController
 
   def toggle_visibility
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     @access_level = AccessLevel.find params.require(:id)
     @access_level.hidden = not(@access_level.hidden)
     @access_level.save
