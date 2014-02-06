@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   after_initialize :fetch_club
 
   has_and_belongs_to_many :clubs
-  has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members
+  has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: "Club"
 
   # return the club this user can manage
   def fetch_club
