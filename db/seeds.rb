@@ -5,9 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+#
+WebMock.allow_net_connect!
 url = 'http://student.ugent.be/hydra/api/1.1/Associations.json'
 hash = JSON(HTTParty.get(url).body)
+WebMock.disable_net_connect!
 
 hash.each do |club|
   next unless club['parentAssociation'] == 'FKCENTRAAL'
