@@ -3,6 +3,11 @@ require 'test_helper'
 class RegistrationsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
+  def setup
+    stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
+      with(query: hash_including(u: "")).to_return(body: 'FAIL')
+  end
+
   test "uploading partially failed registrations" do
 
     # Quick check for the used fixture
@@ -15,11 +20,11 @@ class RegistrationsControllerTest < ActionController::TestCase
       separator: ';',
       amount_column: 'Amount',
       csv_file: fixture_file_upload('files/unsuccesful_registration_payments.csv') }
-    
+
     # Check if the correct rows failed.
     assert_not_nil assigns(:csvfails)
     assigns(:csvfails).each do |csvfail|
-      assert_match /FAIL.*/, csvfail.to_s
+      assert_match(/FAIL.*/, csvfail.to_s)
     end
 
     # Check if the flash is correct

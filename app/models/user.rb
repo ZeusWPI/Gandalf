@@ -96,6 +96,7 @@ class User < ActiveRecord::Base
     if resp.code == 200
       clubs = JSON[resp.body]
       self.enrolled_clubs = Club.where(internal_name: clubs)
+      self.save!
     end
 
   end
