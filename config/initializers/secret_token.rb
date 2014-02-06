@@ -14,3 +14,4 @@ Isengard::Application.config.secret_key_base = 'a27fcd9aa2eabd14030493d6b5a1521b
 Isengard::Application.config.fk_auth_url = 'http://fkgent.be/api_isengard_v2.php'
 Isengard::Application.config.fk_auth_salt = '#development#'
 Isengard::Application.config.fk_auth_key = '#development#'
+Isengard::Application.config.enrollment_key = '#development#'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203192534) do
+ActiveRecord::Schema.define(version: 20140206092248) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 20140203192534) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "enrolled_clubs_members", id: false, force: true do |t|
+    t.integer "club_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  add_index "enrolled_clubs_members", ["club_id"], name: "index_enrolled_clubs_members_on_club_id"
+  add_index "enrolled_clubs_members", ["user_id"], name: "index_enrolled_clubs_members_on_user_id"
+
   create_table "events", force: true do |t|
     t.string   "name"
     t.datetime "start_date"
@@ -86,8 +94,8 @@ ActiveRecord::Schema.define(version: 20140203192534) do
     t.string   "export_content_type"
     t.integer  "export_file_size"
     t.datetime "export_updated_at"
-    t.boolean  "show_statistics"
     t.string   "export_status"
+    t.boolean  "show_statistics"
     t.integer  "club_id"
     t.boolean  "registration_open",       default: true
   end
@@ -129,8 +137,8 @@ ActiveRecord::Schema.define(version: 20140203192534) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.integer  "paid"
     t.string   "student_number"
+    t.integer  "paid"
     t.integer  "price"
     t.datetime "checked_in_at"
     t.text     "comment"

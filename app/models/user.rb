@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   after_initialize :fetch_club
 
   has_and_belongs_to_many :clubs
+  has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: "Club"
 
   # return the club this user can manage
   def fetch_club
@@ -85,6 +86,19 @@ class User < ActiveRecord::Base
     else
       username
     end
+  end
+
+  # fetch clubs where user is enrolled in
+  def fetch_enrolled_clubs
+    resp = HTTParty.get("http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
+                 {key: Rails.application.config.enrollment_key, ugent_nr: self.cas_ugentStudentID})
+
+    if resp.code == 200
+      clubs = JSON[resp.body]
+      self.enrolled_clubs = Club.where(internal_name: clubs)
+      self.save!
+    end
+
   end
 
 end
