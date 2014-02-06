@@ -87,7 +87,7 @@ gem 'capistrano-rails', '~> 1.1'
 gem 'capistrano-rvm'
 
 # Stubbing http requests
-gem 'webmock'
+gem 'webmock', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
