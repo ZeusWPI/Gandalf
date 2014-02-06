@@ -25,15 +25,19 @@ class AccessLevelsController < ApplicationController
   def update
     @event = Event.find params.require(:event_id)
     @access_level = @event.access_levels.find(params.require(:id))
-    @access_level.update params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment, :hidden)
+    @access_level.update update_params
 
     respond_with @access_level
   end
 
   def create
     @event = Event.find params.require(:event_id)
-    @access_level = @event.access_levels.create params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment, :hidden)
+    @access_level = @event.access_levels.create update_params
     respond_with @access_level
+  end
+
+  def update_params
+    params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment, :hidden, :member_only)
   end
 
   def destroy

@@ -6,6 +6,7 @@ class Ability
     alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
     clubs = user.try(:clubs)
+    enrolled_clubs = user.try(:enrolled_clubs)
     if !clubs.blank?
       can :create, Event
       can :show, Event
@@ -37,9 +38,19 @@ class Ability
     # can you register for an access level
     can :register, AccessLevel do |access_level|
       # not if you can't register for the event
-      return false unless can? :register, access_level.event
+      next false unless can? :register, access_level.event
+
+      next false if access_level.hidden
+
+      # don't support private tickets for the moment
+      next false unless access_level.public
+
       # if the access level is not hidden and it's public or you're a member
-      not access_level.hidden and (access_level.public or clubs.include? access_level.event.club)
+      if access_level.member_only?
+        enrolled_clubs.include? access_level.event.club
+      else
+        access_level.public
+      end
     end
 
     # add modify registrations permission for club members
