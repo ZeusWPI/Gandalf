@@ -2,9 +2,6 @@ language: ruby
 rvm:
   - 2.1.0
 
-before_install:
-  - "cd Isengard"
-
 before_script:
   - "RAILS_ENV=test bundle exec rake db:setup"
 
@@ -12,13 +9,13 @@ notifications:
   email:
     recipients:
       - gandalf@zeus.ugent.be
-    on_success: change
+    on_success: never
     on_failure: change
 
-  irc: 
+  irc:
     channels:
       - "wina.ugent.be#hydra"
-    on_success: never
+    on_success: change
     on_failure: always
 
 

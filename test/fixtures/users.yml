@@ -1,0 +1,46 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  username            :string(255)      default(""), not null
+#  remember_created_at :datetime
+#  sign_in_count       :integer          default(0), not null
+#  current_sign_in_at  :datetime
+#  last_sign_in_at     :datetime
+#  current_sign_in_ip  :string(255)
+#  last_sign_in_ip     :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  cas_givenname       :string(255)
+#  cas_surname         :string(255)
+#  cas_ugentStudentID  :string(255)
+#  cas_mail            :string(255)
+#  cas_uid             :string(255)
+#  admin               :boolean
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+#
+
+tom:
+  username: tnnaesse
+  cas_ugentStudentId: 00800857
+  clubs:
+    - zeus
+
+maarten:
+  username: mherthog
+  clubs:
+    - fk
+
+toon:
+  username: tvwillem
+
+matthias:
+  username: mjhertho
