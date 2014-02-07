@@ -33,6 +33,9 @@ gem 'annotate'
 # Use form helpers, because we live in the future now
 gem 'simple_form'
 
+# Datagrid is nice
+gem 'datagrid'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -80,6 +80,8 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     daemons (1.1.9)
+    datagrid (1.0.5)
+      rails (>= 3.0)
     delayed_job (4.0.0)
       activesupport (>= 3.0, < 4.1)
     delayed_job_active_record (4.0.0)
@@ -252,6 +254,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   coveralls
   daemons
+  datagrid
   delayed_job (~> 4.0)
   delayed_job_active_record
   devise

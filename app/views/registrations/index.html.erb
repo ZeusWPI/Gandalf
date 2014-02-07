@@ -28,6 +28,15 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-sm-12">
+    <%= bootstrap_pagination @registrations %>
+    <%= datagrid_table @registrationsgrid, @registrations, html: { class: 'table table-striped' } %>
+    <%= bootstrap_pagination @registrations %>
+  </div>
+</div>
+
+
 <%= render partial: 'registrations/email_modal' %>
 <%= render partial: 'registrations/upload_modal' %>
 <%= render partial: 'registrations/info_modal' %>

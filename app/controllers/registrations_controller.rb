@@ -6,7 +6,10 @@ class RegistrationsController < ApplicationController
 
   def index
     @event = Event.find params.require(:event_id)
-    @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
+
+    @registrationsgrid = RegistrationsGrid.new
+    @registrations = @registrationsgrid.assets
+    @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 3)
   end
 
   def new
