@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
     authorize! :read, @event
 
     # Fuck this scope for now on
-    @registrationsgrid = RegistrationsGrid.new(params[:registration_grid]) do |scope|
+    @registrationsgrid = RegistrationsGrid.new(params[:registrations_grid]) do |scope|
       scope.where(event_id: @event.id)
     end
 

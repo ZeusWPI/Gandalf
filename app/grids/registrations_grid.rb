@@ -5,6 +5,10 @@ class RegistrationsGrid
     Registration
   end
 
+  filter(:name)
+  filter(:email)
+  # filter(:access_levels)
+
   column(:name)
   column(:email)
   column(:access_level) do |registration|

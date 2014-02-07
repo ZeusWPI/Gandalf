@@ -5,11 +5,17 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Filter</h4>
       </div>
+      <%= form_for @registrationsgrid, url: event_registrations_path, method: :get do |f| %>
       <div class="modal-body">
+        <%= form_text_field f, :name %>
+        <%= form_text_field f, :email %>
+        <%# <%= form_collection_select f, :access_levels, @event.access_levels, :id, :name %1> %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <%= f.button :submit, class: 'btn btn-group btn-primary' %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
