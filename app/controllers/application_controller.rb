@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
     session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to root_path
+  end
+
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
   end

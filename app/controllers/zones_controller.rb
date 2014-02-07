@@ -1,9 +1,13 @@
 class ZonesController < ApplicationController
 
+  # You need to be logged in for everything.
+  before_action :authenticate_user!, except: :show
+
   respond_to :html, :js
 
   def index
     @event = Event.find params.require(:event_id)
+    authorize! :read, @event
   end
 
   def show
@@ -16,6 +20,7 @@ class ZonesController < ApplicationController
 
   def create
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     @zone = @event.zones.create params.require(:zone).permit(:name)
   end
 
@@ -23,6 +28,7 @@ class ZonesController < ApplicationController
     zone = Zone.find params.require(:id)
     @id = zone.id
     @event = Event.find params.require(:event_id)
+    authorize! :update, @event
     zone.destroy
   end
 
