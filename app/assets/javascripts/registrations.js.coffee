@@ -24,6 +24,8 @@ ready = ->
 
   $("a[data-toggle = 'tooltip']").tooltip({'container': 'body'})
 
+  $('th.to_pay').attr("width", 175)
+
   hideCommentFieldIfNeeded = (value) ->
     val = parseInt(value)
     if (window.ticketsWithComments.indexOf(val) == -1)
@@ -35,6 +37,7 @@ ready = ->
     hideCommentFieldIfNeeded($(this).val())
 
   hideCommentFieldIfNeeded($("#registration_access_levels").val())
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
