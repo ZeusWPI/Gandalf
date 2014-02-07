@@ -12,7 +12,7 @@ class RegistrationsGrid
 
   column(:name)
   column(:email)
-  column(:access_level) do |registration|
+  column(:access_level, header: "Ticket") do |registration|
     registration.access_levels.first.try :name
   end
   column(:payment_code)
