@@ -74,10 +74,12 @@ class EventsController < ApplicationController
 
   def scan
     @event = Event.find params.require(:id)
+    authorize! :update, @event
   end
 
   def check_in
     @event = Event.find params.require(:id)
+    authorize! :update, @event
     barcode = params.require(:code)
 
     @registration = @event.registrations.find_by_barcode barcode
@@ -101,6 +103,7 @@ class EventsController < ApplicationController
 
   def export_status
     @event = Event.find params.require(:id)
+    authorize! :read, @event
     if @event.export_status == 'done'
       render partial: 'events/export'
     else
@@ -110,6 +113,7 @@ class EventsController < ApplicationController
 
   def generate_export
     @event = Event.find params.require(:id)
+    authorize! :read, @event
     @event.export_status = "generating"
     @event.save
     @event.generate_xls
