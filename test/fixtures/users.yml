@@ -41,3 +41,5 @@ maarten:
 
 matthias:
   username: mjherthog
+  enrolled_clubs:
+    - zeus
