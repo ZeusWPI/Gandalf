@@ -12,7 +12,11 @@
     </span>
     <%= tag :div, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
     <%= bootstrap_pagination @registrations %>
-    <%= datagrid_table @registrationsgrid, @registrations, html: { class: 'table table-striped' } %>
+    <table class="table table-striped table-hover" id="table-registrations">
+      <%= datagrid_header @registrationsgrid %>
+      <%= datagrid_rows @registrationsgrid, @registrations, html: { class: 'registration', id: 'blargh' }  %>
+    </table>
+    <%# <%= datagrid_table @registrationsgrid, @registrations, html: { class: 'table table-striped' } %1> %>
     <%= bootstrap_pagination @registrations %>
   </div>
 </div>
