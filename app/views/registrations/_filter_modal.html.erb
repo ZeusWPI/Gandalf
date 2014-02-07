@@ -13,6 +13,7 @@
       </div>
       <div class="modal-footer">
         <%= f.button :submit, class: 'btn btn-group btn-primary' %>
+        <%= link_to "Reset", event_registrations_path(@event), class: 'btn btn-group btn-default' %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
       <% end %>
