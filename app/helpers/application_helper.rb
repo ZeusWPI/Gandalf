@@ -37,6 +37,7 @@ module ApplicationHelper
   end
 
   def form_collection_select(f, *args)
+    args << {} if args.length < 5
     render partial: "form_collection_select", locals: {f: f, args: args}
   end
 

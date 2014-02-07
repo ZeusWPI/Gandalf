@@ -9,7 +9,7 @@
       <div class="modal-body">
         <%= form_text_field f, :name %>
         <%= form_text_field f, :email %>
-        <%# <%= form_collection_select f, :access_levels, @event.access_levels, :id, :name %1> %>
+        <%= form_collection_select f, :access_levels, @event.access_levels, :id, :name, {include_blank: true} %>
       </div>
       <div class="modal-footer">
         <%= f.button :submit, class: 'btn btn-group btn-primary' %>

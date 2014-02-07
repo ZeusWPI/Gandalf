@@ -6,9 +6,9 @@ class RegistrationsGrid
   end
 
   # We use the lower() instead of ilike because SQLite dev doesn't like ilike
-  filter(:name) { |value| where("lower(?) like lower(?)", :name, "%#{value}%") }
-  filter(:email) { |value| where("lower(?) like lower(?)", :email, "%#{value}%") }
-  # filter(:access_levels)
+  filter(:name) { |value| where("lower(?) like ?", :name, "%#{value.downcase}%") }
+  filter(:email) { |value| where("lower(?) like ?", :email, "%#{value.downcase}%") }
+  filter(:access_levels)
 
   column(:name)
   column(:email)
