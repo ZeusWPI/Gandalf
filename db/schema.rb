@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206092248) do
+ActiveRecord::Schema.define(version: 20140206154613) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140206092248) do
     t.boolean  "public",      default: true
     t.boolean  "has_comment"
     t.boolean  "hidden"
+    t.boolean  "member_only"
   end
 
   add_index "access_levels", ["event_id"], name: "index_access_levels_on_event_id"

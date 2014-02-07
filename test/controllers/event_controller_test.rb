@@ -98,4 +98,35 @@ class EventControllerTest < ActionController::TestCase
       assert_select "td", "1234567891231"
     end
   end
+
+
+  test "member tickets should not be shown for wrong user" do
+    sign_out users(:tom)
+    get :show, id: events(:codenight).id
+    assert_response :success
+
+    assert assigns(:event)
+    assert_select "#registration_access_levels" do
+      assert_select "option", count: 1, text: "Lid"
+      assert_select "option", count: 1, text: "Unlimited"
+      assert_select "option", count: 0, text: "Member Only"
+    end
+  end
+
+  test "member tickets should be shown for enrolled user" do
+    sign_out users(:tom)
+    sign_in users(:matthias)
+    assert users(:matthias).enrolled_clubs.include? clubs(:zeus)
+    get :show, id: events(:codenight).id
+
+    assert_response :success
+
+    assert_select "#registration_access_levels" do
+      assert_select "option", count: 1, text: "Lid"
+      assert_select "option", count: 1, text: "Unlimited"
+      assert_select "option", count: 1, text: "Member"
+    end
+
+  end
+
 end

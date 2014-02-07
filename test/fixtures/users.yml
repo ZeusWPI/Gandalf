@@ -44,3 +44,5 @@ toon:
 
 matthias:
   username: mjhertho
+  enrolled_clubs:
+    - zeus
