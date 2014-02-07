@@ -14,9 +14,8 @@
     <%= bootstrap_pagination @registrations %>
     <table class="table table-striped table-hover" id="table-registrations">
       <%= datagrid_header @registrationsgrid %>
-      <%= datagrid_rows @registrationsgrid, @registrations, html: { class: 'registration', id: 'blargh' }  %>
+      <%= datagrid_rows @registrationsgrid, @registrations %>
     </table>
-    <%# <%= datagrid_table @registrationsgrid, @registrations, html: { class: 'table table-striped' } %1> %>
     <%= bootstrap_pagination @registrations %>
   </div>
 </div>
