@@ -26,7 +26,7 @@ ready = ->
 
   hideCommentFieldIfNeeded = (value) ->
     val = parseInt(value)
-    if (window.ticketsWithComments.indexOf(val) == -1)
+    if (window.ticketsWithComments && window.ticketsWithComments.indexOf(val) == -1)
       $("#registration_comment").parent().hide();
     else
       $("#registration_comment").parent().show();
