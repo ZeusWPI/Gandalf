@@ -131,7 +131,14 @@ class EventControllerTest < ActionController::TestCase
 
   test "registration form hidden when only member or hidden tickets available" do
     get :show, id: events(:twaalfurenloop).id
-    assert_select "#basic-registration_form", false, "Should not contain registration form"
+    assert_select "#basic-registration-form", false, "Should not contain registration form"
+
+    get :show, id: events(:codenight).id
+
+    ability = Ability.new(users(:tom))
+
+    puts ability.can? :register, events(:codenight) and not events(:codenight).access_levels.find_all { |al| ability.can? :register, al }.blank?
+    assert_select "#basic-registration-form", true, "Should contain registration form"
   end
 
 end

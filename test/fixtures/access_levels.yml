@@ -49,6 +49,7 @@ hidden:
   name: Hidden
   event_id: 3
   price: 0
+  hidden: true
 
 member_only:
   id: 6
