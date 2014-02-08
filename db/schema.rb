@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 20140206154613) do
     t.string   "export_content_type"
     t.integer  "export_file_size"
     t.datetime "export_updated_at"
-    t.string   "export_status"
     t.boolean  "show_statistics"
+    t.string   "export_status"
     t.integer  "club_id"
     t.boolean  "registration_open",       default: true
   end
@@ -138,8 +138,8 @@ ActiveRecord::Schema.define(version: 20140206154613) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
-    t.string   "student_number"
     t.integer  "paid"
+    t.string   "student_number"
     t.integer  "price"
     t.datetime "checked_in_at"
     t.text     "comment"
