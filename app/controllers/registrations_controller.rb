@@ -90,6 +90,8 @@ class RegistrationsController < ApplicationController
     @registration.update params.require(:registration).permit(:to_pay)
     if @registration.is_paid
       RegistrationMailer.ticket(@registration).deliver
+    else
+      RegistrationMailer.confirm_registration(@registration).deliver
     end
     respond_with @registration
   end
@@ -148,6 +150,8 @@ class RegistrationsController < ApplicationController
 
         if registration.is_paid
           RegistrationMailer.ticket(registration).deliver
+        else
+          RegistrationMailer.confirm_registration(registration).deliver
         end
 
         counter += 1
