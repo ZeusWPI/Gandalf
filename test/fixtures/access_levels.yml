@@ -35,12 +35,28 @@ two:
   event_id: 2
   price: 10
 
+
 # Capacity stuff testing
 unlimited:
   id: 3
   name: Unlimited
   event_id: 1
   price: 0
+
+# Can can testing
+hidden:
+  id: 5
+  name: Hidden
+  event_id: 3
+  price: 0
+  hidden: true
+
+member_only:
+  id: 6
+  name: Member Only
+  event_id: 3
+  price: 0
+  member_only: true
 
 <% 3.times do |n| %>
 limited_<%= n %>:

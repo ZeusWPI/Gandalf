@@ -50,3 +50,14 @@ galabal:
   description: Super awesome galabal
   club: fk
   bank_number: 55
+
+twaalfurenloop:
+  id: 3
+  name: 12urenloop
+  contact_email: info@12urenloop.be
+  start_date: 2014-04-25 10:00:00
+  end_date: 2014-04-26 2:00:00
+  location: Sint-Pietersplein
+  website: 12urenloop.be
+  description: rondjes lopeuh!
+  club: fk

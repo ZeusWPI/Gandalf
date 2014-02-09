@@ -129,4 +129,13 @@ class EventControllerTest < ActionController::TestCase
 
   end
 
+  test "registration form hidden when only member or hidden tickets available" do
+    get :show, id: events(:twaalfurenloop).id
+    assert_select "#basic-registration-form", false, "Should not contain registration form"
+  end
+
+  test "registration form shown when a ticket is available" do
+    get :show, id: events(:codenight).id
+    assert_select "#basic-registration-form", true, "Should contain registration form"
+  end
 end
