@@ -145,6 +145,11 @@ class RegistrationsController < ApplicationController
 
         registration.paid += amount
         registration.save
+
+        if registration.is_paid
+          RegistrationMailer.ticket(registration).deliver
+        end
+
         counter += 1
       end
 
