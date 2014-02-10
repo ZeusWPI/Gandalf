@@ -89,6 +89,9 @@ gem 'capistrano-rvm'
 # Stubbing http requests
 gem 'webmock', require: false
 
+# export to ical
+gem 'ri_cal'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
