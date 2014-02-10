@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
 
-  respond_to :html, :js
+  respond_to :html, :js, :ics
 
   def index
     @events = Event.where('end_date > ?', DateTime.now).order(:name)
