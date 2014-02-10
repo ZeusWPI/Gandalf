@@ -90,6 +90,8 @@ class RegistrationsController < ApplicationController
     @registration.update params.require(:registration).permit(:to_pay)
     if @registration.is_paid
       RegistrationMailer.ticket(@registration).deliver
+    else
+      RegistrationMailer.confirm_registration(@registration).deliver
     end
     respond_with @registration
   end
@@ -120,7 +122,7 @@ class RegistrationsController < ApplicationController
         match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F/.match(row.to_s)
         next unless match # seems like this is not a Gandalf transfer.
 
-        registration = Registration.find_by_id match[:id]
+        registration = @event.registrations.find_by_id match[:id]
 
         # If the registration doesn't exist
         if registration.nil?
@@ -145,6 +147,13 @@ class RegistrationsController < ApplicationController
 
         registration.paid += amount
         registration.save
+
+        if registration.is_paid
+          RegistrationMailer.ticket(registration).deliver
+        else
+          RegistrationMailer.confirm_registration(registration).deliver
+        end
+
         counter += 1
       end
 
