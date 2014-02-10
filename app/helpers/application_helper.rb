@@ -37,7 +37,10 @@ module ApplicationHelper
   end
 
   def form_collection_select(f, *args)
+    # This line enable passing optional arguments such as include_blank to the
+    # partial. If nothing is passed, an empty options hash is appended.
     args << {} if args.length < 5
+
     render partial: "form_collection_select", locals: {f: f, args: args}
   end
 
