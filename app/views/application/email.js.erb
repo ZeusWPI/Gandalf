@@ -1,0 +1,8 @@
+$("#feedback-form").html('<%= j render partial: 'application/feedback_success' %>');
+setTimeout(function() {
+  $('#feedback-modal').modal('hide');
+}, 2000);
+
+$('#feedback-modal').on('hidden.bs.modal', function (e) {
+  $("#feedback-modal").replaceWith('<%= j render partial: 'application/feedback_modal' %>');
+})

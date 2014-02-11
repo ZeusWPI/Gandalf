@@ -42,6 +42,9 @@
           </div>
 
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to "Send feedback", '#', 'data-toggle' => 'modal', 'data-target' => '#feedback-modal' %>
+            </li>
             <% if can? :crud, Event %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
@@ -87,5 +90,6 @@
     </footer>
   </div> <!-- /container -->
 
+  <%= render partial: 'application/feedback_modal' %>
 </body>
 </html>
