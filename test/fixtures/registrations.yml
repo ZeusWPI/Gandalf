@@ -29,6 +29,7 @@ one:
   event_id: 1
   paid: 0
   price: 0
+  random_check: 9458098234
 
 two:
   id: 2
@@ -40,6 +41,7 @@ two:
   event_id: 2
   paid: 5
   price: 10
+  random_check: 3264625368
 
 three:
   id: 3
@@ -50,6 +52,7 @@ three:
   event_id: 1
   paid: 0
   price: 20
+  random_check: 39840256920
 
 <% 9.times do |n| %>
 capacity_registration_<%= n %>:
@@ -60,4 +63,5 @@ capacity_registration_<%= n %>:
   paid: 0
   price: 0
   student_number: <%= 100 + n %>
+  random_check: <%= 1928347019 + n %>
 <% end %>
