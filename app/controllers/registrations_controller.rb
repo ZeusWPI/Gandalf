@@ -119,7 +119,7 @@ class RegistrationsController < ApplicationController
 
     begin
       CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
-        match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F/.match(row.to_s)
+        match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F(?<rand>\d+)/.match(row.to_s)
         next unless match # seems like this is not a Gandalf transfer.
 
         registration = @event.registrations.find_by_id match[:id]
