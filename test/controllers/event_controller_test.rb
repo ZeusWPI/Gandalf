@@ -75,6 +75,18 @@ class EventControllerTest < ActionController::TestCase
     assert(flash[:warning].include? "Person already checked in")
   end
 
+  test "show unpaid for checked in unpaid tickets" do
+    reg = registrations(:one)
+    reg.checked_in_at = Time.now
+    reg.price = 10
+    reg.save
+
+    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    assert_response :success
+    assert_nil(@registration)
+    assert(flash[:warning].include? "Person has not paid yet!")
+  end
+
   test "dont find registrations from other event" do
     post :check_in, id: events(:codenight).id, code: '2222222222222'
     assert_response :success
