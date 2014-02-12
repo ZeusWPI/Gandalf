@@ -13,10 +13,12 @@
     <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
   <% end %>
   <td>
-    <%= link_to raw(visibility_icon(access_level)), toggle_visibility_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
-    <% unless access_level.registrations.any? %>
-      <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
-      <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-danger', confirm: 'Are you sure?', remote: true, method: :delete %>
-    <% end %>
+    <div class="nowrap">
+      <%= link_to raw(visibility_icon(access_level)), toggle_visibility_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
+      <% unless access_level.registrations.any? %>
+        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
+        <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-danger', confirm: 'Are you sure?', remote: true, method: :delete %>
+      <% end %>
+    </div<
   </td>
 </tr>
