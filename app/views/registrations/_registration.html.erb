@@ -4,26 +4,9 @@
   <td><%= registration.access_levels.first.try :name %></td>
   <td><%= registration.payment_code %></td>
   <td>
-    <%= form_for [registration.event, registration], method: :patch, remote: true, html: { class: 'inline-form' } do |f| %>
-
-      <div class="input-group input-group-sm <%= f.object.is_paid ? 'has-success' : 'has-error' %>">
-        <span class="input-group-addon">&euro;</span>
-        <%= f.text_field :to_pay, value: number_with_precision(f.object.to_pay, precision: 2), disabled: true, class: 'disabling registration-paid form-control' %>
-        <%= f.hidden_field :price, value: number_with_precision(f.object.price, precision: 2), disabled: true, class: 'registration-price' %>
-        <span class="input-group-addon">
-          <%= check_box_tag 'is_paid', '1', f.object.is_paid, class: 'disabling registration-box input-append', disabled: true %>
-        </span>
-        <span class="input-group-btn">
-          <button class="btn btn-default registration-lock" type="button">
-            <span class="glyphicon glyphicon-lock"></span>
-          </button>
-        </span>
-      </div>
-    <% end %>
+    <%= render partial: 'registration_payment_form', locals: { registration: registration } %>
   </td>
   <td>
-    <%= link_to raw('<i class="glyphicon glyphicon-comment"></i> Info'), info_event_registration_path(registration.event, registration), class: 'btn btn-xs btn-default', remote: true unless registration.comment.blank? %>
-    <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend'), resend_event_registration_path(registration.event, registration), class: 'btn btn-xs btn-default', remote: true %>
-    <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_registration_path(registration.event, registration), class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?' }, remote: true, method: :delete %>
+    <%= render partial: 'registration_actions', locals: { registration: registration } %>
   </td>
 <% end %>
