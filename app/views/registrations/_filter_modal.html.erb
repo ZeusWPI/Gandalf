@@ -12,9 +12,9 @@
         <%= form_collection_select f, :access_level, @event.access_levels, :id, :name, {include_blank: true} %>
       </div>
       <div class="modal-footer">
-        <%= f.button :submit, class: 'btn btn-group btn-primary' %>
         <%= link_to "Reset", event_registrations_path(@event), class: 'btn btn-group btn-default' %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit "Filter", class: 'btn btn-group btn-primary' %>
       </div>
       <% end %>
     </div>
