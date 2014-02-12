@@ -90,6 +90,9 @@ class RegistrationsController < ApplicationController
     @registration.update params.require(:registration).permit(:to_pay)
     if @registration.is_paid
       RegistrationMailer.ticket(@registration).deliver
+      if @registration.paid > @registration.price
+        RegistrationMailer.notify_overpayment(@registration).deliver
+      end
     else
       RegistrationMailer.confirm_registration(@registration).deliver
     end

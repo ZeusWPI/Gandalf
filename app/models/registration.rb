@@ -72,7 +72,7 @@ class Registration < ActiveRecord::Base
   end
 
   def is_paid
-    self.price == self.paid
+    self.price <= self.paid
   end
 
   def payment_code

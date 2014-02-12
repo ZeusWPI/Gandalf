@@ -120,7 +120,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     to_pay = -5
 
     [three, four].each do |registration|
-      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+      assert_difference "ActionMailer::Base.deliveries.size", +2 do
         xhr :put, :update, {
           event_id: registration.event.id,
           id: registration.id,
@@ -128,8 +128,12 @@ class RegistrationsControllerTest < ActionController::TestCase
         }, remote: true
       end
       assert registration.price < registration.reload.paid
-      email = ActionMailer::Base.deliveries.last
-      assert_match(/Registration for/, email.subject)
+
+      email = ActionMailer::Base.deliveries[-2]
+      assert_match(/Ticket for/, email.subject)
+
+      email = ActionMailer::Base.deliveries[-1]
+      assert_match(/Overpayment for/, email.subject)
     end
 
   end
