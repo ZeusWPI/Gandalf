@@ -63,4 +63,79 @@ class RegistrationsControllerTest < ActionController::TestCase
     email = ActionMailer::Base.deliveries.last
     assert_match(/Ticket for/, email.subject)
   end
+
+  test "manual full paying works" do
+    three = registrations(:three)
+    four = registrations(:four)
+    
+    assert_equal 0, three.paid
+    assert_equal 0.05, four.paid
+
+    [three, four].each do |registration|
+      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+        xhr :put, :update, {
+          event_id: registration.event.id,
+          id: registration.id,
+          registration: { to_pay: 0 }
+        }, remote: true
+      end
+      assert_equal registration.price, registration.reload.paid
+      email = ActionMailer::Base.deliveries.last
+      assert_match(/Ticket for/, email.subject)
+    end
+
+  end
+
+  test "manual partial paying works" do
+    three = registrations(:three)
+    four = registrations(:four)
+    
+    assert_equal 0, three.paid
+    assert_equal 0.05, four.paid
+
+    to_pay = 0.01
+
+    [three, four].each do |registration|
+      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+        xhr :put, :update, {
+          event_id: registration.event.id,
+          id: registration.id,
+          registration: { to_pay: to_pay }
+        }, remote: true
+      end
+      assert registration.price > registration.reload.paid
+      email = ActionMailer::Base.deliveries.last
+      assert_match(/Registration for/, email.subject)
+    end
+
+  end
+
+  test "manual overpaying works" do
+    three = registrations(:three)
+    four = registrations(:four)
+    
+    assert_equal 0, three.paid
+    assert_equal 0.05, four.paid
+
+    to_pay = -5
+
+    [three, four].each do |registration|
+      assert_difference "ActionMailer::Base.deliveries.size", +2 do
+        xhr :put, :update, {
+          event_id: registration.event.id,
+          id: registration.id,
+          registration: { to_pay: to_pay }
+        }, remote: true
+      end
+      assert registration.price < registration.reload.paid
+
+      email = ActionMailer::Base.deliveries[-2]
+      assert_match(/Ticket for/, email.subject)
+
+      email = ActionMailer::Base.deliveries[-1]
+      assert_match(/Overpayment for/, email.subject)
+    end
+
+  end
+
 end

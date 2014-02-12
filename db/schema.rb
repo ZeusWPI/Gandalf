@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206154613) do
+ActiveRecord::Schema.define(version: 20140210141746) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 20140206154613) do
     t.datetime "checked_in_at"
     t.text     "comment"
     t.string   "barcode_data"
+    t.integer  "random_check",   limit: 1023
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"

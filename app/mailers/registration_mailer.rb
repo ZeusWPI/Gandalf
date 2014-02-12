@@ -18,4 +18,9 @@ class RegistrationMailer < ActionMailer::Base
     mail to: "#{registration.name} <#{registration.email}>", subject: "Ticket for #{registration.event.name}"
   end
 
+  def notify_overpayment(registration)
+    @registration = registration
+    mail to: "#{registration.name} <#{registration.email}>", subject: "Overpayment for #{registration.event.name}"
+  end
+
 end

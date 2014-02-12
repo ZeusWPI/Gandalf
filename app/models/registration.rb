@@ -28,6 +28,14 @@ class Registration < ActiveRecord::Base
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  # We change the random check before each save.
+  # This should make it unique enough for checking the counts.
+  before_save do |record|
+    old = record.random_check
+    record.random_check = rand(10 ** 15) while record.random_check == old
+  end
+
+
   after_save do |record|
     record.access_levels.each do |access_level|
       if access_level.capacity != nil and access_level.registrations.count > access_level.capacity
@@ -64,12 +72,12 @@ class Registration < ActiveRecord::Base
   end
 
   def is_paid
-    self.price == self.paid
+    self.price <= self.paid
   end
 
   def payment_code
     base = "GAN#{self.event.id}D#{self.id}A#{(self.event.id + self.id) % 9}L"
-    base += (base.sum % 99).to_s + 'F'
+    base += "#{base.sum % 99}F#{self.random_check}"
   end
 
   def generate_barcode

@@ -29,6 +29,7 @@ one:
   event_id: 1
   paid: 0
   price: 0
+  random_check: 9458098234
 
 two:
   id: 2
@@ -40,24 +41,41 @@ two:
   event_id: 2
   paid: 5
   price: 10
+  random_check: 3264625368
 
 three:
   id: 3
-  barcode: 12345
+  barcode: 012345678901
+  barcode_data: 012345678901
   name: Felix Van der Jeugt
   email: felix.vanderjeugt@gmail.com
   student_number: 3
   event_id: 1
   paid: 0
   price: 20
+  random_check: 39840256920
+
+four:
+  id: 4
+  barcode: 012345678902
+  barcode_data: 012345678902
+  name: Felix Van der Jeugd
+  email: felix.vanderjeugd@gmail.com
+  student_number: 4
+  event_id: 1
+  paid: 5
+  price: 10
+  random_check: 3944056920
 
 <% 9.times do |n| %>
 capacity_registration_<%= n %>:
   id: <%= 100 + n %>
-  barcode: 1234
+  barcode: 123456789123
+  barcode_data: 123456789123
   email: capacity@test.com
   name: Capacity Tester <%= n %>
   paid: 0
   price: 0
   student_number: <%= 100 + n %>
+  random_check: <%= 1928347019 + n %>
 <% end %>
