@@ -8,8 +8,16 @@ class RegistrationsController < ApplicationController
 
   def index
     @event = Event.find params.require(:event_id)
+
     authorize! :read, @event
-    @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
+
+    # Fuck this scope for now on
+    @registrationsgrid = RegistrationsGrid.new(params[:registrations_grid]) do |scope|
+      scope.where(event_id: @event.id)
+    end
+
+    @registrations = @registrationsgrid.assets
+    @registrations = @registrations.paginate(page: params[:page], per_page: 25)
   end
 
   def new
