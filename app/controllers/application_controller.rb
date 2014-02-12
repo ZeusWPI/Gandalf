@@ -19,8 +19,4 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || root_path
   end
 
-  def email
-    FeedbackMailer.general_message(params['email']['from'], "gandalf@zeus.ugent.be", "[Gandalf Feedback] #{params['email']['subject']}", params['email']['body']).deliver
-  end
-
 end
