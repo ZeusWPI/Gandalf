@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20140210141746) do
     t.datetime "checked_in_at"
     t.text     "comment"
     t.string   "barcode_data"
-    t.integer  "random_check",   limit: 8
+    t.integer  "random_check"
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
