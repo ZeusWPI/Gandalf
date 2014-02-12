@@ -24,6 +24,6 @@
   <td>
     <%= link_to raw('<i class="glyphicon glyphicon-comment"></i> Info'), info_event_registration_path(registration.event, registration), class: 'btn btn-xs btn-default', remote: true unless registration.comment.blank? %>
     <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend'), resend_event_registration_path(registration.event, registration), class: 'btn btn-xs btn-default', remote: true %>
-    <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_registration_path(registration.event, registration), class: 'btn btn-xs btn-danger', confirm: 'Are you sure?', remote: true, method: :delete %>
+    <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_registration_path(registration.event, registration), class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?' }, remote: true, method: :delete %>
   </td>
 <% end %>
