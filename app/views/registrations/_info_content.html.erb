@@ -1,0 +1,25 @@
+<% unless @registration.comment.blank? %>
+  <h4>Comment</h4>
+  <%= @registration.comment %>
+  <br />
+  <br />
+<% end %>
+
+
+<h4>Changes</h4>
+<table class="table table-responsive table-striped">
+  <tr>
+    <th>Action</th>
+    <th>By</th>
+    <th>At</th>
+    <th>Details</th>
+  </tr>
+  <% @registration.versions.each do |version| %>
+    <tr>
+    <td><%= version.event %></td>
+    <td><%= User.find(version.whodunnit).display_name %></td>
+    <td><%= nice_time version.created_at %></td>
+    <td><%= version.changeset %></td>
+  </tr>
+<% end %>
+</table>

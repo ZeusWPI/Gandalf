@@ -1,2 +1,2 @@
-$('#info-modal #info-comment').html("<%= @registration.comment %>")
-$('#info-modal').modal('show')
+$('#info-modal .modal-body').html("<%= j render partial: 'registrations/info_content' %>");
+$('#info-modal').modal('show');

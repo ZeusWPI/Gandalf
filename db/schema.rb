@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213103501) do
+ActiveRecord::Schema.define(version: 20140213122608) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20140213103501) do
     t.datetime "checked_in_at"
     t.text     "comment"
     t.string   "barcode_data"
-    t.integer  "random_check"
+    t.integer  "random_check",   limit: 8
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
@@ -191,12 +191,13 @@ ActiveRecord::Schema.define(version: 20140213103501) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 
   create_table "versions", force: true do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.string   "event",      null: false
+    t.string   "item_type",      null: false
+    t.integer  "item_id",        null: false
+    t.string   "event",          null: false
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
+    t.text     "object_changes"
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
