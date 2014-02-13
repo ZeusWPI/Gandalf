@@ -126,6 +126,9 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
     orm_adapter (0.4.0)
+    paper_trail (3.0.0)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -264,6 +267,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   mysql2
+  paper_trail
   paperclip (~> 3.0)
   puma
   rails (= 4.0.0)

@@ -53,6 +53,8 @@ gem 'devise_cas_authenticatable'
 gem 'cancan'
 gem 'httparty'
 
+# Logging is awesome, and paper_trail even more
+gem 'paper_trail'
 
 group :production, :deployment do
   gem 'puma'
