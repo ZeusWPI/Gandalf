@@ -9,8 +9,8 @@ module ApplicationHelper
     f.try { |d| d.strftime("%Y-%m-%d %H:%M") }
   end
 
-  def nice_changeset(c)
-    c
+  def euro(f)
+    "€#{number_with_precision f, precision: 2}"
   end
 
   # Form helpers

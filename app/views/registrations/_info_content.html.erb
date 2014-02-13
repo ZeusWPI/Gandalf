@@ -16,10 +16,16 @@
   </tr>
   <% @registration.versions.each do |version| %>
     <tr>
-    <td><%= version.event %></td>
-    <td><%= User.find(version.whodunnit).display_name %></td>
-    <td><%= nice_time version.created_at %></td>
-    <td><%= nice_changeset version.changeset %></td>
-  </tr>
-<% end %>
+      <td><%= version.event %></td>
+      <td><%= User.find(version.whodunnit).display_name %></td>
+      <td><%= nice_time version.created_at %></td>
+      <td>
+        <ul class="no-margin no-padding">
+          <% version.changeset.each do |name, change| %>
+            <%= raw("<li>#{nice_changeset(name, change)}</li>") unless version.event == 'create' %>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
 </table>
