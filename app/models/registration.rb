@@ -29,7 +29,7 @@ class Registration < ActiveRecord::Base
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  has_paper_trail
+  has_paper_trail only: [:paid, :random_check, :checked_in_at]
 
   # We change the random check before each save.
   # This should make it unique enough for checking the counts.

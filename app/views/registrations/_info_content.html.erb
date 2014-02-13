@@ -19,7 +19,7 @@
     <td><%= version.event %></td>
     <td><%= User.find(version.whodunnit).display_name %></td>
     <td><%= nice_time version.created_at %></td>
-    <td><%= version.changeset %></td>
+    <td><%= nice_changeset version.changeset %></td>
   </tr>
 <% end %>
 </table>
