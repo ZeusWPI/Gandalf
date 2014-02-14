@@ -9,12 +9,13 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer
-#  student_number :string(255)
 #  paid           :integer
+#  student_number :string(255)
 #  price          :integer
 #  checked_in_at  :datetime
 #  comment        :text
 #  barcode_data   :string(255)
+#  random_check   :integer
 #
 
 class Registration < ActiveRecord::Base
@@ -27,6 +28,8 @@ class Registration < ActiveRecord::Base
   validates :student_number, presence: true, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  has_paper_trail only: [:paid, :random_check, :checked_in_at]
 
   # We change the random check before each save.
   # This should make it unique enough for checking the counts.
