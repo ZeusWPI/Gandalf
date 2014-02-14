@@ -7,9 +7,7 @@ module RegistrationsHelper
     when 'checked_in_at'
       "Checked in at #{nice_time change[1]}"
     when 'random_check'
-      base = "GAN#{@registration.event_id}D#{@registration.id}A#{(@registration.event_id + @registration.id) % 9}L"
-      base += "#{base.sum % 99}F#{change[1]}"
-      "Payment code updated to #{base}"
+      "Payment code updated to #{change[1]}"
     end
   end
 

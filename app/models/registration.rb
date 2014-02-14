@@ -15,7 +15,7 @@
 #  checked_in_at  :datetime
 #  comment        :text
 #  barcode_data   :string(255)
-#  random_check   :integer
+#  payment_code   :string(255)
 #
 
 class Registration < ActiveRecord::Base

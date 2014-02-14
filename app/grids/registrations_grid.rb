@@ -9,6 +9,7 @@ class RegistrationsGrid
   filter(:name) { |value| where("lower(?) like ?", :name, "%#{value.downcase}%") }
   filter(:email) { |value| where("lower(?) like ?", :email, "%#{value.downcase}%") }
   filter(:access_level) { |value, scope| scope.joins(:access_levels).where(access_levels: { id: value }) }
+  filter(:payment_code) { |value| where("lower(?) like ?", :payment_code, "%#{value.downcase}%") }
   filter(:only_paid) { |value| where("paid = price")  if value == '1' }
   filter(:only_unpaid) { |value| where.not("paid = price")  if value == '1' }
 
@@ -19,7 +20,7 @@ class RegistrationsGrid
   }) do |registration|
     registration.access_levels.first.try :name
   end
-  column(:payment_code, order: "event_id, id, event_id+id, random_check")
+  column(:payment_code)
   column(:to_pay, html: true, order: "price-paid", descending: true) do |registration|
     render partial: 'registration_payment_form', locals: { registration: registration }
   end
