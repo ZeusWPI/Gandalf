@@ -130,20 +130,11 @@ class RegistrationsController < ApplicationController
 
     begin
       CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
-        match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F(?<rand>\d+)/.match(row.to_s)
-        next unless match # seems like this is not a Gandalf transfer.
 
-        registration = @event.registrations.find_by_id match[:id]
-
+        code, registration = Registration.search_payment_code(row.to_s)
         # If the registration doesn't exist
         if registration.nil?
-          fails << row
-          next
-        end
-
-        # if it's not a real code, FAIL
-        unless registration.payment_code == match.to_s
-          fails << row
+          fails << row if code
           next
         end
 

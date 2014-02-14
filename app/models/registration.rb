@@ -27,14 +27,7 @@ class Registration < ActiveRecord::Base
   validates :student_number, presence: true, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-
-  # We change the random check before each save.
-  # This should make it unique enough for checking the counts.
-  before_save do |record|
-    old = record.random_check
-    record.random_check = rand(10 ** 15) while record.random_check == old
-  end
-
+  validates :payment_code, presence: true, uniqueness: true
 
   after_save do |record|
     record.access_levels.each do |access_level|
@@ -61,6 +54,7 @@ class Registration < ActiveRecord::Base
 
   def to_pay=(value)
     self.paid = self.price - (to_cents(value) / 100.0)
+    renew_payment_code
   end
 
   def price
@@ -75,16 +69,20 @@ class Registration < ActiveRecord::Base
     self.price <= self.paid
   end
 
-  def payment_code
-    base = "GAN#{self.event.id}D#{self.id}A#{(self.event.id + self.id) % 9}L"
-    base += "#{base.sum % 99}F#{self.random_check}"
-  end
-
   def generate_barcode
     self.barcode_data = 12.times.map { SecureRandom.random_number(10) }.join
     calculated_barcode = Barcodes.create('EAN13', data: self.barcode_data)
     self.barcode = calculated_barcode.caption_data
     self.save!
+  end
+
+  def self.search_payment_code(string)
+    match = /GAN\d+/.match(string)
+    if match
+      return true, Registration.find_by_payment_code(match[0])
+    else
+      return false, nil
+    end
   end
 
   private
@@ -96,6 +94,12 @@ class Registration < ActiveRecord::Base
   def to_cents(value)
     if value.is_a? String then value.sub!(',', '.') end
     (value.to_f * 100).to_int
+  end
+
+  def renew_payment_code
+    random = rand(10**15)
+    check = random % 99
+    self.payment_code = sprintf("GAN%02d%015d", check, random)
   end
 
 end

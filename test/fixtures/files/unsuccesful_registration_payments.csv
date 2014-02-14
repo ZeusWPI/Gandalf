@@ -1,6 +1,6 @@
 Description;Amount
 Not a code;17.00
-Fail Non-existing GAN0D3A4L80F39840256920;1,00
-Fail Check-sum GAN1D3A4L81F39840256920;1,02
-Fail Not even money GAN1D3A4L80F39840256920;hello
-Should be succes GAN1D3A4L80F39840256920;0,01
+Fail Non-existing GAN40256920891;1,00
+Fail Check-sum GAN7239840256920891;1,02
+Fail Not even money GAN7539840256920891;hello
+Should be succes GAN7539840256920891;0,01
