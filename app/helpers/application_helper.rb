@@ -1,5 +1,6 @@
 module ApplicationHelper
 
+  # Prettify helpers
   def nice_time(f)
     f.try { |d| d.strftime("%a %d %b %Y %H:%M") }
   end
@@ -8,6 +9,11 @@ module ApplicationHelper
     f.try { |d| d.strftime("%Y-%m-%d %H:%M") }
   end
 
+  def euro(f)
+    "&euro;#{number_with_precision f, precision: 2}"
+  end
+
+  # Form helpers
   def form_errors(object)
     render partial: "form_errors", locals: {object: object}
   end
@@ -48,6 +54,7 @@ module ApplicationHelper
     render partial: "form_check_box", locals: {f: f, tag: tag}
   end
 
+  # Pagination
   def bootstrap_pagination(collection)
     render partial: "bootstrap_pagination", locals: {collection: collection}
   end

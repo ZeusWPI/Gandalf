@@ -9,12 +9,13 @@
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer
-#  student_number :string(255)
 #  paid           :integer
+#  student_number :string(255)
 #  price          :integer
 #  checked_in_at  :datetime
 #  comment        :text
 #  barcode_data   :string(255)
+#  random_check   :integer
 #
 
 class Registration < ActiveRecord::Base
@@ -28,6 +29,8 @@ class Registration < ActiveRecord::Base
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true
+
+  has_paper_trail only: [:paid, :random_check, :checked_in_at]
 
   after_save do |record|
     record.access_levels.each do |access_level|

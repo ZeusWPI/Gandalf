@@ -9,6 +9,8 @@
       <div class="modal-body">
         <%= form_text_field f, :name %>
         <%= form_text_field f, :email %>
+        <%= form_check_box f, :only_paid %>
+        <%= form_check_box f, :only_unpaid %>
         <%= form_collection_select f, :access_level, @event.access_levels, :id, :name, {include_blank: true} %>
       </div>
       <div class="modal-footer">
