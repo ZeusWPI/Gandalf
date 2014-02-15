@@ -6,9 +6,10 @@ class RegistrationsGrid
   end
 
   # We use the lower() instead of ilike because SQLite dev doesn't like ilike
-  filter(:name) { |value| where("lower(?) like ?", :name, "%#{value.downcase}%") }
-  filter(:email) { |value| where("lower(?) like ?", :email, "%#{value.downcase}%") }
+  filter(:name) { |value| where("lower(registrations.name) like ?", "%#{value.downcase}%") }
+  filter(:email) { |value| where("lower(registrations.email) like ?", "%#{value.downcase}%") }
   filter(:access_level) { |value, scope| scope.joins(:access_levels).where(access_levels: { id: value }) }
+  filter(:payment_code) { |value| where("registrations.payment_code like ?","%#{value}%") }
   filter(:only_paid) { |value| where("paid = price")  if value == '1' }
   filter(:only_unpaid) { |value| where.not("paid = price")  if value == '1' }
 
@@ -19,8 +20,8 @@ class RegistrationsGrid
   }) do |registration|
     registration.access_levels.first.try :name
   end
-  column(:payment_code, order: "event_id, id, event_id+id, random_check")
-  column(:to_pay, html: true, order: "price-paid", descending: true) do |registration|
+  column(:payment_code)
+  column(:to_pay, html: true, order: "registrations.price - paid", descending: true) do |registration|
     render partial: 'registration_payment_form', locals: { registration: registration }
   end
   column(:actions, html: true) do |registration|
