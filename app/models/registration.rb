@@ -101,7 +101,7 @@ class Registration < ActiveRecord::Base
 
   def renew_payment_code
     random = rand(10**15)
-    check = random % 99
+    check = random % 97
     self.payment_code = sprintf("GAN%02d%015d", check, random)
   end
 
