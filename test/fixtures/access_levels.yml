@@ -44,6 +44,15 @@ unlimited:
   event_id: 1
   price: 0
 
+<% 3.times do |n| %>
+limited_<%= n %>:
+  id: <%= 100 + n %>
+  name: <%= "Limited#{n}" %>
+  price: 0
+  event_id: 1
+  capacity: <%= 3 + n %>
+<% end %>
+
 # Can can testing
 hidden:
   id: 5
@@ -59,11 +68,3 @@ member_only:
   price: 0
   member_only: true
 
-<% 3.times do |n| %>
-limited_<%= n %>:
-  id: <%= 100 + n %>
-  name: <%= "Limited#{n}" %>
-  price: 0
-  event_id: 1
-  capacity: <%= 3 + n %>
-<% end %>
