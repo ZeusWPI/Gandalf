@@ -1,4 +1,5 @@
 <div id="basic-registration-form">
+  <p>
   <%= form_errors @registration %>
   <%= render partial: 'flash' %>
 
@@ -14,4 +15,10 @@
     <% end %>
     <%= f.submit "Register", class: 'btn btn-group btn-primary' %>
   <% end %>
+  </p>
+
+  <div class="well well-sm">
+    Payments can be done by bank transfer, <strong>not by credit card</strong>.
+  </div>
+
 </div>
