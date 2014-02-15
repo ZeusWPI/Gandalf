@@ -30,7 +30,7 @@ class Registration < ActiveRecord::Base
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true
 
-  has_paper_trail only: [:paid, :random_check, :checked_in_at]
+  has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
   after_save do |record|
     record.access_levels.each do |access_level|
