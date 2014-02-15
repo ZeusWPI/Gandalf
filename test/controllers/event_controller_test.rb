@@ -150,4 +150,19 @@ class EventControllerTest < ActionController::TestCase
     get :show, id: events(:codenight).id
     assert_select "#basic-registration-form", true, "Should contain registration form"
   end
+
+  test "do statistics" do
+    date = "#{Date.today}"
+    get :statistics, { id: 1 }
+    assert_response :success
+    assert assigns(:data) == [
+      { name: "Lid",       data: { date => 1 } },
+      { name: "Limited0",  data: { date => 3 } },
+      { name: "Limited1",  data: { date => 3 } },
+      { name: "Limited2",  data: { date => 3 } },
+      { name: "Member",    data: { date => 0 } },
+      { name: "Unlimited", data: { date => 0 } }
+    ]
+  end
+
 end
