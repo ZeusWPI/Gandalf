@@ -20,6 +20,7 @@ class Ability
     # Admins can do anything!
     if user.admin?
       can :manage, Event
+      can :manage, Registration
     end
 
     # add register permission
