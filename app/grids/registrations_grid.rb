@@ -20,7 +20,7 @@ class RegistrationsGrid
     registration.access_levels.first.try :name
   end
   column(:payment_code, order: "event_id, id, event_id+id, random_check")
-  column(:to_pay, html: true, order: "price-paid", descending: true) do |registration|
+  column(:to_pay, html: true, order: "registrations.price - paid", descending: true) do |registration|
     render partial: 'registration_payment_form', locals: { registration: registration }
   end
   column(:actions, html: true) do |registration|
