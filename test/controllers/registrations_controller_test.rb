@@ -138,6 +138,28 @@ class RegistrationsControllerTest < ActionController::TestCase
 
   end
 
+  test "basic registration" do
+
+    # setting up data
+    galabal = events(:galabal)
+    posthash = {
+      event_id: galabal.id,
+      registration: {
+        access_levels: 2,
+        email: "a@b.c",
+        name: "Ab Cd",
+        student_number: 123,
+        comment: ""
+      }
+    }
+
+    assert_difference "Registration.count", +1 do
+      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+        post :basic, posthash
+      end
+    end
+  end
+
   test "admins can manage registrations from other events" do
     user = users(:adminfelix)
     ability = Ability.new(user)

@@ -15,7 +15,7 @@
 #  checked_in_at  :datetime
 #  comment        :text
 #  barcode_data   :string(255)
-#  random_check   :integer
+#  payment_code   :string(255)
 #
 
 class Registration < ActiveRecord::Base
@@ -28,16 +28,9 @@ class Registration < ActiveRecord::Base
   validates :student_number, presence: true, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :payment_code, presence: true, uniqueness: true
 
-  has_paper_trail only: [:paid, :random_check, :checked_in_at]
-
-  # We change the random check before each save.
-  # This should make it unique enough for checking the counts.
-  before_save do |record|
-    old = record.random_check
-    record.random_check = rand(10 ** 15) while record.random_check == old
-  end
-
+  has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
   after_save do |record|
     record.access_levels.each do |access_level|
@@ -56,6 +49,7 @@ class Registration < ActiveRecord::Base
 
   def paid=(value)
     write_attribute :paid, to_cents(value)
+    self.payment_code = Registration.create_payment_code
   end
 
   def to_pay
@@ -78,16 +72,25 @@ class Registration < ActiveRecord::Base
     self.price <= self.paid
   end
 
-  def payment_code
-    base = "GAN#{self.event.id}D#{self.id}A#{(self.event.id + self.id) % 9}L"
-    base += "#{base.sum % 99}F#{self.random_check}"
-  end
-
   def generate_barcode
     self.barcode_data = 12.times.map { SecureRandom.random_number(10) }.join
     calculated_barcode = Barcodes.create('EAN13', data: self.barcode_data)
     self.barcode = calculated_barcode.caption_data
     self.save!
+  end
+
+  def self.find_payment_code_from_csv(csvline)
+    match = /GAN\d+/.match(csvline)
+    if match
+      return Registration.find_by_payment_code(match[0])
+    else
+      return false
+    end
+  end
+
+  def self.create_payment_code
+    random = rand(10**15)
+    return sprintf("GAN%02d%015d", random % 97, random)
   end
 
   private
