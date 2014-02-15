@@ -152,15 +152,16 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
+    date = "#{Date.today}"
     get :statistics, { id: 1 }
     assert_response :success
     assert assigns(:data) == [
-      {:name=>"Lid", :data=>{"2014-02-15"=>1}},
-      {:name=>"Limited0", :data=>{"2014-02-15"=>3}},
-      {:name=>"Limited1", :data=>{"2014-02-15"=>3}},
-      {:name=>"Limited2", :data=>{"2014-02-15"=>3}},
-      {:name=>"Member", :data=>{"2014-02-15"=>0}},
-      {:name=>"Unlimited", :data=>{"2014-02-15"=>0}}
+      { name: "Lid",       data: { date => 1 } },
+      { name: "Limited0",  data: { date => 3 } },
+      { name: "Limited1",  data: { date => 3 } },
+      { name: "Limited2",  data: { date => 3 } },
+      { name: "Member",    data: { date => 0 } },
+      { name: "Unlimited", data: { date => 0 } }
     ]
   end
 
