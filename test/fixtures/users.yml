@@ -46,3 +46,9 @@ matthias:
   username: mjhertho
   enrolled_clubs:
     - zeus
+
+adminfelix:
+  username: noctua
+  clubs:
+    -zeus
+  admin: 1
