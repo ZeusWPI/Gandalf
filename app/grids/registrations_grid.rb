@@ -9,7 +9,7 @@ class RegistrationsGrid
   filter(:name) { |value| where("lower(?) like ?", :name, "%#{value.downcase}%") }
   filter(:email) { |value| where("lower(?) like ?", :email, "%#{value.downcase}%") }
   filter(:access_level) { |value, scope| scope.joins(:access_levels).where(access_levels: { id: value }) }
-  filter(:payment_code) { |value| where("lower(?) like ?", :payment_code, "%#{value.downcase}%") }
+  filter(:payment_code) { |value| where("? like ?", :payment_code, "%#{value}%") }
   filter(:only_paid) { |value| where("paid = price")  if value == '1' }
   filter(:only_unpaid) { |value| where.not("paid = price")  if value == '1' }
 
