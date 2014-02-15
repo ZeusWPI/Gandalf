@@ -5,8 +5,7 @@ class AddPaymentCodeToRegistration < ActiveRecord::Migration
     Registration.reset_column_information
 
     Registration.find_each do |r|
-      random = rand(10**15)
-      r.payment_code = sprintf("GAN%02d%015d", random % 97, random)
+      r.payment_code = Registration.create_payment_code
       r.save
     end
   end

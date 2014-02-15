@@ -30,7 +30,7 @@ one:
   event_id: 1
   paid: 0
   price: 0
-  payment_code: GAN7894580982340989
+  payment_code: <%= Registration.create_payment_code %>
 
 two:
   id: 2
@@ -42,7 +42,7 @@ two:
   event_id: 2
   paid: 5
   price: 10
-  payment_code: GAN2832646253682224
+  payment_code: <%= Registration.create_payment_code %>
 
 three:
   id: 3
@@ -66,7 +66,7 @@ four:
   event_id: 1
   paid: 5
   price: 10
-  payment_code: GAN0701928374091827
+  payment_code: <%= Registration.create_payment_code %>
 
 <% 9.times do |n| %>
 capacity_registration_<%= n %>:
@@ -78,5 +78,5 @@ capacity_registration_<%= n %>:
   paid: 0
   price: 0
   student_number: <%= 100 + n %>
-  payment_code: <%= "GAN#{(19283470191230 + n)%99}#{19283470191230 + n}" %>
+  payment_code: <%= Registration.create_payment_code %>
 <% end %>

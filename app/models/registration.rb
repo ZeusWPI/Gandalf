@@ -49,7 +49,7 @@ class Registration < ActiveRecord::Base
 
   def paid=(value)
     write_attribute :paid, to_cents(value)
-    renew_payment_code
+    self.payment_code = Registration.create_payment_code
   end
 
   def to_pay
@@ -88,6 +88,11 @@ class Registration < ActiveRecord::Base
     end
   end
 
+  def self.create_payment_code
+    random = rand(10**15)
+    return sprintf("GAN%02d%015d", random % 97, random)
+  end
+
   private
 
   def from_cents(value)
@@ -97,12 +102,6 @@ class Registration < ActiveRecord::Base
   def to_cents(value)
     if value.is_a? String then value.sub!(',', '.') end
     (value.to_f * 100).to_int
-  end
-
-  def renew_payment_code
-    random = rand(10**15)
-    check = random % 97
-    self.payment_code = sprintf("GAN%02d%015d", check, random)
   end
 
 end
