@@ -68,10 +68,21 @@ class EventsController < ApplicationController
     @event = Event.find params.require(:id)
     authorize! :view_stats, @event
 
-    min, max = @event.registrations.pluck(:created_at).minmax
-    zeros = Hash[(min..max).map { |date| [date.strftime("%Y-%m-%d"), 0] }]
-    @data = @event.access_levels.map do |al|
-      {name: al.name, data: zeros.merge(al.registrations.group('date(registrations.created_at)').count)}
+    if not @event.registrations.empty?
+
+      min, max = @event.registrations.pluck(:created_at).minmax
+      zeros = Hash[]
+      while min < max
+        zeros[min.strftime("%Y-%m-%d")] = 0
+        min += 1.day
+      end
+
+      @data = @event.access_levels.map do |al|
+        {name: al.name, data: zeros.merge(al.registrations.group('date(registrations.created_at)').count)}
+      end
+
+    else
+      @data = []
     end
   end
 
