@@ -106,6 +106,7 @@ GEM
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.6.4)
+    iban-tools (0.0.9)
     jbuilder (1.5.0)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -264,6 +265,7 @@ DEPENDENCIES
   devise
   devise_cas_authenticatable
   httparty
+  iban-tools
   jbuilder (~> 1.2)
   jquery-rails
   mysql2
