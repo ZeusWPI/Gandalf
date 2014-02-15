@@ -72,7 +72,7 @@ class EventsController < ApplicationController
 
       min, max = @event.registrations.pluck(:created_at).minmax
       zeros = Hash[]
-      while min < max
+      while min <= max
         zeros[min.strftime("%Y-%m-%d")] = 0
         min += 1.day
       end
