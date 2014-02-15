@@ -56,9 +56,11 @@ class RegistrationsController < ApplicationController
     authorize! :register, requested_access_level
 
     # Make the registration
-    @registration = @event.registrations.create params.require(:registration).permit(:email, :name, :student_number, :comment)
+    @registration = @event.registrations.new params.require(:registration).permit(:email, :name, :student_number, :comment)
     @registration.access_levels << requested_access_level
-    @registration.update paid: 0, price: requested_access_level.price
+    @registration.price = requested_access_level.price
+    @registration.paid = 0
+    @registration.save
 
     # Send the confirmation email.
     if not @registration.errors.any?

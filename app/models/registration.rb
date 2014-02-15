@@ -49,6 +49,7 @@ class Registration < ActiveRecord::Base
 
   def paid=(value)
     write_attribute :paid, to_cents(value)
+    renew_payment_code
   end
 
   def to_pay
@@ -57,7 +58,6 @@ class Registration < ActiveRecord::Base
 
   def to_pay=(value)
     self.paid = self.price - (to_cents(value) / 100.0)
-    renew_payment_code
   end
 
   def price
