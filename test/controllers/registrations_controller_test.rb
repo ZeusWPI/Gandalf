@@ -67,7 +67,7 @@ class RegistrationsControllerTest < ActionController::TestCase
   test "manual full paying works" do
     three = registrations(:three)
     four = registrations(:four)
-    
+
     assert_equal 0, three.paid
     assert_equal 0.05, four.paid
 
@@ -89,7 +89,7 @@ class RegistrationsControllerTest < ActionController::TestCase
   test "manual partial paying works" do
     three = registrations(:three)
     four = registrations(:four)
-    
+
     assert_equal 0, three.paid
     assert_equal 0.05, four.paid
 
@@ -113,7 +113,7 @@ class RegistrationsControllerTest < ActionController::TestCase
   test "manual overpaying works" do
     three = registrations(:three)
     four = registrations(:four)
-    
+
     assert_equal 0, three.paid
     assert_equal 0.05, four.paid
 
@@ -136,6 +136,14 @@ class RegistrationsControllerTest < ActionController::TestCase
       assert_match(/Overpayment for/, email.subject)
     end
 
+  end
+
+  test "admins can manage registrations from other events" do
+    user = users(:adminfelix)
+    ability = Ability.new(user)
+
+    r = registrations(:two)
+    assert ability.can?(:manage, r)
   end
 
 end
