@@ -79,12 +79,12 @@ class Registration < ActiveRecord::Base
     self.save!
   end
 
-  def self.search_payment_code(string)
-    match = /GAN\d+/.match(string)
+  def self.find_payment_code_from_csv(csvline)
+    match = /GAN\d+/.match(csvline)
     if match
-      return true, Registration.find_by_payment_code(match[0])
+      return Registration.find_by_payment_code(match[0])
     else
-      return false, nil
+      return false
     end
   end
 
