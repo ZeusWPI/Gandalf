@@ -86,6 +86,9 @@ gem 'delayed_job', '~> 4.0'
 gem 'delayed_job_active_record'
 #
 
+# Whenever cronjobs
+gem 'whenever'
+
 # Coveralls
 gem 'coveralls', require: false
 
