@@ -56,9 +56,11 @@ class RegistrationsController < ApplicationController
     authorize! :register, requested_access_level
 
     # Make the registration
-    @registration = @event.registrations.create params.require(:registration).permit(:email, :name, :student_number, :comment)
+    @registration = @event.registrations.new params.require(:registration).permit(:email, :name, :student_number, :comment)
     @registration.access_levels << requested_access_level
-    @registration.update paid: 0, price: requested_access_level.price
+    @registration.price = requested_access_level.price
+    @registration.paid = 0
+    @registration.save
 
     # Send the confirmation email.
     if not @registration.errors.any?
@@ -129,20 +131,11 @@ class RegistrationsController < ApplicationController
 
     begin
       CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
-        match = /GAN(?<event_id>\d+)D(?<id>\d+)A(?<sum>\d+)L(?<ssum>\d+)F(?<rand>\d+)/.match(row.to_s)
-        next unless match # seems like this is not a Gandalf transfer.
 
-        registration = @event.registrations.find_by_id match[:id]
-
+        registration = Registration.find_payment_code_from_csv(row.to_s)
         # If the registration doesn't exist
-        if registration.nil?
-          fails << row
-          next
-        end
-
-        # if it's not a real code, FAIL
-        unless registration.payment_code == match.to_s
-          fails << row
+        unless registration
+          fails << row if registration.nil?
           next
         end
 

@@ -1,7 +1,6 @@
 Gandalf [![Analytics](https://ga-beacon.appspot.com/UA-25444917-6/ZeusWPI/gandalf/README.md?pixel)](https://github.com/igrigorik/ga-beacon) [![Coverage Status](https://coveralls.io/repos/ZeusWPI/Gandalf/badge.png?branch=master)](https://coveralls.io/r/ZeusWPI/Gandalf) [![Build Status](https://travis-ci.org/ZeusWPI/Gandalf.png?branch=master)](https://travis-ci.org/ZeusWPI/Gandalf)
 =======
-
-![You. Shall. Not. Pass.](http://www.badhaven.com/wp-content/uploads/2011/07/Gandalf-You-Shall-Not-Pass-Ian-McKellen.png)
+![You. Shall. Not. Pass.](http://media.giphy.com/media/njYrp176NQsHS/giphy.gif)
 
 
 # What is Gandalf?

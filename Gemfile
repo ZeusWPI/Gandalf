@@ -56,6 +56,9 @@ gem 'httparty'
 # Logging is awesome, and paper_trail even more
 gem 'paper_trail'
 
+# Njam njam, IBAN
+gem 'iban-tools'
+
 group :production, :deployment do
   gem 'puma'
 end

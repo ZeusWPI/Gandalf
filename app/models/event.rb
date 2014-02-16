@@ -47,7 +47,15 @@ class Event < ActiveRecord::Base
   validates :club, presence: true
   validates :start_date, presence: true
 
+  validates_with IBANValidator
+
   has_attached_file :export
+
+  before_save :prettify_bank_number
+
+  def prettify_bank_number
+    self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
+  end
 
   def generate_xls
     self.export_status = 'generating'
