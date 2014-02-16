@@ -24,6 +24,18 @@ class RegistrationTest < ActiveSupport::TestCase
     assert @r2.save
   end
 
+  test "student_number should be present on member_only tickets" do
+    @r1.student_number = ""
+    @r1.access_levels << access_levels(:member_only)
+    assert !@r1.save
+  end
+
+  test "student_number can be blank on non-member_only tickets" do
+    @r1.student_number = ""
+    @r1.access_levels << access_levels(:unlimited)
+    assert @r1.save
+  end
+
   def teardown
     @r1.destroy
     @r2.destroy
