@@ -100,7 +100,14 @@ class User < ActiveRecord::Base
         self.save!
       end
     end
+  end
 
+  # specifies the daily update for a users (enrolled) clubs
+  def self.daily_update
+    User.all.each do |user|
+      user.fetch_club
+      user.fetch_enrolled_clubs
+    end
   end
 
 end
