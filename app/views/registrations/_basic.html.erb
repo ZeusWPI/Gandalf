@@ -6,7 +6,11 @@
   <%= form_for [@event, @registration], url: basic_event_registrations_path(@event) do |f| %>
     <%= form_text_field f, :name %>
     <%= form_email_field f, :email %>
-    <%= form_text_field f, :student_number %>
+    <% if user_signed_in? %>
+      <%= f.hidden_field :student_number %>
+    <% else %>
+      <%= form_text_field f, :student_number %>
+    <% end %>
 
     <%= form_collection_select f, :access_levels, @event.access_levels.find_all { |al| can? :register, al }, :id, :name_with_price %>
     <%= form_text_area f, :comment %>
