@@ -17,7 +17,7 @@
   <% @registration.versions.each do |version| %>
     <tr>
       <td><%= version.event %></td>
-      <td><%= User.find(version.whodunnit).display_name %></td>
+      <td><%= version.whodunnit.nil? ? "Anonymous user" : User.find(version.whodunnit).display_name %></td>
       <td><%= nice_time version.created_at %></td>
       <td>
         <ul class="no-margin no-padding">
