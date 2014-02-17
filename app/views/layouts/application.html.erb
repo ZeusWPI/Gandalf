@@ -8,7 +8,7 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <%= render partial: "layouts/ga" if Rails.env.production? %>
-
+    <%= airbrake_javascript_notifier if Rails.env.production? %>
     <%= csrf_meta_tags %>
   </head>
 

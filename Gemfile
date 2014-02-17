@@ -114,7 +114,8 @@ gem 'ri_cal'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-#
+
+gem 'airbrake', git: "git://github.com/nudded/airbrake"
 
 group :production do
   gem 'mysql2' # Database
