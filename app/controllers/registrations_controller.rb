@@ -60,6 +60,11 @@ class RegistrationsController < ApplicationController
     @registration.access_levels << requested_access_level
     @registration.price = requested_access_level.price
     @registration.paid = 0
+
+    # overwrite student_number so setting this will not work
+    if requested_access_level.member_only?
+      @registration.student_number = current_user.cas_ugentStudentID
+    end
     @registration.save
 
     # Send the confirmation email.
