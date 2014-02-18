@@ -165,20 +165,20 @@ class RegistrationsController < ApplicationController
         counter += 1
       end
 
-      flash.now[:success] = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
+      success_msg = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
       if fails.any?
+        flash.now[:success] = success_msg
         flash.now[:error] = "The rows listed below contained an invalid code, please fix them by hand."
         @csvheaders = fails.first.headers
         @csvfails = fails
         render 'upload'
       else
-        @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
-        render 'index'
+        flash[:success] = success_msg
+        redirect_to action: :index
       end
     rescue CSV::MalformedCSVError
-      flash.now[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
-      @registrations = @event.registrations.all.sort_by {:to_pay }.reverse.paginate(page: params[:page], per_page: 15)
-      render 'index'
+      flash[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
+      redirect_to action: :index
     end
 
   end
