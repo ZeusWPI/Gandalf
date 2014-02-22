@@ -43,6 +43,8 @@ end
 
 group :development do
   gem 'rails-erd'
+  gem 'capybara'
+  gem 'capybara-webkit'
 end
 
 # Let's use devise for users
