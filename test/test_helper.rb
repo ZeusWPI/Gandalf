@@ -20,6 +20,8 @@ Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
 require 'webmock/minitest'
 
+I18n.enforce_available_locales = false
+
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 
