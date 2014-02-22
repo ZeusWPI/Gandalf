@@ -13,7 +13,6 @@
       var inputs = $(id).parent().find('input');
       $(id).parent().find('button').on('click', function() {
         $(id).append(inputs.clone());
-        $(id).append('<input type="hidden" name="_method" value="put">');
         $(id).submit();
       });
     <% end %>
