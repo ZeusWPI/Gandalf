@@ -49,7 +49,6 @@ class Registration < ActiveRecord::Base
 
   def paid=(value)
     write_attribute :paid, to_cents(value)
-    self.payment_code = Registration.create_payment_code
   end
 
   def to_pay

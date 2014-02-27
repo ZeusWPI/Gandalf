@@ -149,6 +149,7 @@ class RegistrationsController < ApplicationController
         end
 
         registration.paid += amount
+        registration.payment_code = Registration.create_payment_code
         registration.save
 
         if registration.is_paid
