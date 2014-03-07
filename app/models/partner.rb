@@ -21,6 +21,7 @@
 
 class Partner < ActiveRecord::Base
   acts_as_token_authenticatable
+  has_paper_trail
 
   devise :timeoutable, :trackable
 
