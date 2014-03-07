@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214104123) do
+ActiveRecord::Schema.define(version: 20140307154720) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -110,6 +110,16 @@ ActiveRecord::Schema.define(version: 20140214104123) do
 
   add_index "included_zones", ["access_level_id"], name: "index_included_zones_on_access_level_id"
   add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
+
+  create_table "partners", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "authentication_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
 
   create_table "people", force: true do |t|
     t.string   "username"
