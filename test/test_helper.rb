@@ -2,6 +2,7 @@
 require 'simplecov'
 require 'coveralls'
 
+
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
@@ -12,7 +13,14 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
+require 'capybara/rails'
+require 'capybara/poltergeist'
+
+Capybara.default_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist
 require 'webmock/minitest'
+
+I18n.enforce_available_locales = false
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
@@ -31,4 +39,22 @@ class ActiveSupport::TestCase
   end
 
 end
+class ActionDispatch::IntegrationTest
+  # Make the Capybara DSL available in all integration tests
+  #
+  include Warden::Test::Helpers
+  Warden.test_mode!
+  setup do
+    WebMock.disable_net_connect! allow_localhost: true
+  end
 
+  teardown do
+    Warden.test_reset!
+  end
+
+  def sign_in(user)
+    login_as user, scope: :user
+  end
+
+  include Capybara::DSL
+end

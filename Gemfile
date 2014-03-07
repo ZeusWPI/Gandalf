@@ -45,6 +45,11 @@ group :development do
   gem 'rails-erd'
 end
 
+group :test do
+  gem 'capybara'
+  gem 'poltergeist'
+end
+
 # Let's use devise for users
 gem 'devise'
 gem 'devise_cas_authenticatable'
