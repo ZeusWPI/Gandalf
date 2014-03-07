@@ -54,6 +54,9 @@ end
 gem 'devise'
 gem 'devise_cas_authenticatable'
 
+# Token authentication for partners
+gem 'simple_token_authentication'
+
 # CanCan is used for authorization
 gem 'cancan'
 gem 'httparty'
