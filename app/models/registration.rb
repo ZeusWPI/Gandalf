@@ -32,6 +32,12 @@ class Registration < ActiveRecord::Base
 
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
+  before_validation do |record|
+    if record.payment_code.nil? then
+      record.payment_code = Registration.create_payment_code
+    end
+  end
+
   after_save do |record|
     record.access_levels.each do |access_level|
       if access_level.capacity != nil and access_level.registrations.count > access_level.capacity
