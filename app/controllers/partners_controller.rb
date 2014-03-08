@@ -10,7 +10,7 @@ class PartnersController < ApplicationController
 
   def show
     @event = Event.find params.require(:event_id)
-    authorize! :read, @event
+    # TODO authorize has pretty token
 
     @partner = @event.partners.find params.require(:id)
   end

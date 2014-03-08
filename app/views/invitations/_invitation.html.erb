@@ -1,0 +1,20 @@
+<tr id="<%= dom_id(invitation) %>">
+  <td>
+    <form>
+      <input type="submit" />
+      <input type="text" />
+    </form>
+  </td>
+  <td>
+    <%= invitation.access_level.name %>
+  </td>
+  <td>
+    <%= if invitation.paid then "Paid" else "Unpaid" end %>
+  </td>
+  <td>
+    <%= number_with_precision invitation.price || "0", precision: 2 %>
+  </td>
+  <td>
+    <i class="glyphicon glyphicon-arrow-right"></i>
+  </td>
+</tr>

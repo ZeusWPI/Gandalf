@@ -21,7 +21,8 @@
 #
 
 class Partner < ActiveRecord::Base
-  has_many :invitations
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: :inviter_id
+  has_many :received_invitations, class_name: "Invitation", foreign_key: :invitee_id
   has_many :reservations
 
   acts_as_token_authenticatable

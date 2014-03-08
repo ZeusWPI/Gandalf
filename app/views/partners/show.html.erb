@@ -1,2 +1,25 @@
 <h1>Partners#show</h1>
 <p>Find me in app/views/partners/show.html.erb</p>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Sent Invitations</h2>
+    <div class="table-responsive">
+      <table class="table" id="invitations">
+        <tbody>
+          <%= render @partner.sent_invitations %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <h2>Reservations Left</h2>
+    <div class="table-responsive">
+      <table class="table" id="reservations">
+        <tbody>
+          <%= render @partner.reservations %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
