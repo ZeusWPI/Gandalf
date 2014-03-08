@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307163912) do
+ActiveRecord::Schema.define(version: 20140308135535) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -132,15 +132,6 @@ ActiveRecord::Schema.define(version: 20140307163912) do
   add_index "partners", ["email"], name: "index_partners_on_email", unique: true
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
 
-  create_table "people", force: true do |t|
-    t.string   "username"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "people", ["username"], name: "index_people_on_username", unique: true
-
   create_table "periods", force: true do |t|
     t.datetime "starts"
     t.datetime "ends"
@@ -170,27 +161,6 @@ ActiveRecord::Schema.define(version: 20140307163912) do
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
   add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code", unique: true
-
-  create_table "role_names", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "role_names", ["name"], name: "index_role_names_on_name", unique: true
-
-  create_table "roles", force: true do |t|
-    t.integer  "person_id"
-    t.integer  "event_id"
-    t.integer  "role_name_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "roles", ["event_id"], name: "index_roles_on_event_id"
-  add_index "roles", ["person_id", "event_id", "role_name_id"], name: "index_roles_on_person_id_and_event_id_and_role_name_id", unique: true
-  add_index "roles", ["person_id"], name: "index_roles_on_person_id"
-  add_index "roles", ["role_name_id"], name: "index_roles_on_role_name_id"
 
   create_table "users", force: true do |t|
     t.string   "username",            default: "", null: false
