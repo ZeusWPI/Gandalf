@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20140308160643) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "event_id"
   end
 
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"

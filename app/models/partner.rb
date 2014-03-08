@@ -17,6 +17,7 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  event_id               :integer
 #
 
 class Partner < ActiveRecord::Base
@@ -27,6 +28,8 @@ class Partner < ActiveRecord::Base
   has_paper_trail
 
   devise :timeoutable, :trackable
+
+  belongs_to :event
 
   validates :name, uniqueness: true
   validates :email, uniqueness: true

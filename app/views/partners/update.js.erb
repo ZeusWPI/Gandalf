@@ -1,0 +1,6 @@
+<% if @partner.errors.any? %>
+  $('#partner-errors').html("<%= escape_javascript form_errors(@partner) %>")
+<% else %>
+  $('#partner-errors').html('')
+  $('#edit_<%= dom_id(@partner) %>').parent().replaceWith("<%= j render @partner %>");
+<% end %>
