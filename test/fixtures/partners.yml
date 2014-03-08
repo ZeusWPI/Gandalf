@@ -17,6 +17,13 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  event_id               :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+KBC:
+  id: 1
+  name: KBC
+  email: kbc@email.com
+  event_id: 1

@@ -1,0 +1,7 @@
+<tr>
+  <%= form_for [object.event, object], remote: true do |f| %>
+    <td><%= f.text_field :name, class: 'form-control' %></td>
+    <td><%= f.email_field :email, class: 'form-control' %></td>
+    <td><input type="hidden" name="_method" value="<%= action %>"><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
+  <% end %>
+</tr>

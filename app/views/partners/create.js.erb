@@ -1,0 +1,9 @@
+<% if @partner.errors.any? %>
+  $('#partner-errors').html("<%= escape_javascript form_errors(@partner) %>");
+<% else %>
+  $('#partner-errors').html('');
+  $('#new_partner')[0].reset();
+
+  <%# break advanced deliberately, how we currently do it will not continue working! %>
+  $('#table-partners tr:last').before('<%= escape_javascript render @partner %>')
+<% end %>
