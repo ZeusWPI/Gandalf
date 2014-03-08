@@ -20,6 +20,9 @@
 #
 
 class Partner < ActiveRecord::Base
+  has_many :invitations
+  has_many :reservations
+
   acts_as_token_authenticatable
   has_paper_trail
 

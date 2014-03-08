@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: reservations
+#
+#  id              :integer          not null, primary key
+#  partner_id      :integer
+#  access_level_id :integer
+#  price           :integer
+#  paid            :integer
+#  count           :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  partner_id: 
+  access_level_id: 
+  price: 1
+  paid: 1
+  count: 1
+
+two:
+  partner_id: 
+  access_level_id: 
+  price: 1
+  paid: 1
+  count: 1

@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: invitations
+#
+#  id              :integer          not null, primary key
+#  send            :boolean
+#  access_level_id :integer
+#  inviter_id      :integer
+#  invitee_id      :integer
+#  price           :integer
+#  paid            :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  send: false
+  access_level_id: 
+  inviter_id: 
+  invitee_id: 
+  price: 1
+  paid: 1
+
+two:
+  send: false
+  access_level_id: 
+  inviter_id: 
+  invitee_id: 
+  price: 1
+  paid: 1
