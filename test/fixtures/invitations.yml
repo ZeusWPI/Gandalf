@@ -16,7 +16,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-    sent: false
+  sent: false
   access_level_id: 
   inviter_id: 
   invitee_id: 
