@@ -16,17 +16,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  send: false
+    sent: false
   access_level_id: 
   inviter_id: 
   invitee_id: 
   price: 1
-  paid: 1
+  paid: false
 
 two:
-  send: false
+  sent: false
   access_level_id: 
   inviter_id: 
   invitee_id: 
   price: 1
-  paid: 1
+  paid: false
