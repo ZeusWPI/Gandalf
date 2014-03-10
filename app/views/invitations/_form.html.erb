@@ -1,0 +1,4 @@
+<%= form_for [event, partner, partner.received_invitations.build], remote: true do |f| %>
+  <%= f.select :access_level_id, options_for_select(partner.event.access_levels.map { |al| [ "#{al.name} (#{partner.received_invitations.where(access_level: al).count} sent)", al.id ] }, select || ""), prompt: "Select Ticket" %>
+  <%= f.submit "Send Invite" %>
+<% end %>

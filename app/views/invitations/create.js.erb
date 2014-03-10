@@ -1,0 +1,6 @@
+<% if @invitation.errors.any? %>
+  $("#partner-errors").html("<%= escape_javascript form_errors(@invitation) %>");
+<% else %>
+  $("#partner-errors").html("");
+  $("#<%= dom_id(@partner) %> .new_invitation").replaceWith("<%= escape_javascript render "invitations/form", event: @event, partner: @partner, select: @invitation.access_level_id %>");
+<% end %>

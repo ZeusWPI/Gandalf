@@ -18,6 +18,8 @@ class Invitation < ActiveRecord::Base
   belongs_to :inviter, class_name: "Partner"
   belongs_to :invitee, class_name: "Partner"
 
+  validates :access_level, presence: true
+
   def price
     from_cents read_attribute(:price)
   end

@@ -1,6 +1,7 @@
-<tr id="<%= dom_id(partner) %>">
+<tr id="<%= dom_id(partner) %>" class="partner">
   <td><%= link_to partner.name, event_partner_path(@event, partner)%></td>
   <td><%= mail_to partner.email %></td>
+  <td><%= render "invitations/form", event: @event, partner: partner, select: nil %></td>
   <td>
     <div class="nowrap">
     <%= render "partners/actions", partner: partner %>
