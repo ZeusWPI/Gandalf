@@ -4,11 +4,6 @@ class InvitationsController < ApplicationController
 
   respond_to :html, :js
 
-  def show
-    @invitation = Invitation.find params.require(:id)
-    # TODO authorize has pretty token
-  end
-
   def new
     @invitation = Invitation.new
   end

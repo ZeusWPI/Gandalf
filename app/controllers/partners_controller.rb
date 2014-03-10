@@ -8,12 +8,12 @@ class PartnersController < ApplicationController
     authorize! :read, @event
   end
 
-  # def show
-  #   @event = Event.find params.require(:event_id)
-  #   # TODO authorize has pretty token
+  def show
+    @event = Event.find params.require(:event_id)
+    # TODO authorize has pretty token
 
-  #   @partner = @event.partners.find params.require(:id)
-  # end
+    @partner = @event.partners.find params.require(:id)
+  end
 
   def new
     @partner = Partner.new
@@ -58,6 +58,11 @@ class PartnersController < ApplicationController
 
     partner = @event.partners.find params.require(:id)
     PartnerMailer.send_token(partner).deliver
+  end
+
+  def confirm
+    # TODO authorize has pretty token
+    # TODO make confirm
   end
 
 end
