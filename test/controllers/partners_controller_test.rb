@@ -11,9 +11,4 @@ class PartnersControllerTest < ActionController::TestCase
     get :index, event_id: 1
     assert_response :success
   end
-
-  test "should get show" do
-    get :show, event_id: 1, id: 1
-    assert_response :success
-  end
 end
