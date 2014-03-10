@@ -14,6 +14,7 @@ class InvitationsController < ApplicationController
     authorize! :update, @event
 
     @invitation = @partner.received_invitations.create params.require(:invitation).permit(:access_level_id)
+    @invitation.deliver
     respond_with @invitation
   end
 

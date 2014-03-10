@@ -20,6 +20,12 @@ class Invitation < ActiveRecord::Base
 
   validates :access_level, presence: true
 
+  def deliver
+    PartnerMailer.invitation(self.invitee, self).deliver
+    self.sent = true
+    self.save
+  end
+
   def price
     from_cents read_attribute(:price)
   end

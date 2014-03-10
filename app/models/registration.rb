@@ -95,6 +95,18 @@ class Registration < ActiveRecord::Base
     return sprintf("GAN%02d%015d", random % 97, random)
   end
 
+  def deliver
+    if self.barcode.nil?
+      self.generate_barcode
+    end
+
+    if self.is_paid
+      RegistrationMailer.ticket(self).deliver
+    else
+      RegistrationMailer.confirm_registration(self).deliver
+    end
+  end
+
   private
 
   def from_cents(value)

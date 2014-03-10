@@ -1,5 +1,10 @@
 
-$(".flash").replaceWith("<%= escape_javascript render "flash", locals: { flash: flash } %>");
+$("#flash").replaceWith("<%= escape_javascript render "flash", locals: { flash: flash } %>");
 <% unless flash[:error] %>
-  $(".confirm-form").replaceWith("<%= escape_javascript render partial: "form_confirm", locals: { event: @event, partner: @partner } %>");
+  <% if @partner.received_invitations.where(accepted: false).any? %>
+    $(".confirm-form").replaceWith("<%= escape_javascript render partial: "form_confirm", locals: { event: @event, partner: @partner } %>");
+  <% else %>
+    $(".confirm-form").prev().html("You have no pending invitations.");
+    $(".confirm-form").remove();
+  <% end %>
 <% end %>

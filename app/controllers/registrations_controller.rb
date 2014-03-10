@@ -69,13 +69,7 @@ class RegistrationsController < ApplicationController
 
     # Send the confirmation email.
     if not @registration.errors.any?
-      @registration.generate_barcode
-
-      if @registration.is_paid
-        RegistrationMailer.ticket(@registration).deliver
-      else
-        RegistrationMailer.confirm_registration(@registration).deliver
-      end
+      @registration.deliver
 
       flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."
       respond_with @event

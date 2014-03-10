@@ -66,14 +66,21 @@ class PartnersController < ApplicationController
     @partner = @event.partners.find params.require(:id)
     @invitation = @partner.received_invitations.find params.require(:partner).require(:received_invitations)
 
-    # TODO send mail
-
-    # if succes
+    @registration = @event.registrations.new(
+      email:          @partner.email,
+      name:           @partner.name,
+      student_number: nil,
+      comment:        nil,
+      price:          @invitation.price,
+      paid:           @invitation.paid ? @invitation.price : 0
+    )
+    @registration.access_levels << @invitation.access_level
     @invitation.accepted = true
-    if @invitation.save then
-      # succes
+    if @registration.save and @invitation.save then
+      @registration.deliver
+      flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
     else
-      # TODO notify errors with flash
+      flash.now[:error] = "Something went horribly wrong. Try again or contact us."
     end
   end
 

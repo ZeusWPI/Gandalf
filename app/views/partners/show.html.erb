@@ -5,7 +5,7 @@
 
 <p>You are registered as a partner of <%= link_to @event %> with the email-adres "<%= @partner.email %>". Please contact them if you want to change this email address.</p>
 
-<% if @partner.received_invitations.any? %>
+<% if @partner.received_invitations.where(accepted: false).any? %>
   <h2>Pending Invitations</h2>
 
   <p>You have pending invitations. Confirm them below to receive your ticket information.</p>
