@@ -1,1 +1,5 @@
-// TODO remove selected option
+
+$(".flash").replaceWith("<%= escape_javascript render "flash", locals: { flash: flash } %>");
+<% unless flash[:error] %>
+  $(".confirm-form").replaceWith("<%= escape_javascript render partial: "form_confirm", locals: { event: @event, partner: @partner } %>");
+<% end %>

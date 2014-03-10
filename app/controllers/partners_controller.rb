@@ -62,7 +62,19 @@ class PartnersController < ApplicationController
 
   def confirm
     # TODO authorize has pretty token
-    # TODO make confirm
+    @event = Event.find params.require(:event_id)
+    @partner = @event.partners.find params.require(:id)
+    @invitation = @partner.received_invitations.find params.require(:partner).require(:received_invitations)
+
+    # TODO send mail
+
+    # if succes
+    @invitation.accepted = true
+    if @invitation.save then
+      # succes
+    else
+      # TODO notify errors with flash
+    end
   end
 
 end

@@ -1,0 +1,6 @@
+<div class="confirm-form">
+  <%= form_for [event, partner], url: confirm_event_partner_path(event, partner), method: :post, remote: true do |f| %>
+    <%= f.select :received_invitations, partner.received_invitations.where(accepted: false).map { |i| [i.access_level.name, i.id] } %>
+    <%= f.submit "Confirm" %>
+  <% end %>
+</div>
