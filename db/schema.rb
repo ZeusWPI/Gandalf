@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308194406) do
+ActiveRecord::Schema.define(version: 20140310202911) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20140308194406) do
   add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
 
   create_table "invitations", force: true do |t|
-    t.boolean  "sent"
+    t.boolean  "sent",            default: false
     t.integer  "access_level_id"
     t.integer  "inviter_id"
     t.integer  "invitee_id"
@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 20140308194406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "paid"
-    t.boolean  "accepted"
+    t.boolean  "accepted",        default: false
   end
 
   add_index "invitations", ["access_level_id"], name: "index_invitations_on_access_level_id"
