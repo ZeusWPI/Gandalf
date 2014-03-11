@@ -11,7 +11,8 @@
     <%= javascript_tag do %>
       var id = "#<%=dom_id(f.object) %>";
       var inputs = $(id).parent().find('input');
-      $(id).parent().find('button').on('click', function() {
+      $(id).parent().find('button').on('click', function(e) {
+        e.preventDefault();
         $(id).append(inputs.clone());
         $(id).submit();
       });
