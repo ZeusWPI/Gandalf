@@ -8,6 +8,8 @@
     <p>Beste <%= @registration.name %>,</p>
   
     <p>Wij, <%= @registration.event.club.name %>, zouden u graag uitnodigen voor <%= @registration.event.name %>. Om uw aanwezigheid te bevestigen en uw gepersonaliseerd ticket te ontvangen, kan u op onderstaande link klikken: Opgelet: als u niet op deze link klikt (en uw aanwezigheid dus niet bevestigt), zal u uw ticket niet ontvangen en dus ook geen toegang krijgen tot <%= @registration.event.name %>.</p>
+    
+    <p><<<insert link here>>></p>
   
     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
 
