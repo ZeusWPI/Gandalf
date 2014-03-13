@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20140308135535) do
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
-  add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code"
+  add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code", unique: true
 
   create_table "users", force: true do |t|
     t.string   "username",            default: "", null: false
