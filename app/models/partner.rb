@@ -28,6 +28,11 @@ class Partner < ActiveRecord::Base
 
   belongs_to :event
 
-  validates :name, uniqueness: true
-  validates :email, uniqueness: true
+  validates :name, uniqueness: { scope: :event_id }
+  # [Tom] I commented this out to fix a current restraint:
+  # We sometimes only have the emailadress of a partner, even if
+  # this partner is allowed to invite 5 persons. This way, we can
+  # add as many partners with a different name and the same adress.
+  # This will be fixed in the advanced view though.
+  # validates :email, uniqueness: { scope: :event_id }
 end
