@@ -1,42 +1,48 @@
+<div class-"row">
+  <div class="col-sm-12">
 
-<%= render partial: "flash" %>
+    <%= render partial: "flash" %>
 
-<h1>Welcome, <%= @partner.name %></h1>
+    <h1>Welcome, <%= @partner.name %></h1>
 
-<p>You are registered as a partner of <%= link_to @event.name, @event %> with the e-mail address "<%= @partner.email %>". Please contact them if you want to change this email address.</p>
+    <p>You are registered as a partner of <%= link_to @event.name, @event %> with the e-mail address "<%= @partner.email %>". Please contact them if you want to change this email address.</p>
 
-<% if @partner.received_invitations.where(accepted: false).any? %>
-  <h2>Pending Invitations</h2>
+    <% if @partner.received_invitations.where(accepted: false).any? %>
+      <h2>Pending Invitations</h2>
 
-  <p>You have pending invitations. Confirm them below to receive your ticket information.</p>
+      <p>You have pending invitations. Confirm them below to receive your ticket information.</p>
 
-  <%= render partial: "form_confirm", locals: { event: @event, partner: @partner } %>
-<% end %>
+      <div class-"row">
+        <div class="col-sm-6">
+          <%= render partial: "form_confirm", locals: { event: @event, partner: @partner } %>
+        </div>
+      </div>
+    <% end %>
 
-
-
-
-<% if false # TODO for advanced tickets %>
-<div class="row">
-  <div class="col-sm-6">
-    <h2>Sent Invitations</h2>
-    <div class="table-responsive">
-      <table class="table" id="invitations">
-        <tbody>
-          <%= render @partner.sent_invitations %>
-        </tbody>
-      </table>
+    <% if false # TODO for advanced tickets %>
+    <div class="row">
+      <div class="col-sm-6">
+        <h2>Sent Invitations</h2>
+        <div class="table-responsive">
+          <table class="table" id="invitations">
+            <tbody>
+              <%= render @partner.sent_invitations %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h2>Reservations Left</h2>
+        <div class="table-responsive">
+          <table class="table" id="reservations">
+            <tbody>
+              <%= render @partner.reservations %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <h2>Reservations Left</h2>
-    <div class="table-responsive">
-      <table class="table" id="reservations">
-        <tbody>
-          <%= render @partner.reservations %>
-        </tbody>
-      </table>
-    </div>
+    <% end %>
+
   </div>
 </div>
-<% end %>
