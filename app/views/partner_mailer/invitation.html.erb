@@ -5,26 +5,26 @@
   </head>
 
   <body>
-    <p>Beste <%= @registration.name %>,</p>
+    <p>Beste <%= @invitation.invitee.name %>,</p>
   
-    <p>Wij, <%= @registration.event.club.name %>, zouden u graag uitnodigen voor <%= @registration.event.name %>. Om uw aanwezigheid te bevestigen en uw gepersonaliseerd ticket te ontvangen, kan u op onderstaande link klikken: Opgelet: als u niet op deze link klikt (en uw aanwezigheid dus niet bevestigt), zal u uw ticket niet ontvangen en dus ook geen toegang krijgen tot <%= @registration.event.name %>.</p>
+    <p>Wij, <%= @invitation.invitee.event.club.name %>, zouden u graag uitnodigen voor <%= @invitation.invitee.event.name %>. Om uw aanwezigheid te bevestigen en uw gepersonaliseerd ticket te ontvangen, kan u op onderstaande link klikken: Opgelet: als u niet op deze link klikt (en uw aanwezigheid dus niet bevestigt), zal u uw ticket niet ontvangen en dus ook geen toegang krijgen tot <%= @invitation.invitee.event.name %>.</p>
     
-    <p><<<insert link here>>></p>
+    <p>INSERT LINK HERE</p>
   
-    <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
+    <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @invitation.invitee.event.contact_email, @invitation.invitee.event.contact_email %></p>
 
-    <p>Met vriendelijke groet,<br /><%= @registration.event.club.name %></p>
+    <p>Met vriendelijke groet,<br /><%= @invitation.invitee.event.club.name %></p>
 
     <p><br /><br />-------------------------------------<br /><br /></p>
   
-    <p>Dear <%= @partner.name %>,</p>
+    <p>Dear <%= @invitation.invitee.name %>,</p>
     
-    <p>We, <%= @registration.event.club.name %>, would like to invite to <%= @registration.event.name %>. In order to confirm your presence and receive your personalized ticket, please click on the link below. Please not that if you do not click it (thus not confirming your presence), you will not receive your ticket and will not be granted access to <%= @registration.event.name %>.</p>
+    <p>We, <%= @invitation.invitee.event.club.name %>, would like to invite to <%= @invitation.invitee.event.name %>. In order to confirm your presence and receive your personalized ticket, please click on the link below. Please not that if you do not click it (thus not confirming your presence), you will not receive your ticket and will not be granted access to <%= @invitation.invitee.event.name %>.</p>
 
     <p><<<insert link here>>></p>
 
-    <p>If you have any problems, you can contact us via mail: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
+    <p>If you have any problems, you can contact us via mail: <%= mail_to @invitation.invitee.event.contact_email, @invitation.invitee.event.contact_email %></p>
 
-    <p>Kind regards,<br /><%= @registration.event.club.name %></p>
+    <p>Kind regards,<br /><%= @invitation.invitee.event.club.name %></p>
   </body>
 </html>

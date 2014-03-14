@@ -21,7 +21,7 @@ class Invitation < ActiveRecord::Base
   validates :access_level, presence: true
 
   def deliver
-    PartnerMailer.invitation(self.invitee, self).deliver
+    PartnerMailer.invitation(self).deliver
     self.sent = true
     self.save
   end

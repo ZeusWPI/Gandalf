@@ -7,24 +7,24 @@
   <body>
     <p>Beste <%= @partner.name %>,</p>
   
-    <p>Via onderstaande link kan u <<<aantal tickets>>> personen toegang geven tot <%= @registration.event.name %>. Opgelet: als u zelf ook aanwezig wil zijn en via deze weg een ticket wil ontvangen, moet u zichzelf ook toevoegen.</p>
+    <p>Via onderstaande link kan u <<<aantal tickets>>> personen toegang geven tot <%= @partner.event.name %>. Opgelet: als u zelf ook aanwezig wil zijn en via deze weg een ticket wil ontvangen, moet u zichzelf ook toevoegen.</p>
   
     <p><<<insert link here>>></p>
   
-    <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
+    <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @partner.event.contact_email, @partner.event.contact_email %></p>
 
-    <p>Met vriendelijke groet,<br /><%= @registration.event.club.name %></p>
+    <p>Met vriendelijke groet,<br /><%= @partner.event.club.name %></p>
 
     <p><br /><br />-------------------------------------<br /><br /></p>
     
     <p>Dear <%= @partner.name %>,</p>
 
-    <p>By clicking on the link below you can grant <<<aantal tickets>>> persons access to <%= @registration.event.name %>. Please note that if you also want to be present and receive a ticket, you also have to add yourself.</p>
+    <p>By clicking on the link below you can grant <<<aantal tickets>>> persons access to <%= @partner.event.name %>. Please note that if you also want to be present and receive a ticket, you also have to add yourself.</p>
     
     <p><<<insert link here>>></p>
 
-    <p>If you have any problems, you can contact us via mail: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
+    <p>If you have any problems, you can contact us via mail: <%= mail_to @partner.event.contact_email, @partner.event.contact_email %></p>
 
-    <p>Kind regards,<br /><%= @registration.event.club.name %></p>
+    <p>Kind regards,<br /><%= @partner.event.club.name %></p>
   </body>
 </html>
