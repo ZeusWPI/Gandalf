@@ -1,3 +1,4 @@
 <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_event_partner_path(@event, partner), class: "btn btn-default btn-xs", remote: true %>
-<%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend login link'), resend_event_partner_path(@event, partner), class: 'btn btn-xs btn-default', remote: true %>
+<%# Not yet needed now. The invite email contains the token here. %>
+<%# <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend login link'), resend_event_partner_path(@event, partner), class: 'btn btn-xs btn-default', remote: true %1> %>
 <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_partner_path(@event, partner), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
