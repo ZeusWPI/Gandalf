@@ -1,10 +1,28 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
-    user ||= User.new
+  def initialize(entity)
+    # User.new is the default
+    entity ||= User.new
+
+    # Aliases
     alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
+    # Delegate
+    if entity.kind_of? Partner
+      parter_rules(entity)
+    else
+      user_rules(entity)
+    end
+  end
+
+  def partner_rules(partner)
+    # Partners can read and register
+    can :read, Partner, event_id: partner.event.id, partner_id: partner.id
+    can :register, Partner, event_id: partner.event.id, partner_id: partner.id
+  end
+
+  def user_rules(user)
     clubs = user.try(:clubs)
     enrolled_clubs = user.try(:enrolled_clubs)
     if !clubs.blank?
@@ -21,6 +39,7 @@ class Ability
     if user.admin?
       can :manage, Event
       can :manage, Registration
+      can :manage, Partner
     end
 
     # add register permission
@@ -63,33 +82,6 @@ class Ability
     can :view_stats, Event do |event|
       clubs.include? event.club or event.show_statistics
     end
-
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 
 end

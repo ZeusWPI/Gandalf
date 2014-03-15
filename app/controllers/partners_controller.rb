@@ -82,6 +82,8 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     @partner = @event.partners.find params.require(:id)
 
+    authorize! :register, @partner
+
     @registration = @event.registrations.new(
       email:          @partner.email,
       name:           @partner.name,
