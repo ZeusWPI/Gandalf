@@ -29,3 +29,4 @@ KBC:
   name: KBC
   email: kbc@email.com
   event_id: 1
+  access_level_id: 1
