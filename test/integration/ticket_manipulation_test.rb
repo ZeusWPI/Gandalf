@@ -12,14 +12,10 @@ class TicketManipulationTest < ActionDispatch::IntegrationTest
     click_on "Tickets"
     fill_in 'access_level_name', with: "Test"
 
-    initial_size = events(:codenight).access_levels.count
-
-    click_button "Add Ticket"
-    visit current_path
-    assert page.has_content? "Test"
-
-    # TODO: figure out why this sometimes is submitted twice
-    assert Event.find_by_name(events(:codenight).name).access_levels.count > initial_size
+    assert_difference "Event.find_by_name(events(:codenight).name).access_levels.count", +1 do
+      click_button "Add Ticket"
+      assert page.has_content? "Test"
+    end
 
   end
 end

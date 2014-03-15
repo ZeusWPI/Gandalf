@@ -100,15 +100,18 @@ class RegistrationsController < ApplicationController
 
   def update
     @registration = Registration.find params.require(:id)
+    paid = @registration.paid
     authorize! :update, @registration
     @registration.update params.require(:registration).permit(:to_pay)
-    if @registration.is_paid
-      RegistrationMailer.ticket(@registration).deliver
-      if @registration.paid > @registration.price
-        RegistrationMailer.notify_overpayment(@registration).deliver
+    if @registration.paid != paid then
+      if @registration.is_paid
+        RegistrationMailer.ticket(@registration).deliver
+        if @registration.paid > @registration.price
+          RegistrationMailer.notify_overpayment(@registration).deliver
+        end
+      else
+        RegistrationMailer.confirm_registration(@registration).deliver
       end
-    else
-      RegistrationMailer.confirm_registration(@registration).deliver
     end
     respond_with @registration
   end
@@ -154,6 +157,7 @@ class RegistrationsController < ApplicationController
         end
 
         registration.paid += amount
+        registration.payment_code = Registration.create_payment_code
         registration.save
 
         if registration.is_paid
