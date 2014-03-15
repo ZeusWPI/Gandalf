@@ -2,8 +2,8 @@ class PartnersController < ApplicationController
 
   acts_as_token_authentication_handler_for Partner
 
-  before_filter :authenticate_partner!, only: :show
-  before_filter :authenticate_user!, except: :show
+  before_action :authenticate_partner!, only: [:show, :confirm]
+  before_action :authenticate_user!, except: [:show, :confirm]
 
   respond_to :html, :js
 
