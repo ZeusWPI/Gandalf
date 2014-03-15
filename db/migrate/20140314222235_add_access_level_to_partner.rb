@@ -1,5 +1,9 @@
 class AddAccessLevelToPartner < ActiveRecord::Migration
-  def change
+  def up
     add_reference :partners, :access_level, index: true
+  end
+
+  def down
+    remove_column :partners, :access_level
   end
 end
