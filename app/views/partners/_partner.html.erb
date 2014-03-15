@@ -1,5 +1,5 @@
 <tr id="<%= dom_id(partner) %>">
-  <td><%= link_to partner.name, event_partner_path(@event, partner)%></td>
+  <td><%= link_to partner.name, sign_in_event_partner_url(partner.event, partner, partner_email: partner.email, partner_token: partner.authentication_token), target: '_blank' %></td>
   <td><%= mail_to partner.email %></td>
   <td><%= partner.access_level.name %></td>
   <td><%= partner.confirmed ? 'Yes' : 'No' %></td>

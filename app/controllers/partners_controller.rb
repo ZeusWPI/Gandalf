@@ -1,20 +1,18 @@
 class PartnersController < ApplicationController
 
-  acts_as_token_authentication_handler_for Partner
-
-  before_action :authenticate_partner!, only: [:show, :confirm]
   before_action :authenticate_user!, except: [:show, :confirm]
+  before_action :authenticate_partner!, only: [:show, :confirm]
 
   respond_to :html, :js
 
   def index
     @event = Event.find params.require(:event_id)
+
     authorize! :read, @event
   end
 
   def show
     @event = Event.find params.require(:event_id)
-
     @partner = @event.partners.find params.require(:id)
 
     authorize! :read, @partner
@@ -75,7 +73,7 @@ class PartnersController < ApplicationController
     authorize! :read, @event
 
     partner = @event.partners.find params.require(:id)
-    PartnerMailer.send_token(partner).deliver
+    partner.deliver
   end
 
   def confirm

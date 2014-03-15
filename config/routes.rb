@@ -51,8 +51,10 @@ Isengard::Application.routes.draw do
     end
 
     resources :periods
+
     resources :partners do
       member do
+        get 'sign_in', to: 'sign_in#sign_in_partner'
         get :resend
         post :confirm
       end

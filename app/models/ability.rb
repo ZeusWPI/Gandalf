@@ -8,11 +8,11 @@ class Ability
     # Aliases
     alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
-    # Delegate
-    if entity.kind_of? Partner
-      parter_rules(entity)
-    else
+    # Delegate with user precedence
+    if entity.kind_of? User
       user_rules(entity)
+    else
+      parter_rules(entity)
     end
   end
 
@@ -41,6 +41,8 @@ class Ability
       can :manage, Registration
       can :manage, Partner
     end
+
+    can :manage, Partner
 
     # add register permission
     can :register, Event do |event|
