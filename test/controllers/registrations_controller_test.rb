@@ -138,6 +138,28 @@ class RegistrationsControllerTest < ActionController::TestCase
 
   end
 
+
+  test "manual not changing mails nor changes the code" do
+    three = registrations(:three)
+    four = registrations(:four)
+
+    assert_equal 0, three.paid
+    assert_equal 0.05, four.paid
+
+    [three, four].each do |registration|
+      paid, code = registration.paid, registration.payment_code
+      assert_no_difference "ActionMailer::Base.deliveries.size" do
+        xhr :put, :update, {
+          event_id: registration.event.id,
+          id: registration.id,
+          registration: { to_pay: registration.to_pay }
+        }, remote: true
+      end
+      assert_equal paid, registration.reload.paid
+      assert_equal code, registration.reload.payment_code
+    end
+  end
+
   test "basic registration" do
 
     # setting up data
