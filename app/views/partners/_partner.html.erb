@@ -1,6 +1,8 @@
 <tr id="<%= dom_id(partner) %>">
   <td><%= link_to partner.name, event_partner_path(@event, partner)%></td>
   <td><%= mail_to partner.email %></td>
+  <td><%= partner.access_level.name %></td>
+  <td><%= partner.confirmed ? 'Yes' : 'No' %></td>
   <td>
     <div class="nowrap">
     <%= render "partners/actions", partner: partner %>

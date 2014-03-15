@@ -18,6 +18,8 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  event_id               :integer
+#  access_level_id        :integer
+#  confirmed              :boolean
 #
 
 class Partner < ActiveRecord::Base
@@ -27,6 +29,7 @@ class Partner < ActiveRecord::Base
   devise :timeoutable, :trackable
 
   belongs_to :event
+  belongs_to :access_level
 
   validates :name, uniqueness: { scope: :event_id }
   # [Tom] I commented this out to fix a current restraint:
@@ -35,4 +38,9 @@ class Partner < ActiveRecord::Base
   # add as many partners with a different name and the same adress.
   # This will be fixed in the advanced view though.
   # validates :email, uniqueness: { scope: :event_id }
+
+  def deliver
+    PartnerMailer.invitation(self).deliver
+  end
+
 end

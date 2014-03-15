@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308145734) do
+ActiveRecord::Schema.define(version: 20140314230223) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -111,6 +111,22 @@ ActiveRecord::Schema.define(version: 20140308145734) do
   add_index "included_zones", ["access_level_id"], name: "index_included_zones_on_access_level_id"
   add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
 
+  create_table "invitations", force: true do |t|
+    t.boolean  "sent",            default: false
+    t.integer  "access_level_id"
+    t.integer  "inviter_id"
+    t.integer  "invitee_id"
+    t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "paid"
+    t.boolean  "accepted",        default: false
+  end
+
+  add_index "invitations", ["access_level_id"], name: "index_invitations_on_access_level_id"
+  add_index "invitations", ["invitee_id"], name: "index_invitations_on_invitee_id"
+  add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id"
+
   create_table "partners", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -127,20 +143,14 @@ ActiveRecord::Schema.define(version: 20140308145734) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "event_id"
+    t.integer  "access_level_id"
+    t.boolean  "confirmed"
   end
 
+  add_index "partners", ["access_level_id"], name: "index_partners_on_access_level_id"
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
   add_index "partners", ["email"], name: "index_partners_on_email", unique: true
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
-
-  create_table "people", force: true do |t|
-    t.string   "username"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "people", ["username"], name: "index_people_on_username", unique: true
 
   create_table "periods", force: true do |t|
     t.datetime "starts"
@@ -172,26 +182,18 @@ ActiveRecord::Schema.define(version: 20140308145734) do
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
   add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code", unique: true
 
-  create_table "role_names", force: true do |t|
-    t.string   "name"
+  create_table "reservations", force: true do |t|
+    t.integer  "partner_id"
+    t.integer  "access_level_id"
+    t.integer  "price"
+    t.integer  "paid"
+    t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "role_names", ["name"], name: "index_role_names_on_name", unique: true
-
-  create_table "roles", force: true do |t|
-    t.integer  "person_id"
-    t.integer  "event_id"
-    t.integer  "role_name_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "roles", ["event_id"], name: "index_roles_on_event_id"
-  add_index "roles", ["person_id", "event_id", "role_name_id"], name: "index_roles_on_person_id_and_event_id_and_role_name_id", unique: true
-  add_index "roles", ["person_id"], name: "index_roles_on_person_id"
-  add_index "roles", ["role_name_id"], name: "index_roles_on_role_name_id"
+  add_index "reservations", ["access_level_id"], name: "index_reservations_on_access_level_id"
+  add_index "reservations", ["partner_id"], name: "index_reservations_on_partner_id"
 
   create_table "users", force: true do |t|
     t.string   "username",            default: "", null: false

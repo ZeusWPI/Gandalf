@@ -54,6 +54,7 @@ Isengard::Application.routes.draw do
     resources :partners do
       member do
         get :resend
+        post :confirm
       end
     end
   end
