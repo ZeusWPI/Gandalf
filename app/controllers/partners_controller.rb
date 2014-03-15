@@ -1,5 +1,9 @@
 class PartnersController < ApplicationController
-  before_action :authenticate_user!, except: :show
+
+  acts_as_token_authentication_handler_for Partner
+
+  before_filter :authenticate_partner!, only: :show
+  before_filter :authenticate_user!, except: :show
 
   respond_to :html, :js
 
@@ -10,7 +14,6 @@ class PartnersController < ApplicationController
 
   def show
     @event = Event.find params.require(:event_id)
-    authorize! :read, @event
 
     @partner = @event.partners.find params.require(:id)
   end
