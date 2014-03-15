@@ -92,12 +92,18 @@ class PartnersControllerTest < ActionController::TestCase
   end
 
   test "should confirm correct access level for correct event" do
-    sign_in partners(:KBC)
-    xhr :post, :confirm, event_id: 1, id: 1
+    p = partners(:KBC)
+    assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +1 do
+      sign_in p
+      xhr :post, :confirm, event_id: 1, id: 1
+    end
 
     # Get latest registration here
-    r = Registration.last
-    r.inspect
+    r = Registration.find_by_name "KBC"
+    assert r.name = p.name
+    assert r.email = p.email
+    assert r.event_id = p.event_id
+    assert r.price = p.access_level.price
   end
 
 end
