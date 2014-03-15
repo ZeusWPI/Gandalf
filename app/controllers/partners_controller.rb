@@ -16,6 +16,8 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
 
     @partner = @event.partners.find params.require(:id)
+
+    authorize! :read, @partner
   end
 
   def new
