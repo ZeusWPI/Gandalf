@@ -11,15 +11,15 @@ class Ability
     # Delegate with user precedence
     if entity.kind_of? User
       user_rules(entity)
-    else
-      parter_rules(entity)
+    elsif entity.kind_of? Partner
+      partner_rules(entity)
     end
   end
 
   def partner_rules(partner)
     # Partners can read and register
-    can :read, Partner, event_id: partner.event.id, partner_id: partner.id
-    can :register, Partner, event_id: partner.event.id, partner_id: partner.id
+    can :read, Partner, event_id: partner.event_id, id: partner.id
+    can :register, Partner, event_id: partner.event_id, id: partner.id
   end
 
   def user_rules(user)
@@ -41,8 +41,6 @@ class Ability
       can :manage, Registration
       can :manage, Partner
     end
-
-    can :manage, Partner
 
     # add register permission
     can :register, Event do |event|
