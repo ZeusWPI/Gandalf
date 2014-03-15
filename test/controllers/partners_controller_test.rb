@@ -94,6 +94,10 @@ class PartnersControllerTest < ActionController::TestCase
   test "should confirm correct access level for correct event" do
     sign_in partners(:KBC)
     xhr :post, :confirm, event_id: 1, id: 1
+
+    # Get latest registration here
+    r = Registration.last
+    r.inspect
   end
 
 end
