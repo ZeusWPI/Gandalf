@@ -13,7 +13,7 @@ class PartnersController < ApplicationController
 
   def show
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find params.require(:id)
+    @partner = @event.partners.find_by_id params.require(:id)
 
     authorize! :read, @partner
   end
@@ -78,25 +78,29 @@ class PartnersController < ApplicationController
 
   def confirm
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find params.require(:id)
+    @partner = @event.partners.find_by_id params.require(:id)
 
     authorize! :register, @partner
 
-    @registration = @event.registrations.new(
-      email:          @partner.email,
-      name:           @partner.name,
-      student_number: nil,
-      comment:        nil,
-      price:          @partner.access_level.price,
-      paid:           0
-    )
-    @registration.access_levels << @partner.access_level
-    @partner.confirmed = true
-    if @registration.save and @partner.save then
-      @registration.deliver
-      flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
+    if @partner.confirmed
+      flash.now[:error] = "You have already registered for this event. Please check your mailbox."
     else
-      flash.now[:error] = "Something went horribly wrong. Try again or contact us."
+      @registration = @event.registrations.new(
+        email:          @partner.email,
+        name:           @partner.name,
+        student_number: nil,
+        comment:        nil,
+        price:          @partner.access_level.price,
+        paid:           0
+      )
+      @registration.access_levels << @partner.access_level
+      @partner.confirmed = true
+      if @registration.save and @partner.save then
+        @registration.deliver
+        flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
+      else
+        flash.now[:error] = "Something went horribly wrong. Try again or contact us."
+      end
     end
   end
 
