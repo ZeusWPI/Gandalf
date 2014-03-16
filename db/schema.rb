@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308145734) do
+ActiveRecord::Schema.define(version: 20140314230223) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -127,8 +127,11 @@ ActiveRecord::Schema.define(version: 20140308145734) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "event_id"
+    t.integer  "access_level_id"
+    t.boolean  "confirmed"
   end
 
+  add_index "partners", ["access_level_id"], name: "index_partners_on_access_level_id"
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
   add_index "partners", ["email"], name: "index_partners_on_email", unique: true
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
