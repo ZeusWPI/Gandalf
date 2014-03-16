@@ -36,6 +36,7 @@ class AccessLevel < ActiveRecord::Base
   end
 
   default_scope { order "price, name" }
+  scope :public, -> { where(public: true) }
 
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones
