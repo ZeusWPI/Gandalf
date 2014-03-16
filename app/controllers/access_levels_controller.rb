@@ -13,10 +13,6 @@ class AccessLevelsController < ApplicationController
     authorize! :read, @event
   end
 
-  def new
-    @access_level = AccessLevel.new
-  end
-
   def edit
     @event = Event.find params.require(:event_id)
     authorize! :update, @event

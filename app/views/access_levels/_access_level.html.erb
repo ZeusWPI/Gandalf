@@ -1,7 +1,7 @@
 <tr id="<%= dom_id(access_level) %>">
   <td><%= access_level.name %></td>
   <td>
-    <%= access_level.registrations.count %>/<%= access_level.capacity.presence || "&infin;".html_safe %>
+    <%= access_level.registrations.size %> (<%= access_level.registrations.paid.size %>) / <%= access_level.capacity.presence || "&infin;".html_safe %>
     <span class="label label-<%= color_for_tickets_left(access_level) %> pull-right"><%= "#{pluralize(access_level.tickets_left, "ticket")} left" if access_level.capacity.presence %></span>
   </td>
   <td>&euro; <%= number_with_precision access_level.price || "0", precision: 2  %></td>
@@ -19,6 +19,6 @@
         <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
         <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
       <% end %>
-    </div<
+    </div>
   </td>
 </tr>

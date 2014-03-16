@@ -23,6 +23,8 @@ class Registration < ActiveRecord::Base
   has_many :accesses, dependent: :destroy
   has_many :access_levels, through: :accesses
 
+  scope :paid, -> { where("price <= paid") }
+
   validates :name, presence: true
   validates :email, presence: true, email: true
   validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
@@ -100,6 +102,18 @@ class Registration < ActiveRecord::Base
     return sprintf("GAN%02d%015d", random % 97, random)
   end
 
+  def deliver
+    if self.barcode.nil?
+      self.generate_barcode
+    end
+
+    if self.is_paid
+      RegistrationMailer.ticket(self).deliver
+    else
+      RegistrationMailer.confirm_registration(self).deliver
+    end
+  end
+
   private
 
   def from_cents(value)
@@ -110,5 +124,4 @@ class Registration < ActiveRecord::Base
     if value.is_a? String then value.sub!(',', '.') end
     (value.to_f * 100).to_int
   end
-
 end
