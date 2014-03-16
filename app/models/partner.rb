@@ -39,6 +39,8 @@ class Partner < ActiveRecord::Base
   # This will be fixed in the advanced view though.
   # validates :email, uniqueness: { scope: :event_id }
 
+  default_scope { order "name ASC" }
+
   def deliver
     PartnerMailer.invitation(self).deliver
   end

@@ -58,6 +58,9 @@ Isengard::Application.routes.draw do
         get :resend
         post :confirm
       end
+      collection do
+        post 'upload'
+      end
     end
   end
 
