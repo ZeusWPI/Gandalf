@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <%= render partial: "flash" %>
+
+    <h1>Welcome, <%= @partner.name %></h1>
+
+    <p>You are registered as a partner of <%= link_to @event.name, @event %> with the e-mail address "<%= @partner.email %>". Please contact them if you want to change this email address.</p>
+
+    <p id="register">
+      <strong>Ticket:</strong> <%= @partner.access_level.name_with_price %><br />
+      <% if @partner.confirmed %>
+        <%= link_to "You have already registered for this event.", "#", class: 'btn btn-warning' %>
+      <% else %>
+        <%= link_to "Register yourself for this event", confirm_event_partner_path(@event, @partner), method: :post, remote: true, class: 'btn btn-primary' %>
+      <% end %>
+    </p>
+
+  </div>
+</div>

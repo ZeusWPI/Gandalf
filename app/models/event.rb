@@ -31,6 +31,7 @@ class Event < ActiveRecord::Base
   belongs_to :club
 
   has_many :access_levels, dependent: :destroy
+  has_many :partners, dependent: :destroy
   has_many :zones, dependent: :destroy
   has_many :registrations, dependent: :destroy
 
