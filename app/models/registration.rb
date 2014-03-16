@@ -23,8 +23,8 @@ class Registration < ActiveRecord::Base
   has_many :accesses, dependent: :destroy
   has_many :access_levels, through: :accesses
 
-  validates :name, presence: true
-  validates :email, presence: true
+  validates :name, presence: true, uniqueness: { scope: :event_id }
+  validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
     uniqueness: { scope: :event }, allow_blank: true
   validates :student_number, presence: true, if: "access_levels.first.try(:member_only?)"
