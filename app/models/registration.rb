@@ -23,6 +23,8 @@ class Registration < ActiveRecord::Base
   has_many :accesses, dependent: :destroy
   has_many :access_levels, through: :accesses
 
+  scope :paid, -> { where("price <= paid") }
+
   validates :name, presence: true
   validates :email, presence: true
   validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" },

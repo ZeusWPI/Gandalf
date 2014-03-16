@@ -10,8 +10,10 @@
     <span id="export-link">
       <%= render 'events/export' %>
     </span>
-    <%= tag :div, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
+    <%= tag :span, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
+    <span class="pull-right btn btn-default"><strong>Total tickets:</strong> <%= @event.registrations.size %> (<%= @event.registrations.paid.size %> paid)</span>
 
+    <br />
     <br />
 
     <% if @registrations.blank? %>
