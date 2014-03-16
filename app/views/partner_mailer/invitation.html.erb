@@ -9,7 +9,7 @@
 
     <p>Wij, <%= @partner.event.club.name %>, zouden u graag uitnodigen voor <%= @partner.event.name %>. Om uw aanwezigheid te bevestigen en uw gepersonaliseerd ticket te ontvangen, kan u op onderstaande link klikken: Opgelet: als u niet op deze link klikt (en uw aanwezigheid dus niet bevestigt), zal u uw ticket niet ontvangen en dus ook geen toegang krijgen tot <%= @partner.event.name %>.</p>
 
-    <p><%= link_to event_partner_url(@partner.event, @partner), sign_in_event_partner_url(@partner.event, @partner, partner_email: @partner.email, partner_token: @partner.authentication_token) %></p>
+    <p><%= link_to event_partner_url(@partner.event, @partner, partner_email: @partner.email, partner_token: @partner.authentication_token), sign_in_event_partner_url(@partner.event, @partner, partner_email: @partner.email, partner_token: @partner.authentication_token) %></p>
 
     <p>Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= mail_to @partner.event.contact_email, @partner.event.contact_email %></p>
 
@@ -21,7 +21,7 @@
 
     <p>We, <%= @partner.event.club.name %>, would like to invite to <%= @partner.event.name %>. In order to confirm your presence and receive your personalized ticket, please click on the link below. Please not that if you do not click it (thus not confirming your presence), you will not receive your ticket and will not be granted access to <%= @partner.event.name %>.</p>
 
-    <p><%= link_to event_partner_url(@partner.event, @partner), sign_in_event_partner_url(@partner.event, @partner, partner_email: @partner.email, partner_token: @partner.authentication_token) %></p>
+    <p><%= link_to event_partner_url(@partner.event, @partner, partner_email: @partner.email, partner_token: @partner.authentication_token), sign_in_event_partner_url(@partner.event, @partner, partner_email: @partner.email, partner_token: @partner.authentication_token) %></p>
 
     <p>If you have any problems, you can contact us via mail: <%= mail_to @partner.event.contact_email, @partner.event.contact_email %></p>
 
