@@ -1,0 +1,49 @@
+# == Schema Information
+#
+# Table name: partners
+#
+#  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  email                  :string(255)
+#  authentication_token   :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  event_id               :integer
+#  access_level_id        :integer
+#  confirmed              :boolean
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+KBC:
+  id: 1
+  name: KBC
+  email: kbc@email.com
+  event_id: 1
+  access_level_id: 1
+  authentication_token: KBC
+
+Zeus:
+  id: 2
+  name: Zeus
+  email: zeus@email.com
+  event_id: 1
+  access_level_id: 1
+  authentication_token: zeus
+
+SKO:
+  id: 3
+  name: SKO
+  email: sko@email.com
+  event_id: 2
+  access_level_id: 1
+  authentication_token: sko

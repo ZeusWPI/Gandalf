@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308135535) do
+ActiveRecord::Schema.define(version: 20140314230223) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -110,6 +110,31 @@ ActiveRecord::Schema.define(version: 20140308135535) do
 
   add_index "included_zones", ["access_level_id"], name: "index_included_zones_on_access_level_id"
   add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
+
+  create_table "partners", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "authentication_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "event_id"
+    t.integer  "access_level_id"
+    t.boolean  "confirmed"
+  end
+
+  add_index "partners", ["access_level_id"], name: "index_partners_on_access_level_id"
+  add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
+  add_index "partners", ["email"], name: "index_partners_on_email", unique: true
+  add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
 
   create_table "periods", force: true do |t|
     t.datetime "starts"

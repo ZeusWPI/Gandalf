@@ -1,0 +1,5 @@
+<% unless partner.confirmed %>
+  <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_event_partner_path(@event, partner), class: "btn btn-default btn-xs", remote: true %>
+  <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend invitation'), resend_event_partner_path(@event, partner), class: 'btn btn-xs btn-default', remote: true %>
+  <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_partner_path(@event, partner), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
+<% end %>

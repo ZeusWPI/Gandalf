@@ -7,7 +7,7 @@
       <table class="table" id="table-access-levels">
         <thead>
           <th>Name</th>
-          <th width="150">Sold/Capacity</th>
+          <th width="200">Sold (Paid) /Capacity</th>
           <th>Price</th>
           <th>Availability</th>
           <th>Member Only</th>
@@ -19,8 +19,8 @@
           <th>Actions</th>
         </thead>
         <tbody>
-        <%= render @event.access_levels, advanced: @advanced %>
-        <%= render "access_levels/form", object: @event.access_levels.build, button_name: "Add Ticket"%>
+          <%= render @event.access_levels, advanced: @advanced %>
+          <%= render "access_levels/form", object: @event.access_levels.build, button_name: "Add Ticket" %>
         </tbody>
       </table>
       <div id='access-level-errors' class='form-errors'>

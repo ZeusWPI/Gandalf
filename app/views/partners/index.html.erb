@@ -1,0 +1,28 @@
+<%= render partial: "events/tabs" %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Manage Partners</h3>
+    <%= render partial: 'flash' %>
+    <%= link_to raw('<i class="glyphicon glyphicon-upload"></i> Upload CSV'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#upload-modal' %>
+
+    <div class="table-responsive">
+      <table class="table table-striped" id="table-partners">
+        <thead>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Ticket</th>
+          <th>Registered</th>
+          <th width="210">Actions</th>
+        </thead>
+        <tbody>
+          <%= render @event.partners %>
+          <%= render "partners/form", object: @event.partners.build, action: 'post', button_name: "Add Partner" %>
+        </tbody>
+      </table>
+      <div id='partner-errors' class='form-errors'>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: 'partners/upload_modal' %>

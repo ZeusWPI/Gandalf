@@ -17,6 +17,7 @@
         <li <%= raw 'class="active"' if current_page?(edit_event_path(@event)) %>><%= link_to "Edit event", edit_event_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(event_registrations_path(@event)) %>><%= link_to "Registrations", event_registrations_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(event_access_levels_path(@event)) && !@advanced %>><%= link_to "Tickets", event_access_levels_path(@event, advanced: false) %></li>
+        <li <%= raw 'class="active"' if current_page?(event_partners_path(@event)) %>><%= link_to "Partners", event_partners_path(@event) %></li>
         <%# <li class="dropdown<%= raw ' active"' if (current_page?(event_access_levels_path(@event)) && @advanced) || current_page?(event_zones_path(@event)) || current_page?(event_periods_path(@event)) %1>"> %>
         <%#   <a href="#" id="advanced_drop" data-toggle="dropdown" class="dropdown-toggle">Advanced <b class="caret"></b></a> %>
         <%#   <ul class="dropdown-menu" role="menu" aria-labelledby="advanced_drop"> %>

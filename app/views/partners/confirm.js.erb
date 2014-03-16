@@ -1,0 +1,4 @@
+$("#flash").replaceWith("<%= escape_javascript render "flash", locals: { flash: flash } %>");
+<% unless flash[:error] %>
+  $("#register").html("You have already registered for this event.");
+<% end %>

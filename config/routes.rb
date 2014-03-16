@@ -1,4 +1,5 @@
 Isengard::Application.routes.draw do
+  devise_for :partners
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -50,6 +51,17 @@ Isengard::Application.routes.draw do
     end
 
     resources :periods
+
+    resources :partners do
+      member do
+        get 'sign_in', to: 'sign_in#sign_in_partner'
+        get :resend
+        post :confirm
+      end
+      collection do
+        post 'upload'
+      end
+    end
   end
 
   patch "events/:event_id/access_level/:access_level_id/set_zones", to: "access_levels#set_zones", as: "set_zones_for_access_level"
