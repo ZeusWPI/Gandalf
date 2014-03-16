@@ -25,7 +25,9 @@ class Registration < ActiveRecord::Base
 
   scope :paid, -> { where("price <= paid") }
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :event_id }
+  # Uniqueness temporarily disabled; see the Partner model for the reason
+  #validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
   validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
     uniqueness: { scope: :event }, allow_blank: true

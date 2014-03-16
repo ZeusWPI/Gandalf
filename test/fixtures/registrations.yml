@@ -25,7 +25,7 @@ one:
   barcode: 1234567891231
   barcode_data: 123456789123
   name: Tom Naessens
-  email: siloxtom@gmail.com
+  email: supermail@gmail.com
   student_number: 1
   event_id: 1
   paid: 0
@@ -37,7 +37,7 @@ two:
   barcode: 2222222222222
   barcode_data: 22222222222
   name: Maarten Herthoge
-  email: m.herthoge.be@gmail.com
+  email: fakemail@gmail.com
   student_number: 2
   event_id: 2
   paid: 5
@@ -49,7 +49,7 @@ three:
   barcode: 012345678901
   barcode_data: 012345678901
   name: Felix Van der Jeugt
-  email: felix.vanderjeugt@gmail.com
+  email: felix.vanderjeblarghugt@gmail.com
   student_number: 3
   event_id: 1
   paid: 0
@@ -73,7 +73,7 @@ capacity_registration_<%= n %>:
   id: <%= 100 + n %>
   barcode: 123456789123
   barcode_data: 123456789123
-  email: capacity@test.com
+  email: capacity<%= n %>@test.com
   name: Capacity Tester <%= n %>
   paid: 0
   price: 0

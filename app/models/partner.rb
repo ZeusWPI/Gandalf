@@ -35,7 +35,7 @@ class Partner < ActiveRecord::Base
   # [Tom] I commented this out to fix a current restraint:
   # We sometimes only have the emailadress of a partner, even if
   # this partner is allowed to invite 5 persons. This way, we can
-  # add as many partners with a different name and the same adress.
+  # add as many partners with a different name and the same address.
   # This will be fixed in the advanced view though.
   # validates :email, uniqueness: { scope: :event_id }
   validates :email, email: true
