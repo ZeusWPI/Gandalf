@@ -7,7 +7,7 @@ Gandalf [![Analytics](https://ga-beacon.appspot.com/UA-25444917-6/ZeusWPI/gandal
 In short, Gandalf is a project that does everything that makes organising and managing an event a lot easier:
 
 ## 1. Isengard
-Isengard consists of 2 parts: the user front-end and the admin back-end. Users can register themselves and attend events. Optionally, they'll be able to pay. Admins can create events and manage them. They can add specific groups such as VIPs and press. They can also add employees and assign them to shifts.
+Isengard consists of 2 parts: the user front-end and the admin back-end. Users can register themselves and attend events. Optionally, they'll be able to pay. Admins can create events and manage them. They can add specific groups such as VIPs and press and send partnerised tickets. They can also add employees and assign them to shifts.
 
 ## 2. Uruk-hai
 Uruk-hai is the little server that syncs the little Hobbitses.

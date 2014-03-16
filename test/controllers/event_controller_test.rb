@@ -152,7 +152,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
-    date = "#{Date.today}"
+    date = "#{Time.zone.today}"
     get :statistics, { id: 1 }
     assert_response :success
     assert assigns(:data) == [
@@ -162,7 +162,7 @@ class EventControllerTest < ActionController::TestCase
       { name: "Limited2",  data: { date => 3 } },
       { name: "Member",    data: { date => 0 } },
       { name: "Unlimited", data: { date => 0 } }
-    ]
+    ], "Got #{assigns(:data).inspect} on #{date}"
   end
 
 end
