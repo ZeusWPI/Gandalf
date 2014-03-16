@@ -38,6 +38,7 @@ class Partner < ActiveRecord::Base
   # add as many partners with a different name and the same adress.
   # This will be fixed in the advanced view though.
   # validates :email, uniqueness: { scope: :event_id }
+  validates :email, email: true
 
   default_scope { order "name ASC" }
 

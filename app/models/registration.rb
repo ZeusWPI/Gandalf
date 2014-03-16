@@ -26,7 +26,7 @@ class Registration < ActiveRecord::Base
   scope :paid, -> { where("price <= paid") }
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, email: true
   validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
     uniqueness: { scope: :event }, allow_blank: true
   validates :student_number, presence: true, if: "access_levels.first.try(:member_only?)"
