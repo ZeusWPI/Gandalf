@@ -7,7 +7,7 @@
     <td width="130px"><%= form_check_box f, :member_only %></td>
     <td><div class="checkbox"><%= f.check_box :has_comment %></div></td>
     <td><div class="checkbox"><%= f.check_box :hidden %></div></td>
-    <td><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
+    <td><input type="hidden" name="_method" value="<%= (button_name == 'Save') ? 'put' : 'post'  %>"><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
     <%= javascript_tag do %>
       var id = "#<%=dom_id(f.object) %>";
       var inputs = $(id).parent().find('input');
