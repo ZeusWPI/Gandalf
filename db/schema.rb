@@ -133,15 +133,6 @@ ActiveRecord::Schema.define(version: 20140308145734) do
   add_index "partners", ["email"], name: "index_partners_on_email", unique: true
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
 
-  create_table "people", force: true do |t|
-    t.string   "username"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "people", ["username"], name: "index_people_on_username", unique: true
-
   create_table "periods", force: true do |t|
     t.datetime "starts"
     t.datetime "ends"
