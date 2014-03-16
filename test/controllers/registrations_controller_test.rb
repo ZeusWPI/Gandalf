@@ -168,7 +168,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       event_id: galabal.id,
       registration: {
         access_levels: 2,
-        email: "a@b.c",
+        email: "a@b.com",
         name: "Ab Cd",
         student_number: 123,
         comment: ""

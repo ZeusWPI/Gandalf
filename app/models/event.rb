@@ -45,6 +45,7 @@ class Event < ActiveRecord::Base
   validates :club, presence: true
   validates :start_date, presence: true
 
+  validates :contact_email, email: true
   validates_with IBANValidator
 
   has_attached_file :export
