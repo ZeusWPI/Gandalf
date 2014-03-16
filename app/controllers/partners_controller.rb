@@ -30,9 +30,10 @@ class PartnersController < ApplicationController
 
     @partner = @event.partners.new params.require(:partner).permit(:name, :email)
     @partner.access_level = al
-    @partner.save
 
-    @partner.deliver
+    if @partner.save
+      @partner.deliver
+    end
 
     respond_with @partner
   end
