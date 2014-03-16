@@ -40,7 +40,7 @@
       <div class="row">
         <div class="col-sm-12">
           <ul class="list-group">
-            <% @event.access_levels.each do |al| %>
+            <% @event.access_levels.public.each do |al| %>
               <%= render partial: "events/ticket", locals: {al: al} %>
             <% end %>
           </ul>
