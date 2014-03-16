@@ -6,13 +6,13 @@
     <td></td>
     <td><input type="hidden" name="_method" value="<%= action %>"><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
     <%= javascript_tag do %>
-      var id = "#<%=dom_id(f.object) %>";
+      var id = "#<%= dom_id(f.object) %>";
       var inputs = $(id).parent().find('input');
-      var selects = $(id).parent().find('select');
+      var select = $(id).parent().find('select');
       $(id).parent().find('button').on('click', function(e) {
         e.preventDefault();
         $(id).append(inputs.clone());
-        $(id).append(selects.clone());
+        $(id).append("<input type'hidden' name='partner[access_level]' value='" + select.val() + "'>");
         $(id).submit();
       });
     <% end %>
