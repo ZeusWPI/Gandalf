@@ -18,12 +18,6 @@ class SignInController < ApplicationController
     # see http://stackoverflow.com/questions/11017348/rails-api-authentication-by-headers-token
     params_token_name = "partner_token".to_sym
     params_email_name = "partner_email".to_sym
-    if token = params[params_token_name].blank?
-      params[params_token_name] = token
-    end
-    if email = params[params_email_name].blank?
-      params[params_email_name] = email
-    end
 
     email = params[params_email_name].presence
     token = params[params_token_name].presence
