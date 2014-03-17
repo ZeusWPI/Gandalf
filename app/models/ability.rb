@@ -20,6 +20,7 @@ class Ability
     # Partners can read and register
     can :read, Partner, event_id: partner.event_id, id: partner.id
     can :register, Partner, event_id: partner.event_id, id: partner.id
+    can :show, Event
   end
 
   def user_rules(user)
