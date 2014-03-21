@@ -5,6 +5,10 @@ rvm:
 before_script:
   - "RAILS_ENV=test bundle exec rake db:setup"
 
+branches:
+  except:
+    - dont-merge/offline-scanning-without-authentication
+
 notifications:
   email:
     recipients:
