@@ -1,8 +1,21 @@
-
 <%= render partial: 'flash' %>
 
-<h1>Welcome!</h1>
+<div class="container-index">
+  <div class="jumbotron">
+    <h1>Welcome!</h1>
+    <p>Welcome to Gandalf, an online event management service brought to you by <a href="http://zeus.ugent.be/" target="_blank">Zeus WPI</a> and <a href="http://www.fkgent.be/" target="_blank">FaculteitenKonvent Gent</a>.</p>
+  </div>
 
-<p>Welcome to Gandalf, an online event management service brought to you by <a href="http://zeus.ugent.be/" target="_blank">Zeus WPI</a> and <a href="http://www.fkgent.be/" target="_blank">FaculteitenKonvent Gent</a></p>
+  <div class="row marketing">
+    <div class="col-lg-6">
+      <h4>Guests</h4>
+      <p>Click on <%= link_to "Events", events_path %> in the menu to register or buy tickets for an event.</p>
+    </div>
 
-<p>Click on <%= link_to "Events", events_path %> in the menu to register or buy tickets for an event.</p>
+    <div class="col-lg-6">
+      <h4>FK Praesidia</h4>
+      <p>FK Praesidia can <%= link_to "log in", new_user_session_path %> using their UGent credentials and create events.</p>
+    </div>
+  </div>
+</div>
+
