@@ -4,15 +4,17 @@
     <td><%= f.email_field :email, class: 'form-control' %></td>
     <td><%= f.collection_select :access_level, object.event.access_levels, :id, :name_with_price, {}, { class: "form-control" } %></td>
     <td></td>
-    <td><input type="hidden" name="_method" value="<%= action %>"><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
+    <td><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
     <%= javascript_tag do %>
-      var id = "#<%= dom_id(f.object) %>";
+      var id = "#<% if button_name == 'Save' %>edit_<% end %><%= dom_id(f.object) %>";
       var inputs = $(id).parent().find('input');
       var select = $(id).parent().find('select');
+
       $(id).parent().find('button').on('click', function(e) {
         e.preventDefault();
         $(id).append(inputs.clone());
         $(id).append("<input type'hidden' name='partner[access_level]' value='" + select.val() + "'>");
+        $(id).append('<input type="hidden" name="_method" value="<%= (button_name == 'Save') ? 'put' : 'post'  %>">');
         $(id).submit();
       });
     <% end %>
