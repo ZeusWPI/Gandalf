@@ -4,16 +4,7 @@ Gandalf [![Analytics](https://ga-beacon.appspot.com/UA-25444917-6/ZeusWPI/gandal
 
 
 # What is Gandalf?
-In short, Gandalf is a project that does everything that makes organising and managing an event a lot easier:
-
-## 1. Isengard
-Isengard consists of 2 parts: the user front-end and the admin back-end. Users can register themselves and attend events. Optionally, they'll be able to pay. Admins can create events and manage them. They can add specific groups such as VIPs and press and send partnerised tickets. They can also add employees and assign them to shifts.
-
-## 2. Uruk-hai
-Uruk-hai is the little server that syncs the little Hobbitses.
-
-## 3. Hobbit
-The Hobbits are mini servers that have a printer and a barcode scanner.
+In short, Gandalf is a project that does everything that makes organising and managing an event a lot easier for FK-clubs of the University of Ghent. The application is written specificly for the UGent FakulteitenKonvent. It allows students to register for events and it also interacts with the FK-Enrolment database and allows members of student unions to subscribe to member-only events from their clubs.
 
 # Contributors (in order of contribution)
 1. Felix Van der Jeugt
