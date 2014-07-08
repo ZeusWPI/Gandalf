@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invitee_id: 
+  inviter_id: 
+  comment: MyText
+  paid: 1
+  price: 1
+  delivered: false
+  accepted: false
+  access_level_id: 
+
+two:
+  invitee_id: 
+  inviter_id: 
+  comment: MyText
+  paid: 1
+  price: 1
+  delivered: false
+  accepted: false
+  access_level_id: 

@@ -29,15 +29,12 @@ class Partner < ActiveRecord::Base
   devise :timeoutable, :trackable
 
   belongs_to :event
-  belongs_to :access_level
+
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: :inviter_id
+  has_many :received_invitations, class_name: "Invitation", foreign_key: :invitee_id
 
   validates :name, uniqueness: { scope: :event_id }
-  # [Tom] I commented this out to fix a current restraint:
-  # We sometimes only have the emailadress of a partner, even if
-  # this partner is allowed to invite 5 persons. This way, we can
-  # add as many partners with a different name and the same address.
-  # This will be fixed in the advanced view though.
-  # validates :email, uniqueness: { scope: :event_id }
+  validates :email, uniqueness: { scope: :event_id }
   validates :email, email: true
 
   default_scope { order "name ASC" }
