@@ -1,0 +1,8 @@
+
+<%= form_tag invite_event_partner_invitations_url(@event, @partner), method: :post, remote: true, id: dom_id(access_level) do %>
+  <%= hidden_field_tag(:access_level, access_level.id) %>
+  <%= @partner.received_invitations.where(access_level_id: access_level, delivered: true).count %> of
+  <%= number_field_tag :invite_count, @partner.received_invitations.where(access_level_id: access_level).count, min: @partner.received_invitations.where(access_level_id: access_level, delivered: true).count %>
+  <%= submit_tag :send %>
+<% end %>
+

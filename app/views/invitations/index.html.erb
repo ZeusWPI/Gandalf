@@ -1,0 +1,30 @@
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <h3>Send Invitations</h3>
+    <%= render partial: 'flash' %>
+
+    <p>Send invitations for partner <%= @partner.name %> (<%= @partner.email %>) using the table below. You can also retract the invitations, if they are not yet delivered.</p>
+
+    <div class="table-responsive">
+      <table class="table table-striped" id="table-partners">
+        <thead>
+          <th>Access Level</th>
+          <th>Invites Used</th>
+        </thead>
+        <tbody>
+          <% @event.access_levels.each do |al| %>
+            <tr>
+              <td><%= al.name %></td>
+              <td><%= render partial: 'form', locals: { access_level: al } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div id='partner-errors' class='form-errors'>
+      </div>
+    </div>
+
+  </div>
+</div>

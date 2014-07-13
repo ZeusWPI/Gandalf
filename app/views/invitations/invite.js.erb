@@ -1,0 +1,3 @@
+
+$("#flash").replaceWith("<%= escape_javascript render "flash", locals: { flash: flash } %>");
+$('#<%= dom_id(@access_level) %>').replaceWith("<%= escape_javascript render partial: "form", locals: { access_level: @access_level } %>");

@@ -61,6 +61,11 @@ Isengard::Application.routes.draw do
       collection do
         post 'upload'
       end
+      resources :invitations, only: [:index] do
+        collection do
+          post :invite
+        end
+      end
     end
   end
 
