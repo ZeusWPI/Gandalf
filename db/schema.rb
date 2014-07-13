@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316194936) do
+ActiveRecord::Schema.define(version: 20140708175633) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -111,6 +111,23 @@ ActiveRecord::Schema.define(version: 20140316194936) do
   add_index "included_zones", ["access_level_id"], name: "index_included_zones_on_access_level_id"
   add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
 
+  create_table "invitations", force: true do |t|
+    t.integer  "invitee_id"
+    t.integer  "inviter_id"
+    t.text     "comment"
+    t.integer  "paid"
+    t.integer  "price"
+    t.boolean  "delivered",       default: false
+    t.boolean  "accepted",        default: false
+    t.integer  "access_level_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invitations", ["access_level_id"], name: "index_invitations_on_access_level_id"
+  add_index "invitations", ["invitee_id"], name: "index_invitations_on_invitee_id"
+  add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id"
+
   create_table "partners", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -127,11 +144,9 @@ ActiveRecord::Schema.define(version: 20140316194936) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "event_id"
-    t.integer  "access_level_id"
     t.boolean  "confirmed"
   end
 
-  add_index "partners", ["access_level_id"], name: "index_partners_on_access_level_id"
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
 

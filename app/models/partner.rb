@@ -32,6 +32,7 @@ class Partner < ActiveRecord::Base
 
   has_many :sent_invitations, class_name: "Invitation", foreign_key: :inviter_id
   has_many :received_invitations, class_name: "Invitation", foreign_key: :invitee_id
+  has_many :access_levels, through: :received_invitations
 
   validates :name, uniqueness: { scope: :event_id }
   validates :email, uniqueness: { scope: :event_id }

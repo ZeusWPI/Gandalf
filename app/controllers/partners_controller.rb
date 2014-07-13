@@ -26,10 +26,7 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    al = @event.access_levels.find(params.require(:partner).require(:access_level))
-
     @partner = @event.partners.new params.require(:partner).permit(:name, :email)
-    @partner.access_level = al
 
     if @partner.save
       @partner.deliver
@@ -50,10 +47,7 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    al = @event.access_levels.find(params.require(:partner).require(:access_level))
-
     @partner = @event.partners.find params.require(:id)
-    @partner.access_level = al
     @partner.update params.require(:partner).permit(:name, :email)
 
     @partner.deliver
@@ -77,6 +71,7 @@ class PartnersController < ApplicationController
     partner.deliver
   end
 
+  # TODO move to invitation
   def confirm
     @event = Event.find params.require(:event_id)
     @partner = @event.partners.find_by_id params.require(:id)
@@ -105,6 +100,8 @@ class PartnersController < ApplicationController
     end
   end
 
+  # TODO remove access_level from the csv, or parse multiple lines and create an
+  # invitation for each.
   def upload
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
