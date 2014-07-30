@@ -10,6 +10,8 @@ branches:
     - dont-merge/offline-scanning-without-authentication
 
 notifications:
+  slack: zeuswpi:EWgfa9aeAwSfi3mnLxw6Hi9N
+
   email:
     recipients:
       - gandalf@zeus.ugent.be
