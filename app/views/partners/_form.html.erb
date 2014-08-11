@@ -13,7 +13,7 @@
       $(id).parent().find('button').on('click', function(e) {
         e.preventDefault();
         $(id).append(inputs.clone());
-        $(id).append("<input type'hidden' name='partner[access_level]' value='" + select.val() + "'>");
+        $(id).append("<input type='hidden' name='partner[access_level]' value='" + select.val() + "'>");
         $(id).append('<input type="hidden" name="_method" value="<%= (button_name == 'Save') ? 'put' : 'post'  %>">');
         $(id).submit();
       });
