@@ -29,19 +29,14 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    invoke 'puma:restart'
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        execute "touch #{current_path}/tmp/restart.txt"
+      end
+    end
     invoke 'delayed_job:restart'
   end
 
   after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
 
 end
