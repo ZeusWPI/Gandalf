@@ -85,7 +85,7 @@ gem 'ckeditor_rails'
 gem 'chartkick'
 
 # Attachements
-gem 'paperclip', '~> 3.0'
+gem 'paperclip', '~> 4.0'
 gem 'spreadsheet'
 
 # Run stuff in the background
