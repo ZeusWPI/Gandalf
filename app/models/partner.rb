@@ -31,6 +31,8 @@ class Partner < ActiveRecord::Base
   belongs_to :event
   belongs_to :access_level
 
+  after_save :deliver, if: :email_changed?
+
   validates :name, uniqueness: { scope: :event_id }
   # [Tom] I commented this out to fix a current restraint:
   # We sometimes only have the emailadress of a partner, even if
