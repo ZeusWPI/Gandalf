@@ -15,6 +15,7 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     @partner = @event.partners.find_by_id params.require(:id)
 
+    # TODO uncomment after manual testing
     #authorize! :read, @partner
   end
 

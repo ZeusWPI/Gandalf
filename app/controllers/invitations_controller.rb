@@ -21,17 +21,17 @@ class InvitationsController < ApplicationController
     current = @partner.received_invitations.where access_level: @access_level
     current_count = current.count
 
-    # can't remove delivered invites here
-    min_count = current.where(delivered: true).count
+    # can't remove selected invites here
+    min_count = current.where(selected: true).count
     if min_count > new_count
-      flash.now[:error] = "You cannot remove delivered invites."
+      flash.now[:error] = "You cannot remove selected invites."
     end
     new_count = [new_count, min_count].max
 
     if new_count < current_count
       # remove superfluous invites
       logger.debug("HEY HEY HEY #{new_count}")
-      current.where(delivered: false).take(current_count - new_count).each do |i|
+      current.where(selected: false).take(current_count - new_count).each do |i|
         i.destroy
       end
       flash.now[:success] = "#{@access_level.name} invitations removed"
@@ -52,6 +52,7 @@ class InvitationsController < ApplicationController
   end
 
   def accept
+    # TODO repalce after manual testing
     #authorize! :register, @partner
 
     if @invitation.accepted
