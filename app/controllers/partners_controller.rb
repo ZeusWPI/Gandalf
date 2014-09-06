@@ -1,7 +1,7 @@
 class PartnersController < ApplicationController
 
   before_action :authenticate_user!, except: [:show, :confirm]
-  before_action :authenticate_partner!, only: [:show, :confirm]
+  #before_action :authenticate_partner!, only: [:show, :confirm]
 
   respond_to :html, :js
 
@@ -15,7 +15,7 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     @partner = @event.partners.find_by_id params.require(:id)
 
-    authorize! :read, @partner
+    #authorize! :read, @partner
   end
 
   def new
@@ -29,6 +29,7 @@ class PartnersController < ApplicationController
     @partner = @event.partners.new params.require(:partner).permit(:name, :email)
 
     if @partner.save
+      # TODO deliver? SHould be invitation...
       @partner.deliver
     end
 
@@ -69,35 +70,6 @@ class PartnersController < ApplicationController
 
     partner = @event.partners.find params.require(:id)
     partner.deliver
-  end
-
-  # TODO move to invitation
-  def confirm
-    @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find_by_id params.require(:id)
-
-    authorize! :register, @partner
-
-    if @partner.confirmed
-      flash.now[:error] = "You have already registered for this event. Please check your mailbox."
-    else
-      @registration = @event.registrations.new(
-        email:          @partner.email,
-        name:           @partner.name,
-        student_number: nil,
-        comment:        nil,
-        price:          @partner.access_level.price,
-        paid:           0
-      )
-      @registration.access_levels << @partner.access_level
-      @partner.confirmed = true
-      if @registration.save and @partner.save then
-        @registration.deliver
-        flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
-      else
-        flash.now[:error] = "Is seems there already is someone with your name and/or email registered for this event. #{view_context.mail_to @event.contact_email, "Contact us"} if this is not correct.".html_safe
-      end
-    end
   end
 
   # TODO remove access_level from the csv, or parse multiple lines and create an

@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Invitation for <%= invitation.access_level.name %>
+  </div>
+  <div class="panel-body">
+    <% if invitation.comment.present? %>
+      <p><%= invitation.comment %></p>
+    <% end %>
+    <% if invitation.paid == invitation.price %>
+      <p>This invitation has been paid.<p>
+    <% elsif invitation.paid == 0 %>
+      <p>This invitation still needs to be payed. It costs <%= invitation.price %> euro's</p>
+    <% else %>
+      <p>This invitation has been payed partially (<%= invitation.paid %> out of <%= invitation.price %>).</p>
+    <% end %>
+    <div class="actions">
+      <% if invitation.selected %>
+        <a href="<%= deselect_event_partner_invitation_path(@event, @partner, invitation) %>">Take out</a>
+      <% else %>
+        <a href="<%= accept_event_partner_invitation_path(@event, @partner, invitation) %>">Accept...</a>
+        <a href="<%= select_event_partner_invitation_path(@event, @partner, invitation) %>">Put in Enveloppe</a>
+      <% end %>
+    </div>
+  </div>
+</div>

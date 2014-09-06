@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140713130649) do
+ActiveRecord::Schema.define(version: 20140905231719) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20140713130649) do
     t.text     "comment"
     t.integer  "paid"
     t.integer  "price"
-    t.boolean  "delivered",       default: false
+    t.boolean  "selected",        default: false
     t.boolean  "accepted",        default: false
     t.integer  "access_level_id"
     t.datetime "created_at"

@@ -56,14 +56,19 @@ Isengard::Application.routes.draw do
       member do
         get 'sign_in', to: 'sign_in#sign_in_partner'
         get :resend
-        post :confirm
       end
       collection do
         post 'upload'
       end
       resources :invitations, only: [:index] do
+        member do
+          get :accept
+          get :select
+          get :deselect
+        end
         collection do
           post :invite
+          post :pass
         end
       end
     end
