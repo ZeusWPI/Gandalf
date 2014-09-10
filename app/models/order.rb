@@ -17,6 +17,7 @@
 
 class Order < ActiveRecord::Base
   belongs_to :event
+  has_many :ticket
 
   scope :paid, -> { where("price <= paid") }
 

@@ -1,0 +1,43 @@
+<h1>Listing tickets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Gsm</th>
+      <th>Checked in at</th>
+      <th>Event</th>
+      <th>Order</th>
+      <th>Student number</th>
+      <th>Comment</th>
+      <th>Barcode</th>
+      <th>Barcode data</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.name %></td>
+        <td><%= ticket.email %></td>
+        <td><%= ticket.gsm %></td>
+        <td><%= ticket.checked_in_at %></td>
+        <td><%= ticket.event %></td>
+        <td><%= ticket.order %></td>
+        <td><%= ticket.student_number %></td>
+        <td><%= ticket.comment %></td>
+        <td><%= ticket.barcode %></td>
+        <td><%= ticket.barcode_data %></td>
+        <td><%= link_to 'Show', ticket %></td>
+        <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ticket', new_ticket_path %>

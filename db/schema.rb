@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910112715) do
+ActiveRecord::Schema.define(version: 20140910120108) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -193,6 +193,26 @@ ActiveRecord::Schema.define(version: 20140910112715) do
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
   add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code", unique: true
+
+  create_table "tickets", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "gsm"
+    t.datetime "checked_in_at"
+    t.integer  "event_id"
+    t.integer  "order_id"
+    t.string   "student_number"
+    t.text     "comment"
+    t.string   "barcode"
+    t.string   "barcode_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "access_level_id"
+  end
+
+  add_index "tickets", ["access_level_id"], name: "index_tickets_on_access_level_id"
+  add_index "tickets", ["event_id"], name: "index_tickets_on_event_id"
+  add_index "tickets", ["order_id"], name: "index_tickets_on_order_id"
 
   create_table "users", force: true do |t|
     t.string   "username",            default: "", null: false

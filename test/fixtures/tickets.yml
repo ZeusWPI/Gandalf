@@ -1,0 +1,45 @@
+# == Schema Information
+#
+# Table name: tickets
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  gsm             :string(255)
+#  checked_in_at   :datetime
+#  event_id        :integer
+#  order_id        :integer
+#  student_number  :string(255)
+#  comment         :text
+#  barcode         :string(255)
+#  barcode_data    :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  access_level_id :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  gsm: MyString
+  checked_in_at: 2014-09-10 13:53:32
+  event_id: 
+  order_id: 
+  student_number: MyString
+  comment: MyText
+  barcode: MyString
+  barcode_data: MyString
+
+two:
+  name: MyString
+  email: MyString
+  gsm: MyString
+  checked_in_at: 2014-09-10 13:53:32
+  event_id: 
+  order_id: 
+  student_number: MyString
+  comment: MyText
+  barcode: MyString
+  barcode_data: MyString
