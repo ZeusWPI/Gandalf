@@ -20,7 +20,7 @@
 
 class Registration < ActiveRecord::Base
   belongs_to :event
-  has_many :accesses, dependent: :destroy
+
   has_many :access_levels, through: :accesses
 
   scope :paid, -> { where("price <= paid") }

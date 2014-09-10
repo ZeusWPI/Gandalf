@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910120108) do
+ActiveRecord::Schema.define(version: 20140910120947) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -27,18 +27,6 @@ ActiveRecord::Schema.define(version: 20140910120108) do
   end
 
   add_index "access_levels", ["event_id"], name: "index_access_levels_on_event_id"
-
-  create_table "accesses", force: true do |t|
-    t.integer  "period_id"
-    t.integer  "registration_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "access_level_id"
-  end
-
-  add_index "accesses", ["access_level_id"], name: "index_accesses_on_access_level_id"
-  add_index "accesses", ["period_id"], name: "index_accesses_on_period_id"
-  add_index "accesses", ["registration_id"], name: "index_accesses_on_registration_id"
 
   create_table "clubs", force: true do |t|
     t.string   "full_name"
@@ -101,33 +89,6 @@ ActiveRecord::Schema.define(version: 20140910120108) do
     t.boolean  "registration_open",       default: true
   end
 
-  create_table "included_zones", force: true do |t|
-    t.integer  "zone_id"
-    t.integer  "access_level_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "included_zones", ["access_level_id"], name: "index_included_zones_on_access_level_id"
-  add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
-
-  create_table "invitations", force: true do |t|
-    t.integer  "invitee_id"
-    t.integer  "inviter_id"
-    t.text     "comment"
-    t.integer  "paid"
-    t.integer  "price"
-    t.boolean  "selected",        default: false
-    t.boolean  "accepted",        default: false
-    t.integer  "access_level_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "invitations", ["access_level_id"], name: "index_invitations_on_access_level_id"
-  add_index "invitations", ["invitee_id"], name: "index_invitations_on_invitee_id"
-  add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id"
-
   create_table "orders", force: true do |t|
     t.string   "status"
     t.string   "name"
@@ -159,21 +120,13 @@ ActiveRecord::Schema.define(version: 20140910120108) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "event_id"
+    t.integer  "access_level_id"
+    t.boolean  "confirmed"
   end
 
+  add_index "partners", ["access_level_id"], name: "index_partners_on_access_level_id"
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
-
-  create_table "periods", force: true do |t|
-    t.datetime "starts"
-    t.datetime "ends"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "event_id"
-  end
-
-  add_index "periods", ["event_id"], name: "index_periods_on_event_id"
 
   create_table "registrations", force: true do |t|
     t.string   "barcode"
@@ -245,15 +198,5 @@ ActiveRecord::Schema.define(version: 20140910120108) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-
-  create_table "zones", force: true do |t|
-    t.string   "name"
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "zones", ["event_id"], name: "index_zones_on_event_id"
-  add_index "zones", ["name", "event_id"], name: "index_zones_on_name_and_event_id", unique: true
 
 end

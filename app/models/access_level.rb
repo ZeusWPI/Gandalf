@@ -19,11 +19,7 @@
 class AccessLevel < ActiveRecord::Base
   belongs_to :event
 
-  has_many :included_zones, dependent: :destroy
-  has_many :zones, through: :included_zones
-
-  has_many :accesses, dependent: :destroy
-  has_many :registrations, through: :accesses
+  has_many :ticket
 
   validates :name, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }

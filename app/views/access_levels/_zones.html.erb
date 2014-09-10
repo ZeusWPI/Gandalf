@@ -1,9 +1,0 @@
-<%= form_for [access_level.event, access_level],
-  url: set_zones_for_access_level_path(access_level.event, access_level),
-  remote: true do |f| %>
-  <%= f.collection_check_boxes(:zones, access_level.event.zones, lambda {|z| [z.id, access_level.id]}, :name,  checked: access_level.zones.map {|z| [z.id, access_level.id]}) do |b| %>
-    <%= b.check_box %>
-    <%= b.label { b.text } %>
-    <br>
-  <% end %>
-<% end %>

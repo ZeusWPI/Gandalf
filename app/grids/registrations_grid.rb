@@ -16,9 +16,9 @@ class RegistrationsGrid
   column(:name)
   column(:email)
   column(:access_level, header: "Ticket", order: proc { |scope|
-    scope.joins(:accesses).joins(:access_levels).order("access_levels.name")
+    scope.joins(:access_levels).order("access_levels.name")
   }) do |registration|
-    registration.access_levels.first.try :name
+    registration.access_level.try :name
   end
   column(:payment_code)
   column(:to_pay, html: true, order: "registrations.price - paid", descending: true) do |registration|

@@ -2,7 +2,7 @@
   $('#access-level-errors').html("<%= escape_javascript form_errors(@access_level) %>")
 <% else %>
   $('#access-level-errors').html('')
-  $('#edit_<%= dom_id(@access_level) %>').parent().replaceWith("<%=j  render @access_level, advanced: false %>");
+  $('#edit_<%= dom_id(@access_level) %>').parent().replaceWith("<%=j  render @access_level %>");
 
   var id = "#new_access_level";
   var inputs = $(id).parent().find('input');
