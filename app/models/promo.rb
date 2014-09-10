@@ -13,4 +13,8 @@
 class Promo < ActiveRecord::Base
   belongs_to :event
   has_and_belongs_to_many :access_levels
+
+  def tickets_sold?
+    self.sold_tickets != 0
+  end
 end
