@@ -23,7 +23,7 @@ one:
   email: MyString
   gsm: MyString
   ticket_id: 1
-  event_id: 
+  event_id:
   paid: 1
   price: 1
 
@@ -33,6 +33,6 @@ two:
   email: MyString
   gsm: MyString
   ticket_id: 1
-  event_id: 
+  event_id:
   paid: 1
   price: 1
