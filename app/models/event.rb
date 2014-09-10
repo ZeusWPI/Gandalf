@@ -49,6 +49,8 @@ class Event < ActiveRecord::Base
   validates_with IBANValidator
 
   has_attached_file :export
+  validates_attachment_file_name :export, :matches => /.*/
+  validates_attachment_content_type :export, :content_type => /.*/
 
   before_save :prettify_bank_number
 

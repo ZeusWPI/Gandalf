@@ -28,11 +28,9 @@ class PartnersController < ApplicationController
     authorize! :update, @event
 
     @partner = @event.partners.new params.require(:partner).permit(:name, :email)
-
-    if @partner.save
-      # TODO deliver? SHould be invitation...
-      @partner.deliver
-    end
+    @partner.access_level = al
+    # TODO deliver? SHould be invitation...
+    @partner.save
 
     respond_with @partner
   end
@@ -51,8 +49,6 @@ class PartnersController < ApplicationController
 
     @partner = @event.partners.find params.require(:id)
     @partner.update params.require(:partner).permit(:name, :email)
-
-    @partner.deliver
 
     respond_with @partner
   end
