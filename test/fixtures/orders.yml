@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: orders
+#
+#  id         :integer          not null, primary key
+#  status     :string(255)
+#  name       :string(255)
+#  email      :string(255)
+#  gsm        :string(255)
+#  ticket_id  :integer
+#  event_id   :integer
+#  paid       :integer
+#  price      :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  name: MyString
+  email: MyString
+  gsm: MyString
+  ticket_id: 1
+  event_id: 
+  paid: 1
+  price: 1
+
+two:
+  status: MyString
+  name: MyString
+  email: MyString
+  gsm: MyString
+  ticket_id: 1
+  event_id: 
+  paid: 1
+  price: 1

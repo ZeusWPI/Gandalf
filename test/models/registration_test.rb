@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: registrations
+#
+#  id             :integer          not null, primary key
+#  barcode        :string(255)
+#  name           :string(255)
+#  email          :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  event_id       :integer
+#  paid           :integer
+#  student_number :string(255)
+#  price          :integer
+#  checked_in_at  :datetime
+#  comment        :text
+#  barcode_data   :string(255)
+#  payment_code   :string(255)
+#
+
 require 'test_helper'
 
 class RegistrationTest < ActiveSupport::TestCase

@@ -18,8 +18,6 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  event_id               :integer
-#  access_level_id        :integer
-#  confirmed              :boolean
 #
 
 class Partner < ActiveRecord::Base

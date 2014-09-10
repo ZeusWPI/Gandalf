@@ -1,0 +1,18 @@
+<%= simple_form_for(@order) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :status %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :gsm %>
+    <%= f.input :ticket_id %>
+    <%= f.association :event %>
+    <%= f.input :paid %>
+    <%= f.input :price %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
