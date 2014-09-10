@@ -1,7 +1,7 @@
 <tr id="<%= dom_id(promo) %>">
 <td><%= promo.code %></td>
 <td><%= promo.limit %></td>
-<td>TICKETJES</td>
+<td><%= promo.access_levels.map(&:name).join(', ') %></td>
   <td>
     <div class="nowrap">
       <% unless promo.tickets_sold? %>

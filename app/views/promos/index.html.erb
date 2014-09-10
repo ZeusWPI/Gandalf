@@ -14,11 +14,10 @@
         </thead>
         <tbody>
           <%= render @event.promos %>
-
-          <%# <%= render "access_levels/form", object: @event.access_levels.build, button_name: "Add Ticket" %>
+          <%= render "promos/form", object: @event.promos.build, button_name: "Add Promo" %>
         </tbody>
       </table>
-      <div id='access-level-errors' class='form-errors'>
+      <div id='promo-errors' class='form-errors'>
       </div>
     </div>
   </div>
