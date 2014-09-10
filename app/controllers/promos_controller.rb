@@ -53,4 +53,23 @@ class PromosController < ApplicationController
     end
   end
 
+  def generate
+    @event = Event.find params.require(:event_id)
+    authorize! :update, @event
+    amount = params[:amount].to_i
+    limit = params[:limit].to_i
+    access_levels = @event.access_levels.find(params[:access_levels].split(',')) rescue []
+
+    if amount <= 0 || limit <= 0
+      flash[:error] = "Amount and Maximum uses should be greater than zero!"
+      redirect_to event_promos_path(@event)
+    elsif access_levels.blank?
+      flash[:error] = "Tickets should be specified"
+      redirect_to event_promos_path(@event)
+    else
+      Promo.generate_bulk(amount, limit, access_levels, @event)
+      redirect_to event_promos_path(@event)
+    end
+  end
+
 end
