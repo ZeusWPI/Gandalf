@@ -36,6 +36,9 @@ gem 'simple_form'
 # Datagrid is nice
 gem 'datagrid'
 
+# Wicked gem
+gem 'wicked'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
