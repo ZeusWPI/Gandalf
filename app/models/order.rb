@@ -21,6 +21,8 @@ class Order < ActiveRecord::Base
 
   scope :paid, -> { where("price <= paid") }
 
+  has_paper_trail only: [:paid, :payment_code]
+
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true
@@ -85,7 +87,7 @@ class Order < ActiveRecord::Base
     end
 
     if self.is_paid
-      OrderMailer.ticket(self).deliver
+      # OrderMailer.ticket(self).deliver
     else
       OrderMailer.confirm_order(self).deliver
     end
