@@ -12,5 +12,5 @@
 
 class Promo < ActiveRecord::Base
   belongs_to :event
-  has_many :access_levels, through: :promo_access_levels_join_table
+  has_and_belongs_to_many :access_levels
 end
