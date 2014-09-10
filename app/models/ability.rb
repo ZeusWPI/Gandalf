@@ -39,7 +39,8 @@ class Ability
     # Admins can do anything!
     if user.admin?
       can :manage, Event
-      can :manage, Registration
+      can :manage, Ticket
+      can :manage, Order
       can :manage, Partner
     end
 
@@ -74,9 +75,14 @@ class Ability
       end
     end
 
-    # add modify registrations permission for club members
-    can :update, Registration do |registration|
-      clubs.include? registration.event.club
+    # add modify tickets permission for club members
+    can :update, Ticket do |ticket|
+      clubs.include? ticket.event.club
+    end
+
+    # add modify tickets permission for club members
+    can :update, Order do |order|
+      clubs.include? ticket.event.club
     end
 
     # can view statistics?

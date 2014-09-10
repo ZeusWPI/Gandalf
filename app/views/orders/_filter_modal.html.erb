@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Filter</h4>
       </div>
-      <%= form_for @ordergrid, url: event_orders_path, method: :get do |f| %>
+      <%= form_for @ordersgrid, url: event_orders_path, method: :get do |f| %>
       <div class="modal-body">
         <%= form_text_field f, :name %>
         <%= form_text_field f, :email %>

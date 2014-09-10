@@ -7,10 +7,6 @@
     <%= link_to raw('<i class="glyphicon glyphicon-filter"></i> Filter orders'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#filter-modal' %>
     <%= link_to raw('<i class="glyphicon glyphicon-upload"></i> Upload CSV'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#upload-modal' %>
     <%= link_to raw('<i class="glyphicon glyphicon-envelope"></i> Send email'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#mail-modal' %>
-    <span id="export-link">
-      <%= render 'events/export' %>
-    </span>
-    <%= tag :span, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
     <span class="pull-right btn btn-default"><strong>Total tickets:</strong> <%= @event.orders.size %> (<%= @event.orders.paid.size %> paid)</span>
 
     <br />
