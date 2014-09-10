@@ -1,0 +1,10 @@
+<%= content_tag_for :tr, ticket do %>
+  <td><%= ticket.name %></td>
+  <td><%= ticket.email %></td>
+  <td><%= ticket.access_level :name %></td>
+  <td><%= ticket.payment_code %></td>
+  <td><%= ticket.order.paid? %></td>
+  <td>
+    <%= render partial: 'ticket_actions', locals: { ticket: ticket } %>
+  </td>
+<% end %>

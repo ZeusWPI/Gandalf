@@ -19,8 +19,4 @@ require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
   verify_fixtures Order
-
-  # test "the truth" do
-  #   assert true
-  # end
 end

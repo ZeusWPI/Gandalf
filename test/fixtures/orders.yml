@@ -18,21 +18,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  status: MyString
-  name: MyString
-  email: MyString
-  gsm: MyString
-  ticket_id: 1
-  event_id:
-  paid: 1
-  price: 1
+  id: 1
+  name: Tom Naessens
+  email: supermail@gmail.com
+  event_id: 1
+  paid: 0
+  price: 0
+  payment_code: <%= Order.create_payment_code %>
 
 two:
-  status: MyString
-  name: MyString
-  email: MyString
-  gsm: MyString
-  ticket_id: 1
-  event_id:
-  paid: 1
-  price: 1
+  id: 2
+  name: Maarten Herthoge
+  email: fakemail@gmail.com
+  event_id: 2
+  paid: 5
+  price: 10
+  payment_code: <%= Order.create_payment_code %>
+
+three:
+  id: 3
+  name: Felix Van der Jeugt
+  email: felix.vanderjeblarghugt@gmail.com
+  event_id: 1
+  paid: 0
+  price: 20
+  payment_code: GAN7539840256920891
+
+four:
+  id: 4
+  name: Felix Van der Jeugd
+  email: felix.vanderjeugd@gmail.com
+  event_id: 1
+  paid: 5
+  price: 10
+  payment_code: <%= Order.create_payment_code %>

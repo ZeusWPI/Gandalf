@@ -1,0 +1,17 @@
+Dear <%= @order.name %>,
+
+This mail is being sent to you because you payed to much for the ticket you bought with our event management application. Please check out any faults in below information and contact us at <%= mail_to @order.event.contact_email, @order.event.contact_email %> for any changes.
+
+Event:
+<%= @order.event.name %>
+Organisation:
+<%= @order.event.club.name %>
+Location:
+<%= @order.event.location %>
+Price:
+<%= @order.price %>
+Paid:
+<%= @order.paid %>
+
+Kind regards,
+<%= @order.event.club.name %>

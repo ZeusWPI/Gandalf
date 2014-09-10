@@ -1,0 +1,11 @@
+<%= content_tag_for :tr, order do %>
+  <td><%= order.name %></td>
+  <td><%= order.email %></td>
+  <td><%= order.payment_code %></td>
+  <td>
+    <%= render partial: 'order_payment_form', locals: { order: order } %>
+  </td>
+  <td>
+    <%= render partial: 'order_actions', locals: { order: order } %>
+  </td>
+<% end %>

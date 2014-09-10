@@ -1,0 +1,16 @@
+<%= form_for [order.event, order], method: :patch, remote: true, html: { class: 'form-inline' } do |f| %>
+  <div class="input-group input-group-sm <%= f.object.is_paid ? 'has-success' : 'has-error' %>">
+      <div class="input-group-addon">&euro;</div>
+      <%= f.text_field :to_pay, value: number_with_precision(f.object.to_pay, precision: 2), disabled: true, class: 'disabling order-paid form-control' %>
+      <%= f.hidden_field :price, value: number_with_precision(f.object.price, precision: 2), disabled: true, class: 'order-price' %>
+      <div class="input-group-addon">
+        <%= check_box_tag 'is_paid', '1', f.object.is_paid, class: 'disabling order-box input-append', disabled: true %>
+      </div>
+      <div class="input-group-btn">
+        <button class="btn btn-default order-lock" type="button">
+          <div class="glyphicon glyphicon-lock"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+$("#flash").replaceWith("<%= escape_javascript render partial: 'flash' %>")
+$("#<%= dom_id(@ticket) %>").replaceWith("<%= escape_javascript render partial: 'ticket', locals: { ticket: @ticket } %>")

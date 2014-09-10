@@ -1,0 +1,31 @@
+<% unless @order.comment.blank? %>
+  <h4>Comment</h4>
+  <p>
+    <%= @order.comment %>
+  </p>
+<% end %>
+
+
+<h4>Changes</h4>
+<table class="table table-responsive table-striped">
+  <tr>
+    <th>Action</th>
+    <th>By</th>
+    <th>At</th>
+    <th>Details</th>
+  </tr>
+  <% @order.versions.each do |version| %>
+    <tr>
+      <td><%= version.event %></td>
+      <td><%= version.whodunnit.nil? ? "Anonymous user" : User.find(version.whodunnit).display_name %></td>
+      <td><%= nice_time version.created_at %></td>
+      <td>
+        <ul class="no-margin no-padding">
+          <% version.changeset.each do |name, change| %>
+            <%= raw("<li>#{nice_changeset(name, change)}</li>") unless version.event == 'create' %>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+</table>

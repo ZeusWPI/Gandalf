@@ -21,7 +21,7 @@
 class Registration < ActiveRecord::Base
   belongs_to :event
 
-  has_many :access_levels, through: :accesses
+  has_one :access_level
 
   scope :paid, -> { where("price <= paid") }
 

@@ -17,13 +17,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @registration = @event.registrations.build
-
-    if current_user
-      @registration.name = current_user.display_name
-      @registration.student_number = current_user.cas_ugentStudentID
-      @registration.email = current_user.cas_mail
-    end
   end
 
   def new
@@ -68,9 +61,9 @@ class EventsController < ApplicationController
     @event = Event.find params.require(:id)
     authorize! :view_stats, @event
 
-    if not @event.registrations.empty?
+    if not @event.tickets.empty?
 
-      min, max = @event.registrations.pluck(:created_at).minmax
+      min, max = @event.tickets.pluck(:created_at).minmax
       zeros = Hash[]
       while min <= max
         zeros[min.strftime("%Y-%m-%d")] = 0
@@ -78,7 +71,7 @@ class EventsController < ApplicationController
       end
 
       @data = @event.access_levels.map do |al|
-        {name: al.name, data: zeros.merge(al.registrations.group('date(registrations.created_at)').count)}
+        {name: al.name, data: zeros.merge(al.tickets.group('date(tickets.created_at)').count)}
       end
 
     else
@@ -96,17 +89,17 @@ class EventsController < ApplicationController
     authorize! :update, @event
     barcode = params.require(:code)
 
-    @registration = @event.registrations.find_by_barcode barcode
+    @ticket = @event.tickets.find_by_barcode barcode
 
-    if @registration
-      if not @registration.is_paid
-        flash.now[:warning] = "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
-      elsif @registration.checked_in_at
-        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(@registration.checked_in_at) + "!"
+    if @ticket
+      if not @ticket.order.is_paid
+        flash.now[:warning] = "Person has not paid yet! Resting amount: €" + @ticket.order.to_pay.to_s
+      elsif @ticket.checked_in_at
+        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(@ticket.checked_in_at) + "!"
       else
         flash.now[:success] = "Person has been scanned!"
-        @registration.checked_in_at = Time.now
-        @registration.save!
+        @ticket.checked_in_at = Time.now
+        @ticket.save!
       end
     else
       flash.now[:error] = "Barcode not found"

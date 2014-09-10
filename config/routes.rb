@@ -1,6 +1,5 @@
 Isengard::Application.routes.draw do
 
-  resources :tickets
 
   devise_for :partners
   devise_for :users
@@ -25,27 +24,12 @@ Isengard::Application.routes.draw do
       post 'toggle_registration_open'
     end
 
-    resources :zones
     resources :access_levels do
-      resources :zones
       member do
         get 'toggle_visibility'
       end
     end
     resources :role_names
-    resources :registrations do
-      member do
-        get 'resend'
-        get 'info'
-      end
-
-      collection do
-        post 'basic'
-        post 'advanced'
-        post 'upload'
-        post 'email'
-      end
-    end
 
     member do
       get 'statistics'
@@ -53,9 +37,27 @@ Isengard::Application.routes.draw do
       post 'check_in'
     end
 
-    resources :periods
+    resources :tickets do
+      member do
+        get 'resend'
+        get 'info'
+      end
 
-    resources :orders
+      collection do
+        post 'email'
+      end
+    end
+    resources :orders do
+      member do
+        get 'resend'
+        get 'info'
+      end
+
+      collection do
+        post 'upload'
+        post 'email'
+      end
+    end
 
     resources :partners do
       member do
@@ -68,6 +70,4 @@ Isengard::Application.routes.draw do
       end
     end
   end
-
-  patch "events/:event_id/access_level/:access_level_id/set_zones", to: "access_levels#set_zones", as: "set_zones_for_access_level"
 end

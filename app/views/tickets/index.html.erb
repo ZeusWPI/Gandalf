@@ -1,43 +1,38 @@
-<h1>Listing tickets</h1>
+<%= render partial: "events/tabs" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Gsm</th>
-      <th>Checked in at</th>
-      <th>Event</th>
-      <th>Order</th>
-      <th>Student number</th>
-      <th>Comment</th>
-      <th>Barcode</th>
-      <th>Barcode data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Registrations</h3>
+    <%= render partial: 'flash' %>
+    <%= link_to raw('<i class="glyphicon glyphicon-filter"></i> Filter registrations'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#filter-modal' %>
+    <%= link_to raw('<i class="glyphicon glyphicon-envelope"></i> Send email'), '#', class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => '#mail-modal' %>
+    <span id="export-link">
+      <%= render 'events/export' %>
+    </span>
+    <%= tag :span, id: "export_status_url", data: {url: export_status_event_path(@event)} %>
+    <span class="pull-right btn btn-default"><strong>Total registrations:</strong> <%= @event.tickets.size %></span>
 
-  <tbody>
-    <% @tickets.each do |ticket| %>
-      <tr>
-        <td><%= ticket.name %></td>
-        <td><%= ticket.email %></td>
-        <td><%= ticket.gsm %></td>
-        <td><%= ticket.checked_in_at %></td>
-        <td><%= ticket.event %></td>
-        <td><%= ticket.order %></td>
-        <td><%= ticket.student_number %></td>
-        <td><%= ticket.comment %></td>
-        <td><%= ticket.barcode %></td>
-        <td><%= ticket.barcode_data %></td>
-        <td><%= link_to 'Show', ticket %></td>
-        <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <br />
+    <br />
+
+    <% if @tickets.blank? %>
+      <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Warning!</strong> No registrations found. If you have set any filters, you can
+        <%= link_to "reset", event_tickets_path(@event) %> these.
+      </div>
+    <% else %>
+      <%= bootstrap_pagination @tickets %>
+      <table class="table table-striped table-hover" id="table-tickets">
+        <%= datagrid_header @ticketsgrid %>
+        <%= datagrid_rows @ticketsgrid, @tickets %>
+      </table>
+      <%= bootstrap_pagination @tickets %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
 
-<br>
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<%= render partial: 'tickets/email_modal' %>
+<%= render partial: 'tickets/info_modal' %>
+<%= render partial: 'tickets/filter_modal' %>

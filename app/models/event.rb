@@ -33,6 +33,7 @@ class Event < ActiveRecord::Base
   has_many :access_levels, dependent: :destroy
   has_many :partners, dependent: :destroy
   has_many :tickets, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   validates :description, presence: true
   validates :end_date, presence: true

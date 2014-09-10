@@ -76,9 +76,9 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "show unpaid for checked in unpaid tickets" do
-    reg = registrations(:one)
+    reg = tickets(:one)
     reg.checked_in_at = Time.now
-    reg.price = 10
+    reg.order.price = 10
     reg.save
 
     post :check_in, id: events(:codenight).id, code: '1234567891231'

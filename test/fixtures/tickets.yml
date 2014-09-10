@@ -21,25 +21,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  gsm: MyString
-  checked_in_at: 2014-09-10 13:53:32
-  event_id: 
-  order_id: 
-  student_number: MyString
-  comment: MyText
-  barcode: MyString
-  barcode_data: MyString
+  id: 1
+  name: Tom Naessens
+  email: supermail@gmail.com
+  student_number: 1
+  event_id: 1
+  order_id: 1
 
 two:
-  name: MyString
-  email: MyString
-  gsm: MyString
-  checked_in_at: 2014-09-10 13:53:32
-  event_id: 
-  order_id: 
-  student_number: MyString
-  comment: MyText
-  barcode: MyString
-  barcode_data: MyString
+  id: 2
+  barcode: 2222222222222
+  barcode_data: 22222222222
+  name: Maarten Herthoge
+  email: fakemail@gmail.com
+  student_number: 2
+  event_id: 2
