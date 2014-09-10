@@ -1,0 +1,25 @@
+<%= render partial: "events/tabs" %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Manage Promos</h3>
+    <%= render partial: 'flash' %>
+    <div class="table-responsive">
+      <table class="table" id="table-promos">
+        <thead>
+          <th>Code</th>
+          <th>Limit</th>
+          <th>Tickets</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <%= render @event.promos %>
+
+          <%# <%= render "access_levels/form", object: @event.access_levels.build, button_name: "Add Ticket" %>
+        </tbody>
+      </table>
+      <div id='access-level-errors' class='form-errors'>
+      </div>
+    </div>
+  </div>
+</div>
