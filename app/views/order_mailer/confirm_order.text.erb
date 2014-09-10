@@ -1,0 +1,29 @@
+(English version below)
+
+Beste <%= @order.name %>,
+
+Bedankt voor het bestellen van een ticket voor <%= @order.event.name %> van <%= @order.event.club.name %>. Als u zich niet opgegeven hebt voor dit ticket, dan heeft iemand anders uw e-mailadres gebruikt om dit te registreren. Mocht dit het geval zijn, mag u deze e-mail negeren.
+
+Om uw ticket te ontvangen via e-mail, schrijft u <%= number_with_precision @order.to_pay, precision: 2 %> euro over op het rekeningnummer <%= @order.event.bank_number || "our bank account" %>. Plaats de code "<%= @order.payment_code %>" in de mededeling van de overschrijving (zonder aanhalingstekens). Als u de code vergeet mee te geven of niet correct vermeldt in de beschrijving, dan kunnen wij uw betaling niet verwerken en zal u uw ticket niet ontvangen. U mag maximaal 1 code ingeven per overschrijving.
+
+Gelieve ten laatste 3 dagen voor het evenement te betalen. Indien dit niet meer lukt, gelieve ons te contacteren via <%= @order.event.contact_email %> om een andere betalingswijze af te spreken. Eens we uw betaling verwerkt hebben, zal u uw ticket via e-mail ontvangen.
+
+Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contacteren: <%= @order.event.contact_email %>
+
+Met vriendelijke groet,
+<%= @order.event.club.name %>
+
+-------------------------------------
+
+Dear <%= @order.name %>,
+
+Thank you for buying a ticket for <%= @order.event.name %> of <%= @order.event.club.name %>. If you did not register for this ticket, someone else used your email address to register. If this is the case, please ignore this email.
+
+To receive your ticket by mail, please transfer <%= number_with_precision @order.to_pay, precision: 2 %> euro to <%= @order.event.bank_number || "our bank account" %>. Place "<%= @order.payment_code %>" in the description of your transfer (without the quotation marks). If you forget this code or you do not copy it correctly, we cannot process your payment and you will not receive your ticket. You are only allowed to enter one code per transfer.
+
+Please pay at least 3 days before the event. If this is no longer possible, please contact us via <%= @order.event.contact_email %> to agree upon a different payment method. You will receive your ticket by mail once we processed your payment.
+
+If you have any problems, you can contact us via mail: <%= @order.event.contact_email %>
+
+Kind regards,
+<%= @order.event.club.name %>

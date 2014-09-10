@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @order.name %>,</p>
+
+	<p>This email is your ticket to enter the following event:</p>
+
+	<table>
+      <tbody>
+	  <tr>
+        <td><strong>Event</strong></td>
+        <td><%= @order.event.name %></td>
+	  </tr>
+	  <tr>
+        <td><strong>Organisation</strong></td>
+        <td><%= @order.event.club.name %></td>
+      </tr>
+      <tr>
+        <td><strong>Location</strong></td>
+        <td><%= @order.event.location %></td>
+      </tr>
+      <tr>
+        <td><strong>Start date</strong></td>
+        <td><%= nice_time @order.event.start_date %></td>
+      </tr>
+      <tr>
+        <td><strong>End date</strong></td>
+        <td><%= nice_time @order.event.end_date %></td>
+      </tr>
+      <tr>
+        <td><strong>Website</strong></td>
+        <td><a href="<%= @order.event.website %>"><%= @order.event.website %></a></td>
+      </tr>
+      </tbody>
+	</table>
+
+    <p>Below is your personal barcode (ticket type: <%= @order.access_levels.first.try :name %>).</p>
+    <br />
+    <%= image_tag attachments['barcode.png'].url %>
+	<br />
+
+    <p><strong>Do not forget to print this email and bring it with you. This email acts as your ticket. Without it, you will not be granted access to <%= @order.event.name %>.</strong><p>
+
+	<p>If you have any problems, you can contact us via mail: <%= mail_to @order.event.contact_email, @order.event.contact_email %></p>
+
+	<p>Kind regards,<br /><%= @order.event.club.name %></p>
+
+  </body>
+</html>
