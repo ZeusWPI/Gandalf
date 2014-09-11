@@ -1,0 +1,27 @@
+<%= fields_for :ticket do |f| %>
+  <tr>
+    <td>
+      <%= ticket.access_level.name %>
+    </td>
+    <td>
+      <div class="form-group">
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </td>
+    <td>
+      <div class="form-group">
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+    </td>
+    <td>
+      <div class="form-group">
+        <%= f.email_field :email_confirmation, class: 'form-control' %>
+      </div>
+    </td>
+    <td>
+      <div class="form-group">
+        <%= f.text_field :gsm, class: 'form-control' %>
+      </div>
+    </td>
+  </tr>
+<% end %>
