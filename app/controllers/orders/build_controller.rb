@@ -12,6 +12,7 @@ class Orders::BuildController < ApplicationController
       @access_levels = @event.access_levels.find_all { |al| can? :show, al }
     when :add_info
     when :add_ticket_info
+      @tickets = @order.tickets
     when :pay
     end
 
@@ -41,13 +42,17 @@ class Orders::BuildController < ApplicationController
         else
           # create exactly as many as needed
           (amount - tickets.count).times do
-            @order.tickets.create access_level_id: id
+            @order.tickets.create! access_level_id: id
           end
         end
       end
     when :add_info
       @order.update params.require(:order).permit(:name, :email, :email_confirmation, :gsm)
     when :add_ticket_info
+      @tickets = @order.tickets
+      params.require(:tickets).each do |id, ticket|
+        @tickets.find(id).update ticket
+      end
     when :pay
     end
 

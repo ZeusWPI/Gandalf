@@ -18,8 +18,8 @@ module ApplicationHelper
     render partial: "form_errors", locals: {object: object}
   end
 
-  def form_text_field(f, tag, *args)
-    render partial: "form_text_field", locals: {f: f, tag: tag, args: args}
+  def form_text_field(f, tag)
+    render partial: "form_text_field", locals: {f: f, tag: tag}
   end
 
   def form_text_area(f, tag)

@@ -28,8 +28,7 @@ class Ticket < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :event_id }, if: :parent_add_ticket_info?
   # Uniqueness temporarily disabled; see the Partner model for the reason
   #validates :email, presence: true, uniqueness: { scope: :event_id }
-  validates :email, confirmation: true, presence: true, email: true, if: :parent_add_ticket_info?
-  validates :email_confirmation, presence: true, if: :parent_add_ticket_info?
+  validates :email, presence: true, email: true, if: :parent_add_ticket_info?
   validates :student_number,
     format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
     uniqueness: { scope: :event }, allow_blank: true,
@@ -46,6 +45,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def parent_add_ticket_info?
+    logger.debug self.order.status
     self.order.active_or_add_ticket_info?
   end
 

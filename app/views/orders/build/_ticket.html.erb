@@ -1,4 +1,4 @@
-<%= fields_for :ticket do |f| %>
+<%= tickets.fields_for ticket.id.to_s, ticket do |f| %>
   <tr>
     <td>
       <%= ticket.access_level.name %>
@@ -15,13 +15,15 @@
     </td>
     <td>
       <div class="form-group">
-        <%= f.email_field :email_confirmation, class: 'form-control' %>
-      </div>
-    </td>
-    <td>
-      <div class="form-group">
         <%= f.text_field :gsm, class: 'form-control' %>
       </div>
     </td>
   </tr>
+  <% if ticket.errors.any? %>
+    <tr>
+      <td colspan="5">
+        <%= form_errors ticket %>
+      </td>
+    </tr>
+  <% end %>
 <% end %>
