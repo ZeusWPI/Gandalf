@@ -1,0 +1,27 @@
+<h3>Generate Promo Codes</h3>
+<%= form_tag(generate_event_promos_path(@event), class: 'form-horizontal') do |f| %>
+  <div class='form-group'>
+    <%= label_tag :amount, "Amount:", class: "col-sm-2 control-label"%>
+    <div class='col-sm-3'>
+      <%= number_field_tag :amount, 0, min:0, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= label_tag :limit, "Maximum uses:", class: 'col-sm-2 control-label' %>
+    <div class='col-sm-3'>
+      <%= number_field_tag :limit, 0, min:0, class: 'form-control' %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= label_tag :access_levels, "Tickets:", class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <%= select_tag :access_levels, options_from_collection_for_select(@event.access_levels,:id, :name_with_price), id: 'generate-tickets-select', multiple: true %>
+    </div>
+  </div>
+
+  <div class='form-group'>
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= button_tag "Generate", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

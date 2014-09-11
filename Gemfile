@@ -125,6 +125,9 @@ gem 'ri_cal'
 
 gem 'airbrake'
 
+# select2 is beautiful
+gem 'select2-rails'
+
 group :production do
   gem 'mysql2' # Database
 end

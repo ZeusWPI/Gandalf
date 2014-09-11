@@ -1,0 +1,9 @@
+<% if @promo.errors.any? %>
+  $('#promo-errors').html("<%= escape_javascript form_errors(@promo) %>")
+<% else %>
+  $('#promo-errors').html('')
+  $('#edit_<%= dom_id(@promo) %>').parent().replaceWith("<%=j render @promo %>");
+
+  var id = "#new_promo";
+  var inputs = $(id).parent().find('input');
+<% end %>

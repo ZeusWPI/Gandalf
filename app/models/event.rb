@@ -34,6 +34,7 @@ class Event < ActiveRecord::Base
   has_many :partners, dependent: :destroy
   has_many :zones, dependent: :destroy
   has_many :registrations, dependent: :destroy
+  has_many :promos, dependent: :destroy
 
   has_many :periods, dependent: :destroy
 

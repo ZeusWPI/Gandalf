@@ -1,19 +1,18 @@
 # == Schema Information
 #
-# Table name: zones
+# Table name: promos
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
 #  event_id   :integer
+#  code       :string(255)
+#  limit      :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 require 'test_helper'
 
-class ZoneTest < ActiveSupport::TestCase
-  verify_fixtures Zone
-
+class PromoTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

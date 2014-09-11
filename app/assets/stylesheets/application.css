@@ -9,6 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require datagrid
+ *= require select2
+ *= require select2-bootstrap
  *= require_self
  *= require_tree .
  */
