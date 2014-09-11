@@ -2,7 +2,9 @@
 
 <div class="row">
   <div class="col-sm-8">
+    <h3>Pick your tickets</h3>
 
+    <%= form_errors @order %>
     <%= render partial: 'flash' %>
 
     <%= form_for [@event, @order], url: wizard_path do |f| %>

@@ -23,6 +23,8 @@ class Order < ActiveRecord::Base
 
   has_paper_trail only: [:paid, :payment_code]
 
+  # Should validate on add_tickets
+  validates :tickets, presence: { message: "is empty! Please pick at least one." }, if: :active_or_add_tickets?
   # Should validate on add_info
   validates :name, presence: true, if: :active_or_add_info?
   validates :gsm, presence: true, if: :active_or_add_info?
@@ -45,6 +47,10 @@ class Order < ActiveRecord::Base
   # Wicked methods
   def active?
     status == 'active'
+  end
+
+  def active_or_add_tickets?
+    status.include?('add_tickets') || active?
   end
 
   def active_or_add_info?

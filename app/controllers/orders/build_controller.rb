@@ -20,7 +20,7 @@ class Orders::BuildController < ApplicationController
 
   def create
     @event = Event.find params.require(:event_id)
-    @order = @event.orders.create status: steps.first.to_s
+    @order = @event.orders.create! status: 'initial'
 
     redirect_to wizard_path(steps.first, order_id: @order.id)
   end
@@ -31,6 +31,7 @@ class Orders::BuildController < ApplicationController
 
     case step
     when :add_tickets
+      @access_levels = @event.access_levels.find_all { |al| can? :show, al }
       params.require(:access_levels).each do |id, amount|
         amount = amount[:amount].to_i
         tickets = @order.tickets.where(access_level_id: id)
