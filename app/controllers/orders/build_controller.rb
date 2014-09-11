@@ -32,6 +32,7 @@ class Orders::BuildController < ApplicationController
     case step
     when :add_tickets
     when :add_info
+      @order.update params.require(:order).permit(:name, :email, :email_confirmation, :gsm)
     when :add_ticket_info
     when :pay
     end

@@ -23,6 +23,13 @@ class Order < ActiveRecord::Base
 
   has_paper_trail only: [:paid, :payment_code]
 
+  # Should validate on add_info
+  validates :name, presence: true, if: :active_or_add_info?
+  validates :gsm, presence: true, if: :active_or_add_info?
+  validates :email, confirmation: true, presence: true, if: :active_or_add_info?
+  validates :email_confirmation, presence: true, if: :active_or_add_info?
+
+  # Should validate on pay
   validates :paid, presence: true, numericality: { only_integer: true }, if: :active_or_pay?
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :active_or_pay?
   validates :payment_code, presence: true, uniqueness: true, if: :active_or_pay?
@@ -38,6 +45,10 @@ class Order < ActiveRecord::Base
   # Wicked methods
   def active?
     status == 'active'
+  end
+
+  def active_or_add_info?
+    status.include?('add_info') || active?
   end
 
   def active_or_pay?
