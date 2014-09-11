@@ -45,6 +45,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def parent_add_ticket_info?
+    logger.debug self.order.status
     self.order.active_or_add_ticket_info?
   end
 

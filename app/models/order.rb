@@ -25,11 +25,15 @@ class Order < ActiveRecord::Base
 
   # Should validate on add_tickets
   validates :tickets, presence: { message: "is empty! Please pick at least one." }, if: :active_or_add_tickets?
+
   # Should validate on add_info
   validates :name, presence: true, if: :active_or_add_info?
   validates :gsm, presence: true, if: :active_or_add_info?
-  validates :email, confirmation: true, presence: true, if: :active_or_add_info?
+  validates :email, email: true, confirmation: true, if: :active_or_add_info?
   validates :email_confirmation, presence: true, if: :active_or_add_info?
+
+  # Should validate on add_ticket_info
+  validates_associated :tickets, if: :active_or_add_ticket_info?
 
   # Should validate on pay
   validates :paid, presence: true, numericality: { only_integer: true }, if: :active_or_pay?
