@@ -1,7 +1,7 @@
 <%= render partial: "events/tabs" %>
 
 <div class="row">
-  <div class="col-sm-7">
+  <div class="col-sm-6">
     <h3>Description</h3>
     <table class="table">
       <tr>
@@ -35,6 +35,8 @@
       </tr>
     </table>
 
+  </div>
+  <div class="col-sm-6">
     <% unless @event.access_levels.blank? %>
       <h3>Tickets</h3>
       <div class="row">
@@ -46,6 +48,7 @@
           </ul>
         </div>
       </div>
+
+      <%= button_to "Buy tickets now", event_order_build_index_path(@event, :new), class: 'btn btn-primary' %>
     <% end %>
-  </div>
 </div>

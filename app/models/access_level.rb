@@ -21,6 +21,8 @@ class AccessLevel < ActiveRecord::Base
 
   has_many :tickets
 
+  attr_accessor :amount
+
   validates :name, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :capacity, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }

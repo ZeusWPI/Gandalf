@@ -60,8 +60,8 @@ gem 'devise_cas_authenticatable'
 # Token authentication for partners
 gem 'simple_token_authentication'
 
-# CanCan is used for authorization
-gem 'cancan'
+# CanCanCan is used for authorization
+gem 'cancancan', '~> 1.9'
 gem 'httparty'
 
 # Logging is awesome, and paper_trail even more

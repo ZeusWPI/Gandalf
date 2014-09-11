@@ -57,6 +57,18 @@ class Ability
       end
     end
 
+    can :show, AccessLevel do |access_level|
+      # not if you can't register for the event
+      next false unless can? :register, access_level.event
+
+      next false if access_level.hidden
+
+      # don't support private tickets for the moment
+      next false unless access_level.public
+
+      true
+    end
+
     # can you register for an access level
     can :register, AccessLevel do |access_level|
       # not if you can't register for the event

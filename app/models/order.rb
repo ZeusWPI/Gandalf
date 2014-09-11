@@ -23,9 +23,9 @@ class Order < ActiveRecord::Base
 
   has_paper_trail only: [:paid, :payment_code]
 
-  validates :paid, presence: true, numericality: { only_integer: true }
-  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :payment_code, presence: true, uniqueness: true
+  validates :paid, presence: true, numericality: { only_integer: true }, if: :active_or_pay?
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :active_or_pay?
+  validates :payment_code, presence: true, uniqueness: true, if: :active_or_pay?
 
   default_scope { order "name ASC" }
 
@@ -35,8 +35,13 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Wicked methods
   def active?
     status == 'active'
+  end
+
+  def active_or_pay?
+    status.include?('pay') || active?
   end
 
   def paid

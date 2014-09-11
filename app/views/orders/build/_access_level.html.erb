@@ -1,0 +1,13 @@
+<tr>
+  <td><%= access_level.name %></td>
+  <td>
+    <span class="label label-<%= color_for_tickets_left(access_level) %> pull-right"><%= "#{pluralize(access_level.tickets_left, "ticket")} left" if access_level.capacity.presence %></span>
+  </td>
+  <td>&euro; <%= number_with_precision access_level.price || "0", precision: 2  %></td>
+  <td><%= access_level.member_only ? 'Yes' : 'No' %></td>
+  <td>
+    <%= af.fields_for access_level.id.to_s, access_level do |al_fields| %>
+      <%= al_fields.number_field :amount %>
+    <% end %>
+  </td>
+</tr>
