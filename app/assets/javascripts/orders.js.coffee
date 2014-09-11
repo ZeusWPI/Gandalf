@@ -26,6 +26,15 @@ ready = ->
 
   $('th.to_pay').attr("width", 175)
 
+  $('.btn-inc').on 'click', ->
+    input = $(this).parent().parent().find('input').first()
+    input.val(parseInt(input.val()) + 1)
+
+  $('.btn-dec').on 'click', ->
+    input = $(this).parent().parent().find('input').first()
+    if input.val() != '0'
+      input.val(parseInt(input.val()) - 1)
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

@@ -1,18 +1,28 @@
 <%= render partial: "events/tabs" %>
 
 <div class="row">
-  <div class="col-sm-6">
-    <h3>Pick your tickets</h3>
+  <div class="col-sm-8">
 
     <%= render partial: 'flash' %>
 
     <%= form_for [@event, @order], url: wizard_path do |f| %>
       <%= fields_for :access_levels do |af| %>
-        <table class="table table-hover">
-          <%= render partial: "access_level", collection: @access_levels, locals: {af: af} %>
-        </table>
+        <% @access_levels.partition(&:member_only?).reverse.each do |c| %>
+          <h4><%= c.first.member_only? ? "Member-only Tickets" : "Regular Tickets" %></h4>
+          <table class="table table-hover">
+            <thead>
+              <th>Name</th>
+              <th>Tickets left</th>
+              <th>Price</th>
+              <th>Amount</th>
+            </thead>
+            <tbody>
+              <%= render partial: "access_level", collection: c, locals: {af: af, order: @order} %>
+            <tbody>
+          </table>
+        <% end %>
       <% end %>
-      <%= f.submit %>
+      <%= f.submit 'Place your order', class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>
