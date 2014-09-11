@@ -12,7 +12,7 @@
             <span class="glyphicon glyphicon-minus"></span>
           </button>
         </span>
-        <%= al_fields.text_field :amount, class: 'form-control', value: order.tickets.where(access_level: access_level).count %>
+        <%= al_fields.text_field :amount, class: 'form-control', value: order.tickets.where(access_level_id: access_level).count %>
         <span class="input-group-btn">
           <button class="btn btn-default btn-inc" type="button">
             <span class="glyphicon glyphicon-plus"></span>

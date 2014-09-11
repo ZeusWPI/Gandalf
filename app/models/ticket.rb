@@ -21,7 +21,7 @@
 class Ticket < ActiveRecord::Base
   belongs_to :event
   belongs_to :order
-  has_one :access_level
+  belongs_to :access_level
 
   has_paper_trail only: [:checked_in_at]
 
