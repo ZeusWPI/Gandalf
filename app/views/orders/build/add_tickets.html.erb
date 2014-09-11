@@ -24,7 +24,10 @@
           </table>
         <% end %>
       <% end %>
-      <%= f.submit 'Place your order', class: 'btn btn-primary' %>
+      <ul class="pager">
+        <li class="previous disabled"><a href='#'>&larr; Previous</a></li>
+        <li class="next"><%= link_to raw('Place your order &rarr;'), '#', onclick: "$(this).closest('form').submit()" %></li>
+      </ul>
     <% end %>
   </div>
 </div>
