@@ -31,6 +31,19 @@ class Orders::BuildController < ApplicationController
 
     case step
     when :add_tickets
+      params.require(:access_levels).each do |id, amount|
+        amount = amount[:amount].to_i
+        tickets = @order.tickets.where(access_level_id: id)
+        if tickets.count > amount
+          # destroy last tickets
+          tickets.where.not(id: tickets.limit(amount).pluck(:id)).destroy_all
+        else
+          # create exactly as many as needed
+          (amount - tickets.count).times do
+            @order.tickets.create access_level_id: id
+          end
+        end
+      end
     when :add_info
       @order.update params.require(:order).permit(:name, :email, :email_confirmation, :gsm)
     when :add_ticket_info
