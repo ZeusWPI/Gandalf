@@ -25,13 +25,14 @@ class Ticket < ActiveRecord::Base
 
   has_paper_trail only: [:checked_in_at]
 
-  validates :name, presence: true, uniqueness: { scope: :event_id }
+  validates :name, presence: true, uniqueness: { scope: :event_id }, if: :parent_add_ticket_info?
   # Uniqueness temporarily disabled; see the Partner model for the reason
   #validates :email, presence: true, uniqueness: { scope: :event_id }
-  validates :email, presence: true, email: true
+  validates :email, presence: true, email: true, if: :parent_add_ticket_info?
   validates :student_number,
     format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
-    uniqueness: { scope: :event }, allow_blank: true
+    uniqueness: { scope: :event }, allow_blank: true,
+    if: :parent_add_ticket_info?
 
   default_scope { order "name ASC" }
 
@@ -41,6 +42,10 @@ class Ticket < ActiveRecord::Base
       ticket.errors.add :access_level, "type is sold out."
       raise ActiveRecord::Rollback
     end
+  end
+
+  def parent_add_ticket_info?
+    self.order.active_or_add_ticket_info?
   end
 
   def generate_barcode

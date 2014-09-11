@@ -51,6 +51,10 @@ class Order < ActiveRecord::Base
     status.include?('add_info') || active?
   end
 
+  def active_or_add_ticket_info?
+    status.include?('add_ticket_info') || active?
+  end
+
   def active_or_pay?
     status.include?('pay') || active?
   end
