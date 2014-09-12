@@ -2,7 +2,7 @@ class TicketsGrid
   include Datagrid
 
   scope do
-    Ticket
+    Ticket.active
   end
 
   # We use the lower() instead of ilike because SQLite dev doesn't like ilike

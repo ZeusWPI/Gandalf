@@ -21,6 +21,7 @@ class Order < ActiveRecord::Base
   has_many :tickets
 
   scope :paid, -> { where("price <= paid") }
+  scope :active, -> { where(status: 'active') }
 
   has_paper_trail only: [:paid, :payment_code]
 

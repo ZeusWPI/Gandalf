@@ -25,6 +25,8 @@ class Ticket < ActiveRecord::Base
 
   has_paper_trail only: [:checked_in_at]
 
+  scope :active, -> { where(status: 'active') }
+
   # A ticket should have an access_level set
   validates :access_level, presence: true
   # The name should only be unique for member only tickets in the same event

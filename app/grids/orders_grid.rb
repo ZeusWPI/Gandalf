@@ -2,7 +2,7 @@ class OrdersGrid
   include Datagrid
 
   scope do
-    Order
+    Order.active
   end
 
   # We use the lower() instead of ilike because SQLite dev doesn't like ilike
