@@ -40,11 +40,8 @@ class OrdersController < ApplicationController
   def resend
     @order = Order.find params.require(:id)
     authorize! :update, @order.event
-    if @order.is_paid
-      @order.tickets.each { |ticket| TicketMailer.ticket(ticket).deliver }
-    else
-      OrderMailer.confirm_order(@order).deliver
-    end
+
+    @order.deliver
   end
 
   def create
@@ -58,6 +55,14 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find params.require(:id)
+    authorize! :update, @order
+
+    paid = @order.paid
+    @order.update params.require(:order).permit(:to_pay)
+    if @order.paid != paid # Did the amount change?
+      @order.deliver
+    end
+
     respond_with @order
   end
 
@@ -103,11 +108,7 @@ class OrdersController < ApplicationController
         order.payment_code = Order.create_payment_code
         order.save
 
-        if order.is_paid
-          # Order.order(order).deliver
-        else
-          OrderMailer.confirm_order(order).deliver
-        end
+        order.deliver
 
         counter += 1
       end

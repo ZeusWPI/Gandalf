@@ -25,25 +25,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 KBC:
-  id: 1
   name: KBC
   email: kbc@email.com
-  event_id: 1
-  access_level_id: 1
+  event: codenight
+  access_level: one
   authentication_token: KBC
 
 Zeus:
-  id: 2
   name: Zeus
   email: zeus@email.com
-  event_id: 1
-  access_level_id: 1
+  event: codenight
+  access_level: one
   authentication_token: zeus
 
 SKO:
-  id: 3
   name: SKO
   email: sko@email.com
-  event_id: 2
-  access_level_id: 1
+  event: galabal
+  access_level: one
   authentication_token: sko

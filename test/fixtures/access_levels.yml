@@ -18,38 +18,33 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  id: 1
   name: Lid
-  event_id: 1
+  event: codenight
   price: 0
 
 member:
-  id: 4
   name: Member
-  event_id: 1
+  event: codenight
   member_only: 1
   price: 0
 
 two:
-  id: 2
   name: VIP
-  event_id: 2
+  event: galabal
   price: 10
 
 
 # Capacity stuff testing
 unlimited:
-  id: 3
   name: Unlimited
-  event_id: 1
+  event: codenight
   price: 0
 
 <% 3.times do |n| %>
 limited_<%= n %>:
-  id: <%= 100 + n %>
   name: <%= "Limited#{n}" %>
   price: 0
-  event_id: 1
+  event: codenight
   capacity: <%= 3 + n %>
 <% end %>
 
@@ -57,14 +52,14 @@ limited_<%= n %>:
 hidden:
   id: 5
   name: Hidden
-  event_id: 3
+  event: twaalfurenloop
   price: 0
   hidden: true
 
 member_only:
   id: 6
   name: Member Only
-  event_id: 3
+  event: twaalfurenloop
   price: 0
   member_only: true
 

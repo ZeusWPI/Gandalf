@@ -40,6 +40,7 @@ class TicketsController < ApplicationController
   def resend
     @ticket = Ticket.find params.require(:id)
     authorize! :update, @ticket.event
+
     TicketMailer.ticket(@ticket).deliver
   end
 

@@ -29,7 +29,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 codenight:
-  id: 1
   name: Codenight
   contact_email: blargh@gmail.com
   start_date: 2013-09-17 16:25:51
@@ -40,7 +39,6 @@ codenight:
   club: zeus
 
 galabal:
-  id: 2
   name: Galabal
   contact_email: blargh2@gmail.com
   start_date: 2013-09-17 16:25:51
@@ -52,7 +50,6 @@ galabal:
   bank_number: BE62 5100 0754 7061
 
 twaalfurenloop:
-  id: 3
   name: 12urenloop
   contact_email: info@12urenloop.be
   start_date: 2014-04-25 10:00:00

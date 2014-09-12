@@ -69,3 +69,22 @@ capacity_registration_<%= n %>:
   status: initial
   payment_code: <%= Order.create_payment_code %>
 <% end %>
+
+
+non_free_not_paid:
+  name: Non Free Not Paid
+  email: an@email.com
+  event: codenight
+  paid: 0
+  price: 20
+  status: initial
+  payment_code: <%= Order.create_payment_code %>
+
+non_free_partially_paid:
+  name: Non Free Partially Paid
+  email: another@email.com
+  event: codenight
+  paid: 5
+  price: 10
+  status: initial
+  payment_code: <%= Order.create_payment_code %>

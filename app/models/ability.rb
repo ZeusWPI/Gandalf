@@ -94,7 +94,7 @@ class Ability
 
     # add modify tickets permission for club members
     can :update, Order do |order|
-      clubs.include? ticket.event.club
+      clubs.include? order.event.club
     end
 
     # can view statistics?

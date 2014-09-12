@@ -19,7 +19,7 @@ class OrdersControllerTest < ActionController::TestCase
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
       # Posting the csv file
       post :upload, {
-        event_id: 1,
+        event_id: events(:codenight),
         separator: ';',
         amount_column: 'Amount',
         csv_file: fixture_file_upload('files/unsuccesful_registration_payments.csv') }
@@ -46,7 +46,7 @@ class OrdersControllerTest < ActionController::TestCase
     end
   end
 
-  test "resend sends payment email when !is_paid" do
+  test "resend sends order email when !is_paid" do
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
       xhr :get, :resend, event_id: events(:codenight), id: orders(:three).id
     end
@@ -55,7 +55,7 @@ class OrdersControllerTest < ActionController::TestCase
     assert_match(/Order for/, email.subject)
   end
 
-  test "resend sends ticket email when is_paid" do
+  test "resend sends ticket emails when is_paid" do
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
       xhr :get, :resend, event_id: events(:codenight), id: orders(:one).id
     end
@@ -65,13 +65,13 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "manual full paying works" do
-    three = orders(:three)
-    four = orders(:four)
+    a = orders(:non_free_not_paid)
+    b = orders(:non_free_partially_paid)
 
-    assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_equal 0, a.paid
+    assert_equal 0.05, b.paid
 
-    [three, four].each do |order|
+    [a, b].each do |order|
       assert_difference "ActionMailer::Base.deliveries.size", +1 do
         xhr :put, :update, {
           event_id: order.event.id,

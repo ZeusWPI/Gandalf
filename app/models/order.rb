@@ -101,7 +101,7 @@ class Order < ActiveRecord::Base
   def self.find_payment_code_from_csv(csvline)
     match = /GAN\d+/.match(csvline)
     if match
-      return self.class.find_by_payment_code(match[0])
+      return Order.find_by_payment_code(match[0])
     else
       return false
     end
@@ -113,12 +113,11 @@ class Order < ActiveRecord::Base
   end
 
   def deliver
-    if self.barcode.nil?
-      self.generate_barcode
-    end
-
     if self.is_paid
-      # OrderMailer.ticket(self).deliver
+      self.tickets.all.map(&:deliver)
+      if self.paid > self.price
+        OrderMailer.notify_overpayment(self).deliver
+      end
     else
       OrderMailer.confirm_order(self).deliver
     end

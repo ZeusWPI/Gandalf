@@ -28,22 +28,22 @@ class Ticket < ActiveRecord::Base
   # A ticket should have an access_level set
   validates :access_level, presence: true
   # The name should only be unique for member only tickets in the same event
-  validates :name, presence: true, uniqueness: { scope: :event_id }, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
+  # validates :name, presence: true, uniqueness: { scope: :event_id }, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
   # Same for email
-  validates :email, presence: true, uniqueness: { scope: :event_id }, email: true, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
+  # validates :email, presence: true, uniqueness: { scope: :event_id }, email: true, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
 
   validates :student_number,
     format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
     uniqueness: { scope: :event }, allow_blank: true,
     if: :parent_add_ticket_info?
 
-  after_save do |ticket|
-    al = ticket.access_level
-    if al.capacity != nil and al.tickets.count > al.capacity
-      ticket.errors.add :access_level, "type is sold out."
-      raise ActiveRecord::Rollback
-    end
-  end
+  # after_save do |ticket|
+  #   al = ticket.access_level
+  #   if al.capacity != nil and al.tickets.count > al.capacity
+  #     ticket.errors.add :access_level, "type is sold out."
+  #     raise ActiveRecord::Rollback
+  #   end
+  # end
 
   def initial?
     status == 'initial'
@@ -55,6 +55,14 @@ class Ticket < ActiveRecord::Base
 
   def parent_add_ticket_info?
     self.order.active_or_add_ticket_info?
+  end
+
+  def deliver
+    if self.barcode.nil?
+      self.generate_barcode
+    end
+
+    TicketMailer.ticket(self).deliver
   end
 
   def generate_barcode
