@@ -52,7 +52,7 @@ class OrdersControllerTest < ActionController::TestCase
     end
 
     email = ActionMailer::Base.deliveries.last
-    assert_match(/Registration for/, email.subject)
+    assert_match(/Order for/, email.subject)
   end
 
   test "resend sends ticket email when is_paid" do
@@ -95,12 +95,12 @@ class OrdersControllerTest < ActionController::TestCase
 
     to_pay = 0.01
 
-    [three, four].each do |registration|
+    [three, four].each do |order|
       assert_difference "ActionMailer::Base.deliveries.size", +1 do
         xhr :put, :update, {
           event_id: order.event.id,
           id: order.id,
-          registration: { to_pay: to_pay }
+          order: { to_pay: to_pay }
         }, remote: true
       end
       assert order.price > order.reload.paid
@@ -119,12 +119,12 @@ class OrdersControllerTest < ActionController::TestCase
 
     to_pay = -5
 
-    [three, four].each do |registration|
+    [three, four].each do |order|
       assert_difference "ActionMailer::Base.deliveries.size", +2 do
         xhr :put, :update, {
           event_id: order.event.id,
           id: order.id,
-          registration: { to_pay: to_pay }
+          order: { to_pay: to_pay }
         }, remote: true
       end
       assert order.price < order.reload.paid
@@ -146,7 +146,7 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal 0, three.paid
     assert_equal 0.05, four.paid
 
-    [three, four].each do |registration|
+    [three, four].each do |order|
       paid, code = order.paid, order.payment_code
       assert_no_difference "ActionMailer::Base.deliveries.size" do
         xhr :put, :update, {
@@ -160,11 +160,11 @@ class OrdersControllerTest < ActionController::TestCase
     end
   end
 
-  test "admins can manage registrations from other events" do
+  test "admins can manage orders from other events" do
     user = users(:adminfelix)
     ability = Ability.new(user)
 
-    r = order(:two)
+    r = orders(:two)
     assert ability.can?(:manage, r)
   end
 

@@ -41,9 +41,9 @@ class OrdersController < ApplicationController
     @order = Order.find params.require(:id)
     authorize! :update, @order.event
     if @order.is_paid
-      OrderMailer.ticket(@order).deliver
+      @order.tickets.each { |ticket| TicketMailer.ticket(ticket).deliver }
     else
-      Order.confirm_order(@order).deliver
+      OrderMailer.confirm_order(@order).deliver
     end
   end
 

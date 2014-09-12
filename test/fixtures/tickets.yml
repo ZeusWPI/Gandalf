@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)
 #  email           :string(255)
-#  gsm             :string(255)
 #  checked_in_at   :datetime
 #  event_id        :integer
 #  order_id        :integer
@@ -16,6 +15,7 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  access_level_id :integer
+#  status          :string(255)      default("initial")
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -24,6 +24,7 @@ one:
   id: 1
   name: Tom Naessens
   email: supermail@gmail.com
+  barcode: 1234567891231
   student_number: 1
   event_id: 1
   order_id: 1
@@ -36,3 +37,37 @@ two:
   email: fakemail@gmail.com
   student_number: 2
   event_id: 2
+  order_id: 1
+
+three:
+  id: 3
+  barcode: 012345678901
+  barcode_data: 012345678901
+  name: Felix Van der Jeugt
+  email: felix.vanderjeblarghugt@gmail.com
+  student_number: 3
+  event_id: 1
+  order_id: 1
+
+four:
+  id: 4
+  barcode: 012345678902
+  barcode_data: 012345678902
+  name: Felix Van der Jeugd
+  email: felix.vanderjeugd@gmail.com
+  student_number: 4
+  event_id: 1
+  order_id: 1
+
+<% 9.times do |n| %>
+capacity_registration_<%= n %>:
+  id: <%= 100 + n %>
+  barcode: 123456789123
+  barcode_data: 123456789123
+  email: capacity<%= n %>@test.com
+  name: Capacity Tester <%= n %>
+  student_number: <%= 100 + n %>
+  event_id: 1
+  order_id: 1
+<% end %>
+

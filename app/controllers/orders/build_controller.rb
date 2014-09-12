@@ -30,6 +30,7 @@ class Orders::BuildController < ApplicationController
     @event = Event.find params.require(:event_id)
     @order = @event.orders.find params.require(:order_id)
 
+
     case step
     when :add_tickets
       @access_levels = @event.access_levels.find_all { |al| can? :show, al }
@@ -42,7 +43,7 @@ class Orders::BuildController < ApplicationController
         else
           # create exactly as many as needed
           (amount - tickets.count).times do
-            @order.tickets.create! access_level_id: id
+            @order.tickets.create! access_level_id: id, status: 'initial'
           end
         end
       end
@@ -51,7 +52,7 @@ class Orders::BuildController < ApplicationController
     when :add_ticket_info
       @tickets = @order.tickets
       params.require(:tickets).each do |id, ticket|
-        @tickets.find(id).update ticket
+        @tickets.find(id).update ticket.merge({ state: 'active' })
       end
     when :pay
     end

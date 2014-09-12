@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  name            :string(255)
 #  email           :string(255)
-#  gsm             :string(255)
 #  checked_in_at   :datetime
 #  event_id        :integer
 #  order_id        :integer
@@ -16,6 +15,7 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  access_level_id :integer
+#  status          :string(255)      default("initial")
 #
 
 class Ticket < ActiveRecord::Base
@@ -25,27 +25,35 @@ class Ticket < ActiveRecord::Base
 
   has_paper_trail only: [:checked_in_at]
 
-  validates :name, presence: true, uniqueness: { scope: :event_id }, if: :parent_add_ticket_info?
-  # Uniqueness temporarily disabled; see the Partner model for the reason
-  #validates :email, presence: true, uniqueness: { scope: :event_id }
-  validates :email, presence: true, email: true, if: :parent_add_ticket_info?
+  # A ticket should have an access_level set
+  validates :access_level, presence: true
+  # The name should only be unique for member only tickets in the same event
+  validates :name, presence: true, uniqueness: { scope: :event_id }, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
+  # Same for email
+  validates :email, presence: true, uniqueness: { scope: :event_id }, email: true, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
+
   validates :student_number,
     format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
     uniqueness: { scope: :event }, allow_blank: true,
     if: :parent_add_ticket_info?
 
-  default_scope { order "name ASC" }
-
   after_save do |ticket|
     al = ticket.access_level
-    if al.capacity != nil and al.registrations.count > al.capacity
+    if al.capacity != nil and al.tickets.count > al.capacity
       ticket.errors.add :access_level, "type is sold out."
       raise ActiveRecord::Rollback
     end
   end
 
+  def initial?
+    status == 'initial'
+  end
+
+  def active?
+    status == 'active'
+  end
+
   def parent_add_ticket_info?
-    logger.debug self.order.status
     self.order.active_or_add_ticket_info?
   end
 

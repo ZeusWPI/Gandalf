@@ -2,17 +2,18 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  status     :string(255)
-#  name       :string(255)
-#  email      :string(255)
-#  gsm        :string(255)
-#  ticket_id  :integer
-#  event_id   :integer
-#  paid       :integer
-#  price      :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id           :integer          not null, primary key
+#  status       :string(255)      default("initial")
+#  name         :string(255)
+#  email        :string(255)
+#  gsm          :string(255)
+#  ticket_id    :integer
+#  event_id     :integer
+#  paid         :integer
+#  price        :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  payment_code :string(255)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -24,6 +25,7 @@ one:
   event_id: 1
   paid: 0
   price: 0
+  status: initial
   payment_code: <%= Order.create_payment_code %>
 
 two:
@@ -33,6 +35,7 @@ two:
   event_id: 2
   paid: 5
   price: 10
+  status: initial
   payment_code: <%= Order.create_payment_code %>
 
 three:
@@ -42,6 +45,7 @@ three:
   event_id: 1
   paid: 0
   price: 20
+  status: initial
   payment_code: GAN7539840256920891
 
 four:
@@ -51,4 +55,17 @@ four:
   event_id: 1
   paid: 5
   price: 10
+  status: initial
   payment_code: <%= Order.create_payment_code %>
+
+<% 9.times do |n| %>
+capacity_registration_<%= n %>:
+  id: <%= 100 + n %>
+  email: capacity<%= n %>@test.com
+  name: Capacity Tester <%= n %>
+  event_id: 1
+  paid: 0
+  price: 0
+  status: initial
+  payment_code: <%= Order.create_payment_code %>
+<% end %>

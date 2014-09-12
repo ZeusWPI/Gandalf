@@ -50,7 +50,7 @@ class AccessLevel < ActiveRecord::Base
   end
 
   def tickets_left
-    capacity - registrations.count if capacity.presence
+    capacity - tickets.count if capacity.presence
   end
 
   def price
