@@ -42,6 +42,7 @@ unlimited:
 
 <% 3.times do |n| %>
 limited_<%= n %>:
+  id: <%= 100 + n %>
   name: <%= "Limited#{n}" %>
   price: 0
   event: codenight

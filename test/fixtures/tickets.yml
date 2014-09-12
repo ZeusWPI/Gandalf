@@ -20,6 +20,18 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# CAPACITY TESTS
+<% 9.times do |n| %>
+capacity_registration_<%= n %>:
+  id: <%= 100 + n %>
+  email: capacity<%= n %>@test.com
+  name: Capacity Tester <%= n %>
+  student_number: <%= 100 + n %>
+  order: free
+  event: codenight
+  access_level_id: <%= 100 + (n % 3) %>
+<% end %>
+
 # PAYMENT TESTS
 payment_test_ticket_one:
   name: One

@@ -54,17 +54,6 @@ four:
   status: initial
   payment_code: <%= Order.create_payment_code %>
 
-<% 9.times do |n| %>
-capacity_registration_<%= n %>:
-  email: capacity<%= n %>@test.com
-  name: Capacity Tester <%= n %>
-  event: codenight
-  paid: 0
-  price: 0
-  status: initial
-  payment_code: <%= Order.create_payment_code %>
-<% end %>
-
 free:
   name: Free
   email: free@email.com
