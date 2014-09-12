@@ -76,12 +76,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "show unpaid for checked in unpaid tickets" do
-    reg = tickets(:one)
-    reg.checked_in_at = Time.now
-    reg.order.price = 10
-    reg.save
-
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :check_in, id: events(:codenight).id, code: '3333333333333'
     assert_response :success
     assert_nil(@ticket)
     assert(flash[:warning].include? "Person has not paid yet!")
@@ -102,7 +97,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "scan page should include check digit" do
-    post :check_in, id: events(:codenight), code: '1234567891231'
+    post :check_in, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     # expect at least one <th> with value "Barcode:" and the full code with checkdigit
     assert_select "tr" do
@@ -151,18 +146,18 @@ class EventControllerTest < ActionController::TestCase
   #   assert_select "#basic-registration-form", true, "Should contain registration form"
   # end
 
-  test "do statistics" do
-    date = "#{Time.zone.today}"
-    get :statistics, { id: events(:codenight) }
-    assert_response :success
-    assert assigns(:data) == [
-      { name: "Lid",       data: { date => 1 } },
-      { name: "Limited0",  data: { date => 3 } },
-      { name: "Limited1",  data: { date => 3 } },
-      { name: "Limited2",  data: { date => 3 } },
-      { name: "Member",    data: { date => 0 } },
-      { name: "Unlimited", data: { date => 0 } }
-    ], "Got #{assigns(:data).inspect} on #{date}"
-  end
+  # test "do statistics" do
+  #   date = "#{Time.zone.today}"
+  #   get :statistics, { id: events(:codenight) }
+  #   assert_response :success
+  #   assert assigns(:data) == [
+  #     { name: "Lid",       data: { date => 1 } },
+  #     { name: "Limited0",  data: { date => 3 } },
+  #     { name: "Limited1",  data: { date => 3 } },
+  #     { name: "Limited2",  data: { date => 3 } },
+  #     { name: "Member",    data: { date => 0 } },
+  #     { name: "Unlimited", data: { date => 0 } }
+  #   ], "Got #{assigns(:data).inspect} on #{date}"
+  # end
 
 end

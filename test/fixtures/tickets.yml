@@ -20,6 +20,7 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# PAYMENT TESTS
 payment_test_ticket_one:
   name: One
   email: one@gmail.com
@@ -31,7 +32,7 @@ payment_test_ticket_two:
   name: Two
   email: two@gmail.com
   event: codenight
-  order: non_free_not_paid0
+  order: non_free_not_paid
   access_level: one
 
 payment_test_ticket_three:
@@ -40,3 +41,32 @@ payment_test_ticket_three:
   event: codenight
   order: non_free_partially_paid
   access_level: one
+
+# CHECKIN TESTS
+checkin_test_ticket_codenight:
+  name: Checking Test Codenight
+  email: checking@test.one
+  event: codenight
+  order: free
+  barcode: 1234567891231
+  barcode_data: 123456789123
+  access_level: one
+
+checkin_test_ticket_galabal:
+  name: Checking Test Galabal
+  email: checking@test.galabal
+  event: galabal
+  order: non_free_not_paid
+  barcode: 2222222222222
+  barcode_data: 22222222222
+  access_level: one
+
+checkin_test_ticket_unpaid_order:
+  name: Checking Test Codenight
+  email: checking@test.one
+  event: codenight
+  order: non_free_not_paid
+  barcode: 3333333333333
+  barcode_data: 33333333333
+  access_level: one
+  checked_in_at: <%= Time.now %>
