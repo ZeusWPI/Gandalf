@@ -41,7 +41,7 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "resend actuallly sends an email" do
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
+    assert_difference "ActionMailer::Base.deliveries.size", orders(:one).tickets.count do
       xhr :get, :resend, event_id: events(:codenight), id: orders(:one).id
     end
   end
@@ -56,8 +56,8 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "resend sends ticket emails when is_paid" do
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      xhr :get, :resend, event_id: events(:codenight), id: orders(:one).id
+    assert_difference "ActionMailer::Base.deliveries.size", orders(:free).tickets.count do
+      xhr :get, :resend, event_id: events(:codenight), id: orders(:free).id
     end
 
     email = ActionMailer::Base.deliveries.last
@@ -111,16 +111,17 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "manual overpaying works" do
-    three = orders(:three)
-    four = orders(:four)
+    a = orders(:non_free_not_paid)
+    b = orders(:non_free_partially_paid)
 
-    assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_equal 0, a.paid
+    assert_equal 0.05, b.paid
 
     to_pay = -5
 
-    [three, four].each do |order|
-      assert_difference "ActionMailer::Base.deliveries.size", +2 do
+    [a, b].each do |order|
+      # +1 here for the overpayment email
+      assert_difference "ActionMailer::Base.deliveries.size", order.tickets.count+1 do
         xhr :put, :update, {
           event_id: order.event.id,
           id: order.id,

@@ -19,40 +19,36 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   name: Tom Naessens
   email: supermail@gmail.com
-  event_id: 1
+  event: codenight
   paid: 0
   price: 0
   status: initial
   payment_code: <%= Order.create_payment_code %>
 
 two:
-  id: 2
   name: Maarten Herthoge
   email: fakemail@gmail.com
-  event_id: 2
+  event: galabal
   paid: 5
   price: 10
   status: initial
   payment_code: <%= Order.create_payment_code %>
 
 three:
-  id: 3
   name: Felix Van der Jeugt
   email: felix.vanderjeblarghugt@gmail.com
-  event_id: 1
+  event: codenight
   paid: 0
   price: 20
   status: initial
   payment_code: GAN7539840256920891
 
 four:
-  id: 4
   name: Felix Van der Jeugd
   email: felix.vanderjeugd@gmail.com
-  event_id: 1
+  event: codenight
   paid: 5
   price: 10
   status: initial
@@ -60,10 +56,9 @@ four:
 
 <% 9.times do |n| %>
 capacity_registration_<%= n %>:
-  id: <%= 100 + n %>
   email: capacity<%= n %>@test.com
   name: Capacity Tester <%= n %>
-  event_id: 1
+  event: codenight
   paid: 0
   price: 0
   status: initial
