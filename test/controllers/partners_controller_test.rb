@@ -103,7 +103,7 @@ class PartnersControllerTest < ActionController::TestCase
     assert r.name = p.name
     assert r.email = p.email
     assert r.event_id = p.event_id
-    assert r.price = p.access_level.price
+    assert r.order.price = p.access_level.price
   end
 
 end

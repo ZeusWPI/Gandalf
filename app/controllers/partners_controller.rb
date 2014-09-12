@@ -81,18 +81,24 @@ class PartnersController < ApplicationController
     if @partner.confirmed
       flash.now[:error] = "You have already registered for this event. Please check your mailbox."
     else
-      @registration = @event.registrations.new(
-        email:          @partner.email,
+      @order = @event.orders.new(
         name:           @partner.name,
+        email:          @partner.email,
+        price:          @partner.access_level.price,
+        paid:           0,
+      )
+      @ticket = @order.tickets.new(
+        name:           @partner.name,
+        email:          @partner.email,
         student_number: nil,
         comment:        nil,
-        price:          @partner.access_level.price,
-        paid:           0
+        access_level:   @partner.access_level,
+        event:          @event,
       )
-      @registration.access_levels << @partner.access_level
       @partner.confirmed = true
-      if @registration.save and @partner.save then
-        @registration.deliver
+
+      if @ticket.save and @order.save and @partner.save then
+        @order.deliver
         flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
       else
         flash.now[:error] = "Is seems there already is someone with your name and/or email registered for this event. #{view_context.mail_to @event.contact_email, "Contact us"} if this is not correct.".html_safe
