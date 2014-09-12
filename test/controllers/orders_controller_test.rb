@@ -72,7 +72,7 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal 0.05, b.paid
 
     [a, b].each do |order|
-      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+      assert_difference "ActionMailer::Base.deliveries.size", order.tickets.count do
         xhr :put, :update, {
           event_id: order.event.id,
           id: order.id,
