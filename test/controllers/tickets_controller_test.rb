@@ -5,7 +5,7 @@ class TicketsControllerTest < ActionController::TestCase
     user = users(:adminfelix)
     ability = Ability.new(user)
 
-    r = tickets(:two)
+    r = tickets(:checkin_test_ticket_galabal)
     assert ability.can?(:manage, r)
   end
 end
