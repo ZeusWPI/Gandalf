@@ -35,6 +35,11 @@ ready = ->
     if input.val() != '0'
       input.val(parseInt(input.val()) - 1)
 
+  $('#order_email').on 'change', ->
+    $('#order_email_confirmation').val('')
+
+  $('#order_email_confirmation').val($('#order_email').val())
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

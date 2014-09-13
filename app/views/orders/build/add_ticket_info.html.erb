@@ -19,14 +19,13 @@
           </tbody>
         </table>
       <% end %>
-      <%= f.submit %>
+      <ul class="pager">
+        <li class="previous">
+          <%= link_to raw('&larr; Back to info'), previous_wizard_path %>
+        </li>
+        <li class="next"><%= link_to raw('Save ticket information &rarr;'), '#', onclick: "$(this).closest('form').submit()" %></li>
+      </ul>
     <% end %>
 
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6">
-    <%= link_to raw('<span class="glyphicon glyphicon-chevron-left"></span> Back to tickets'), previous_wizard_path, class: 'btn btn-default'  %>
   </div>
 </div>
