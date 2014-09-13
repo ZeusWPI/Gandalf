@@ -27,7 +27,6 @@ capacity_registration_<%= n %>:
   name: Capacity Tester <%= n %>
   student_number: <%= 100 + n %>
   order: free
-  event: codenight
   access_level_id: <%= 100 + (n % 3) %>
 <% end %>
 
@@ -35,21 +34,18 @@ capacity_registration_<%= n %>:
 payment_test_ticket_one:
   name: One
   email: one@gmail.com
-  event: codenight
   order: non_free_not_paid
   access_level: one
 
 payment_test_ticket_two:
   name: Two
   email: two@gmail.com
-  event: codenight
   order: non_free_not_paid
   access_level: one
 
 payment_test_ticket_three:
   name: Three
   email: three@gmail.com
-  event: codenight
   order: non_free_partially_paid
   access_level: one
 
@@ -57,7 +53,6 @@ payment_test_ticket_three:
 checkin_test_ticket_codenight:
   name: Checking Test Codenight
   email: checking@test.one
-  event: codenight
   order: free
   barcode: 1234567891231
   barcode_data: 123456789123
@@ -66,7 +61,6 @@ checkin_test_ticket_codenight:
 checkin_test_ticket_galabal:
   name: Checking Test Galabal
   email: checking@test.galabal
-  event: galabal
   order: non_free_not_paid
   barcode: 2222222222222
   barcode_data: 22222222222
@@ -75,7 +69,6 @@ checkin_test_ticket_galabal:
 checkin_test_ticket_unpaid_order:
   name: Checking Test Codenight
   email: checking@test.one
-  event: codenight
   order: non_free_not_paid
   barcode: 3333333333333
   barcode_data: 33333333333
