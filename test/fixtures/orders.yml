@@ -79,3 +79,22 @@ non_free_partially_paid:
   price: 10
   status: initial
   payment_code: <%= Order.create_payment_code %>
+
+# Ticket validation tests
+ticket_validation_active:
+  name: Ticket Validation Order
+  email: ticket@validation.com
+  event: codenight
+  paid: 0
+  price: 0
+  status: active
+  payment_code: <%= Order.create_payment_code %>
+
+ticket_validation_add_ticket_info:
+  name: Ticket Validation Order
+  email: ticket@validation.com
+  event: codenight
+  paid: 0
+  price: 0
+  status: add_ticket_info
+  payment_code: <%= Order.create_payment_code %>

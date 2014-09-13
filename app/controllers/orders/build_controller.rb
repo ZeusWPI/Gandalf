@@ -1,7 +1,7 @@
 class Orders::BuildController < ApplicationController
   include Wicked::Wizard
 
-  steps :add_tickets, :add_info, :add_ticket_info, :pay
+  steps :add_tickets, :add_info, :add_ticket_info, :confirmation
 
   def show
     @event = Event.find params.require(:event_id)
@@ -13,7 +13,7 @@ class Orders::BuildController < ApplicationController
     when :add_info
     when :add_ticket_info
       @tickets = @order.tickets
-    when :pay
+    when :confirmation
     end
 
     render_wizard
@@ -52,9 +52,10 @@ class Orders::BuildController < ApplicationController
     when :add_ticket_info
       @tickets = @order.tickets
       params.require(:tickets).each do |id, ticket|
-        @tickets.find(id).update ticket.merge({ state: 'active' })
+        @tickets.find(id).update_columns ticket.merge({ status: 'filled_in' })
       end
-    when :pay
+    when :confirmation
+      @order.deliver
     end
 
     @order.status = step.to_s

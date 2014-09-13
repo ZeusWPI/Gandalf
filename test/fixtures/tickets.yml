@@ -6,7 +6,6 @@
 #  name            :string(255)
 #  email           :string(255)
 #  checked_in_at   :datetime
-#  event_id        :integer
 #  order_id        :integer
 #  student_number  :string(255)
 #  comment         :text

@@ -6,7 +6,6 @@
 #  name            :string(255)
 #  email           :string(255)
 #  checked_in_at   :datetime
-#  event_id        :integer
 #  order_id        :integer
 #  student_number  :string(255)
 #  comment         :text
@@ -21,12 +20,29 @@
 require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
-  verify_fixtures Ticket
+  # verify_fixtures Ticket
 
   def setup
   end
 
-  test "student_number should be unique on event basis for member-only tickets" do
+  test "multiple non member tickets should be able to have the same info" do
+    active_order = orders(:ticket_validation_active)
+
+    t1 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_open)
+    t2 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_open)
+
+    assert t1.save
+    assert t2.save
+  end
+
+  test "info should be unique on event basis for member-only tickets" do
+    active_order = orders(:ticket_validation_active)
+
+    t1 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_member)
+    t2 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_member)
+
+    assert t1.save
+    assert !t2.save
   end
 
   test "same student_number should work for multiple events" do

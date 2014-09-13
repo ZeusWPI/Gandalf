@@ -1,0 +1,21 @@
+<%= render partial: "events/tabs" %>
+
+<div class="row">
+  <div class="col-sm-10">
+    <h3>Enter ticket information</h3>
+
+    <%= render partial: 'flash' %>
+
+    <%= render partial: 'orders/build/order' %>
+    <%= form_for [@event, @order], url: wizard_path do |f| %>
+      <%= f.submit %>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <%= link_to raw('<span class="glyphicon glyphicon-chevron-left"></span> Back to tickets'), previous_wizard_path, class: 'btn btn-default'  %>
+  </div>
+</div>

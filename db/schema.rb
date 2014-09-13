@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140912063651) do
+ActiveRecord::Schema.define(version: 20140913142443) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -152,7 +152,6 @@ ActiveRecord::Schema.define(version: 20140912063651) do
     t.string   "name"
     t.string   "email"
     t.datetime "checked_in_at"
-    t.integer  "event_id"
     t.integer  "order_id"
     t.string   "student_number"
     t.text     "comment"
@@ -165,7 +164,6 @@ ActiveRecord::Schema.define(version: 20140912063651) do
   end
 
   add_index "tickets", ["access_level_id"], name: "index_tickets_on_access_level_id"
-  add_index "tickets", ["event_id"], name: "index_tickets_on_event_id"
   add_index "tickets", ["order_id"], name: "index_tickets_on_order_id"
 
   create_table "users", force: true do |t|

@@ -6,7 +6,6 @@
 #  name            :string(255)
 #  email           :string(255)
 #  checked_in_at   :datetime
-#  event_id        :integer
 #  order_id        :integer
 #  student_number  :string(255)
 #  comment         :text
@@ -19,20 +18,27 @@
 #
 
 class Ticket < ActiveRecord::Base
-  belongs_to :event
+  has_one :event, through: :order
   belongs_to :order
   belongs_to :access_level
 
   has_paper_trail only: [:checked_in_at]
 
   scope :active, -> { where(status: 'active') }
+  default_scope { order(:id) }
 
   # A ticket should have an access_level set
   validates :access_level, presence: true
-  # The name should only be unique for member only tickets in the same event
-  # validates :name, presence: true, uniqueness: { scope: :event_id }, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
-  # Same for email
-  # validates :email, presence: true, uniqueness: { scope: :event_id }, email: true, if: Proc.new { |t| t.access_level.member_only and t.parent_add_ticket_info? }
+
+  # NAME VALIDATION
+  # name should always be present
+  validates :name, uniqueness: { scope: [:order, :access_level] }, presence: true, if: :parent_add_ticket_info?
+  # a user cannot order a ticket which name already exists in a valid order in the event
+  validates :name, uniqueness: { scope: :event }, if: Proc.new { |t| t.access_level.member_only && t.order.active? }
+
+  # EMAIL VALIDATION
+  # email should always be present
+  validates :email, presence: true, if: :parent_add_ticket_info?
 
   validates :student_number,
     format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
@@ -49,6 +55,10 @@ class Ticket < ActiveRecord::Base
 
   def initial?
     status == 'initial'
+  end
+
+  def filled_in?
+    status == 'filled_in'
   end
 
   def active?

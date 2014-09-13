@@ -51,16 +51,26 @@ limited_<%= n %>:
 
 # Can can testing
 hidden:
-  id: 5
   name: Hidden
   event: twaalfurenloop
   price: 0
   hidden: true
 
 member_only:
-  id: 6
   name: Member Only
   event: twaalfurenloop
   price: 0
   member_only: true
 
+# Ticket validation tests
+ticket_validation_open:
+  name: Open ticket validation
+  event: codenight
+  price: 0
+  member_only: false
+
+ticket_validation_member:
+  name: Member only ticket validation
+  event: codenight
+  price: 0
+  member_only: true
