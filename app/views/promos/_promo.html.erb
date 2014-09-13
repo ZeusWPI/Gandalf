@@ -1,0 +1,15 @@
+<tr id="<%= dom_id(promo) %>">
+<td><%= promo.code %></td>
+<td><%= promo.limit %></td>
+<td><%= promo.access_levels.map(&:name).join(', ') %></td>
+  <td>
+    <div class="nowrap">
+      <% unless promo.tickets_sold? %>
+        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_event_promo_path(promo.event, promo), class: 'btn btn-xs btn-default', remote: true %>
+        <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_promo_path(promo.event, promo), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
+      <% end %>
+    </div>
+  </td>
+
+</tr>
+

@@ -59,5 +59,11 @@ Isengard::Application.routes.draw do
         post 'upload'
       end
     end
+
+    resources :promos do
+      collection do
+        post 'generate'
+      end
+    end
   end
 end

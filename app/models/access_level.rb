@@ -23,6 +23,8 @@ class AccessLevel < ActiveRecord::Base
 
   attr_accessor :amount
 
+  has_and_belongs_to_many :promos
+
   validates :name, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :capacity, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
