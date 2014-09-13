@@ -91,3 +91,11 @@ ticket_validation_add_ticket_info:
   barcode: 4
   barcode_data: 5
   access_level: one
+
+ticket_validation_active_member_only:
+  name: Ticket validation active member only
+  email: ticket@validation.activememberonly
+  order: ticket_validation_active
+  barcode: 4
+  barcode_data: 5
+  access_level: ticket_validation_member

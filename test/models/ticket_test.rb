@@ -55,6 +55,14 @@ class TicketTest < ActiveSupport::TestCase
     assert !t2.save
   end
 
+  test "a member should not be able to order another member only ticket in another order in the same event" do
+    add_ticket_info_order = orders(:ticket_validation_add_ticket_info)
+
+    t = add_ticket_info_order.tickets.new name: "Ticket validation active member only", email: "ticket@validation.activememberonly", access_level: access_levels(:ticket_validation_member)
+
+    assert !t.save
+  end
+
   test "same student_number should work for multiple events" do
   end
 

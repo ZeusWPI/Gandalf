@@ -42,8 +42,8 @@ class Ticket < ActiveRecord::Base
 
   validates :student_number,
     format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
-    uniqueness: { scope: :event }, allow_blank: true,
-    if: :parent_add_ticket_info?
+    uniqueness: { scope: :event }, presence: true,
+    if: Proc.new { |t| t.access_level.member_only && t.order.active? }
 
   # after_save do |ticket|
   #   al = ticket.access_level
