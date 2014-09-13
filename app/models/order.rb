@@ -32,8 +32,7 @@ class Order < ActiveRecord::Base
   validates :name, presence: true, if: :active_or_add_info?
   # This should be a setting per event basis
   # validates :gsm, presence: true, if: :active_or_add_info?
-  validates :email, email: true, confirmation: true, if: :active_or_add_info?
-  validates :email_confirmation, presence: true, if: :active_or_add_info?
+  validates :email, email: true, presence: true, confirmation: true, if: :active_or_add_info?
 
   # Should validate on add_ticket_info
   validates_associated :tickets, if: :active_or_add_ticket_info?

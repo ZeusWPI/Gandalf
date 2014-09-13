@@ -102,7 +102,7 @@ class PartnersControllerTest < ActionController::TestCase
     r = Ticket.find_by_name "KBC"
     assert r.name = p.name
     assert r.email = p.email
-    assert r.event_id = p.event_id
+    assert r.event = p.event
     assert r.order.price = p.access_level.price
   end
 

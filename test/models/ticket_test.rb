@@ -25,21 +25,31 @@ class TicketTest < ActiveSupport::TestCase
   def setup
   end
 
-  test "multiple non member tickets should be able to have the same info" do
-    active_order = orders(:ticket_validation_active)
+  test "multiple non member tickets for the same access level should not be able to have the same name" do
+    active_order = orders(:ticket_validation_add_ticket_info)
 
-    t1 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_open)
-    t2 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_open)
+    t1 = active_order.tickets.new name: "Zelfde", email: "Zelfde", access_level: access_levels(:ticket_validation_open)
+    t2 = active_order.tickets.new name: "Zelfde", email: "Zelfde", access_level: access_levels(:ticket_validation_open)
+
+    assert t1.save
+    assert !t2.save
+  end
+
+  test "multiple non member tickets for different access levels should be able to have the same name" do
+    active_order = orders(:ticket_validation_add_ticket_info)
+
+    t1 = active_order.tickets.new name: "Zelfde", email: "Zelfde", access_level: access_levels(:ticket_validation_open)
+    t2 = active_order.tickets.new name: "Zelfde", email: "Zelfde", access_level: access_levels(:ticket_validation_member)
 
     assert t1.save
     assert t2.save
   end
 
   test "info should be unique on event basis for member-only tickets" do
-    active_order = orders(:ticket_validation_active)
+    active_order = orders(:ticket_validation_add_ticket_info)
 
-    t1 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_member)
-    t2 = active_order.tickets.new name: "Zelfde", email: "Zelfde", event: events(:codenight), access_level: access_levels(:ticket_validation_member)
+    t1 = active_order.tickets.new name: "Zelfde", email: "Zelfde", access_level: access_levels(:ticket_validation_member)
+    t2 = active_order.tickets.new name: "Zelfde", email: "Zelfde", access_level: access_levels(:ticket_validation_member)
 
     assert t1.save
     assert !t2.save
