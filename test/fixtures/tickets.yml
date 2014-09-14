@@ -94,8 +94,9 @@ ticket_validation_add_ticket_info:
 
 ticket_validation_active_member_only:
   name: Ticket validation active member only
-  email: ticket@validation.activememberonly
+  email: ticket@validation.acti
   order: ticket_validation_active
   barcode: 4
   barcode_data: 5
   access_level: ticket_validation_member
+  student_number: 40

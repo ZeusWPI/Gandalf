@@ -20,7 +20,7 @@
 require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
-  # verify_fixtures Ticket
+  verify_fixtures Ticket
 
   def setup
   end
