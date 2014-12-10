@@ -152,7 +152,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
-    date = "#{Time.zone.today}"
+    date = "#{registrations(:one).created_at.to_date}"
     get :statistics, { id: 1 }
     assert_response :success
     assert assigns(:data) == [
