@@ -3,18 +3,18 @@
 # Table name: tickets
 #
 #  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
+#  name            :string
+#  email           :string
 #  checked_in_at   :datetime
 #  order_id        :integer
-#  student_number  :string(255)
+#  student_number  :string
 #  comment         :text
-#  barcode         :string(255)
-#  barcode_data    :string(255)
+#  barcode         :string
+#  barcode_data    :string
 #  created_at      :datetime
 #  updated_at      :datetime
 #  access_level_id :integer
-#  status          :string(255)      default("initial")
+#  status          :string           default("initial")
 #
 
 class Ticket < ActiveRecord::Base

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.2'
 
 # We <3 New Relic
 gem 'newrelic_rpm'
@@ -96,7 +96,7 @@ gem 'spreadsheet'
 
 # Run stuff in the background
 gem 'daemons'
-gem 'delayed_job', '~> 4.0'
+gem 'delayed_job', '~> 4.0.6'
 gem 'delayed_job_active_record'
 #
 

@@ -10,7 +10,7 @@
 #  updated_at  :datetime
 #  capacity    :integer
 #  price       :integer
-#  public      :boolean          default(TRUE)
+#  public      :boolean          default("t")
 #  has_comment :boolean
 #  hidden      :boolean
 #  member_only :boolean

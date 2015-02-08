@@ -3,17 +3,17 @@
 # Table name: orders
 #
 #  id           :integer          not null, primary key
-#  status       :string(255)      default("initial")
-#  name         :string(255)
-#  email        :string(255)
-#  gsm          :string(255)
+#  status       :string           default("initial")
+#  name         :string
+#  email        :string
+#  gsm          :string
 #  ticket_id    :integer
 #  event_id     :integer
 #  paid         :integer
 #  price        :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  payment_code :string(255)
+#  payment_code :string
 #
 
 class Order < ActiveRecord::Base

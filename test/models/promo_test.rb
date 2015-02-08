@@ -8,7 +8,7 @@
 #  limit        :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  sold_tickets :integer          default(0)
+#  sold_tickets :integer          default("0")
 #
 
 require 'test_helper'
