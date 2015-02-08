@@ -74,7 +74,7 @@ class Ticket < ActiveRecord::Base
       self.generate_barcode
     end
 
-    TicketMailer.ticket(self).deliver
+    TicketMailer.ticket(self).deliver_now
   end
 
   def generate_barcode

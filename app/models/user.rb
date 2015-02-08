@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
     end
 
     # using httparty because it is much easier to read than net/http code
-    resp = HTTParty.get(Rails.application.config.fk_auth_url, :query => {
-              :k => digest(username, Rails.application.config.fk_auth_key),
+    resp = HTTParty.get(Rails.application.secrets.fk_auth_url, :query => {
+              :k => digest(username, Rails.application.secrets.fk_auth_key),
               :u => username
            })
 
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
       hash = JSON[resp.body]
 
       clubs_dig = hash['data'].map { |c| c['internalName'] }
-      dig = digest(Rails.application.config.fk_auth_salt, username, clubs_dig)
+      dig = digest(Rails.application.secrets.fk_auth_salt, username, clubs_dig)
 
       # Process clubs if the controle is correct
       if hash['controle'] == dig
@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   # fetch clubs where user is enrolled in
   def fetch_enrolled_clubs
     resp = HTTParty.get("http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
-                 {key: Rails.application.config.enrollment_key, ugent_nr: self.cas_ugentStudentID})
+                 {key: Rails.application.secrets.enrolment_key, ugent_nr: self.cas_ugentStudentID})
 
     if resp.code == 200
       clubs = JSON[resp.body].map(&:downcase)
