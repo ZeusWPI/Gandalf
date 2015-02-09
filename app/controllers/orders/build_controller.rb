@@ -10,6 +10,7 @@ class Orders::BuildController < ApplicationController
     case step
     when :add_tickets
       @access_levels = @event.access_levels.find_all { |al| can? :show, al }
+      logger.debug @access_levels.partition(&:member_only?)
     when :add_info
     when :add_ticket_info
       @tickets = @order.tickets

@@ -9,7 +9,7 @@
 
     <%= form_for [@event, @order], url: wizard_path do |f| %>
       <%= fields_for :access_levels do |af| %>
-        <% @access_levels.partition(&:member_only?).reverse.each do |c| %>
+        <% @access_levels.partition(&:member_only?).reject(&:empty?).reverse.each do |c| %>
           <h4><%= c.first.member_only? ? "Member-only Tickets" : "Regular Tickets" %></h4>
           <table class="table table-hover">
             <thead>
