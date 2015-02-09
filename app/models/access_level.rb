@@ -4,7 +4,7 @@
 # Table name: access_levels
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
+#  name        :string
 #  event_id    :integer
 #  created_at  :datetime
 #  updated_at  :datetime
@@ -52,7 +52,7 @@ class AccessLevel < ActiveRecord::Base
   end
 
   def tickets_left
-    self.capacity - self.tickets.count if self.capacity.presence
+    self.capacity - self.tickets.active.count if self.capacity.presence
   end
 
   def price
