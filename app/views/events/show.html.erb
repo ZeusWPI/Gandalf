@@ -49,9 +49,14 @@
     <% end %>
   </div>
 
-  <% if can? :register, @event and not @event.access_levels.find_all{ |al| can? :register, al }.blank? %>
-    <div class="col-sm-4 col-sm-offset-1">
+  <div class="col-sm-4 col-sm-offset-1">
+    <h3>Register</h3>
+    <% if not @event.access_levels.where(member_only: true).blank? %>
+      Some tickets of this event can only be registered for if you are a member of the organiser's organisation.<br />
+      <%= link_to "Login", new_user_session_path %> using CAS to register for these tickets.
+    <% end %>
+    <% if can? :register, @event and not @event.access_levels.find_all{ |al| can? :register, al }.blank? %>
       <%= render partial: "registrations/form" %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
