@@ -65,7 +65,7 @@ gem 'cancan'
 gem 'httparty'
 
 # Logging is awesome, and paper_trail even more
-gem 'paper_trail', '~> 3.0'
+gem 'paper_trail', '~> 4.0.0.beta'
 
 # Njam njam, IBAN
 gem 'iban-tools'
