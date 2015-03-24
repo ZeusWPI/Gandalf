@@ -27,18 +27,62 @@
 
     <div class="row">
       <div class="col-sm-6">
-        <%= form_tag check_in_event_path(@event),
-          url: scan_event_path(@event),
-          remote: false do %>
-          <div class="form-group">
-            <label for="code">Barcode:</label>
-            <input required class="form-control" id="code" name="code" type="text" autofocus="autofocus">
+        <%= form_tag scan_barcode_event_path(@event), remote: false do %>
+          <div class="input-group">
+            <div class="input-group">
+              <input required type="text" autofocus="autofocus"
+                class="form-control" placeholder="Barcode" name="code" id="code">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" name="button" type="submit">
+                  Submit
+                </button>
+              </span>
+            </div>
           </div>
-
-          <button class="btn btn-group btn-primary" name="button" type="submit">submit</button>
         <% end %>
+
+        <br/>
+
+        <%= form_tag scan_username_event_path(@event), remote: false do %>
+          <div class="input-group">
+            <div class="input-group">
+              <input required type="text" class="form-control typeahead" 
+                placeholder="Ugent username" name="username" id="username">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" name="button" type="submit">
+                  Submit
+                </button>
+              </span>
+            </div>
+          </div>
+        <% end %>
+        <br/>
+
       </div>
     </div>
 
   </div>
 </div>
+
+<script>
+var registrations = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: '<%= list_registrations_event_path %>'
+
+});
+ 
+registrations.initialize();
+ 
+$('#username').typeahead(
+    {
+        highlight: true,
+        minLength: 1
+    },
+    {
+        name: 'registrations',
+        displayKey: 'name',
+        source: registrations.ttAdapter()
+    }
+); 
+</script>
