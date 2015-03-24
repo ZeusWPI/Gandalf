@@ -310,6 +310,7 @@ DEPENDENCIES
   rails (~> 4.0)
   rails-erd
   ri_cal
+  rmagick
   sass-rails (~> 4.0)
   sdoc
   select2-rails
