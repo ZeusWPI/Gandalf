@@ -9,11 +9,10 @@ class EventsController < ApplicationController
   respond_to :html, :js, :ics
 
   def index
-    @events = Event.where('end_date > ?', DateTime.now).order(:name)
+    @events = Event.where('end_date > ?', DateTime.now).order(:start_date)
     if user_signed_in?
-      @events += Event.accessible_by(current_ability).to_a
+      @past_events = Event.accessible_by(current_ability).order(:name)
     end
-    @events.uniq!
   end
 
   def show
