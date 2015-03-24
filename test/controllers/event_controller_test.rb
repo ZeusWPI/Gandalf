@@ -61,16 +61,16 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "validate correct barcode" do
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
   end
 
   test "dont check in twice" do
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert(flash[:warning].include? "Person already checked in")
   end
@@ -81,14 +81,14 @@ class EventControllerTest < ActionController::TestCase
     reg.price = 10
     reg.save
 
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert_nil(@registration)
     assert(flash[:warning].include? "Person has not paid yet!")
   end
 
   test "dont find registrations from other event" do
-    post :check_in, id: events(:codenight).id, code: '2222222222222'
+    post :scan_barcode, id: events(:codenight).id, code: '2222222222222'
     assert_response :success
     assert_nil(@registration)
   end
@@ -96,13 +96,13 @@ class EventControllerTest < ActionController::TestCase
   test "dont check in unpaid tickets" do
     sign_out users(:tom)
     sign_in users(:maarten)
-    post :check_in, id: events(:galabal).id, code: '2222222222222'
+    post :scan_barcode, id: events(:galabal).id, code: '2222222222222'
     assert_response :success
     assert(flash[:warning].include? "Person has not paid yet!")
   end
 
   test "scan page should include check digit" do
-    post :check_in, id: events(:codenight), code: '1234567891231'
+    post :scan_barcode, id: events(:codenight), code: '1234567891231'
     assert_response :success
     # expect at least one <th> with value "Barcode:" and the full code with checkdigit
     assert_select "tr" do
