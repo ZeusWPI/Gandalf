@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910122923) do
+ActiveRecord::Schema.define(version: 20150324160400) do
 
   create_table "access_levels", force: true do |t|
     t.string   "name"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20140910122923) do
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
+  add_index "registrations", ["name", "event_id"], name: "index_registrations_on_name_and_event_id", unique: true
   add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code", unique: true
 
   create_table "users", force: true do |t|
