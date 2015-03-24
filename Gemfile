@@ -131,6 +131,8 @@ gem 'jc-validates_timeliness'
 
 gem 'airbrake'
 
+gem 'rmagick'
+
 # select2 is beautiful
 gem 'select2-rails'
 
