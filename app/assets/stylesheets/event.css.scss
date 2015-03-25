@@ -4,3 +4,21 @@
 .field_with_errors {
   display: inline;
 }
+
+.input-group {
+    width: 100%;
+}
+
+.typeahead-scan-name {
+    float: left;
+}
+
+.typeahead-scan-email {
+    color: #777;
+    float: right;
+}
+
+.typeahead-scan-email .tt-highlight {
+    color: brown;
+    text-decoration: none;
+}
