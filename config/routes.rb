@@ -49,7 +49,7 @@ Isengard::Application.routes.draw do
       get 'scan'
       get 'list_registrations'
       post 'scan_barcode'
-      post 'scan_username'
+      post 'scan_name'
     end
 
     resources :periods

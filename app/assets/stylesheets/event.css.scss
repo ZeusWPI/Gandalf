@@ -2,23 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .field_with_errors {
-  display: inline;
+    display: inline;
 }
 
 .input-group {
-    width: 100%;
+  width: 100%;
 }
 
-.typeahead-scan-name {
+#scan-by-name {
+  .typeahead-scan-name {
     float: left;
-}
+  }
 
-.typeahead-scan-email {
+  .typeahead-scan-email {
     color: #777;
     float: right;
-}
+  }
 
-.typeahead-scan-email .tt-highlight {
-    color: brown;
+  .tt-highlight {
+    color: #3276B1;
     text-decoration: none;
+  }
+
+  .tt-cursor {
+      background-color: #eee;
+  }
+
+  .tt-suggestion {
+    overflow: hidden;
+  }
 }

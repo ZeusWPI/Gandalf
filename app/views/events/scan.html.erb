@@ -43,11 +43,11 @@
 
         <br/>
 
-        <%= form_tag scan_username_event_path(@event), remote: false do %>
-          <div class="input-group">
+        <%= form_tag scan_name_event_path(@event), remote: false do %>
+          <div id="scan-by-name" class="input-group">
             <div class="input-group">
               <input required type="text" class="form-control typeahead"
-                placeholder="Start searching by entering a name or an email" name="username" id="username">
+                placeholder="Start searching by entering a name or an email" name="name" id="name">
               <span class="input-group-btn">
                 <button class="btn btn-primary" name="button" type="submit">
                   Submit
@@ -74,7 +74,7 @@ var registrations = new Bloodhound({
 
 registrations.initialize();
 
-$('#username').typeahead(
+$('#name').typeahead(
     {
         hint:      true,
         highlight: true,

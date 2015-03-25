@@ -66,6 +66,12 @@ class EventControllerTest < ActionController::TestCase
     assert(flash[:success].include? "Person has been scanned")
   end
 
+  test "validate correct name" do
+    post :scan_name, id: events(:codenight).id, name: 'Tom Naessens'
+    assert_response :success
+    assert(flash[:success].include? "Person has been scanned")
+  end
+
   test "dont check in twice" do
     post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success

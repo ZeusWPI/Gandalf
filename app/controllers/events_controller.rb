@@ -93,16 +93,14 @@ class EventsController < ApplicationController
   def scan_barcode
     @event = Event.find params.require(:id)
     authorize! :update, @event
-    barcode = params.require(:code)
-    @registration = @event.registrations.find_by barcode: barcode
+    @registration = @event.registrations.find_by barcode: params.require(:code)
     check_in
   end
 
-  def scan_username
+  def scan_name
     @event = Event.find params.require(:id)
     authorize! :update, @event
-    username = params.require(:username)
-    @registration = @event.registrations.find_by name: username
+    @registration = @event.registrations.find_by name: params.require(:name)
     check_in
   end
 
