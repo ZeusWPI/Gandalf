@@ -136,6 +136,9 @@ gem 'rmagick'
 # select2 is beautiful
 gem 'select2-rails'
 
+# Typeahead
+gem 'twitter-typeahead-rails'
+
 group :production do
   gem 'mysql2' # Database
 end
