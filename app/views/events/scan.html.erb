@@ -30,7 +30,7 @@
         <%= form_tag scan_barcode_event_path(@event), remote: false do %>
           <div class="input-group">
             <div class="input-group">
-              <input required type="text" autofocus="autofocus"
+              <input required type="text" autofocus="autofocus" autocomplete="off"
                 class="form-control" placeholder="Barcode" name="code" id="code">
               <span class="input-group-btn">
                 <button class="btn btn-primary" name="button" type="submit">
