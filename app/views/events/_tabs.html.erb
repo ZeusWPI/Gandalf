@@ -18,7 +18,6 @@
         <li <%= raw 'class="active"' if current_page?(event_registrations_path(@event)) %>><%= link_to "Registrations", event_registrations_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(event_access_levels_path(@event)) && !@advanced %>><%= link_to "Tickets", event_access_levels_path(@event, advanced: false) %></li>
         <li <%= raw 'class="active"' if current_page?(event_partners_path(@event)) %>><%= link_to "Partners", event_partners_path(@event) %></li>
-        <li <%= raw 'class="active"' if current_page?(event_promos_path(@event)) %>><%= link_to "Promo", event_promos_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(scan_event_path(@event)) %>><%= link_to "Scan", scan_event_path(@event) %></li>
       <% end %>
     </ul>
