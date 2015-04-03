@@ -158,7 +158,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
-    date = "#{registrations(:one).utc.created_at.to_date}"
+    date = "#{registrations(:one).created_at.utc.to_date}"
     get :statistics, { id: 1 }
     assert_response :success
     expected = [
