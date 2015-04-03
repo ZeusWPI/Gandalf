@@ -61,16 +61,22 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "validate correct barcode" do
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
+    assert_response :success
+    assert(flash[:success].include? "Person has been scanned")
+  end
+
+  test "validate correct name" do
+    post :scan_name, id: events(:codenight).id, name: 'Tom Naessens'
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
   end
 
   test "dont check in twice" do
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert(flash[:warning].include? "Person already checked in")
   end
@@ -81,14 +87,14 @@ class EventControllerTest < ActionController::TestCase
     reg.price = 10
     reg.save
 
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert_nil(@registration)
     assert(flash[:warning].include? "Person has not paid yet!")
   end
 
   test "dont find registrations from other event" do
-    post :check_in, id: events(:codenight).id, code: '2222222222222'
+    post :scan_barcode, id: events(:codenight).id, code: '2222222222222'
     assert_response :success
     assert_nil(@registration)
   end
@@ -96,13 +102,13 @@ class EventControllerTest < ActionController::TestCase
   test "dont check in unpaid tickets" do
     sign_out users(:tom)
     sign_in users(:maarten)
-    post :check_in, id: events(:galabal).id, code: '2222222222222'
+    post :scan_barcode, id: events(:galabal).id, code: '2222222222222'
     assert_response :success
     assert(flash[:warning].include? "Person has not paid yet!")
   end
 
   test "scan page should include check digit" do
-    post :check_in, id: events(:codenight), code: '1234567891231'
+    post :scan_barcode, id: events(:codenight), code: '1234567891231'
     assert_response :success
     # expect at least one <th> with value "Barcode:" and the full code with checkdigit
     assert_select "tr" do
@@ -152,10 +158,10 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
-    date = "#{registrations(:one).created_at.utc.to_date}"
+    date = "#{registrations(:one).utc.created_at.to_date}"
     get :statistics, { id: 1 }
     assert_response :success
-    assert assigns(:data) == [
+    expected = [
       { name: "Lid",       data: { date => 1 } },
       { name: "Limited0",  data: { date => 3 } },
       { name: "Limited1",  data: { date => 3 } },
@@ -163,6 +169,14 @@ class EventControllerTest < ActionController::TestCase
       { name: "Member",    data: { date => 0 } },
       { name: "Unlimited", data: { date => 0 } }
     ], "Got #{assigns(:data).inspect} on #{date}"
+    expected.zip(assigns(:data)).each do |e, a|
+      assert e.name == a.name, "Mismatching names. Expected #{e.name} got #{a.name}"
+      e.date.keys.each do |k|
+        assert k in a.date, "Missing date for #{e.name}: #{k}"
+        assert e.date[k] == a.date[k], "Mismatching counts for #{e.name} on #{k}: Expected #{e.date[k]} got #{a.date[k]}"
+      end
+    end
+
   end
 
 end
