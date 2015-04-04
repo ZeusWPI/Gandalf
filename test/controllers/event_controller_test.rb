@@ -170,7 +170,6 @@ class EventControllerTest < ActionController::TestCase
       { name: "Unlimited", data: { date => 0 } }
     ]
     expected.zip(assigns(:data)).each do |e, a|
-      puts "#{e} & #{a}"
       assert e[:name] == a[:name], "Mismatching names. Expected #{e[:name]} got #{a[:name]}"
       e[:data].keys.each do |k|
         assert (a[:data].has_key? k), "Missing date for #{e[:name]}: #{k}"
