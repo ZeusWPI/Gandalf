@@ -168,12 +168,14 @@ class EventControllerTest < ActionController::TestCase
       { name: "Limited2",  data: { date => 3 } },
       { name: "Member",    data: { date => 0 } },
       { name: "Unlimited", data: { date => 0 } }
-    ], "Got #{assigns(:data).inspect} on #{date}"
+    ]
     expected.zip(assigns(:data)).each do |e, a|
-      assert e.name == a.name, "Mismatching names. Expected #{e.name} got #{a.name}"
-      e.date.keys.each do |k|
-        assert a.date.has_key? k, "Missing date for #{e.name}: #{k}"
-        assert e.date[k] == a.date[k], "Mismatching counts for #{e.name} on #{k}: Expected #{e.date[k]} got #{a.date[k]}"
+      puts "#{e} & #{a}"
+      assert e[:name] == a[:name], "Mismatching names. Expected #{e[:name]} got #{a[:name]}"
+      e[:data].keys.each do |k|
+        assert (a[:data].has_key? k), "Missing date for #{e[:name]}: #{k}"
+        assert e[:data][k] == a[:data][k],
+          "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
       end
     end
 
