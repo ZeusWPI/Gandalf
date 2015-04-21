@@ -110,9 +110,9 @@ class Registration < ActiveRecord::Base
     end
 
     if self.is_paid
-      RegistrationMailer.ticket(self).deliver
+      RegistrationMailer.ticket(self).deliver_now
     else
-      RegistrationMailer.confirm_registration(self).deliver
+      RegistrationMailer.confirm_registration(self).deliver_now
     end
   end
 

@@ -41,9 +41,9 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find params.require(:id)
     authorize! :update, @registration.event
     if @registration.is_paid
-      RegistrationMailer.ticket(@registration).deliver
+      RegistrationMailer.ticket(@registration).deliver_now
     else
-      RegistrationMailer.confirm_registration(@registration).deliver
+      RegistrationMailer.confirm_registration(@registration).deliver_now
     end
   end
 
@@ -72,9 +72,9 @@ class RegistrationsController < ApplicationController
       @registration.generate_barcode
 
       if @registration.is_paid
-        RegistrationMailer.ticket(@registration).deliver
+        RegistrationMailer.ticket(@registration).deliver_now
       else
-        RegistrationMailer.confirm_registration(@registration).deliver
+        RegistrationMailer.confirm_registration(@registration).deliver_now
       end
 
       flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."
@@ -105,12 +105,12 @@ class RegistrationsController < ApplicationController
     @registration.update params.require(:registration).permit(:to_pay)
     if @registration.paid != paid then
       if @registration.is_paid
-        RegistrationMailer.ticket(@registration).deliver
+        RegistrationMailer.ticket(@registration).deliver_now
         if @registration.paid > @registration.price
-          RegistrationMailer.notify_overpayment(@registration).deliver
+          RegistrationMailer.notify_overpayment(@registration).deliver_now
         end
       else
-        RegistrationMailer.confirm_registration(@registration).deliver
+        RegistrationMailer.confirm_registration(@registration).deliver_now
       end
     end
     respond_with @registration
@@ -125,7 +125,7 @@ class RegistrationsController < ApplicationController
     else
       to = @event.access_levels.find_by_id(to_id).registrations.pluck(:email)
     end
-    MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver
+    MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver_now
     redirect_to event_registrations_path(@event)
   end
 
@@ -161,9 +161,9 @@ class RegistrationsController < ApplicationController
         registration.save
 
         if registration.is_paid
-          RegistrationMailer.ticket(registration).deliver
+          RegistrationMailer.ticket(registration).deliver_now
         else
-          RegistrationMailer.confirm_registration(registration).deliver
+          RegistrationMailer.confirm_registration(registration).deliver_now
         end
 
         counter += 1
