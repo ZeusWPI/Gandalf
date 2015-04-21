@@ -158,17 +158,26 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
-    date = "#{registrations(:one).created_at.to_date}"
+    date = "#{registrations(:one).created_at.utc.to_date}"
     get :statistics, { id: 1 }
     assert_response :success
-    assert assigns(:data) == [
+    expected = [
       { name: "Lid",       data: { date => 1 } },
       { name: "Limited0",  data: { date => 3 } },
       { name: "Limited1",  data: { date => 3 } },
       { name: "Limited2",  data: { date => 3 } },
       { name: "Member",    data: { date => 0 } },
       { name: "Unlimited", data: { date => 0 } }
-    ], "Got #{assigns(:data).inspect} on #{date}"
+    ]
+    expected.zip(assigns(:data)).each do |e, a|
+      assert e[:name] == a[:name], "Mismatching names. Expected #{e[:name]} got #{a[:name]}"
+      e[:data].keys.each do |k|
+        assert (a[:data].has_key? k), "Missing date for #{e[:name]}: #{k}"
+        assert e[:data][k] == a[:data][k],
+          "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
+      end
+    end
+
   end
 
 end
