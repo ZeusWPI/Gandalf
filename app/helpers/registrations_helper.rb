@@ -7,7 +7,7 @@ module RegistrationsHelper
     when 'checked_in_at'
       "Checked in at #{nice_time change[1]}"
     when 'payment_code'
-      "Payment code updated to #{change[1]}"
+      "Payment code updated from #{change[0]} to #{change[1]}"
     end
   end
 
