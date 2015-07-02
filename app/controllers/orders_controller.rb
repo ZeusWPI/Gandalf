@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     @order = Order.find params.require(:id)
     authorize! :update, @order.event
 
-    @order.deliver_now
+    @order.deliver
   end
 
   def create
@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
 
     paid = @order.paid
     @order.update params.require(:order).permit(:to_pay)
-    @order.deliver_now if @order.paid != paid # Did the amount change?
+    @order.deliver if @order.paid != paid # Did the amount change?
 
     respond_with @order
   end
@@ -104,7 +104,7 @@ class OrdersController < ApplicationController
         order.payment_code = Order.create_payment_code
         order.save
 
-        order.deliver_now
+        order.deliver
 
         counter += 1
       end
