@@ -25,6 +25,8 @@ set :log_level, :debug
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :passenger_restart_with_touch, true
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do

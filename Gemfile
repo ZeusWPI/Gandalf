@@ -110,9 +110,10 @@ gem 'whenever', require: false
 gem 'coveralls', require: false
 
 # Deployment
-gem 'capistrano', '~> 3.1'
-gem 'capistrano-rails', '~> 1.1'
+gem 'capistrano'
+gem 'capistrano-rails'
 gem 'capistrano-rvm'
+gem 'capistrano-passenger'
 
 # Stubbing http requests
 gem 'webmock', require: false
