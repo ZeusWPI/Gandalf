@@ -7,7 +7,7 @@ class TicketManipulationTest < ActionDispatch::IntegrationTest
     sign_in users(:adminfelix)
 
     visit events_path
-    click_on "All"
+    click_on 'All'
     click_on events(:codenight).name
     click_on 'Tickets'
     fill_in 'access_level_name', with: 'Test'

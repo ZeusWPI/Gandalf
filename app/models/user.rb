@@ -51,9 +51,7 @@ class User < ActiveRecord::Base
     dig = digest(Rails.application.secrets.fk_auth_salt, username, clubs_dig)
 
     # Process clubs if the controle is correct
-    if hash['controle'] == dig
-      self.clubs = Club.where(internal_name: clubs_dig)
-    end
+    self.clubs = Club.where(internal_name: clubs_dig) if hash['controle'] == dig
     self.save!
   end
 

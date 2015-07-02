@@ -14,7 +14,6 @@ class TicketMailer < ActionMailer::Base
     tilted_image = Magick::Image.from_blob(image).first.rotate!(-90).to_blob
     attachments.inline['barcode-tilted.png'] = tilted_image
 
-
     mail to: "#{ticket.name} <#{ticket.email}>", subject: "Ticket for #{ticket.event.name}"
   end
 end

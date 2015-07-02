@@ -97,7 +97,6 @@ class EventsController < ApplicationController
     check_in
   end
 
-
   def export_status
     @event = Event.find params.require(:id)
     authorize! :read, @event
@@ -123,22 +122,22 @@ class EventsController < ApplicationController
   end
 
   private
-  def check_in
 
+  def check_in
     if @registration
-      if not @registration.is_paid
+      if !@registration.is_paid
         flash.now[:warning] =
-          "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
+          'Person has not paid yet! Resting amount: €' + @registration.to_pay.to_s
       elsif @registration.checked_in_at
-        flash.now[:warning] = "Person already checked in at " +
-          view_context.nice_time(@registration.checked_in_at) + "!"
+        flash.now[:warning] = 'Person already checked in at ' +
+                              view_context.nice_time(@registration.checked_in_at) + '!'
       else
-        flash.now[:success] = "Person has been scanned!"
-        @registration.checked_in_at = Time.now
+        flash.now[:success] = 'Person has been scanned!'
+        @registration.checked_in_at = Time.zone.now
         @registration.save!
       end
     else
-      flash.now[:error] = "Registration not found"
+      flash.now[:error] = 'Registration not found'
     end
     render action: :scan
   end

@@ -46,10 +46,9 @@ class Event < ActiveRecord::Base
   validates :contact_email, email: true
   validates_with IBANValidator
 
-
   validates_datetime :end_date, after: :start_date
   validates_datetime :registration_close_date, after: :registration_open_date,
-    unless: lambda { |o| o.registration_close_date.blank? or o.registration_open_date.blank? }
+                                               unless: ->(o) { o.registration_close_date.blank? || o.registration_open_date.blank? }
 
   has_attached_file :export
   validates_attachment_file_name :export, matches: /.*/
