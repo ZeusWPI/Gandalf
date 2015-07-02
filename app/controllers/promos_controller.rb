@@ -42,13 +42,13 @@ class PromosController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     promo = @event.promos.find(params.require(:id))
-    unless promo.tickets_sold?
+    if promo.tickets_sold?
+      render :index
+    else
       # Save the name so we can respond it as we still have to
       # be able to delete it
       @id = promo.id
       promo.destroy
-    else
-      render :index
     end
   end
 

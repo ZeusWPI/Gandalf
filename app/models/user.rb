@@ -43,18 +43,18 @@ class User < ActiveRecord::Base
                         })
 
     # this will only return the club name if control-hash matches
-    if resp.body != 'FAIL'
-      hash = JSON[resp.body]
+    return if resp.body == 'FAIL'
 
-      clubs_dig = hash['data'].map { |c| c['internalName'] }
-      dig = digest(Rails.application.secrets.fk_auth_salt, username, clubs_dig)
+    hash = JSON[resp.body]
 
-      # Process clubs if the controle is correct
-      if hash['controle'] == dig
-        self.clubs = Club.where(internal_name: clubs_dig)
-      end
-      self.save!
+    clubs_dig = hash['data'].map { |c| c['internalName'] }
+    dig = digest(Rails.application.secrets.fk_auth_salt, username, clubs_dig)
+
+    # Process clubs if the controle is correct
+    if hash['controle'] == dig
+      self.clubs = Club.where(internal_name: clubs_dig)
     end
+    self.save!
   end
 
   # this should add all extra CAS attributes returned by the server to the current session
@@ -93,12 +93,12 @@ class User < ActiveRecord::Base
     resp = HTTParty.get('http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json', query:
                  { key: Rails.application.secrets.enrolment_key, ugent_nr: cas_ugentStudentID })
 
-    if resp.code == 200
-      clubs = JSON[resp.body].map(&:downcase)
-      unless clubs.empty?
-        self.enrolled_clubs = Club.where(internal_name: clubs)
-        self.save!
-      end
+    return unless resp.code == 200
+
+    clubs = JSON[resp.body].map(&:downcase)
+    unless clubs.empty?
+      self.enrolled_clubs = Club.where(internal_name: clubs)
+      self.save!
     end
   end
 

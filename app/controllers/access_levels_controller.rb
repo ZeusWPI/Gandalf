@@ -1,5 +1,5 @@
 class AccessLevelsController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :new]
+  before_action :authenticate_user!, except: [:show, :new]
 
   respond_to :html, :js
 
@@ -43,13 +43,13 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     access_level = AccessLevel.find params.require(:id)
-    unless access_level.tickets.any?
+    if access_level.tickets.any?
+      render :index
+    else
       # Save the name so we can respond it as we still have to
       # be able to delete it
       @id = access_level.id
       access_level.destroy
-    else
-      render :index
     end
   end
 
@@ -57,8 +57,7 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     @access_level = AccessLevel.find params.require(:id)
-    @access_level.hidden = not@access_level.hidden
-    @access_level.save
+    @access_level.toggle_visibility
   end
 
   def parse_advanced

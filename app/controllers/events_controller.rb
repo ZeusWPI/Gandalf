@@ -95,7 +95,7 @@ class EventsController < ApplicationController
         flash.now[:warning] = 'Person already checked in at ' + view_context.nice_time(@ticket.checked_in_at) + '!'
       else
         flash.now[:success] = 'Person has been scanned!'
-        @ticket.checked_in_at = Time.now
+        @ticket.checked_in_at = Time.zone.now
         @ticket.save!
       end
     else

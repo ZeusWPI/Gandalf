@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def store_location
     # store last url as long as it isn't a /users path
-    session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
+    session[:previous_url] = request.fullpath unless request.fullpath =~ %r{/users}
   end
 
   rescue_from CanCan::AccessDenied do |exception|

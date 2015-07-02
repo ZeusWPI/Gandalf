@@ -63,4 +63,8 @@ class AccessLevel < ActiveRecord::Base
     value.sub!(',', '.') if value.is_a? String
     self[:price] = (value.to_f * 100).to_int
   end
+
+  def toggle_visibility
+    self.toggle!(:hidden)
+  end
 end
