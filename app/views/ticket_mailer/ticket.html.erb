@@ -9,38 +9,42 @@
     <p>This email is your ticket to enter the following event:</p>
 
     <table>
-        <tbody>
-            <tr>
-                <td><strong>Event</strong></td>
-                <td><%= @ticket.event.name %></td>
-            </tr>
-            <tr>
-              <td><strong>Organisation</strong></td>
-              <td><%= @ticket.event.club.name %></td>
-            </tr>
-            <tr>
-              <td><strong>Location</strong></td>
-              <td><%= @ticket.event.location %></td>
-            </tr>
-            <tr>
-              <td><strong>Start date</strong></td>
-              <td><%= nice_time @ticket.event.start_date %></td>
-            </tr>
-            <tr>
-              <td><strong>End date</strong></td>
-              <td><%= nice_time @ticket.event.end_date %></td>
-            </tr>
-            <tr>
-              <td><strong>Website</strong></td>
-              <td><a href="<%= @ticket.event.website %>"><%= @ticket.event.website %></a></td>
-            </tr>
-        </tbody>
+      <tbody>
+        <tr>
+          <td><strong>Event</strong></td>
+          <td><%= @ticket.event.name %></td>
+        </tr>
+        <tr>
+          <td><strong>Organisation</strong></td>
+          <td><%= @ticket.event.club.name %></td>
+        </tr>
+        <tr>
+          <td><strong>Location</strong></td>
+          <td><%= @ticket.event.location %></td>
+        </tr>
+        <tr>
+          <td><strong>Start date</strong></td>
+          <td><%= nice_time @ticket.event.start_date %></td>
+        </tr>
+        <tr>
+          <td><strong>End date</strong></td>
+          <td><%= nice_time @ticket.event.end_date %></td>
+        </tr>
+        <tr>
+          <td><strong>Website</strong></td>
+          <td><a href="<%= @ticket.event.website %>"><%= @ticket.event.website %></a></td>
+        </tr>
+      </tbody>
     </table>
 
     <p>Below is your personal barcode (ticket type: <%= @ticket.access_level :name %>).</p>
     <br />
     <%= image_tag attachments['barcode.png'].url %>
+    <%= image_tag attachments['barcode-tilted.png'].url %>
     <br />
+    Barcode number: <%= @registration.barcode %>
+    <br />
+
 
     <p><strong>Do not forget to print this email and bring it with you. This email acts as your ticket. Without it, you will not be granted access to <%= @ticket.event.name %>.</strong><p>
 

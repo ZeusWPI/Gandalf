@@ -3,9 +3,9 @@
 <div class="row">
   <div class="col-sm-6">
     <h3>Description</h3>
-    <table class="table">
+    <table class="table word-break">
       <tr>
-        <th>Organisation</th>
+        <th class="col-md-3 col-xs-3">Organisation</th>
         <td><%= @event.club.name %></td>
       </tr>
       <tr>
@@ -51,4 +51,5 @@
 
       <%= button_to "Buy tickets now", event_order_build_index_path(@event, :new), class: 'btn btn-primary' %>
     <% end %>
+  </div>
 </div>

@@ -24,7 +24,12 @@ footer {
   text-align: center;
 }
 
+/* All round utility classes */
 .nowrap {
   white-space: nowrap;
 }
 
+.word-break {
+  table-layout: fixed;
+  word-wrap: break-word;
+}

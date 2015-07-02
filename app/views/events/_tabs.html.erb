@@ -14,12 +14,11 @@
         <li <%= raw 'class="active"' if current_page?(statistics_event_path(@event)) %>><%= link_to "Statistics", statistics_event_path(@event) %></li>
       <% end %>
       <% if can? :crud, @event %>
-        <li <%= raw 'class="active"' if current_page?(edit_event_path(@event)) %>><%= link_to "Edit event", edit_event_path(@event) %></li>
+        <li <%= raw 'class="active"' if current_page?(edit_event_path(@event)) %> data-no-turbolink><%= link_to "Edit event", edit_event_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(event_tickets_path(@event)) %>><%= link_to "Registrations", event_tickets_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(event_orders_path(@event)) %>><%= link_to "Orders", event_orders_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(event_access_levels_path(@event)) %>><%= link_to "Tickets", event_access_levels_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(event_partners_path(@event)) %>><%= link_to "Partners", event_partners_path(@event) %></li>
-        <li <%= raw 'class="active"' if current_page?(event_promos_path(@event)) %>><%= link_to "Promo", event_promos_path(@event) %></li>
         <li <%= raw 'class="active"' if current_page?(scan_event_path(@event)) %>><%= link_to "Scan", scan_event_path(@event) %></li>
       <% end %>
     </ul>

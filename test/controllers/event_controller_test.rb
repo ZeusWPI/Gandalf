@@ -60,42 +60,55 @@ class EventControllerTest < ActionController::TestCase
     assert ability.can?(:register, e)
   end
 
-  test 'validate correct barcode' do
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+  test "validate correct barcode" do
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
+    assert_response :success
+    assert(flash[:success].include? "Person has been scanned")
+  end
+
+  test "validate correct name" do
+    post :scan_name, id: events(:codenight).id, name: 'Tom Naessens'
     assert_response :success
     assert(flash[:success].include? 'Person has been scanned')
   end
 
-  test 'dont check in twice' do
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+  test "dont check in twice" do
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
-    assert(flash[:success].include? 'Person has been scanned')
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+    assert(flash[:success].include? "Person has been scanned")
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert(flash[:warning].include? 'Person already checked in')
   end
 
-  test 'show unpaid for checked in unpaid tickets' do
-    post :check_in, id: events(:codenight).id, code: '3333333333333'
+  test "show unpaid for checked in unpaid tickets" do
+    reg = registrations(:one)
+    reg.checked_in_at = Time.now
+    reg.price = 10
+    reg.save
+
+    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     assert_nil(@ticket)
     assert(flash[:warning].include? 'Person has not paid yet!')
   end
 
-  test 'dont find tickets from other event' do
-    post :check_in, id: events(:codenight).id, code: '2222222222222'
+  test "dont find registrations from other event" do
+    post :scan_barcode, id: events(:codenight).id, code: '2222222222222'
     assert_response :success
     assert_nil(@ticket)
   end
 
-  test 'dont check in unpaid tickets' do
-    post :check_in, id: events(:codenight).id, code: '2222222222222'
+  test "dont check in unpaid tickets" do
+    sign_out users(:tom)
+    sign_in users(:maarten)
+    post :scan_barcode, id: events(:galabal).id, code: '2222222222222'
     assert_response :success
     assert(flash[:warning].include? 'Person has not paid yet!')
   end
 
-  test 'scan page should include check digit' do
-    post :check_in, id: events(:codenight).id, code: '1234567891231'
+  test "scan page should include check digit" do
+    post :scan_barcode, id: events(:codenight), code: '1234567891231'
     assert_response :success
     # expect at least one <th> with value "Barcode:" and the full code with checkdigit
     assert_select 'tr' do

@@ -8,9 +8,11 @@ class EventsController < ApplicationController
   respond_to :html, :js, :ics
 
   def index
-    @events = Event.where('end_date > ?', DateTime.now).order(:name)
-    @events += Event.accessible_by(current_ability).to_a if user_signed_in?
-    @events.uniq!
+    @events = Event.where('end_date > ?', DateTime.now).order(:start_date)
+
+    if user_signed_in?
+      @past_events = Event.accessible_by(current_ability).order(:name)
+    end
   end
 
   def show
@@ -81,29 +83,20 @@ class EventsController < ApplicationController
     authorize! :update, @event
   end
 
-  def check_in
+  def scan_barcode
     @event = Event.find params.require(:id)
     authorize! :update, @event
-    barcode = params.require(:code)
-
-    @ticket = @event.tickets.find_by_barcode barcode
-
-    if @ticket
-      if !@ticket.order.is_paid
-        flash.now[:warning] = 'Person has not paid yet! Resting amount: €' + @ticket.order.to_pay.to_s
-      elsif @ticket.checked_in_at
-        flash.now[:warning] = 'Person already checked in at ' + view_context.nice_time(@ticket.checked_in_at) + '!'
-      else
-        flash.now[:success] = 'Person has been scanned!'
-        @ticket.checked_in_at = Time.zone.now
-        @ticket.save!
-      end
-    else
-      flash.now[:error] = 'Barcode not found'
-    end
-
-    render action: :scan
+    @registration = @event.registrations.find_by barcode: params.require(:code)
+    check_in
   end
+
+  def scan_name
+    @event = Event.find params.require(:id)
+    authorize! :update, @event
+    @registration = @event.registrations.find_by name: params.require(:name)
+    check_in
+  end
+
 
   def export_status
     @event = Event.find params.require(:id)
@@ -121,5 +114,32 @@ class EventsController < ApplicationController
     @event.export_status = 'generating'
     @event.save
     @event.generate_xls
+  end
+
+  def list_registrations
+    @event = Event.find params.require(:id)
+    authorize! :read, @event
+    render json: @event.registrations
+  end
+
+  private
+  def check_in
+
+    if @registration
+      if not @registration.is_paid
+        flash.now[:warning] =
+          "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
+      elsif @registration.checked_in_at
+        flash.now[:warning] = "Person already checked in at " +
+          view_context.nice_time(@registration.checked_in_at) + "!"
+      else
+        flash.now[:success] = "Person has been scanned!"
+        @registration.checked_in_at = Time.now
+        @registration.save!
+      end
+    else
+      flash.now[:error] = "Registration not found"
+    end
+    render action: :scan
   end
 end

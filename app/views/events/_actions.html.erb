@@ -3,6 +3,6 @@
 <% end %>
 
 <% if can? :crud, event %>
-  <%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_event_path(event), class: "btn btn-default btn-xs" %>
+  <span data-no-turbolink><%= link_to raw('<span class="glyphicon glyphicon-edit"></span> Edit'), edit_event_path(event), class: "btn btn-default btn-xs" %></span>
   <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(event) %>
 <% end %>

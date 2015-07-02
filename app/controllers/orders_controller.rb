@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     @order = Order.find params.require(:id)
     authorize! :update, @order.event
 
-    @order.deliver
+    @order.deliver_now
   end
 
   def create
@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
 
     paid = @order.paid
     @order.update params.require(:order).permit(:to_pay)
-    @order.deliver if @order.paid != paid # Did the amount change?
+    @order.deliver_now if @order.paid != paid # Did the amount change?
 
     respond_with @order
   end
@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
 
     to = @event.orders.pluck(:email)
 
-    MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver
+    MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver_now
 
     redirect_to event_orders_path(@event)
   end
@@ -104,7 +104,7 @@ class OrdersController < ApplicationController
         order.payment_code = Order.create_payment_code
         order.save
 
-        order.deliver
+        order.deliver_now
 
         counter += 1
       end

@@ -9,8 +9,8 @@ class OrdersGrid
   filter(:name) { |value| where('lower(orders.name) like ?', "%#{value.downcase}%") }
   filter(:email) { |value| where('lower(orders.email) like ?', "%#{value.downcase}%") }
   filter(:payment_code) { |value| where('orders.payment_code like ?', "%#{value}%") }
-  filter(:only_paid) { |value| where('paid = price')  if value == '1' }
-  filter(:only_unpaid) { |value| where.not('paid = price')  if value == '1' }
+  filter(:only_paid) { |value| where('orders.paid = orders.price')  if value == '1' }
+  filter(:only_unpaid) { |value| where.not('orders.paid = orders.price')  if value == '1' }
 
   column(:name)
   column(:email)

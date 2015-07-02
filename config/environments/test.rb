@@ -36,4 +36,6 @@ Isengard::Application.configure do
 
   # Randomize test order
   config.active_support.test_order = :random
+
+  config.active_record.raise_in_transactional_callbacks = true
 end

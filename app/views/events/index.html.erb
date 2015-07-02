@@ -1,18 +1,33 @@
 <div class="row">
   <div class="col-lg-12">
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <th>Name</th>
-          <th>Organisation</th>
-          <th>Location</th>
-          <th>Start date</th>
-          <th>End date</th>
-          <th width="210">Actions</th>
-        </thead>
-        <%= render @events %>
-      </table>
+
+    <% if can? :crud, Event %>
+    <div role="tabpanel">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#upcoming" aria-controls="upcoming" role="tab" data-toggle="tab">Upcoming</a></li>
+        <li role="presentation"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
+      </ul>
+    <% end %>
+
+    <% if can? :crud, Event %>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="upcoming">
+    <% end %>
+
+          <%= render partial: "events_table", locals: { events: @events } %>
+
+    <% if can? :crud, Event %>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="all">
+          <%= render partial: "events_table", locals: { events: @past_events } %>
+        </div>
+      </div>
+
     </div>
+    <% end %>
+
   </div>
 </div>
 <%= render "events/delete_modal" %>

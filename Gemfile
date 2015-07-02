@@ -71,7 +71,7 @@ gem 'cancancan', '~> 1.9'
 gem 'httparty'
 
 # Logging is awesome, and paper_trail even more
-gem 'paper_trail'
+gem 'paper_trail', '~> 4.0.0.beta'
 
 # Njam njam, IBAN
 gem 'iban-tools'
@@ -121,6 +121,9 @@ gem 'webmock', require: false
 # export to ical
 gem 'ri_cal'
 
+# Easy date validations
+gem 'jc-validates_timeliness'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -135,8 +138,13 @@ gem 'ri_cal'
 
 gem 'airbrake'
 
+gem 'rmagick'
+
 # select2 is beautiful
 gem 'select2-rails'
+
+# Typeahead
+gem 'twitter-typeahead-rails'
 
 group :production do
   gem 'mysql2' # Database

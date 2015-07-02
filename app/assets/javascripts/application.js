@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require ckeditor-jquery
 //= require select2
+//= require twitter/typeahead.min
 //= require_tree .

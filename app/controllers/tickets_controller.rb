@@ -40,7 +40,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find params.require(:id)
     authorize! :update, @ticket.event
 
-    TicketMailer.ticket(@ticket).deliver
+    TicketMailer.ticket(@ticket).deliver_now
   end
 
   def create
@@ -60,7 +60,7 @@ class TicketsController < ApplicationController
     else
       to = @event.access_levels.find_by_id(to_id).tickets.pluck(:email)
     end
-    MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver
+    MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver_now
     redirect_to event_tickets_path(@event)
   end
 end

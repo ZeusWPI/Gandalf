@@ -46,6 +46,11 @@ class Event < ActiveRecord::Base
   validates :contact_email, email: true
   validates_with IBANValidator
 
+
+  validates_datetime :end_date, after: :start_date
+  validates_datetime :registration_close_date, after: :registration_open_date,
+    unless: lambda { |o| o.registration_close_date.blank? or o.registration_open_date.blank? }
+
   has_attached_file :export
   validates_attachment_file_name :export, matches: /.*/
   validates_attachment_content_type :export, content_type: /.*/
@@ -62,9 +67,9 @@ class Event < ActiveRecord::Base
     xls = Spreadsheet::Workbook.new
     sheet = xls.create_worksheet
 
-    sheet.update_row 0, 'Naam', 'Email', 'Studentnummer', 'Ticket', 'Comment', 'Is paid'
+    sheet.update_row 0, 'Naam', 'Email', 'Studentnummer', 'Ticket', 'Comment', 'Te betalen'
     tickets.each.with_index do |ticket, i|
-      sheet.update_row i + 1, ticket.name, ticket.email, ticket.student_number, ticket.access_level.name, ticket.comment, ticket.order.is_paid
+      sheet.update_row i + 1, ticket.name, ticket.email, ticket.student_number, ticket.access_level.name, ticket.comment, ticket.order.to_pay
     end
     data = Tempfile.new(['export', '.xls'])
 
