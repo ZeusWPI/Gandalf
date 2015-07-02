@@ -1,0 +1,7 @@
+AllCops:
+  RunRailsCops: true
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - db/schema.rb
