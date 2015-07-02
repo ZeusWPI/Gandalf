@@ -42,10 +42,9 @@ class Partner < ActiveRecord::Base
   # validates :email, uniqueness: { scope: :event_id }
   validates :email, email: true
 
-  default_scope { order "name ASC" }
+  default_scope { order 'name ASC' }
 
   def deliver
     PartnerMailer.invitation(self).deliver
   end
-
 end

@@ -1,5 +1,4 @@
 class TicketsController < ApplicationController
-
   before_action :authenticate_user!, only: [:index, :destroy, :resend, :update, :email, :upload]
 
   require 'csv'
@@ -64,5 +63,4 @@ class TicketsController < ApplicationController
     MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver
     redirect_to event_tickets_path(@event)
   end
-
 end

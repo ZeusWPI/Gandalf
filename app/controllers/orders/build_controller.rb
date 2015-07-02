@@ -31,7 +31,6 @@ class Orders::BuildController < ApplicationController
     @event = Event.find params.require(:event_id)
     @order = @event.orders.find params.require(:order_id)
 
-
     case step
     when :add_tickets
       @access_levels = @event.access_levels.find_all { |al| can? :show, al }
@@ -53,7 +52,7 @@ class Orders::BuildController < ApplicationController
     when :add_ticket_info
       @tickets = @order.tickets
       params.require(:tickets).each do |id, ticket|
-        @tickets.find(id).update_columns ticket.merge({ status: 'filled_in' })
+        @tickets.find(id).update_columns ticket.merge(status: 'filled_in')
       end
     when :confirmation
       @order.deliver
@@ -65,5 +64,4 @@ class Orders::BuildController < ApplicationController
 
     render_wizard @order
   end
-
 end

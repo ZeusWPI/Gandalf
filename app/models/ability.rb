@@ -6,12 +6,12 @@ class Ability
     entity ||= User.new
 
     # Aliases
-    alias_action :new, :create, :read, :update, :destroy, :to => :crud
+    alias_action :new, :create, :read, :update, :destroy, to: :crud
 
     # Delegate with user precedence
-    if entity.kind_of? User
+    if entity.is_a? User
       user_rules(entity)
-    elsif entity.kind_of? Partner
+    elsif entity.is_a? Partner
       partner_rules(entity)
     end
   end
@@ -29,7 +29,7 @@ class Ability
     if !clubs.blank?
       can :create, Event
       can :show, Event
-      can :crud, Event, ["? IN (?)", :club_id, clubs.pluck(:id)] do |e|
+      can :crud, Event, ['? IN (?)', :club_id, clubs.pluck(:id)] do |e|
         clubs.include? e.club
       end
     else
@@ -99,8 +99,7 @@ class Ability
 
     # can view statistics?
     can :view_stats, Event do |event|
-      clubs.include? event.club or event.show_statistics
+      clubs.include?(event.club) || event.show_statistics
     end
   end
-
 end

@@ -27,7 +27,6 @@
 #
 
 class Event < ActiveRecord::Base
-
   belongs_to :club
 
   has_many :access_levels, dependent: :destroy
@@ -48,26 +47,26 @@ class Event < ActiveRecord::Base
   validates_with IBANValidator
 
   has_attached_file :export
-  validates_attachment_file_name :export, :matches => /.*/
-  validates_attachment_content_type :export, :content_type => /.*/
+  validates_attachment_file_name :export, matches: /.*/
+  validates_attachment_content_type :export, content_type: /.*/
 
   before_save :prettify_bank_number
 
   def prettify_bank_number
-    self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
+    self.bank_number = IBANTools::IBAN.new(bank_number).prettify if bank_number_changed?
   end
 
   def generate_xls
     self.export_status = 'generating'
-    self.save
+    save
     xls = Spreadsheet::Workbook.new
     sheet = xls.create_worksheet
 
-    sheet.update_row 0, "Naam", "Email", "Studentnummer", "Ticket", "Comment", "Is paid"
+    sheet.update_row 0, 'Naam', 'Email', 'Studentnummer', 'Ticket', 'Comment', 'Is paid'
     tickets.each.with_index do |ticket, i|
       sheet.update_row i + 1, ticket.name, ticket.email, ticket.student_number, ticket.access_level.name, ticket.comment, ticket.order.is_paid
     end
-    data = Tempfile.new(["export", ".xls"])
+    data = Tempfile.new(['export', '.xls'])
 
     xls.write(data)
 
@@ -79,7 +78,7 @@ class Event < ActiveRecord::Base
   handle_asynchronously :generate_xls
 
   def toggle_registration_open
-    self.registration_open = !self.registration_open
-    self.save
+    self.registration_open = !registration_open
+    save
   end
 end

@@ -20,13 +20,13 @@ class Order < ActiveRecord::Base
   belongs_to :event
   has_many :tickets
 
-  scope :paid, -> { where("price <= paid") }
+  scope :paid, -> { where('price <= paid') }
   scope :active, -> { where(status: 'active') }
 
   has_paper_trail only: [:paid, :payment_code]
 
   # Should validate on add_tickets
-  validates :tickets, presence: { message: "is empty! Please pick at least one." }, if: :active_or_add_tickets?
+  validates :tickets, presence: { message: 'is empty! Please pick at least one.' }, if: :active_or_add_tickets?
 
   # Should validate on add_info
   validates :name, presence: true, if: :active_or_add_info?
@@ -42,10 +42,10 @@ class Order < ActiveRecord::Base
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :active_or_pay?
   validates :payment_code, presence: true, uniqueness: true, if: :active_or_pay?
 
-  default_scope { order "name ASC" }
+  default_scope { order 'name ASC' }
 
   before_validation do |record|
-    if record.payment_code.nil? then
+    if record.payment_code.nil?
       record.payment_code = self.class.create_payment_code
     end
   end
@@ -72,31 +72,31 @@ class Order < ActiveRecord::Base
   end
 
   def paid
-    from_cents read_attribute(:paid)
+    from_cents self[:paid]
   end
 
   def paid=(value)
-    write_attribute :paid, to_cents(value)
+    self[:paid] = to_cents(value)
   end
 
   def to_pay
-    self.price - self.paid
+    price - paid
   end
 
   def to_pay=(value)
-    self.paid = self.price - (to_cents(value) / 100.0)
+    self.paid = price - (to_cents(value) / 100.0)
   end
 
   def price
-    from_cents read_attribute(:price)
+    from_cents self[:price]
   end
 
   def price=(value)
-    write_attribute(:price, to_cents(value))
+    self[:price] = to_cents(value)
   end
 
   def is_paid
-    self.price <= self.paid
+    price <= paid
   end
 
   def self.find_payment_code_from_csv(csvline)
@@ -110,15 +110,13 @@ class Order < ActiveRecord::Base
 
   def self.create_payment_code
     random = rand(10**15)
-    return sprintf("GAN%02d%015d", random % 97, random)
+    sprintf('GAN%02d%015d', random % 97, random)
   end
 
   def deliver
-    if self.is_paid
-      self.tickets.all.map(&:deliver)
-      if self.paid > self.price
-        OrderMailer.notify_overpayment(self).deliver_now
-      end
+    if is_paid
+      tickets.all.map(&:deliver)
+      OrderMailer.notify_overpayment(self).deliver_now if paid > price
     else
       OrderMailer.confirm_order(self).deliver_now
     end
@@ -131,7 +129,7 @@ class Order < ActiveRecord::Base
   end
 
   def to_cents(value)
-    if value.is_a? String then value.sub!(',', '.') end
+    value.sub!(',', '.') if value.is_a? String
     (value.to_f * 100).to_int
   end
 end

@@ -4,45 +4,45 @@ class EventControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
-    stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
-      with(query: hash_including(u: 'tnnaesse')).
-      to_return(body: '{"data":[{"internalName":"zeus","displayName":"Zeus WPI"},{"internalName":"zeus2","displayName":"Zeus WPI2"}],"controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"}')
+    stub_request(:get, 'http://fkgent.be/api_isengard_v2.php')
+      .with(query: hash_including(u: 'tnnaesse'))
+      .to_return(body: '{"data":[{"internalName":"zeus","displayName":"Zeus WPI"},{"internalName":"zeus2","displayName":"Zeus WPI2"}],"controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"}')
 
     @controller = EventsController.new
     sign_in users(:tom)
   end
 
-  test "should get show" do
+  test 'should get show' do
     get :show, id: events(:codenight).id
     assert_response :success
   end
 
-  test "should get create" do
+  test 'should get create' do
     post :create, id: events(:codenight).id, event: events(:codenight).attributes
     assert_response :redirect
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should get update" do
+  test 'should get update' do
     get :update, id: events(:codenight).id, event: events(:codenight).attributes
     assert_response :success
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
   end
 
-  test "should get scan" do
+  test 'should get scan' do
     get :scan, id: events(:codenight).id
     assert_response :success
   end
 
-  test "toggle registration open" do
+  test 'toggle registration open' do
     e = events(:codenight)
 
     user = users(:tom)
@@ -60,50 +60,49 @@ class EventControllerTest < ActionController::TestCase
     assert ability.can?(:register, e)
   end
 
-  test "validate correct barcode" do
+  test 'validate correct barcode' do
     post :check_in, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert(flash[:success].include? 'Person has been scanned')
   end
 
-  test "dont check in twice" do
+  test 'dont check in twice' do
     post :check_in, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert(flash[:success].include? 'Person has been scanned')
     post :check_in, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
-    assert(flash[:warning].include? "Person already checked in")
+    assert(flash[:warning].include? 'Person already checked in')
   end
 
-  test "show unpaid for checked in unpaid tickets" do
+  test 'show unpaid for checked in unpaid tickets' do
     post :check_in, id: events(:codenight).id, code: '3333333333333'
     assert_response :success
     assert_nil(@ticket)
-    assert(flash[:warning].include? "Person has not paid yet!")
+    assert(flash[:warning].include? 'Person has not paid yet!')
   end
 
-  test "dont find tickets from other event" do
+  test 'dont find tickets from other event' do
     post :check_in, id: events(:codenight).id, code: '2222222222222'
     assert_response :success
     assert_nil(@ticket)
   end
 
-  test "dont check in unpaid tickets" do
+  test 'dont check in unpaid tickets' do
     post :check_in, id: events(:codenight).id, code: '2222222222222'
     assert_response :success
-    assert(flash[:warning].include? "Person has not paid yet!")
+    assert(flash[:warning].include? 'Person has not paid yet!')
   end
 
-  test "scan page should include check digit" do
+  test 'scan page should include check digit' do
     post :check_in, id: events(:codenight).id, code: '1234567891231'
     assert_response :success
     # expect at least one <th> with value "Barcode:" and the full code with checkdigit
-    assert_select "tr" do
-      assert_select "th", "Barcode:"
-      assert_select "td", "1234567891231"
+    assert_select 'tr' do
+      assert_select 'th', 'Barcode:'
+      assert_select 'td', '1234567891231'
     end
   end
-
 
   # test "member tickets should not be shown for wrong user" do
   #   sign_out users(:tom)
@@ -157,5 +156,4 @@ class EventControllerTest < ActionController::TestCase
   #     { name: "Unlimited", data: { date => 0 } }
   #   ], "Got #{assigns(:data).inspect} on #{date}"
   # end
-
 end

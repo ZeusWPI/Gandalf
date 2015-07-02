@@ -1,18 +1,15 @@
 # encoding: UTF-8
 
 class EventsController < ApplicationController
-
   # order is important here, we need to be authenticated before we can check permission
-  before_filter :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
 
   respond_to :html, :js, :ics
 
   def index
     @events = Event.where('end_date > ?', DateTime.now).order(:name)
-    if user_signed_in?
-      @events += Event.accessible_by(current_ability).to_a
-    end
+    @events += Event.accessible_by(current_ability).to_a if user_signed_in?
     @events.uniq!
   end
 
@@ -34,7 +31,7 @@ class EventsController < ApplicationController
     authorize! :update, @event
 
     if @event.update params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
-      flash.now[:success] = "Successfully updated event."
+      flash.now[:success] = 'Successfully updated event.'
     end
 
     render action: :edit
@@ -61,17 +58,17 @@ class EventsController < ApplicationController
     @event = Event.find params.require(:id)
     authorize! :view_stats, @event
 
-    if not @event.tickets.empty?
+    if !@event.tickets.empty?
 
       min, max = @event.tickets.pluck(:created_at).minmax
       zeros = Hash[]
       while min <= max
-        zeros[min.strftime("%Y-%m-%d")] = 0
+        zeros[min.strftime('%Y-%m-%d')] = 0
         min += 1.day
       end
 
       @data = @event.access_levels.map do |al|
-        {name: al.name, data: zeros.merge(al.tickets.group('date(tickets.created_at)').count)}
+        { name: al.name, data: zeros.merge(al.tickets.group('date(tickets.created_at)').count) }
       end
 
     else
@@ -92,17 +89,17 @@ class EventsController < ApplicationController
     @ticket = @event.tickets.find_by_barcode barcode
 
     if @ticket
-      if not @ticket.order.is_paid
-        flash.now[:warning] = "Person has not paid yet! Resting amount: €" + @ticket.order.to_pay.to_s
+      if !@ticket.order.is_paid
+        flash.now[:warning] = 'Person has not paid yet! Resting amount: €' + @ticket.order.to_pay.to_s
       elsif @ticket.checked_in_at
-        flash.now[:warning] = "Person already checked in at " + view_context.nice_time(@ticket.checked_in_at) + "!"
+        flash.now[:warning] = 'Person already checked in at ' + view_context.nice_time(@ticket.checked_in_at) + '!'
       else
-        flash.now[:success] = "Person has been scanned!"
+        flash.now[:success] = 'Person has been scanned!'
         @ticket.checked_in_at = Time.now
         @ticket.save!
       end
     else
-      flash.now[:error] = "Barcode not found"
+      flash.now[:error] = 'Barcode not found'
     end
 
     render action: :scan
@@ -121,9 +118,8 @@ class EventsController < ApplicationController
   def generate_export
     @event = Event.find params.require(:id)
     authorize! :read, @event
-    @event.export_status = "generating"
+    @event.export_status = 'generating'
     @event.save
     @event.generate_xls
   end
-
 end

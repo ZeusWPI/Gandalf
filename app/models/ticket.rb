@@ -34,16 +34,16 @@ class Ticket < ActiveRecord::Base
   # name should always be present
   validates :name, uniqueness: { scope: [:order, :access_level] }, presence: true, if: :parent_add_ticket_info?
   # a user cannot order a ticket which name already exists in a valid order in the event
-  validates :name, uniqueness: { scope: :event }, if: Proc.new { |t| t.access_level.member_only && t.order.active? }
+  validates :name, uniqueness: { scope: :event }, if: proc { |t| t.access_level.member_only && t.order.active? }
 
   # EMAIL VALIDATION
   # email should always be present
   validates :email, presence: true, if: :parent_add_ticket_info?
 
   validates :student_number,
-    format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
-    uniqueness: { scope: :event }, presence: true,
-    if: Proc.new { |t| t.access_level.member_only && t.order.active? }
+            format: { with: /\A[0-9]*\Z/, message: 'has invalid format' },
+            uniqueness: { scope: :event }, presence: true,
+            if: proc { |t| t.access_level.member_only && t.order.active? }
 
   # after_save do |ticket|
   #   al = ticket.access_level
@@ -66,22 +66,19 @@ class Ticket < ActiveRecord::Base
   end
 
   def parent_add_ticket_info?
-    self.order.active_or_add_ticket_info?
+    order.active_or_add_ticket_info?
   end
 
   def deliver
-    if self.barcode.nil?
-      self.generate_barcode
-    end
+    generate_barcode if barcode.nil?
 
     TicketMailer.ticket(self).deliver_now
   end
 
   def generate_barcode
     self.barcode_data = 12.times.map { SecureRandom.random_number(10) }.join
-    calculated_barcode = Barcodes.create('EAN13', data: self.barcode_data)
+    calculated_barcode = Barcodes.create('EAN13', data: barcode_data)
     self.barcode = calculated_barcode.caption_data
     self.save!
   end
-
 end

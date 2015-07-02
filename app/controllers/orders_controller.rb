@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-
   before_action :authenticate_user!, only: [:index, :destroy, :resend, :update, :email, :upload]
 
   require 'csv'
@@ -12,7 +11,7 @@ class OrdersController < ApplicationController
     authorize! :read, @event
 
     @ordersgrid = OrdersGrid.new(params[:orders_grid]) do |scope|
-      scope.where(event_id: @event.id).order("orders.price - paid DESC")
+      scope.where(event_id: @event.id).order('orders.price - paid DESC')
     end
 
     @orders = @ordersgrid.assets
@@ -50,7 +49,7 @@ class OrdersController < ApplicationController
     # Check if the user can register
     authorize! :register, @event
 
-    render "events/show"
+    render 'events/show'
   end
 
   def update
@@ -59,9 +58,7 @@ class OrdersController < ApplicationController
 
     paid = @order.paid
     @order.update params.require(:order).permit(:to_pay)
-    if @order.paid != paid # Did the amount change?
-      @order.deliver
-    end
+    @order.deliver if @order.paid != paid # Did the amount change?
 
     respond_with @order
   end
@@ -87,7 +84,6 @@ class OrdersController < ApplicationController
 
     begin
       CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
-
         order = Order.find_payment_code_from_csv(row.to_s)
         # If the order doesn't exist
         unless order
@@ -113,10 +109,10 @@ class OrdersController < ApplicationController
         counter += 1
       end
 
-      success_msg = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
+      success_msg = "Updated #{ActionController::Base.helpers.pluralize counter, 'payment'} successfully."
       if fails.any?
         flash.now[:success] = success_msg
-        flash.now[:error] = "The rows listed below contained an invalid code, please fix them by hand."
+        flash.now[:error] = 'The rows listed below contained an invalid code, please fix them by hand.'
         @csvheaders = fails.first.headers
         @csvfails = fails
         render 'upload'
@@ -125,10 +121,8 @@ class OrdersController < ApplicationController
         redirect_to action: :index
       end
     rescue CSV::MalformedCSVError
-      flash[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
+      flash[:error] = 'The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator.'
       redirect_to action: :index
     end
-
   end
-
 end

@@ -1,5 +1,4 @@
 class AccessLevelsController < ApplicationController
-
   before_filter :authenticate_user!, except: [:show, :new]
 
   respond_to :html, :js
@@ -58,12 +57,11 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     @access_level = AccessLevel.find params.require(:id)
-    @access_level.hidden = not(@access_level.hidden)
+    @access_level.hidden = not@access_level.hidden
     @access_level.save
   end
 
   def parse_advanced
     @advanced = params[:advanced] == 'true'
   end
-
 end

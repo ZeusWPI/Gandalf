@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   after_create :fetch_club, :fetch_enrolled_clubs
 
   has_and_belongs_to_many :clubs
-  has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: "Club"
+  has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: 'Club'
 
   # return the club this user can manage
   def fetch_club
@@ -37,10 +37,10 @@ class User < ActiveRecord::Base
     end
 
     # using httparty because it is much easier to read than net/http code
-    resp = HTTParty.get(Rails.application.secrets.fk_auth_url, :query => {
-              :k => digest(username, Rails.application.secrets.fk_auth_key),
-              :u => username
-           })
+    resp = HTTParty.get(Rails.application.secrets.fk_auth_url, query: {
+                          k: digest(username, Rails.application.secrets.fk_auth_key),
+                          u: username
+                        })
 
     # this will only return the club name if control-hash matches
     if resp.body != 'FAIL'
@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
 
   # return Givenname + surname or username if these don't exist
   def display_name
-    if cas_surname and cas_givenname
+    if cas_surname && cas_givenname
       cas_givenname + ' ' + cas_surname
     else
       username
@@ -90,12 +90,12 @@ class User < ActiveRecord::Base
 
   # fetch clubs where user is enrolled in
   def fetch_enrolled_clubs
-    resp = HTTParty.get("http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
-                 {key: Rails.application.secrets.enrolment_key, ugent_nr: self.cas_ugentStudentID})
+    resp = HTTParty.get('http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json', query:
+                 { key: Rails.application.secrets.enrolment_key, ugent_nr: cas_ugentStudentID })
 
     if resp.code == 200
       clubs = JSON[resp.body].map(&:downcase)
-      if !clubs.empty?
+      unless clubs.empty?
         self.enrolled_clubs = Club.where(internal_name: clubs)
         self.save!
       end
@@ -104,10 +104,9 @@ class User < ActiveRecord::Base
 
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
-    User.all.each do |user|
+    User.all.find_each do |user|
       user.fetch_club
       user.fetch_enrolled_clubs
     end
   end
-
 end

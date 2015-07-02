@@ -2,14 +2,13 @@
 require 'simplecov'
 require 'coveralls'
 
-
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
 ]
 SimpleCov.start
 
-ENV["RAILS_ENV"] ||= "test"
+ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
@@ -37,7 +36,6 @@ class ActiveSupport::TestCase
       clazz.all.map { |o| assert o.valid?, o.inspect.to_s + "\n" + o.errors.full_messages.join("\n") }
     end
   end
-
 end
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  after_filter :store_location
+  after_action :store_location
 
   def store_location
     # store last url as long as it isn't a /users path
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     session[:previous_url] || root_path
   end
 
@@ -26,5 +26,4 @@ class ApplicationController < ActionController::Base
       @current_ability ||= Ability.new(current_user)
     end
   end
-
 end

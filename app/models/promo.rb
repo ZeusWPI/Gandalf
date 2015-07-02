@@ -16,23 +16,21 @@ class Promo < ActiveRecord::Base
   has_and_belongs_to_many :access_levels
 
   validates :code, presence: true
-  validates :limit, numericality: {only_integer: true, greater_than: 0}
+  validates :limit, numericality: { only_integer: true, greater_than: 0 }
   validates :access_levels, presence: true
   validates :event, presence: true
 
   def tickets_sold?
-    self.sold_tickets != 0
+    sold_tickets != 0
   end
 
   def self.generate_bulk(amount, limit, access_levels, event)
     amount.times do
-      promo = self.new(code: 12.times.map { SecureRandom.random_number(10) }.join,
-         limit: limit)
+      promo = new(code: 12.times.map { SecureRandom.random_number(10) }.join,
+                  limit: limit)
       promo.access_levels = access_levels
       promo.event = event
       promo.save!
     end
   end
-
-
 end
