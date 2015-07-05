@@ -115,7 +115,7 @@ class Order < ActiveRecord::Base
 
   def deliver
     if is_paid
-      tickets.all.map(&:deliver_now)
+      tickets.all.map(&:deliver)
       OrderMailer.notify_overpayment(self).deliver_now if paid > price
     else
       OrderMailer.confirm_order(self).deliver_now

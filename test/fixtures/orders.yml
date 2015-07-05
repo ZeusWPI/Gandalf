@@ -60,10 +60,11 @@ free:
   event: codenight
   paid: 0
   price: 0
+  status: active
   payment_code: <%= Order.create_payment_code %>
 
-non_free_not_paid:
-  name: Non Free Not Paid
+not_free_not_paid:
+  name: Not Free Not Paid
   email: an@email.com
   event: codenight
   paid: 0
@@ -71,8 +72,17 @@ non_free_not_paid:
   status: active
   payment_code: <%= Order.create_payment_code %>
 
-non_free_partially_paid:
-  name: Non Free Partially Paid
+not_free_not_paid_galabal:
+  name: Not Free Not Paid Gablabal
+  email: an@email.comgala
+  event: galabal
+  paid: 0
+  price: 20
+  status: active
+  payment_code: <%= Order.create_payment_code %>
+
+not_free_partially_paid:
+  name: Not Free Partially Paid
   email: another@email.com
   event: codenight
   paid: 5

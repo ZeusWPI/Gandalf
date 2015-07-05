@@ -86,14 +86,15 @@ class EventsController < ApplicationController
   def scan_barcode
     @event = Event.find params.require(:id)
     authorize! :update, @event
-    @registration = @event.registrations.find_by barcode: params.require(:code)
+    @ticket = @event.tickets.find_by barcode: params.require(:code)
     check_in
   end
 
   def scan_name
+    binding.pry
     @event = Event.find params.require(:id)
     authorize! :update, @event
-    @registration = @event.registrations.find_by name: params.require(:name)
+    @ticket = @event.tickets.find_by name: params.require(:name)
     check_in
   end
 
@@ -115,29 +116,29 @@ class EventsController < ApplicationController
     @event.generate_xls
   end
 
-  def list_registrations
+  def list_tickets
     @event = Event.find params.require(:id)
     authorize! :read, @event
-    render json: @event.registrations
+    render json: @event.tickets
   end
 
   private
 
   def check_in
-    if @registration
-      if !@registration.is_paid
+    if @ticket
+      if !@ticket.order.is_paid
         flash.now[:warning] =
-          'Person has not paid yet! Resting amount: €' + @registration.to_pay.to_s
-      elsif @registration.checked_in_at
+          "The order from this ticket has not been paid for yet. has not paid yet! Resting amount: €#{@ticket.order.to_pay.to_s}, orderer: #{@ticket.order.name} (#{@ticket.order.gsm})"
+      elsif @ticket.checked_in_at
         flash.now[:warning] = 'Person already checked in at ' +
-                              view_context.nice_time(@registration.checked_in_at) + '!'
+                              view_context.nice_time(@ticket.checked_in_at) + '!'
       else
         flash.now[:success] = 'Person has been scanned!'
-        @registration.checked_in_at = Time.zone.now
-        @registration.save!
+        @ticket.checked_in_at = Time.zone.now
+        @ticket.save!
       end
     else
-      flash.now[:error] = 'Registration not found'
+      flash.now[:error] = 'Ticket not found'
     end
     render action: :scan
   end

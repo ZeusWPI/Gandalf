@@ -32,21 +32,21 @@ capacity_registration_<%= n %>:
 
 # PAYMENT TESTS
 payment_test_ticket_one:
-  name: One
+  name: Tom
   email: one@gmail.com
-  order: non_free_not_paid
+  order: not_free_not_paid
   access_level: one
 
 payment_test_ticket_two:
   name: Two
   email: two@gmail.com
-  order: non_free_not_paid
+  order: not_free_not_paid
   access_level: one
 
 payment_test_ticket_three:
   name: Three
   email: three@gmail.com
-  order: non_free_partially_paid
+  order: not_free_partially_paid
   access_level: one
 
 # CHECKIN TESTS
@@ -61,15 +61,15 @@ checkin_test_ticket_codenight:
 checkin_test_ticket_galabal:
   name: Checking Test Galabal
   email: checking@test.galabal
-  order: non_free_not_paid
+  order: not_free_not_paid_galabal
   barcode: 2222222222222
   barcode_data: 22222222222
-  access_level: one
+  access_level: two
 
 checkin_test_ticket_unpaid_order:
   name: Checking Test Codenight
   email: checking@test.one
-  order: non_free_not_paid
+  order: not_free_not_paid
   barcode: 3333333333333
   barcode_data: 33333333333
   access_level: one

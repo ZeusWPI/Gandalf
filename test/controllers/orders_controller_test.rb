@@ -62,8 +62,8 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'manual full paying works' do
-    a = orders(:non_free_not_paid)
-    b = orders(:non_free_partially_paid)
+    a = orders(:not_free_not_paid)
+    b = orders(:not_free_partially_paid)
 
     assert_equal 0, a.paid
     assert_equal 0.05, b.paid
@@ -83,8 +83,8 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'manual partial paying works' do
-    a = orders(:non_free_not_paid)
-    b = orders(:non_free_partially_paid)
+    a = orders(:not_free_not_paid)
+    b = orders(:not_free_partially_paid)
 
     assert_equal 0, a.paid
     assert_equal 0.05, b.paid
@@ -106,8 +106,8 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'manual overpaying works' do
-    a = orders(:non_free_not_paid)
-    b = orders(:non_free_partially_paid)
+    a = orders(:not_free_not_paid)
+    b = orders(:not_free_partially_paid)
 
     assert_equal 0, a.paid
     assert_equal 0.05, b.paid

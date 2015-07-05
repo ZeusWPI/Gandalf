@@ -65,14 +65,14 @@
 </div>
 
 <script>
-var json = '<%= list_registrations_event_path %>';
-var registrations = new Bloodhound({
+var json = '<%= list_tickets_event_path %>';
+var tickets = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'email'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '<%= list_registrations_event_path %>'
+    prefetch: '<%= list_tickets_event_path %>'
 });
 
-registrations.initialize();
+tickets.initialize();
 
 $('#name').typeahead(
     {
@@ -81,19 +81,19 @@ $('#name').typeahead(
         minLength: 1
     },
     {
-        name: 'registrations',
+        name: 'tickets',
         displayKey: 'name',
-        source: registrations.ttAdapter(),
+        source: tickets.ttAdapter(),
         templates: {
-            suggestion: function(registration) {
+            suggestion: function(ticket) {
                 var container = $('<div/>');
                 var name = $('<span/>', {
                     class: "typeahead-scan-name",
-                    text: registration.name
+                    text: ticket.name
                 });
                 var email = $('<span/>', {
                     class: "typeahead-scan-email",
-                    text: registration.email
+                    text: ticket.email
                 })
                 return container.append(name).append(email);
             }

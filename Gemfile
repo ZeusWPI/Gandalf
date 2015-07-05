@@ -59,6 +59,11 @@ group :test do
   gem 'poltergeist'
 end
 
+group :development, :test do
+  # debugging
+  gem 'pry-byebug'
+end
+
 # Let's use devise for users
 gem 'devise'
 gem 'devise_cas_authenticatable'
