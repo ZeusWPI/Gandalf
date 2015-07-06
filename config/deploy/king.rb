@@ -7,6 +7,7 @@ server 'king.ugent.be',
     port: 2222
   }
 
+set :branch, 'enhanced-payment-flow'
 set :rails_env, 'production'
 set :rbenv_type, :system
 set :rbenv_ruby, File.read('.ruby-version').strip
