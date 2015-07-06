@@ -118,6 +118,7 @@ gem 'coveralls', require: false
 gem 'capistrano'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
+gem 'capistrano-rbenv'
 gem 'capistrano-passenger'
 
 # Stubbing http requests
