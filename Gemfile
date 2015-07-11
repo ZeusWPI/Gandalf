@@ -51,7 +51,7 @@ group :development do
   gem 'rails-erd'
   gem 'web-console', '~> 2.0'
   # Static code analysis
-  gem 'rubocop'
+  gem 'rubocop', github: 'bbatsov/rubocop'
 end
 
 group :test do
