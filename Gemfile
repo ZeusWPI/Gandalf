@@ -44,10 +44,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
-  gem 'rails-erd'
-end
-
 group :test do
   gem 'capybara'
   gem 'poltergeist'
@@ -104,10 +100,6 @@ gem 'whenever', require: false
 gem 'coveralls', require: false
 
 # Deployment
-gem 'capistrano', '~> 3.1'
-gem 'capistrano-rails', '~> 1.1'
-gem 'capistrano-rvm'
-gem 'capistrano-rbenv'
 
 # Stubbing http requests
 gem 'webmock', require: false
@@ -121,15 +113,6 @@ gem 'jc-validates_timeliness'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 gem 'airbrake'
 
 gem 'rmagick'
@@ -139,6 +122,17 @@ gem 'select2-rails'
 
 # Typeahead
 gem 'twitter-typeahead-rails'
+
+group :development do
+  gem 'rails-erd'
+
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
+
+  gem 'pry-byebug'
+end
 
 group :production do
   gem 'mysql2' # Database
