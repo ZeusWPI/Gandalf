@@ -33,6 +33,10 @@
         <th>Contact e-mail</th>
         <td><%= mail_to @event.contact_email, @event.contact_email %></td>
       </tr>
+      <tr>
+        <th>Share this event</th>
+        <td><%= render_shareable :buttons=> ['twitter', 'facebook', 'google_plus'] %></td>
+      </tr>
     </table>
 
     <% unless @event.access_levels.blank? %>

@@ -240,6 +240,9 @@ GEM
       rdoc (~> 4.0)
     select2-rails (3.5.9.3)
       thor (~> 0.14)
+    shareable (1.1.4)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -349,6 +352,7 @@ DEPENDENCIES
   sass-rails (~> 4.0)
   sdoc
   select2-rails
+  shareable
   simple_form
   simple_token_authentication
   spreadsheet
@@ -361,3 +365,6 @@ DEPENDENCIES
   whenever
   will_paginate (~> 3.0)
   will_paginate-bootstrap
+
+BUNDLED WITH
+   1.10.5
