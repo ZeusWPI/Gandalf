@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gandalf</title>
+    <title>Gandalf<%= if content_for?(:title_tag) then yield(:title_tag) end %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -9,6 +9,16 @@
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <%= render partial: "layouts/ga" if Rails.env.production? %>
     <%= csrf_meta_tags %>
+    
+    <% if content_for?(:og_title) %>
+      <meta property="og:title" content="<%= yield(:og_title) %>" />
+    <% end %>
+    <% if content_for?(:og_url) %>
+      <meta property="og:url" content="<%= yield(:og_url) %>" />
+    <% end %>
+    <% if content_for?(:og_description) %>
+      <meta property="og:description" content="<%= yield(:og_description) %>" />
+    <% end %>
   </head>
 
   <body>

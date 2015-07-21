@@ -1,3 +1,8 @@
+<% content_for :title_tag, " - #{@event.name}" %>
+<% content_for :og_title, @event.name %>
+<% content_for :og_url, event_url(@event) %>
+<% content_for :og_description, @event.description %>
+
 <h1><%= @event.name %>
   <%= link_to raw('<i class="glyphicon glyphicon-calendar"></i>'), event_path(@event, format: :ics), {class: "btn btn-xs"} %>
   <% if can? :crud, @event %>
