@@ -151,6 +151,11 @@ GEM
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
+    faker (1.5.0)
+      i18n (~> 0.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hike (1.2.3)
@@ -297,6 +302,8 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+    single_test (0.6.0)
+      rake
     slop (3.6.0)
     spreadsheet (1.0.4)
       ruby-ole (>= 1.0)
@@ -386,7 +393,8 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   devise_cas_authenticatable
-  factory_girl
+  factory_girl_rails
+  faker
   httparty
   iban-tools
   jbuilder (~> 1.2)
@@ -409,6 +417,7 @@ DEPENDENCIES
   select2-rails
   simple_form
   simple_token_authentication
+  single_test
   spreadsheet
   sqlite3
   therubyracer

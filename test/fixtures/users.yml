@@ -28,19 +28,6 @@
 #
 #
 
-tom:
-  username: tnnaesse
-  cas_ugentStudentId: 00800857
-  clubs:
-    - zeus
-
-maarten:
-  username: mherthog
-  clubs:
-    - fk
-
-toon:
-  username: tvwillem
 
 matthias:
   username: mjhertho

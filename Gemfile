@@ -129,10 +129,13 @@ end
 group :test do
   gem 'capybara'
   gem 'poltergeist'
-  gem 'factory_girl'
+  gem 'single_test'
 end
 
 group :development, :test do
+  gem 'faker'
+  gem 'factory_girl_rails'
+
   # Debugging goodies
   gem 'pry-byebug'
   gem 'pry-rails'

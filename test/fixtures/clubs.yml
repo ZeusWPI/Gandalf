@@ -16,10 +16,3 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-zeus:
-  internal_name: zeus
-  display_name: Zeus WPI
-#
-fk:
-  internal_name: fkcentraal
-  display_name: FakulteitenKonvent

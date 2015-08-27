@@ -22,6 +22,8 @@ require 'webmock/minitest'
 I18n.enforce_available_locales = false
 
 class ActiveSupport::TestCase
+  include FactoryGirl::Syntax::Methods
+
   ActiveRecord::Migration.check_pending!
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.

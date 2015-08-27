@@ -46,36 +46,39 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'clubs is set after fetching' do
-    tom = users(:tom)
-    tom.clubs = []
+    create(:club_zeus)
+    create(:club_fk)
 
-    assert tom.clubs.empty?
+    tom = build(:user, username: 'tnnaesse')
+    assert_empty tom.clubs
 
     tom.fetch_club
-    assert_not tom.clubs.empty?
-    assert_equal tom.clubs, [clubs(:zeus)]
+    assert_not_empty tom.clubs
+    assert_equal tom.clubs, [Club.find_by_internal_name(:zeus)]
 
-    maarten = users(:maarten)
-    maarten.clubs = []
-
-    assert maarten.clubs.empty?
+    maarten = build(:user, username: 'mherthog')
+    assert_empty maarten.clubs
 
     maarten.fetch_club
     assert_not maarten.clubs.empty?
-    assert_equal maarten.clubs, [clubs(:fk)]
+    assert_equal maarten.clubs, [Club.find_by_internal_name(:fkcentraal)]
 
-    toon = users(:toon)
-    toon.clubs = []
-
-    assert toon.clubs.empty?
+    toon = build(:user, username: 'tvwillem')
+    assert_empty toon.clubs
 
     toon.fetch_club
-    assert toon.clubs.empty?
+    assert_empty toon.clubs
   end
 
   test 'enrolled clubs is set after fetching' do
-    tom = users(:tom)
+    create(:club_zeus)
+
+    tom = build(
+      :numbered_user,
+      username: 'tnnaesse',
+      cas_ugentStudentID: '00800857'
+    )
     tom.fetch_enrolled_clubs
-    assert_equal tom.enrolled_clubs, [clubs(:zeus)]
+    assert_equal tom.enrolled_clubs, [Club.find_by_internal_name(:zeus)]
   end
 end

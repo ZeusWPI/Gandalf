@@ -13,5 +13,4 @@
 require 'test_helper'
 
 class ClubTest < ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
 end

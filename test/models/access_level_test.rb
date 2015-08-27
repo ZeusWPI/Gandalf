@@ -18,5 +18,4 @@
 require 'test_helper'
 
 class AccessLevelTest < ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
 end
