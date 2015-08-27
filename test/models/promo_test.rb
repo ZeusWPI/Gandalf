@@ -4,11 +4,11 @@
 #
 #  id           :integer          not null, primary key
 #  event_id     :integer
-#  code         :string
+#  code         :string(255)
 #  limit        :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  sold_tickets :integer          default("0")
+#  sold_tickets :integer          default(0)
 #
 
 require 'test_helper'
