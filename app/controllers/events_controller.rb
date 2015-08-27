@@ -91,7 +91,6 @@ class EventsController < ApplicationController
   end
 
   def scan_name
-    binding.pry
     @event = Event.find params.require(:id)
     authorize! :update, @event
     @ticket = @event.tickets.find_by name: params.require(:name)

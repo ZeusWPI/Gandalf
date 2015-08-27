@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class EventHelperTest < ActionView::TestCase
+  include FactoryGirl::Syntax::Methods
   include EventHelper
 
   test 'coloring' do

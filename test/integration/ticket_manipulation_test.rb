@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class TicketManipulationTest < ActionDispatch::IntegrationTest
+  include FactoryGirl::Syntax::Methods
+
   self.use_transactional_fixtures = false
 
   test 'add ticket' do

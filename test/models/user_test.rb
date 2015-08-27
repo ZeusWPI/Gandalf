@@ -45,8 +45,6 @@ class UserTest < ActiveSupport::TestCase
       .to_return(body: '[]')
   end
 
-  verify_fixtures User
-
   test 'clubs is set after fetching' do
     tom = users(:tom)
     tom.clubs = []

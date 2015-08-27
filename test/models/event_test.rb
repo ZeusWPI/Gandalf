@@ -29,12 +29,7 @@
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
-  verify_fixtures Event
-
-  # test "the truth" do
-  #   assert true
-  # end
-  #
+  include FactoryGirl::Syntax::Methods
 
   test 'enable_toggling_of_registration_status' do
     e = Event.new

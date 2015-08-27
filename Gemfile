@@ -42,28 +42,6 @@ gem 'datagrid'
 # Wicked gem
 gem 'wicked'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-group :development do
-  gem 'rails-erd'
-  gem 'web-console', '~> 2.0'
-  # Static code analysis
-  gem 'rubocop', github: 'bbatsov/rubocop'
-end
-
-group :test do
-  gem 'capybara'
-  gem 'poltergeist'
-end
-
-group :development, :test do
-  # debugging
-  gem 'pry-byebug'
-end
-
 # Let's use devise for users
 gem 'devise'
 gem 'devise_cas_authenticatable'
@@ -80,10 +58,6 @@ gem 'paper_trail', '~> 4.0.0.beta'
 
 # Njam njam, IBAN
 gem 'iban-tools'
-
-group :production, :deployment do
-  gem 'puma'
-end
 
 # Barcodes
 gem 'barcodes', git: "git://github.com/nudded/barcodes"
@@ -106,20 +80,12 @@ gem 'spreadsheet'
 gem 'daemons'
 gem 'delayed_job', '~> 4.0.6'
 gem 'delayed_job_active_record'
-#
 
 # Whenever cronjobs
 gem 'whenever', require: false
 
 # Coveralls
 gem 'coveralls', require: false
-
-# Deployment
-gem 'capistrano'
-gem 'capistrano-rails'
-gem 'capistrano-rvm'
-gem 'capistrano-rbenv'
-gem 'capistrano-passenger'
 
 # Stubbing http requests
 gem 'webmock', require: false
@@ -133,15 +99,6 @@ gem 'jc-validates_timeliness'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 gem 'airbrake'
 
 gem 'rmagick'
@@ -151,6 +108,40 @@ gem 'select2-rails'
 
 # Typeahead
 gem 'twitter-typeahead-rails'
+
+group :development do
+  # SQL schemes
+  gem 'rails-erd'
+
+  # Static code analysis
+  gem 'rubocop', github: 'bbatsov/rubocop'
+
+  # Deployment goodies
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-passenger'
+
+  gem 'web-console', '~> 2.0'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'factory_girl'
+end
+
+group :development, :test do
+  # Debugging goodies
+  gem 'pry-byebug'
+  gem 'pry-rails'
+end
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
 
 group :production do
   gem 'mysql2' # Database

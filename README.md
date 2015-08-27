@@ -1,5 +1,8 @@
 Gandalf [![Analytics](https://ga-beacon.appspot.com/UA-25444917-6/ZeusWPI/gandalf/README.md?pixel)](https://github.com/igrigorik/ga-beacon) [![Coverage Status](https://coveralls.io/repos/ZeusWPI/Gandalf/badge.png?branch=master)](https://coveralls.io/r/ZeusWPI/Gandalf) [![Build Status](https://travis-ci.org/ZeusWPI/Gandalf.png?branch=master)](https://travis-ci.org/ZeusWPI/Gandalf)
 =======
+**Attention: Master is feature frozen, base new features on enhanced-payment-flow**
+
+
 ![You. Shall. Not. Pass.](http://media.giphy.com/media/njYrp176NQsHS/giphy.gif)
 
 

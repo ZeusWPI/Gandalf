@@ -2,6 +2,7 @@ require 'test_helper'
 
 class PartnersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
+  include FactoryGirl::Syntax::Methods
 
   def setup
   end

@@ -19,8 +19,6 @@
 require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
-  verify_fixtures Order
-
   test 'active? returns correct status' do
     order = orders(:one)
     assert !order.active?
