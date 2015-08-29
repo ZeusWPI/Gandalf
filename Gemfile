@@ -130,6 +130,7 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'single_test'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
