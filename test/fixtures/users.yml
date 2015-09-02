@@ -27,15 +27,3 @@
 # below each fixture, per the syntax in the comments below
 #
 #
-
-
-matthias:
-  username: mjhertho
-  enrolled_clubs:
-    - zeus
-
-adminfelix:
-  username: noctua
-  clubs:
-    - zeus
-  admin: 1

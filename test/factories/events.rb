@@ -37,12 +37,22 @@ FactoryGirl.define do
     contact_email { Faker::Internet.email }
 
     start_date { Faker::Time.forward(2) }
-    end_date { Faker::Time.between(2.days.from_now + 1.minute, 3.days.from_now) }
+    end_date { Faker::Time.between(start_date + 1.minute, 3.days.from_now) }
 
+    # Traits
     trait :has_iban_number do
       bank_number "BE68539007547034"
     end
 
     factory :event_with_iban, traits: [:has_iban_number]
+
+    # Related attributes
+    transient do
+      access_level_count 5
+    end
+
+    after(:create) do |event, evaluator|
+      create_list(:access_level, evaluator.access_level_count, event: event)
+    end
   end
 end

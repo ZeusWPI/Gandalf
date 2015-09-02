@@ -26,7 +26,11 @@ FactoryGirl.define do
       association :event, factory: :event_with_iban
       price { Faker::Number.number(2) }
     end
-
     factory :paid_access_level, traits: [:paid]
+
+    trait :member_only do
+      member_only true
+    end
+    factory :member_only_access_level, traits: [:member_only]
   end
 end

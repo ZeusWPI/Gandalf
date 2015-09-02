@@ -27,34 +27,3 @@
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-codenight:
-  name: Codenight
-  contact_email: blargh@gmail.com
-  start_date: 2013-09-17 16:25:51
-  end_date: 2013-09-17 16:25:52
-  location: Zeus Keldahr
-  website: zeus.ugent.be
-  description: THEYRE TAKING THE HOBBITS TO ISENGARD
-  club: zeus
-
-galabal:
-  name: Galabal
-  contact_email: blargh2@gmail.com
-  start_date: 2013-09-17 16:25:51
-  end_date: 2013-09-17 16:25:52
-  location: FK
-  website: www.fkgent.be
-  description: Super awesome galabal
-  club: fk
-  bank_number: BE62 5100 0754 7061
-
-twaalfurenloop:
-  name: 12urenloop
-  contact_email: info@12urenloop.be
-  start_date: 2014-04-25 10:00:00
-  end_date: 2014-04-26 2:00:00
-  location: Sint-Pietersplein
-  website: 12urenloop.be
-  description: rondjes lopeuh!
-  club: fk

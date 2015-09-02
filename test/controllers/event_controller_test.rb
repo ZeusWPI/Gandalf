@@ -10,16 +10,18 @@ class EventControllerTest < ActionController::TestCase
       .to_return(body: '{"data":[{"internalName":"zeus","displayName":"Zeus WPI"},{"internalName":"zeus2","displayName":"Zeus WPI2"}],"controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"}')
 
     @controller = EventsController.new
-    sign_in users(:tom)
+    sign_in create(:admin)
   end
 
   test 'should get show' do
-    get :show, id: events(:codenight).id
+    get :show, id: create(:event)
     assert_response :success
   end
 
   test 'should get create' do
-    post :create, id: events(:codenight).id, event: events(:codenight).attributes
+    c = create(:club)
+    post :create, event: attributes_for(:event).merge(club_id: c.id)
+
     assert_response :redirect
   end
 
@@ -29,24 +31,28 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test 'should get update' do
-    get :update, id: events(:codenight).id, event: events(:codenight).attributes
+    event = create(:event)
+    get :update, id: event, event: event.attributes
+
     assert_response :success
   end
 
   test 'should get index' do
+    create(:event)
+
     get :index
     assert_response :success
   end
 
   test 'should get scan' do
-    get :scan, id: events(:codenight).id
+    get :scan, id: create(:event)
     assert_response :success
   end
 
   test 'toggle registration open' do
-    e = events(:codenight)
+    e = create(:event)
 
-    user = users(:tom)
+    user = build(:user, username: 'tnnaesse')
     ability = Ability.new(user)
 
     assert e.registration_open
@@ -62,9 +68,11 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test 'dont find registrations from other event' do
+    e = build(:event)
+
     post :scan_barcode, id: events(:codenight).id, code: '2222222222222'
     assert_response :success
-    assert_nil(@ticket)
+    assert_nil @ticket
   end
 
   test 'dont check in unpaid tickets' do

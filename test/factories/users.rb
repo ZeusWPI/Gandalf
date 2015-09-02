@@ -28,6 +28,16 @@ FactoryGirl.define do
       cas_ugentStudentID { Faker::Number.number(8).to_s }
     end
 
+    factory :admin do
+      admin true
+
+      # Don't care for admin clubs
+      after(:build) do |admin|
+        admin.class.skip_callback(:create, :after, :fetch_club)
+        admin.class.skip_callback(:create, :after, :fetch_enrolled_clubs)
+      end
+    end
+
     factory :numbered_user, traits: [:with_number]
   end
 

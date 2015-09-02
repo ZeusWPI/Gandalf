@@ -17,4 +17,15 @@
 #  status          :string           default("initial")
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+FactoryGirl.define do
+  factory :ticket do
+    access_level
+    order
+    event
+
+    status 'active'
+
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+  end
+end
