@@ -1,5 +1,5 @@
-Gandalf [![Analytics](https://ga-beacon.appspot.com/UA-25444917-6/ZeusWPI/gandalf/README.md?pixel)](https://github.com/igrigorik/ga-beacon) [![Code Climate](https://codeclimate.com/github/ZeusWPI/Gandalf/badges/gpa.svg)](https://codeclimate.com/github/ZeusWPI/Gandalf) [![Coverage Status](https://coveralls.io/repos/ZeusWPI/Gandalf/badge.png?branch=master)](https://coveralls.io/r/ZeusWPI/Gandalf) [![Build Status](https://travis-ci.org/ZeusWPI/Gandalf.png?branch=master)](https://travis-ci.org/ZeusWPI/Gandalf)
-=======
+# [Gandalf](https://registratie.fkgent.be) [![Analytics](https://ga-beacon.appspot.com/UA-25444917-6/ZeusWPI/Gandalf/README.md?pixel)](https://github.com/igrigorik/ga-beacon) [![Code Climate](https://codeclimate.com/github/ZeusWPI/Gandalf/badges/gpa.svg)](https://codeclimate.com/github/ZeusWPI/Gandalf) [![Coverage Status](https://coveralls.io/repos/ZeusWPI/Gandalf/badge.svg?branch=master&service=github)](https://coveralls.io/github/ZeusWPI/Gandalf?branch=master) [![Build Status](https://travis-ci.org/ZeusWPI/Gandalf.png?branch=master)](https://travis-ci.org/ZeusWPI/Gandalf)
+
 **Attention: Master is feature frozen, base new features on enhanced-payment-flow**
 
 
