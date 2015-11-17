@@ -24,6 +24,7 @@
 #  export_status           :string
 #  club_id                 :integer
 #  registration_open       :boolean          default(TRUE)
+#  signature               :text
 #
 
 require 'test_helper'

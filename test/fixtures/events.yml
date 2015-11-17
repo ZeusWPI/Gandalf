@@ -24,6 +24,7 @@
 #  export_status           :string
 #  club_id                 :integer
 #  registration_open       :boolean          default(TRUE)
+#  signature               :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

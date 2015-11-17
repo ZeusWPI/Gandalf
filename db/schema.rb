@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910122923) do
+ActiveRecord::Schema.define(version: 20151117181835) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20140910122923) do
     t.string   "export_status"
     t.integer  "club_id"
     t.boolean  "registration_open",       default: true
+    t.text     "signature"
   end
 
   create_table "included_zones", force: :cascade do |t|
