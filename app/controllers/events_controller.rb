@@ -39,7 +39,7 @@ class EventsController < ApplicationController
   def update
     authorize! :update, @event
 
-    if @event.update params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count)
+    if @event.update(event_params)
       flash.now[:success] = "Successfully updated event."
     end
 
@@ -58,7 +58,7 @@ class EventsController < ApplicationController
   def create
     authorize! :create, Event
 
-    @event = Event.create params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description)
+    @event = Event.create(event_create_params)
 
     respond_with @event
   end
@@ -134,7 +134,7 @@ class EventsController < ApplicationController
 
     if @registration
       if not @registration.is_paid
-        flash.now[:warning] = 
+        flash.now[:warning] =
           "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
       elsif @registration.checked_in_at
         flash.now[:warning] = "Person already checked in at " +
@@ -150,4 +150,11 @@ class EventsController < ApplicationController
     render action: :scan
   end
 
+  def event_params
+    params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count, :signature)
+  end
+
+  def event_create_params
+    params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description)
+  end
 end
