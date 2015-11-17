@@ -134,7 +134,7 @@ group :test do
 end
 
 group :development, :test do
-  gem 'faker', github: 'vitormil/faker'
+  gem 'faker'
   gem 'factory_girl_rails'
 
   # Debugging goodies
