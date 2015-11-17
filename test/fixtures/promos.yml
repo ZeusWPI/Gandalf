@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  event_id     :integer
-#  code         :string(255)
+#  code         :string
 #  limit        :integer
 #  created_at   :datetime
 #  updated_at   :datetime

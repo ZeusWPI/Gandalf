@@ -3,19 +3,19 @@
 # Table name: registrations
 #
 #  id             :integer          not null, primary key
-#  barcode        :string(255)
-#  name           :string(255)
-#  email          :string(255)
+#  barcode        :string
+#  name           :string
+#  email          :string
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer
 #  paid           :integer
-#  student_number :string(255)
+#  student_number :string
 #  price          :integer
 #  checked_in_at  :datetime
 #  comment        :text
-#  barcode_data   :string(255)
-#  payment_code   :string(255)
+#  barcode_data   :string
+#  payment_code   :string
 #
 
 class Registration < ActiveRecord::Base
