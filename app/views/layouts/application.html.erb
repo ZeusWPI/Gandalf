@@ -9,7 +9,7 @@
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <%= render partial: "layouts/ga" if Rails.env.production? %>
     <%= csrf_meta_tags %>
-    
+
     <% if content_for?(:og_title) %>
       <meta property="og:title" content="<%= yield(:og_title) %>" />
     <% end %>
@@ -40,15 +40,7 @@
             <li><%= link_to "Events", events_path %></li>
           </ul>
 
-          <div class="hidden-xs navbar-form navbar-right">
-            <div class="form-group">
-            <% if user_signed_in? %>
-              <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control",  method: :delete %>
-            <% else %>
-              <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
-            <% end %>
-            </div>
-          </div>
+          <%= render partial: "layouts/login", locals: {classes: "hidden-xs navbar-right"} %>
 
           <ul class="nav navbar-nav navbar-right">
             <li><%= mail_to "gandalf@zeus.ugent.be", "Send feedback" %></li>
@@ -67,15 +59,7 @@
             <% end %>
           </ul>
 
-          <div class="visible-xs navbar-form">
-            <div class="form-group">
-            <% if user_signed_in? %>
-              <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control",  method: :delete %>
-            <% else %>
-              <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
-            <% end %>
-            </div>
-          </div>
+          <%= render partial: "layouts/login", locals: {classes: 'visible-xs'} %>
 
         </div><!-- /.navbar-collapse -->
       </div><!-- /.navbar-collapse -->
