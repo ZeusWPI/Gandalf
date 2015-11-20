@@ -22,6 +22,16 @@ require 'webmock/minitest'
 
 I18n.enforce_available_locales = false
 
+class Minitest::Test
+  def stub_env(new_env, &block)
+    original_env = Rails.env
+    Rails.instance_variable_set("@_env", new_env.inquiry)
+    block.call
+  ensure
+    Rails.instance_variable_set("@_env", original_env.inquiry)
+  end
+end
+
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 
@@ -37,8 +47,8 @@ class ActiveSupport::TestCase
       clazz.all.map { |o| assert o.valid?, o.inspect.to_s + "\n" + o.errors.full_messages.join("\n") }
     end
   end
-
 end
+
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   #
