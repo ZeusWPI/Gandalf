@@ -6,7 +6,7 @@ class UsersControllerTest < ActionController::TestCase
       assert Rails.env.production?
       # Not actually a decent assert as the route didn't exist
       # before the environment change as the routes gets also
-      # skipped in the current test environment ¯\_(ツ)_/¯)
+      # skipped in the current test environment ¯\_(ツ)_/¯
       assert_raises(ActionController::UrlGenerationError) do
         post :dev_login
       end
