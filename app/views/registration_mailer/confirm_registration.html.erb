@@ -17,6 +17,10 @@
 
 	<p>Met vriendelijke groet,<br /><%= @registration.event.club.name %></p>
 
+  <% unless @registration.event.signature.blank? %>
+    <%= simple_format @registration.event.signature %>
+  <% end %>
+
 	<p><br /><br />-------------------------------------<br /><br /></p>
 
 	<p>Dear <%= @registration.name %>,</p>
@@ -31,6 +35,9 @@
 
 	<p>Kind regards,<br /><%= @registration.event.club.name %></p>
 
+  <% unless @registration.event.signature.blank? %>
+    <%= simple_format @registration.event.signature %>
+  <% end %>
   </body>
 </html>
 

@@ -13,6 +13,10 @@ Mocht er zich eender welk probleem voordoen, kan u ons altijd via e-mail contact
 Met vriendelijke groet,
 <%= @registration.event.club.name %>
 
+<% unless @registration.event.signature.blank? %>
+<%= @registration.event.signature %>
+<% end %>
+
 -------------------------------------
 
 Dear <%= @registration.name %>,
@@ -27,3 +31,7 @@ If you have any problems, you can contact us via mail: <%= @registration.event.c
 
 Kind regards,
 <%= @registration.event.club.name %>
+
+<% unless @registration.event.signature.blank? %>
+<%= @registration.event.signature %>
+<% end %>
