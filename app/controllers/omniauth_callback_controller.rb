@@ -1,4 +1,4 @@
-class CallbacksController < Devise::OmniauthCallbacksController
+class OmniauthCallbackController < Devise::OmniauthCallbacksController
   def zeuswpi
     @user = User.from_omniauth(request.env["omniauth.auth"])
     sign_in_and_redirect @user

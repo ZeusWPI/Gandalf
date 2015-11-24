@@ -1,7 +1,7 @@
 Isengard::Application.routes.draw do
   devise_for :partners
   devise_for :users, controllers: {
-    omniauth_callbacks: 'callbacks'
+    omniauth_callbacks: 'omniauth_callback',
   }
 
   # The priority is based upon order of creation: first created -> highest priority.

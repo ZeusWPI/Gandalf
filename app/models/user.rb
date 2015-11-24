@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(name: auth.uid).first_or_create do |user|
+    where(username: auth.uid).first_or_create do |user|
       user.username = auth.uid
     end
   end
