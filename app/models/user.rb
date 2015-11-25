@@ -3,27 +3,27 @@
 # Table name: users
 #
 #  id                  :integer          not null, primary key
-#  username            :string(255)      default(""), not null
+#  username            :string           default(""), not null
 #  remember_created_at :datetime
 #  sign_in_count       :integer          default(0), not null
 #  current_sign_in_at  :datetime
 #  last_sign_in_at     :datetime
-#  current_sign_in_ip  :string(255)
-#  last_sign_in_ip     :string(255)
+#  current_sign_in_ip  :string
+#  last_sign_in_ip     :string
 #  created_at          :datetime
 #  updated_at          :datetime
-#  cas_givenname       :string(255)
-#  cas_surname         :string(255)
-#  cas_ugentStudentID  :string(255)
-#  cas_mail            :string(255)
-#  cas_uid             :string(255)
+#  cas_givenname       :string
+#  cas_surname         :string
+#  cas_ugentStudentID  :string
+#  cas_mail            :string
+#  cas_uid             :string
 #  admin               :boolean
 #
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :cas_authenticatable
+  devise :cas_authenticatable, :omniauthable
 
   after_create :fetch_club, :fetch_enrolled_clubs
 
@@ -105,6 +105,12 @@ class User < ActiveRecord::Base
     User.all.find_each do |user|
       user.fetch_club
       user.fetch_enrolled_clubs
+    end
+  end
+
+  def self.from_omniauth(auth)
+    where(username: auth.uid).first_or_create do |user|
+      user.username = auth.uid
     end
   end
 end

@@ -21,6 +21,16 @@ require 'webmock/minitest'
 
 I18n.enforce_available_locales = false
 
+class Minitest::Test
+  def stub_env(new_env, &block)
+    original_env = Rails.env
+    Rails.instance_variable_set("@_env", new_env.inquiry)
+    block.call
+  ensure
+    Rails.instance_variable_set("@_env", original_env.inquiry)
+  end
+end
+
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 

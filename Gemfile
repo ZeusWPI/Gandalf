@@ -45,6 +45,8 @@ gem 'wicked'
 # Let's use devise for users
 gem 'devise'
 gem 'devise_cas_authenticatable'
+# Omniauth as extra development backdoor
+gem 'omniauth-oauth2'
 
 # Token authentication for partners
 gem 'simple_token_authentication'

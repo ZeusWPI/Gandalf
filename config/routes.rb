@@ -1,6 +1,11 @@
 Isengard::Application.routes.draw do
   devise_for :partners
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'omniauth_callback',
+  }
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
 
   root 'welcome#index'
 
@@ -67,5 +72,10 @@ Isengard::Application.routes.draw do
         post 'generate'
       end
     end
+  end
+
+  # Development backdoor
+  if Rails.env.development?
+    post "dev_login", to: "users#login"
   end
 end
