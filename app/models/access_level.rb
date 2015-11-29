@@ -24,6 +24,7 @@ class AccessLevel < ActiveRecord::Base
 
   has_many :accesses, dependent: :destroy
   has_many :registrations, through: :accesses
+  has_many :partners
 
   has_and_belongs_to_many :promos
 
