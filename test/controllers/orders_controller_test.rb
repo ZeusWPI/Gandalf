@@ -5,10 +5,8 @@ class OrdersControllerTest < ActionController::TestCase
   include FactoryGirl::Syntax::Methods
 
   def setup
-    stub_request(:get, 'http://fkgent.be/api_isengard_v2.php')
-      .with(query: hash_including(u: '')).to_return(body: 'FAIL')
-
-    sign_in users(:tom)
+    stub_request(:get, 'http://fkgent.be/api_isengard_v2.php').with(query: hash_including(u: /.*/)).to_return(body: 'FAIL')
+    stub_request(:get, 'http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json').with(query: hash_including(key: /.*/)).to_return(body: '{}')
   end
 
   test 'uploading partially failed orders' do
@@ -157,7 +155,8 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'admins can manage orders from other events' do
-    user = users(:adminfelix)
+    user = create(:user, admin: true)
+
     ability = Ability.new(user)
 
     r = orders(:two)
