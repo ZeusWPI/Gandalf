@@ -47,8 +47,9 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'resend sends order email when !is_paid' do
+    order = create(:unpaid_order)
     assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-      xhr :get, :resend, event_id: events(:codenight), id: orders(:three).id
+      xhr :get, :resend, event_id: order.event, id: order
     end
 
     email = ActionMailer::Base.deliveries.last
