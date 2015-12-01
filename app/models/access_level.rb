@@ -23,6 +23,7 @@ class AccessLevel < ActiveRecord::Base
 
   attr_accessor :amount
 
+  has_many :partners
   has_and_belongs_to_many :promos
 
   validates :name, presence: true

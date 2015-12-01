@@ -33,18 +33,6 @@ ActiveRecord::Schema.define(version: 20151117181835) do
     t.integer "access_level_id", null: false
   end
 
-  create_table "accesses", force: :cascade do |t|
-    t.integer  "period_id"
-    t.integer  "registration_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "access_level_id"
-  end
-
-  add_index "accesses", ["access_level_id"], name: "index_accesses_on_access_level_id"
-  add_index "accesses", ["period_id"], name: "index_accesses_on_period_id"
-  add_index "accesses", ["registration_id"], name: "index_accesses_on_registration_id"
-
   create_table "clubs", force: :cascade do |t|
     t.string   "full_name"
     t.string   "internal_name"
@@ -107,15 +95,21 @@ ActiveRecord::Schema.define(version: 20151117181835) do
     t.text     "signature"
   end
 
-  create_table "included_zones", force: :cascade do |t|
-    t.integer  "zone_id"
-    t.integer  "access_level_id"
+  create_table "orders", force: :cascade do |t|
+    t.string   "status",       default: "initial"
+    t.string   "name"
+    t.string   "email"
+    t.string   "gsm"
+    t.integer  "ticket_id"
+    t.integer  "event_id"
+    t.integer  "paid"
+    t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "payment_code"
   end
 
-  add_index "included_zones", ["access_level_id"], name: "index_included_zones_on_access_level_id"
-  add_index "included_zones", ["zone_id"], name: "index_included_zones_on_zone_id"
+  add_index "orders", ["event_id"], name: "index_orders_on_event_id"
 
   create_table "partners", force: :cascade do |t|
     t.string   "name"
@@ -140,17 +134,6 @@ ActiveRecord::Schema.define(version: 20151117181835) do
   add_index "partners", ["access_level_id"], name: "index_partners_on_access_level_id"
   add_index "partners", ["authentication_token"], name: "index_partners_on_authentication_token"
   add_index "partners", ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
-
-  create_table "periods", force: :cascade do |t|
-    t.datetime "starts"
-    t.datetime "ends"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "event_id"
-  end
-
-  add_index "periods", ["event_id"], name: "index_periods_on_event_id"
 
   create_table "promos", force: :cascade do |t|
     t.integer  "event_id"
@@ -181,6 +164,24 @@ ActiveRecord::Schema.define(version: 20151117181835) do
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
   add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code", unique: true
+
+  create_table "tickets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "checked_in_at"
+    t.integer  "order_id"
+    t.string   "student_number"
+    t.text     "comment"
+    t.string   "barcode"
+    t.string   "barcode_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "access_level_id"
+    t.string   "status",          default: "initial"
+  end
+
+  add_index "tickets", ["access_level_id"], name: "index_tickets_on_access_level_id"
+  add_index "tickets", ["order_id"], name: "index_tickets_on_order_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username",            default: "", null: false
@@ -213,15 +214,5 @@ ActiveRecord::Schema.define(version: 20151117181835) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-
-  create_table "zones", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "zones", ["event_id"], name: "index_zones_on_event_id"
-  add_index "zones", ["name", "event_id"], name: "index_zones_on_name_and_event_id", unique: true
 
 end

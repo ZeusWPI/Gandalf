@@ -12,7 +12,7 @@
   <td>
     <div class="nowrap">
       <%= link_to raw(visibility_icon(access_level)), toggle_visibility_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
-      <% unless access_level.tickets.active.any? %>
+      <% unless access_level.tickets.active.any? or access_level.partners.any? %>
         <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Edit'), edit_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>
         <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-danger', data: {confirm: 'Are you sure?'}, remote: true, method: :delete %>
       <% end %>
