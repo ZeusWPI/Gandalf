@@ -7,6 +7,8 @@ class OrdersControllerTest < ActionController::TestCase
   def setup
     stub_request(:get, 'http://fkgent.be/api_isengard_v2.php').with(query: hash_including(u: /.*/)).to_return(body: 'FAIL')
     stub_request(:get, 'http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json').with(query: hash_including(key: /.*/)).to_return(body: '{}')
+
+    sign_in create(:user, admin: true)
   end
 
   test 'uploading partially failed orders' do
@@ -36,9 +38,11 @@ class OrdersControllerTest < ActionController::TestCase
     assert_equal 0.01, three.reload.paid
   end
 
-  test 'resend actuallly sends an email' do
-    assert_difference 'ActionMailer::Base.deliveries.size', orders(:one).tickets.count do
-      xhr :get, :resend, event_id: events(:codenight), id: orders(:one).id
+  test 'resend actually sends an email' do
+    order = create(:free_order)
+
+    assert_difference 'ActionMailer::Base.deliveries.size', order.tickets.count do
+      xhr :get, :resend, event_id: order.event, id: order
     end
   end
 

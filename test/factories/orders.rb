@@ -25,8 +25,26 @@ FactoryGirl.define do
     name { Faker::Name.name }
     email { Faker::Internet.email }
 
-    paid 0
-    price { Faker::Number.number(2) }
+    factory :free_order do
+      paid 0
+      price 0
+    end
+
+    factory :paid_order do
+      price 10
+
+      factory :unpaid_order do
+        paid 0
+      end
+
+      factory :partially_paid_order do
+        paid 5
+      end
+
+      factory :fully_paid_order do
+        paid 10
+      end
+    end
 
     # Related tickets
     transient do
