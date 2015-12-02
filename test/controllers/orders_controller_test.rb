@@ -65,37 +65,52 @@ class OrdersControllerTest < ActionController::TestCase
     assert_match(/Ticket for/, email.subject)
   end
 
-  test 'manual full paying works' do
-    a = orders(:not_free_not_paid)
-    b = orders(:not_free_partially_paid)
+  test 'manual full paying works for unpaid tickets' do
+      order = create(:unpaid_order)
 
-    assert_equal 0, a.paid
-    assert_equal 0.05, b.paid
-
-    [a, b].each do |order|
       assert_difference 'ActionMailer::Base.deliveries.size', order.tickets.count do
-        xhr :put, :update, {
-          event_id: order.event.id,
-          id: order.id,
-          order: { to_pay: 0 }
-        }, remote: true
+        update_order(order, 0)
       end
+
       assert_equal order.price, order.reload.paid
+
       email = ActionMailer::Base.deliveries.last
       assert_match(/Ticket for/, email.subject)
-    end
+  end
+
+  test 'manual full paying works partially paid tickets' do
+      order = create(:partially_paid_order)
+
+      assert_difference 'ActionMailer::Base.deliveries.size', order.tickets.count do
+        update_order(order, 0)
+      end
+
+      assert_equal order.price, order.reload.paid
+
+      email = ActionMailer::Base.deliveries.last
+      assert_match(/Ticket for/, email.subject)
+  end
+
+  test 'manual full paying works doesnt mails for fully paid tickets' do
+      order = create(:fully_paid_order)
+
+      assert_difference 'ActionMailer::Base.deliveries.size', 0 do
+        update_order(order, 0)
+      end
+
+      assert_equal order.price, order.reload.paid
   end
 
   test 'manual partial paying works' do
-    a = orders(:not_free_not_paid)
-    b = orders(:not_free_partially_paid)
-
-    assert_equal 0, a.paid
-    assert_equal 0.05, b.paid
+    orders = [
+      create(:unpaid_order),
+      create(:partially_paid_order),
+      create(:fully_paid_order)
+    ]
 
     to_pay = 0.01
 
-    [a, b].each do |order|
+    orders.each do |order|
       assert_difference 'ActionMailer::Base.deliveries.size', +1 do
         xhr :put, :update, {
           event_id: order.event.id,
@@ -110,11 +125,8 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'manual overpaying works' do
-    a = orders(:not_free_not_paid)
-    b = orders(:not_free_partially_paid)
-
-    assert_equal 0, a.paid
-    assert_equal 0.05, b.paid
+    a = create(:unpaid_order)
+    b = orders(:partially_paid_order)
 
     to_pay = -5
 
@@ -166,5 +178,15 @@ class OrdersControllerTest < ActionController::TestCase
 
     r = orders(:two)
     assert ability.can?(:manage, r)
+  end
+
+  private
+
+  def update_order(order, to_pay)
+    xhr :put, :update, {
+      event_id: order.event,
+      id: order,
+      order: { to_pay: to_pay }
+    }, remote: true
   end
 end
