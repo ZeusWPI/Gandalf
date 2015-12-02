@@ -74,8 +74,9 @@ class OrdersControllerTest < ActionController::TestCase
 
       assert_equal order.price, order.reload.paid
 
-      email = ActionMailer::Base.deliveries.last
-      assert_match(/Ticket for/, email.subject)
+      ActionMailer::Base.deliveries.last(order.tickets.count) do |email|
+        assert_match(/Ticket for/, email.subject)
+      end
   end
 
   test 'manual full paying works partially paid tickets' do
@@ -87,8 +88,9 @@ class OrdersControllerTest < ActionController::TestCase
 
       assert_equal order.price, order.reload.paid
 
-      email = ActionMailer::Base.deliveries.last
-      assert_match(/Ticket for/, email.subject)
+      ActionMailer::Base.deliveries.last(order.tickets.count) do |email|
+        assert_match(/Ticket for/, email.subject)
+      end
   end
 
   test 'manual full paying works doesnt mails for fully paid tickets' do
@@ -112,11 +114,7 @@ class OrdersControllerTest < ActionController::TestCase
 
     orders.each do |order|
       assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-        xhr :put, :update, {
-          event_id: order.event.id,
-          id: order.id,
-          order: { to_pay: to_pay }
-        }, remote: true
+        update_order(order, to_pay)
       end
       assert order.price > order.reload.paid
       email = ActionMailer::Base.deliveries.last
@@ -125,26 +123,26 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'manual overpaying works' do
-    a = create(:unpaid_order)
-    b = orders(:partially_paid_order)
+    orders = [
+      create(:unpaid_order),
+      create(:partially_paid_order),
+      create(:fully_paid_order)
+    ]
 
     to_pay = -5
 
-    [a, b].each do |order|
+    orders.each do |order|
       # +1 here for the overpayment email
       assert_difference 'ActionMailer::Base.deliveries.size', order.tickets.count + 1 do
-        xhr :put, :update, {
-          event_id: order.event.id,
-          id: order.id,
-          order: { to_pay: to_pay }
-        }, remote: true
+        update_order(order, to_pay)
       end
       assert order.price < order.reload.paid
 
-      email = ActionMailer::Base.deliveries[-2]
-      assert_match(/Ticket for/, email.subject)
+      ActionMailer::Base.deliveries.last(4).first(3) do |email|
+        assert_match(/Ticket for/, email.subject)
+      end
 
-      email = ActionMailer::Base.deliveries[-1]
+      email = ActionMailer::Base.deliveries.last()
       assert_match(/Overpayment for/, email.subject)
     end
   end
