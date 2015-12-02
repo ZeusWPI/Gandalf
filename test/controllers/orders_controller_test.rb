@@ -57,8 +57,10 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test 'resend sends ticket emails when is_paid' do
-    assert_difference 'ActionMailer::Base.deliveries.size', orders(:free).tickets.count do
-      xhr :get, :resend, event_id: events(:codenight), id: orders(:free).id
+    order = create(:free_order)
+
+    assert_difference 'ActionMailer::Base.deliveries.size', order.tickets.count do
+      xhr :get, :resend, event_id: order.event, id: order
     end
 
     email = ActionMailer::Base.deliveries.last
@@ -142,7 +144,7 @@ class OrdersControllerTest < ActionController::TestCase
         assert_match(/Ticket for/, email.subject)
       end
 
-      email = ActionMailer::Base.deliveries.last()
+      email = ActionMailer::Base.deliveries.last
       assert_match(/Overpayment for/, email.subject)
     end
   end
