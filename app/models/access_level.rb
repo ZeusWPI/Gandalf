@@ -13,7 +13,7 @@
 #  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
-#  member_only :boolean
+#  permit      :string           default('everyone')
 #
 
 class AccessLevel < ActiveRecord::Base
@@ -40,6 +40,12 @@ class AccessLevel < ActiveRecord::Base
 
   default_scope { order "price, name" }
   scope :public?, -> { where(public: true) }
+
+  as_enum :permit, %w(everyone students enrolled members), prefix: true, source: :permit, map: :string
+
+  def requires_login?
+    not(permit_everyone?)
+  end
 
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones

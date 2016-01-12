@@ -66,12 +66,10 @@ class Ability
       # don't support private tickets for the moment
       next false unless access_level.public
 
-      # if the access level is not hidden and it's public or you're a member
-      if access_level.member_only?
-        enrolled_clubs.include? access_level.event.club
-      else
-        access_level.public
-      end
+      next enrolled_clubs.include? access_level.event.club if access_level.permit_members?
+      next enrolled_clubs.any? if access_level.permit_enrolled?
+
+      access_level.public
     end
 
     # add modify registrations permission for club members

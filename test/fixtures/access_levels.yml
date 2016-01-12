@@ -12,7 +12,7 @@
 #  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
-#  member_only :boolean
+#  permit      :string           default('everyone')
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -27,7 +27,7 @@ member:
   id: 4
   name: Member
   event_id: 1
-  member_only: 1
+  permit: members
   price: 0
 
 two:
@@ -66,5 +66,4 @@ member_only:
   name: Member Only
   event_id: 3
   price: 0
-  member_only: true
-
+  permit: members
