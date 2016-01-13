@@ -10,7 +10,7 @@ class AccessLevelPermitEnum < ActiveRecord::Migration
   def down
     add_column :access_levels, :member_only, :boolean
     AccessLevel.all.each do |a|
-      a.update_attribute :member_only, a.permit_members?
+      a.update_attribute :member_only, true unless a.permit_everyone?
     end
     remove_column :access_levels, :permit
   end
