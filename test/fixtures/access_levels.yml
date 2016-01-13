@@ -78,6 +78,6 @@ enrolled_only:
 students_only:
   id: 8
   name: Students Only
-  event_id: 3
+  event_id: 4
   price: 0
   permit: students

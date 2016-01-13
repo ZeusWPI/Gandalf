@@ -62,3 +62,14 @@ twaalfurenloop:
   website: 12urenloop.be
   description: rondjes lopeuh!
   club: fk
+
+sko:
+  id: 4
+  name: Student Kick-Off
+  contact_email: info@studentkickoff.be
+  start_date: 2015-09-30 12:00:00
+  end_date: 2015-10-01 02:00:00
+  location: Sint-Pietersplein
+  website: studentkickoff.be
+  description: Los gaan op Samson&Gert!
+  club: fk

@@ -180,4 +180,16 @@ class EventControllerTest < ActionController::TestCase
 
   end
 
+  test "registration form for student-only event shown when logged in" do
+    sign_in users(:matthias)
+    get :show, id: events(:sko).id
+    assert_select "#basic-registration-form", true, "Should contain registration form"
+  end
+
+  test "registration form for student-only event hidden when logged out" do
+    sign_out users(:matthias)
+    get :show, id: events(:twaalfurenloop).id
+    assert_select "#basic-registration-form", false, "Should not contain registration form"
+  end
+
 end
