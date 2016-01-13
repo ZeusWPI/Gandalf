@@ -61,9 +61,23 @@ hidden:
   price: 0
   hidden: true
 
-member_only:
+members_only:
   id: 6
   name: Member Only
   event_id: 3
   price: 0
   permit: members
+
+enrolled_only:
+  id: 7
+  name: Enrolled Only
+  event_id: 3
+  price: 0
+  permit: enrolled
+
+students_only:
+  id: 8
+  name: Students Only
+  event_id: 3
+  price: 0
+  permit: students
