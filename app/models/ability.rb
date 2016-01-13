@@ -69,6 +69,9 @@ class Ability
       next enrolled_clubs.include? access_level.event.club if access_level.permit_members?
       next enrolled_clubs.any? if access_level.permit_enrolled?
 
+      # User not logged in.
+      next user.persisted? if access_level.permit_students?
+
       access_level.public
     end
 
