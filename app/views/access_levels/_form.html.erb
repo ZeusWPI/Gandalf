@@ -5,7 +5,7 @@
     <td><%= f.text_field :price, value: number_with_precision(f.object.price, precision: 2), class: 'form-control', placeholder: "0.00" %></td>
     <td><%= form_check_box f, :public %></td>
     <td width="130px">
-      <%= f.select :permit,  AccessLevel.permits.keys.map{|k| [k,k]}, {}, class: 'form-control' %>
+      <%= f.select :permit, AccessLevel.permits.keys.map{|k| [translate(k), k]}, {}, class: 'form-control' %>
     </td>
     <td><div class="checkbox"><%= f.check_box :has_comment %></div></td>
     <td><div class="checkbox"><%= f.check_box :hidden %></div></td>
