@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117181835) do
+ActiveRecord::Schema.define(version: 20160206153124) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -20,10 +20,9 @@ ActiveRecord::Schema.define(version: 20151117181835) do
     t.datetime "updated_at"
     t.integer  "capacity"
     t.integer  "price"
-    t.boolean  "public",      default: true
     t.boolean  "has_comment"
     t.boolean  "hidden"
-    t.boolean  "member_only"
+    t.string   "permit",      default: "everyone"
   end
 
   add_index "access_levels", ["event_id"], name: "index_access_levels_on_event_id"

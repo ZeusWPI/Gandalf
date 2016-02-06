@@ -44,13 +44,25 @@ class RegistrationTest < ActiveSupport::TestCase
     assert @r2.save
   end
 
-  test "student_number should be present on member_only tickets" do
+  test "student_number should be present on members-only tickets" do
     @r1.student_number = ""
-    @r1.access_levels << access_levels(:member_only)
+    @r1.access_levels << access_levels(:members_only)
     assert !@r1.save
   end
 
-  test "student_number can be blank on non-member_only tickets" do
+  test "student_number should be present on enrolled-only tickets" do
+    @r1.student_number = ""
+    @r1.access_levels << access_levels(:enrolled_only)
+    assert !@r1.save
+  end
+
+  test "student_number should be present on students-only tickets" do
+    @r1.student_number = ""
+    @r1.access_levels << access_levels(:students_only)
+    assert !@r1.save
+  end
+
+  test "student_number can be blank on tickets available for everyone" do
     @r1.student_number = ""
     @r1.access_levels << access_levels(:unlimited)
     assert @r1.save

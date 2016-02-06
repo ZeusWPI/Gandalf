@@ -125,6 +125,9 @@ gem 'select2-rails'
 # Typeahead
 gem 'twitter-typeahead-rails'
 
+# Enum support with prefixes
+gem 'simple_enum'
+
 group :development do
   gem 'rails-erd'
 

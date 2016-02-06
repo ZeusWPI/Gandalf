@@ -9,10 +9,9 @@
 #  updated_at  :datetime
 #  capacity    :integer
 #  price       :integer
-#  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
-#  member_only :boolean
+#  permit      :string           default('everyone')
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -27,7 +26,7 @@ member:
   id: 4
   name: Member
   event_id: 1
-  member_only: 1
+  permit: members
   price: 0
 
 two:
@@ -61,10 +60,23 @@ hidden:
   price: 0
   hidden: true
 
-member_only:
+members_only:
   id: 6
   name: Member Only
   event_id: 3
   price: 0
-  member_only: true
+  permit: members
 
+enrolled_only:
+  id: 7
+  name: Enrolled Only
+  event_id: 3
+  price: 0
+  permit: enrolled
+
+students_only:
+  id: 8
+  name: Students Only
+  event_id: 4
+  price: 0
+  permit: students

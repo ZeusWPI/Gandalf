@@ -62,7 +62,7 @@ class RegistrationsController < ApplicationController
     @registration.paid = 0
 
     # overwrite student_number so setting this will not work
-    if requested_access_level.member_only?
+    if requested_access_level.requires_login?
       @registration.student_number = current_user.cas_ugentStudentID
     end
     @registration.save

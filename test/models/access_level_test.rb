@@ -12,7 +12,6 @@
 #  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
-#  member_only :boolean
 #
 
 require 'test_helper'
