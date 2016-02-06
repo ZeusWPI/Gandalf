@@ -37,7 +37,7 @@ class AccessLevelsController < ApplicationController
   end
 
   def update_params
-    params.require(:access_level).permit(:name, :capacity, :price, :public, :has_comment, :hidden, :permit)
+    params.require(:access_level).permit(:name, :capacity, :price, :has_comment, :hidden, :permit)
   end
 
   def destroy

@@ -10,7 +10,6 @@
 #  updated_at  :datetime
 #  capacity    :integer
 #  price       :integer
-#  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
 #  permit      :string           default('everyone')
@@ -39,7 +38,7 @@ class AccessLevel < ActiveRecord::Base
   end
 
   default_scope { order "price, name" }
-  scope :public?, -> { where(public: true) }
+  scope :public?, -> { where(hidden: false) }
 
   as_enum :permit, %w(everyone students enrolled members), prefix: true, source: :permit, map: :string
 

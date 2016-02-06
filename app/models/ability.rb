@@ -63,16 +63,13 @@ class Ability
 
       next false if access_level.hidden
 
-      # don't support private tickets for the moment
-      next false unless access_level.public
-
       next enrolled_clubs.include? access_level.event.club if access_level.permit_members?
       next enrolled_clubs.any? if access_level.permit_enrolled?
 
       # User not logged in.
       next user.persisted? if access_level.permit_students?
 
-      access_level.public
+      access_level.permit_everyone?
     end
 
     # add modify registrations permission for club members
