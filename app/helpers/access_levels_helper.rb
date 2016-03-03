@@ -8,7 +8,7 @@ module AccessLevelsHelper
     end
   end
 
-  def translate(permit)
+  def translate(permit, options = {})
     translations = {
         enrolled: 'FK-members'
     }
