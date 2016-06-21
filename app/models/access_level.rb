@@ -13,7 +13,7 @@
 #  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
-#  member_only :boolean
+#  permit      :string           default("everyone")
 #
 
 class AccessLevel < ActiveRecord::Base

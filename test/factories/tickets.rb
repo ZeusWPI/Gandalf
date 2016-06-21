@@ -27,5 +27,9 @@ FactoryGirl.define do
 
     name { Faker::Name.name }
     email { Faker::Internet.email }
+
+    factory :unpaid_ticket do
+      association :order, factory: :unpaid_order
+    end
   end
 end

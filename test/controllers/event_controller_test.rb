@@ -76,22 +76,29 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test 'dont check in unpaid tickets' do
-    sign_out users(:tom)
-    sign_in users(:maarten)
-    post :scan_barcode, id: events(:galabal).id, code: '2222222222222'
+    ticket = create(:unpaid_ticket)
+    event = ticket.event
+
+    post :scan_barcode, id: event.id, code: ticket.barcode
     assert_response :success
     assert(flash[:warning].include? 'has not been paid')
   end
 
   # Scan tests
   test 'validate correct barcode' do
-    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
+    ticket = create(:ticket)
+    event = ticket.event
+
+    post :scan_barcode, id: event.id, code: ticket.barcode
     assert_response :success
     assert(flash[:success].include? 'Person has been scanned')
   end
 
   test 'validate correct name' do
-    post :scan_name, id: events(:codenight).id, name: 'Checking Test Codenight'
+    ticket = create(:ticket)
+    event = ticket.event
+
+    post :scan_name, id: event.id, name: ticket.name
     assert_response :success
     assert(flash[:success].include? 'Person has been scanned')
   end

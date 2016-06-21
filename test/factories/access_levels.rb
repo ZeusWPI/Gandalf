@@ -3,7 +3,7 @@
 # Table name: access_levels
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
+#  name        :string
 #  event_id    :integer
 #  created_at  :datetime
 #  updated_at  :datetime
@@ -12,7 +12,7 @@
 #  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
-#  member_only :boolean
+#  permit      :string           default("everyone")
 #
 
 FactoryGirl.define do

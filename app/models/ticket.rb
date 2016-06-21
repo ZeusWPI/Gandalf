@@ -22,6 +22,8 @@ class Ticket < ActiveRecord::Base
   belongs_to :order
   belongs_to :access_level
 
+  after_create :generate_barcode
+
   has_paper_trail only: [:checked_in_at]
 
   scope :active, -> { where(status: 'active') }
