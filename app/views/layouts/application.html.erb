@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gandalf<%= if content_for?(:title_tag) then yield(:title_tag) end %></title>
+    <title>UGent<%= if content_for?(:title_tag) then yield(:title_tag) end %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -19,52 +19,121 @@
     <% if content_for?(:og_description) %>
       <meta property="og:description" content="<%= yield(:og_description) %>" />
     <% end %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://styleguide.ugent.be/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://styleguide.ugent.be/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://styleguide.ugent.be/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://styleguide.ugent.be/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://styleguide.ugent.be/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://styleguide.ugent.be/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://styleguide.ugent.be/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://styleguide.ugent.be/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://styleguide.ugent.be/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://styleguide.ugent.be/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://styleguide.ugent.be/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://styleguide.ugent.be/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://styleguide.ugent.be/favicon-16x16.png">
+    <link rel="icon" sizes="16x16 32x32" href="https://styleguide.ugent.be/favicon.ico">
+    <link rel="manifest" href="https://styleguide.ugent.be/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script>document.createElement("picture")</script>
+    <script src="static/js/vendor/modernizr.min.js" async></script>
+    <script src="static/js/vendor/picturefill.min.js" async></script>
+
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to "Gandalf", root_path, class: 'navbar-brand' %>
+  <div class="fluid-container">
+    <div class="row">
+      <header class="pageheader col-xs-12 ">
+        <nav class="navbar navbar-default">
+          <div class="row">
+            <div class="navbar-header col-xs-12 col-sm-2">
+              <div class="page-logo">
+                <a href="https://styleguide.ugent.be/dist/" class="link">
+                  <%= image_tag "logo-ugent.svg" %>
+                </a>
+              </div>
+              <a href="basic_layout.html#" class="toggle-search"><i class="glyphicon glyphicon-search"></i><span>ZOEK</span></a>
+              <a href="basic_layout.html#" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                 aria-expanded="false" aria-controls="navbar" role="button">
+                <span class="">MENU</span>
+                <div class="block">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </div>
+              </a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse col-sm-10" role="navigation">
+              <div class="row search">
+                <div class="col-xs-12 col-sm-6 search-container clearfix pull-right">
+                  <!--<form class="navbar-form navbar-right" role="search">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="" id="search" name="search" value="">
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">Zoek</button>
+                      </div>
+                    </div>
+                  </form>-->
+
+                </div>
+              </div>
+              <div class="row menu">
+                <div class="col-xs-12">
+                  <div class="bg-primary spacer">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <!--<ul class="nav-tertiary nav navbar-nav navbar-right">
+                          <li><a href="basic_layout.html#"><span>Voor studenten</span></a></li>
+                          <li><a href="basic_layout.html#"><span>Voor medewerkers</span></a></li>
+                          <li><a href="basic_layout.html#"><span>In English</span></a></li>
+                        </ul>-->
+                        <%= render partial: "layouts/login", locals: {classes: "hidden-xs navbar-right"} %>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row menu">
+                <div class="col-xs-12">
+                  <ul class="nav-primary nav navbar-nav">
+                    <li><%= link_to "Events", events_path %></li>
+                    <% if can? :crud, Event %>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
+                          <ul class="dropdown-menu" data-no-turbolink>
+                            <li><%= link_to "Create event", new_event_path %></li>
+                          </ul>
+                        </li>
+                    <% end %>
+                    <% if user_signed_in? %>
+                        <li>
+                          <a>Logged in as <%= current_user.display_name %></a>
+                        </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-sm-offset-2 branding-container faculty-1">
+
+
+          </div>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Events", events_path %></li>
-          </ul>
-
-          <%= render partial: "layouts/login", locals: {classes: "hidden-xs navbar-right"} %>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= mail_to "gandalf@zeus.ugent.be", "Send feedback" %></li>
-            <% if can? :crud, Event %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
-              <ul class="dropdown-menu" data-no-turbolink>
-                <li><%= link_to "Create event", new_event_path %></li>
-              </ul>
-            </li>
-            <% end %>
-            <% if user_signed_in? %>
-            <li>
-              <a>Logged in as <%= current_user.display_name %></a>
-            </li>
-            <% end %>
-          </ul>
-
-          <%= render partial: "layouts/login", locals: {classes: 'visible-xs'} %>
-
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.navbar-collapse -->
-    </nav>
-
+      </header>
+    </div>
+  </div>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="container">
       <div class="row">
@@ -73,11 +142,106 @@
         </div>
       </div>
     </div>
+  <footer class="page-footer fluid-container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="bg-primary padding-20">
+          <div class="mbottom-small border-bottom">
+            <div class="row flexbox">
+              <div class="col-xs-12 col-ms-6 col-md-3 pbottom-small">
+               <!-- <h2 class="h4">Opleidingen</h2>
+                <ul class="linklist linklist-inverted">
+                  <li><a href="basic_layout.html#">Masteropleidingen</a></li>
+                  <li><a href="basic_layout.html#">Lerarenopleiding</a></li>
+                  <li><a href="basic_layout.html#">Permanente vorming</a></li>
+                </ul>
+                <ul class="linklist linklist-inverted">
+                  <li><a href="basic_layout.html#">Meer links</a></li>
+                </ul>
+                </ul>
+              </div>
+              <div class="col-xs-12 col-ms-6 col-md-3 pbottom-small">
+                <h2 class="h4">Onderzoek</h2>
+                <ul class="linklist linklist-inverted">
+                  <li><a href="basic_layout.html#">Onderzoek@UGent</a></li>
+                  <li><a href="basic_layout.html#">Doctoreren</a></li>
+                  <li><a href="basic_layout.html#">Financiering</a></li>
+                  <li><a href="basic_layout.html#">Onderzoek en maatschappij</a></li>
+                  <li><a href="basic_layout.html#">Deelnemen aan onderzoek</a></li>
+                </ul>
+                <ul class="linklist linklist-inverted">
+                  <li><a href="basic_layout.html#">Meer links</a></li>
+                </ul>
+                </ul>
+              </div>
+              <div class="col-xs-12 col-ms-6 col-md-3 pbottom-small">
+                <h2 class="h4">Over de UGent</h2>
+                <ul class="linklist linklist-inverted">
+                  <li><a href="basic_layout.html#">Campussen</a></li>
+                  <li><a href="basic_layout.html#">Contact</a></li>
+                  <li><a href="basic_layout.html#">Schenkingen en legaten</a></li>
+                  <li><a href="basic_layout.html#">Faculteiten</a></li>
+                  <li><a href="basic_layout.html#">Administratie en bestuur</a></li>
+                </ul>
+                <ul class="linklist linklist-inverted">
+                  <li><a href="basic_layout.html#">Meer links</a></li>
+                </ul>
+              </div>
+              <div class="col-xs-12 col-ms-6 col-md-3 pbottom-small">
+                <h2 class="h4">Tools</h2>
+                <ul class="linklist linklist-inverted">
+                  <li><a href="basic_layout.html#">Athena</a></li>
+                  <li><a href="basic_layout.html#">Bibliotheek</a></li>
+                  <li><a href="basic_layout.html#">E-mail</a></li>
+                  <li><a href="basic_layout.html#">Oasis</a></li>
+                  <li><a href="basic_layout.html#">Minerva</a></li>
+                  <li><a href="basic_layout.html#">Telefoonboek</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="container-share col-xs-12 col-sm-4">
+              <ul class="list-inline list-unstyled social">
+                <li><a href="basic_layout.html#"><i class="fa fa-facebook"></i><span class="sr-only">Facebook</span></a></li>
+                <li><a href="basic_layout.html#"><i class="fa fa-twitter"></i><span class="sr-only">Twitter</span></a></li>
+                <li><a href="basic_layout.html#"><i class="fa fa-linkedin"></i><span class="sr-only">Linkedin</span></a></li>
+                <li><a href="basic_layout.html#"><i class="fa fa-pinterest-p"></i><span class="sr-only">Pinterest</span></a></li>
+                <li><a href="basic_layout.html#"><i class="fa fa-youtube"></i><span class="sr-only">YouTube</span></a></li>
+                <li><a href="basic_layout.html#"><i class="fa fa-instagram"></i><span class="sr-only">Instagram</span></a></li>
+                <li><a href="basic_layout.html#"><i class="fa fa-google-plus"></i><span class="sr-only">Google-plus</span></a></li>
+                <li><a href="basic_layout.html#"><i class="fa fa-flickr"></i><span class="sr-only">Flickr</span></a></li>
+              </ul>-->
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <ul class="list-inline list-unstyled pull-right">
+                <li><a href="basic_layout.html#">Feedback</a></li>
+                <li><a href="basic_layout.html#">Disclaimer</a></li>
+                <li><a href="basic_layout.html#">Cookies</a></li>
+                <li><a href="basic_layout.html#">Toegankelijkheid</a></li>
+                <li><a href="basic_layout.html#">Aan-/afmelden</a></li>
+                <li>&copy; <%= Time.now.year %> Zeus WPI & Universiteit Gent</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    <hr>
+  <script src="static/js/vendor/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="static/js/vendor/ekkolightbox.min.js"></script>
+  <script src="static/js/smoothscroll.js"></script>
+  <script src="static/js/jquery.inlinesvg.js"></script>
+  <script src="static/js/vendor/moment.min.js"></script>
+  <script src="static/js/vendor/datepicker/locale/nl.js"></script>
+  <script src="static/js/vendor/bootstrap-select.min.js"></script>
+  <script src="static/js/vendor/jquery.tablesorter.min.js"></script>
+  <script src="static/js/vendor/typeahead.bundle.min.js"></script>
+  <script src="static/js/vendor/typeahead.jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="static/js/main.js"></script>
 
-    <footer>
-      <p>&copy; <a href="http://zeus.ugent.be/" target="_blank">Zeus WPI</a> 2013-<%= Time.now.year %></p>
-    </footer>
   </body>
 </html>

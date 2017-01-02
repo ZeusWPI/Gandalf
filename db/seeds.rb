@@ -8,12 +8,13 @@
 #
 require 'webmock'
 WebMock.allow_net_connect!
-url = 'https://raw.githubusercontent.com/ZeusWPI/hydra/master/iOS/Resources/Associations.json'
+url = 'http://student.ugent.be/hydra/api/2.0/associations.json'
 hash = JSON(HTTParty.get(url).body)
 WebMock.disable_net_connect!
 
 hash.each do |club|
-  next unless club['parentAssociation'] == 'FKCENTRAAL'
+  next unless 1 == 0
+  next unless club['parentAssociation'] == 'FK'
 
   club = Club.new do |c|
     c.internal_name = club['internalName'].downcase
@@ -30,3 +31,10 @@ club = Club.new do |c|
   c.full_name = nil
 end
 club.save
+
+ugent = Club.new do |c|
+  c.internal_name = 'ugent'
+  c.display_name = 'Universiteit Gent'
+  c.full_name = nil
+end
+ugent.save

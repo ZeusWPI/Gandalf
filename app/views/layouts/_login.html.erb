@@ -2,18 +2,18 @@
   <div class="form-group">
     <% if user_signed_in? %>
       <div class="form-group">
-        <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control",  method: :delete %>
+        <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control", style: "margin-right: 5px;",  method: :delete %>
       </div>
     <% else %>
       <div class="form-group">
         <div class="button-group">
-          <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
+          <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control", style: "margin-right: 5px;" %>
         </div>
       </div>
       <% if Rails.env.development? %>
         <div class="form-group">
           <div class="button-group">
-            <%= button_to "Login (dev)", dev_login_path, class: "btn form-control" %>
+            <%= button_to "Login (dev)", dev_login_path, class: "btn form-control",  style: "margin-right: 5px;" %>
           </div>
         </div>
       <% end %>
