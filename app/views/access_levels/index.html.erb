@@ -4,16 +4,23 @@
   <div class="col-sm-12">
     <h2>Manage tickets</h2>
     <div class="table-responsive">
-      <table class="table" id="table-access-levels">
+      <table id="table-access-levels">
         <thead>
-          <th>Name</th>
-          <th width="200">Sold (Paid) /Capacity</th>
-          <th>Price</th>
-          <th>Allow</th>
-          <th>Allows comments</th>
-          <th>Hidden</th>
+          <th class="header">Name</th>
+          <th class="header spacer"></th>
+          <th class="header" width="200">Sold (Paid) /Capacity</th>
+          <th class="header spacer"></th>
+          <th class="header">Price</th>
+          <th class="header spacer"></th>
+          <th class="header">Allow</th>
+          <th class="header spacer"></th>
+          <th class="header">Allows comments</th>
+          <th class="header spacer"></th>
+          <th class="header">Hidden</th>
+          <th class="header spacer"></th>
           <% if @advanced %>
             <th>Zones</th>
+            <th class="header spacer"></th>
           <% end %>
           <th>Actions</th>
         </thead>
