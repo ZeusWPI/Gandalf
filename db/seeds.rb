@@ -38,3 +38,15 @@ ugent = Club.new do |c|
   c.full_name = nil
 end
 ugent.save
+
+# Create an event
+event = Event.new do |e|
+  e.name = "Blarghbal"
+  e.description = "Blargh der blarghs"
+  e.start_date = Date.today
+  e.end_date = Date.tomorrow
+  e.location = "Blarghkasteel"
+  e.contact_email "blargh@blargher.bla"
+  e.club = ugent
+end
+event.save!
