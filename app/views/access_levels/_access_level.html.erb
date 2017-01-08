@@ -1,22 +1,15 @@
 <tr id="<%= dom_id(access_level) %>">
   <td><%= access_level.name %></td>
-  <td class="spacer"></td>
   <td>
     <%= access_level.registrations.size %> (<%= access_level.registrations.paid.size %>) / <%= access_level.capacity.presence || "&infin;".html_safe %>
     <span class="label label-<%= color_for_tickets_left(access_level) %> pull-right"><%= "#{pluralize(access_level.tickets_left, "ticket")} left" if access_level.capacity.presence %></span>
   </td>
-  <td class="spacer"></td>
   <td>&euro; <%= number_with_precision access_level.price || "0", precision: 2  %></td>
-  <td class="spacer"></td>
   <td><%= translate access_level.permit %></td>
-  <td class="spacer"></td>
   <td><%= access_level.has_comment ? 'Yes' : 'No' %></td>
-  <td class="spacer"></td>
   <td><%= access_level.hidden ? 'Yes' : 'No' %></td>
-  <td class="spacer"></td>
   <% if advanced %>
     <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
-    <td class="spacer"></td>
   <% end %>
   <td>
     <div class="nowrap">
