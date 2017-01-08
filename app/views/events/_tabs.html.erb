@@ -3,33 +3,33 @@
 <% content_for :og_url, event_url(@event) %>
 <% content_for :og_description, @event.description %>
 
+<h1><%= @event.name %>
+  <%= link_to raw('<i class="glyphicon glyphicon-calendar"></i>'), event_path(@event, format: :ics), {class: "btn btn-xs"} %>
+  <% if can? :crud, @event %>
+    <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(@event) %>
+  <% end %>
+</h1>
+
+<% if can? :view_stats, @event or can? :crud, @event %>
 <div class="row">
   <div class="col-lg-12">
-    <h1><%= @event.name %>
-      <%= link_to raw('<i class="glyphicon glyphicon-calendar"></i>'), event_path(@event, format: :ics), {class: "btn btn-xs"} %>
-      <% if can? :crud, @event %>
-        <%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete'), "#delete-confirm", class: "btn btn-danger btn-xs delete-confirm", :"data-link" => event_path(@event) %>
+    <ul class="nav nav-tabs">
+      <li <%= raw 'class="active"' if current_page?(event_path(@event)) %>><%= link_to "General", event_path(@event) %></li>
+      <% if can? :view_stats, @event %>
+        <li <%= raw 'class="active"' if current_page?(statistics_event_path(@event)) %>><%= link_to "Statistics", statistics_event_path(@event) %></li>
       <% end %>
-    </h1>
-
-    <% if can? :view_stats, @event or can? :crud, @event %>
-        <ul class="nav nav-tabs">
-          <li <%= raw 'class="active"' if current_page?(event_path(@event)) %>><%= link_to "General", event_path(@event) %></li>
-          <% if can? :view_stats, @event %>
-            <li <%= raw 'class="active"' if current_page?(statistics_event_path(@event)) %>><%= link_to "Statistics", statistics_event_path(@event) %></li>
-          <% end %>
-          <% if can? :crud, @event %>
-            <li <%= raw 'class="active"' if current_page?(edit_event_path(@event)) %> data-no-turbolink><%= link_to "Edit event", edit_event_path(@event) %></li>
-            <li <%= raw 'class="active"' if current_page?(event_registrations_path(@event)) %>><%= link_to "Registrations", event_registrations_path(@event) %></li>
-            <li <%= raw 'class="active"' if current_page?(event_access_levels_path(@event)) && !@advanced %>><%= link_to "Tickets", event_access_levels_path(@event, advanced: false) %></li>
-            <li <%= raw 'class="active"' if current_page?(event_partners_path(@event)) %>><%= link_to "Partners", event_partners_path(@event) %></li>
-            <li <%= raw 'class="active"' if current_page?(scan_event_path(@event)) %>><%= link_to "Scan", scan_event_path(@event) %></li>
-          <% end %>
-        </ul>
-    <% end %>
-
-    <% if can? :crud, @event %>
-      <%= render "events/delete_modal" %>
-    <% end %>
+      <% if can? :crud, @event %>
+        <li <%= raw 'class="active"' if current_page?(edit_event_path(@event)) %> data-no-turbolink><%= link_to "Edit event", edit_event_path(@event) %></li>
+        <li <%= raw 'class="active"' if current_page?(event_registrations_path(@event)) %>><%= link_to "Registrations", event_registrations_path(@event) %></li>
+        <li <%= raw 'class="active"' if current_page?(event_access_levels_path(@event)) && !@advanced %>><%= link_to "Tickets", event_access_levels_path(@event, advanced: false) %></li>
+        <li <%= raw 'class="active"' if current_page?(event_partners_path(@event)) %>><%= link_to "Partners", event_partners_path(@event) %></li>
+        <li <%= raw 'class="active"' if current_page?(scan_event_path(@event)) %>><%= link_to "Scan", scan_event_path(@event) %></li>
+      <% end %>
+    </ul>
   </div>
 </div>
+<% end %>
+
+<% if can? :crud, @event %>
+  <%= render "events/delete_modal" %>
+<% end %>

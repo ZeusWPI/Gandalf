@@ -29,14 +29,6 @@ footer {
   word-wrap: break-word;
 }
 
-.nav-tabs {
-  margin-bottom: 15px !important;
-}
-
-ul.nav-tabs li:before {
-  content: "";
-}
-
 .main-content {
   margin-bottom: 15px;
 }
