@@ -14,7 +14,6 @@
  *= require_self
  *= require_tree .
  */
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 footer {
   text-align: center;
@@ -28,4 +27,21 @@ footer {
 .word-break {
   table-layout: fixed;
   word-wrap: break-word;
+}
+
+.nav-tabs {
+  margin-bottom: 15px !important;
+}
+
+ul.nav-tabs li:before {
+  content: "";
+}
+
+.main-content {
+  margin-bottom: 15px;
+}
+
+table.sideways-table td:first-child:not(.colspanned) {
+  width: 150px;
+  font-weight: bold;
 }
