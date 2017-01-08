@@ -1,5 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# This file should contain all the record creation needed to seed the database with its default values.  The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 # Examples:
 #
@@ -46,7 +45,7 @@ event = Event.new do |e|
   e.start_date = Date.today
   e.end_date = Date.tomorrow
   e.location = "Blarghkasteel"
-  e.contact_email "blargh@blargher.bla"
+  e.contact_email = "blargh@blargher.bla"
   e.club = ugent
 end
 event.save!

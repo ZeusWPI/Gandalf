@@ -1,21 +1,21 @@
 <%= render partial: "events/tabs" %>
 
-<h3>Edit event</h3>
+<h2>Edit event</h2>
 <%= form_errors @event %>
 <%= render partial: 'flash' %>
 
 <div class="row">
   <div class="col-sm-7">
-    <h4>General</h4>
+    <h3>General</h3>
     <%= render partial: "events/general_form" %>
   </div>
   <div class="col-sm-4 col-sm-offset-1">
-    <h4>Registration settings</h4>
+    <h3>Registration settings</h3>
     <%= render partial: "events/registration_times_form" %>
 
     <br />
 
-    <h4>Manually close registrations</h4>
+    <h3>Manually close registrations</h3>
     <% if @event.registration_open %>
       <p class="text-warning"><strong>Warning!</strong> Closing the registrations will override the settings above.</p>
       <%= link_to raw('<i class="glyphicon glyphicon-remove"></i> Close the registrations'), toggle_registration_open_event_path(@event), method: 'post', class: 'btn btn-danger' %>
@@ -26,12 +26,12 @@
     <br />
     <br />
 
-    <h4>Payment information</h4>
+    <h3>Payment information</h3>
     <%= render partial: "events/payment_form" %>
 
     <br />
 
-    <h4>Ticket branding</h4>
+    <h3>Ticket branding</h3>
     <%= render partial: "events/ticket_branding_form" %>
   </div>
 </div>
