@@ -25,6 +25,8 @@
 #  club_id                 :integer
 #  registration_open       :boolean          default(TRUE)
 #  signature               :text
+#  unsubscribe_option      :boolean
+#  slug                    :string
 #
 
 class Event < ActiveRecord::Base

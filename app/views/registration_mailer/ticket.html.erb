@@ -49,6 +49,9 @@
 
   <p>If you have any problems, you can contact us via mail: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
 
+  <% if @event.unsubscribe_option %>
+    <p>If you cannot come: <%= link_to "uitschrijven", unsubscribe_path(id: @registration.id, barcode: @registration.barcode)  %></p>
+  <%end %>
   <p>Kind regards,<br /><%= @registration.event.club.name %></p>
 
   <% unless @registration.event.signature.blank? %>
