@@ -47,6 +47,21 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  def show_cancel
+    @registration = Registration.find_by! id: params[:id], barcode: params[:barcode]
+  end
+
+  def destroy_cancel
+    registration = Registration.find_by! id: params[:id], barcode: params[:barcode]
+    event = registration.event
+    if registration.event.registration_cancelable
+      registration.destroy!
+    else
+      redirect_to action: :show_cancel
+    end
+    RegistrationMailer.confirm_cancel(registration, event).deliver_now
+  end
+
   def basic
     @event = Event.find params.require(:event_id)
 
