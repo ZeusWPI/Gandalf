@@ -1,4 +1,8 @@
 <h1>Schrijf u uit!</h1>
 <p><%= @registration.event.name %></p>
 <p>dsfsdfsfk</p>
-<%= button_to 'Schrijf mij nu uit!', cancel_destroy_event_registration_path(params), method: :delete, class:'btn btn-default' %>
+<% if @registration.event.registration_cancelable %>
+    <%= button_to 'Schrijf mij nu uit!', cancel_destroy_event_registration_path(params), method: :delete, class:'btn btn-default' %>
+  <% else %>
+    Sorry, uitschrijven is niet meer mogelijk.
+<% end %>
