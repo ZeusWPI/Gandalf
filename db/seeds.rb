@@ -12,7 +12,6 @@ hash = JSON(HTTParty.get(url).body)
 WebMock.disable_net_connect!
 
 hash.each do |club|
-  next unless 1 == 0
   next unless club['parentAssociation'] == 'FK'
 
   club = Club.new do |c|

@@ -104,8 +104,7 @@ ActiveRecord::Schema.define(version: 20170110175339) do
     t.integer  "club_id"
     t.boolean  "registration_open",       default: true
     t.text     "signature"
-    t.boolean  "unsubscribe_option"
-    t.string   "slug"
+    t.boolean  "registration_cancelable"
   end
 
   create_table "included_zones", force: :cascade do |t|
