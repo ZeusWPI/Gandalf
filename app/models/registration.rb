@@ -16,6 +16,7 @@
 #  comment        :text
 #  barcode_data   :string
 #  payment_code   :string
+#  phone_number   :string
 #
 
 class Registration < ActiveRecord::Base

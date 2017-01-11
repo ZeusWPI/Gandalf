@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110175339) do
+ActiveRecord::Schema.define(version: 20170111155856) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -177,6 +177,7 @@ ActiveRecord::Schema.define(version: 20170110175339) do
     t.text     "comment"
     t.string   "barcode_data"
     t.string   "payment_code"
+    t.string   "phone_number"
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
