@@ -47,15 +47,15 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def show_unsubscribe
+  def show_cancel
     @registration = Registration.find_by! id: params[:id], barcode: params[:barcode]
   end
 
-  def destroy_unsubscribe
+  def destroy_cancel
     registration = Registration.find_by! id: params[:id], barcode: params[:barcode]
     event = registration.event
     registration.destroy!
-    RegistrationMailer.confirm_unsubscribing(registration, event).deliver_now
+    RegistrationMailer.confirm_cancel(registration, event).deliver_now
   end
 
   def basic

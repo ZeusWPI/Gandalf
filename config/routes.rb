@@ -38,8 +38,8 @@ Isengard::Application.routes.draw do
         get 'resend'
         get 'info'
 
-        get 'unsubscribe/:barcode', to: 'registrations#show_unsubscribe',  as: 'unsubscribe'
-        delete 'unsubscribe/:barcode', to: 'registrations#destroy_unsubscribe',  as: 'unsubscribe_destroy'
+        get 'cancel/:barcode', to: 'registrations#show_cancel',  as: 'cancel'
+        delete 'cancel/:barcode', to: 'registrations#destroy_cancel',  as: 'cancel_destroy'
       end
 
       collection do
