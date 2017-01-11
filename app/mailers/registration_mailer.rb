@@ -28,4 +28,10 @@ class RegistrationMailer < ActionMailer::Base
     mail to: "#{registration.name} <#{registration.email}>", subject: "Overpayment for #{registration.event.name}"
   end
 
+  def confirm_unsubscribing(registration, event)
+    @registration = registration
+    @event = event
+
+    mail to: "#{registration.name} <#{registration.email}>", subject: "Unsubscription for #{event.name}"
+  end
 end
