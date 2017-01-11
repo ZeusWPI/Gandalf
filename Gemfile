@@ -117,7 +117,7 @@ gem 'jc-validates_timeliness'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem 'airbrake'
+gem 'airbrake', '~> 4.3'
 
 gem 'rmagick'
 
