@@ -1,0 +1,7 @@
+<div class="form-group btn-group" data-toggle="buttons">
+  <p><strong><%= tag.to_s.humanize %>:</strong></p>
+
+  <% states.each do |state, _| %>
+      <label class="btn btn-primary<%= ' active ' if state.to_s == selected_state  %>"> <%= f.radio_button(tag, state) %><%= state.to_s.capitalize %></label>
+<% end %>
+</div>

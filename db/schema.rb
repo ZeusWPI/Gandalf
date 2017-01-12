@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111155856) do
+ActiveRecord::Schema.define(version: 20170111204432) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170111155856) do
     t.boolean  "registration_open",       default: true
     t.text     "signature"
     t.boolean  "registration_cancelable"
+    t.integer  "phone_number_state",      default: 0
   end
 
   create_table "included_zones", force: :cascade do |t|

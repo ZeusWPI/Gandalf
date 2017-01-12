@@ -50,6 +50,10 @@ module ApplicationHelper
     render partial: "form_number_field", locals: {f: f, tag: tag}
   end
 
+  def form_radio_field(f, tag, selected_state, states)
+    render partial: "form_radio_field", locals: {f: f, tag: tag, selected_state: selected_state, states: states}
+  end
+
   def form_collection_select(f, *args)
     # This line enable passing optional arguments such as include_blank to the
     # partial. If nothing is passed, an empty options hash is appended.

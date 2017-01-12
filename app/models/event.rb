@@ -40,6 +40,8 @@ class Event < ActiveRecord::Base
 
   has_many :periods, dependent: :destroy
 
+  enum phone_number_state: [:optional, :required, :disabled]
+
   validates :description, presence: true
   validates :end_date, presence: true
   validates :location, presence: true
@@ -47,6 +49,7 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :club, presence: true
   validates :start_date, presence: true
+  validates :phone_number_state, presence: true
 
   validates :contact_email, email: true
   validates_with IBANValidator
