@@ -36,6 +36,7 @@ class Registration < ActiveRecord::Base
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true
+  validates :phone_number, presence: true, if: "event.phone_number_state.to_s=='required'"
 
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
