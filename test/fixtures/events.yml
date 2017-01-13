@@ -39,7 +39,7 @@ codenight:
   website: zeus.ugent.be
   description: THEYRE TAKING THE HOBBITS TO ISENGARD
   club: zeus
-  phone_number_state: optional
+  phone_number_state: 1
 
 galabal:
   id: 2
@@ -52,7 +52,7 @@ galabal:
   description: Super awesome galabal
   club: fk
   bank_number: BE62 5100 0754 7061
-  phone_number_state: optional
+  phone_number_state: 1
 
 twaalfurenloop:
   id: 3
@@ -64,7 +64,7 @@ twaalfurenloop:
   website: 12urenloop.be
   description: rondjes lopeuh!
   club: fk
-  phone_number_state: optional
+  phone_number_state: 1
 
 sko:
   id: 4
@@ -76,4 +76,4 @@ sko:
   website: studentkickoff.be
   description: Los gaan op Samson&Gert!
   club: fk
-  phone_number_state: optional
+  phone_number_state: 1
