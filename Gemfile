@@ -52,7 +52,7 @@ end
 gem 'devise'
 gem 'devise_cas_authenticatable'
 # Omniauth as extra development backdoor
-gem 'omniauth-oauth2'
+gem 'omniauth-oauth2', '~> 1.3.1'
 
 # Token authentication for partners
 gem 'simple_token_authentication'
