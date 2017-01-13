@@ -6,9 +6,6 @@ gem 'rails', '~> 4.0'
 # We <3 New Relic
 gem 'newrelic_rpm'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0'
 
@@ -131,6 +128,8 @@ gem 'twitter-typeahead-rails'
 gem 'simple_enum'
 
 group :development do
+  gem 'sqlite3'
+
   gem 'rails-erd'
 
   gem 'capistrano', '~> 3.1'
