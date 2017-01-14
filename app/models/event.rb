@@ -26,6 +26,7 @@
 #  registration_open       :boolean          default(TRUE)
 #  signature               :text
 #  registration_cancelable :boolean
+#  phone_number_state      :string           default("optional")
 #
 
 class Event < ActiveRecord::Base
@@ -40,7 +41,6 @@ class Event < ActiveRecord::Base
 
   has_many :periods, dependent: :destroy
 
-  enum phone_number_state: [:optional, :required, :disabled]
 
   validates :description, presence: true
   validates :end_date, presence: true
@@ -64,6 +64,10 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :export, :content_type => /.*/
 
   before_save :prettify_bank_number
+
+  def self.phone_number_states
+    [:optional, :required, :disabled]
+  end
 
   def prettify_bank_number
     self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?

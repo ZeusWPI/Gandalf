@@ -36,7 +36,7 @@ class Registration < ActiveRecord::Base
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true
-  validates :phone_number, presence: true, if: "event.phone_number_state.to_s=='required'"
+  validates :phone_number, presence: true, if: 'phone_number_required?'
 
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
@@ -127,5 +127,12 @@ class Registration < ActiveRecord::Base
   def to_cents(value)
     if value.is_a? String then value.sub!(',', '.') end
     (value.to_f * 100).to_int
+  end
+
+  def phone_number_required?
+    unless event.nil?
+      return event.phone_number_state.to_s=='required'
+    end
+    false
   end
 end

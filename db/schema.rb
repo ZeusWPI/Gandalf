@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20170111204432) do
     t.boolean  "registration_open",       default: true
     t.text     "signature"
     t.boolean  "registration_cancelable"
-    t.integer  "phone_number_state",      default: 0
+    t.string   "phone_number_state",      default: "optional"
   end
 
   create_table "included_zones", force: :cascade do |t|

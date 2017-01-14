@@ -12,7 +12,7 @@
 #  price       :integer
 #  has_comment :boolean
 #  hidden      :boolean
-#  permit      :string           default('everyone')
+#  permit      :string           default("everyone")
 #
 
 class AccessLevel < ActiveRecord::Base

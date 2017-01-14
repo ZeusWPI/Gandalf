@@ -11,7 +11,7 @@
 #  price       :integer
 #  has_comment :boolean
 #  hidden      :boolean
-#  permit      :string           default('everyone')
+#  permit      :string           default("everyone")
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

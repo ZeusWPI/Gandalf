@@ -25,6 +25,8 @@
 #  club_id                 :integer
 #  registration_open       :boolean          default(TRUE)
 #  signature               :text
+#  registration_cancelable :boolean
+#  phone_number_state      :string           default("optional")
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -39,7 +41,7 @@ codenight:
   website: zeus.ugent.be
   description: THEYRE TAKING THE HOBBITS TO ISENGARD
   club: zeus
-  phone_number_state: <%= Event.phone_number_states[:optional] %>
+  phone_number_state: 'optional'
 
 galabal:
   id: 2
@@ -52,7 +54,7 @@ galabal:
   description: Super awesome galabal
   club: fk
   bank_number: BE62 5100 0754 7061
-  phone_number_state: <%= Event.phone_number_states[:optional] %>
+  phone_number_state: 'optional'
 
 twaalfurenloop:
   id: 3
@@ -64,7 +66,7 @@ twaalfurenloop:
   website: 12urenloop.be
   description: rondjes lopeuh!
   club: fk
-  phone_number_state: <%= Event.phone_number_states[:optional] %>
+  phone_number_state: 'optional'
 
 sko:
   id: 4
@@ -76,4 +78,4 @@ sko:
   website: studentkickoff.be
   description: Los gaan op Samson&Gert!
   club: fk
-  phone_number_state: <%= Event.phone_number_states[:optional] %>
+  phone_number_state: 'optional'
