@@ -1,5 +1,4 @@
 class PartnerMailer < ActionMailer::Base
-  default from: "noreply@event.fkgent.be"
 
   def send_token(partner)
     @partner = partner

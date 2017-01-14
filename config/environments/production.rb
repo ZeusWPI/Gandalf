@@ -65,6 +65,9 @@ Isengard::Application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   #
+  # Set default mail address
+  config.action_mailer.default_options = { from: "no-reply@events.ugent.be" }
+
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.default_url_options = { host: 'events.ugent.be' }
 
