@@ -25,6 +25,8 @@
 #  club_id                 :integer
 #  registration_open       :boolean          default(TRUE)
 #  signature               :text
+#  registration_cancelable :boolean
+#  phone_number_state      :string           default("optional")
 #
 
 require 'test_helper'

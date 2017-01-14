@@ -9,9 +9,9 @@
 #  updated_at  :datetime
 #  capacity    :integer
 #  price       :integer
-#  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
+#  permit      :string           default("everyone")
 #
 
 require 'test_helper'

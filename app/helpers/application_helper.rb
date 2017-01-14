@@ -38,12 +38,20 @@ module ApplicationHelper
     render partial: "form_email_field", locals: {f: f, tag: tag}
   end
 
+  def form_telephone_field(f, tag)
+    render partial: "form_telephone_field", locals: {f: f, tag: tag}
+  end
+
   def form_date_field(f, tag, id, value)
     render partial: "form_date_field", locals: {f: f, tag: tag, id: id, value: value}
   end
 
   def form_number_field(f, tag)
     render partial: "form_number_field", locals: {f: f, tag: tag}
+  end
+
+  def form_radio_field(f, tag, selected_state, states)
+    render partial: "form_radio_field", locals: {f: f, tag: tag, selected_state: selected_state, states: states}
   end
 
   def form_collection_select(f, *args)
