@@ -30,6 +30,8 @@ Isengard::Application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
+  # Set default mail address
+  config.action_mailer.default_options = { from: "noreply@event.fkgent.be" }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

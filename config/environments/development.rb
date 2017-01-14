@@ -22,6 +22,9 @@ Isengard::Application.configure do
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
 
+  # Set default mail address
+  config.action_mailer.default_options = { from: "no-reply@localhost" }
+
   # Set these so devise works in development
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
