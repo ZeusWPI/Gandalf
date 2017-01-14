@@ -6,9 +6,6 @@ gem 'rails', '~> 4.0'
 # We <3 New Relic
 gem 'newrelic_rpm'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0'
 
@@ -55,7 +52,7 @@ end
 gem 'devise'
 gem 'devise_cas_authenticatable'
 # Omniauth as extra development backdoor
-gem 'omniauth-oauth2'
+gem 'omniauth-oauth2', '~> 1.3.1'
 
 # Token authentication for partners
 gem 'simple_token_authentication'
@@ -131,6 +128,8 @@ gem 'twitter-typeahead-rails'
 gem 'simple_enum'
 
 group :development do
+  gem 'sqlite3'
+
   gem 'rails-erd'
 
   gem 'capistrano', '~> 3.1'
