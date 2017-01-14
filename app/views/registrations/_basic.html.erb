@@ -7,7 +7,7 @@
     <%= form_text_field f, :name %>
     <%= form_email_field f, :email %>
     <%= f.hidden_field :student_number %>
-    <% unless @registration.event.phone_number_state == 'disabled' %>
+    <% if @registration.ask_phone_number? %>
       <%= form_telephone_field f, :phone_number %>
     <% end %>
     <%= form_collection_select f, :access_levels, @event.access_levels.find_all { |al| can? :register, al }, :id, :name_with_price %>

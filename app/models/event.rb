@@ -69,6 +69,10 @@ class Event < ActiveRecord::Base
     [:optional, :required, :disabled]
   end
 
+  def ask_phone_number?
+    phone_number_state != 'disabled'
+  end
+
   def prettify_bank_number
     self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
   end
