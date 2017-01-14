@@ -130,6 +130,6 @@ class Registration < ActiveRecord::Base
   end
 
   def phone_number_required?
-    return event && event.phone_number_state.to_s=='required'
+    return event && event.phone_number_state=='required'
   end
 end
