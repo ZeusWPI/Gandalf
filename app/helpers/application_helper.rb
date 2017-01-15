@@ -9,6 +9,10 @@ module ApplicationHelper
     f.try { |d| d.strftime("%Y-%m-%d %H:%M") }
   end
 
+  def nice_date(f)
+    f.try { |d| d.strftime('%a %d %b %Y')}
+  end
+
   def euro(f)
     "&euro;#{number_with_precision f, precision: 2}"
   end

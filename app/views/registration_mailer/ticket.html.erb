@@ -1,62 +1,164 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <p>Dear <%= @registration.name %>,</p>
-
-  <p>This email is your ticket to enter the following event:</p>
-
-  <table>
-    <tbody>
-      <tr>
-        <td><strong>Event</strong></td>
-        <td><%= @registration.event.name %></td>
-      </tr>
-      <tr>
-        <td><strong>Organisation</strong></td>
-        <td><%= @registration.event.club.name %></td>
-      </tr>
-      <tr>
-        <td><strong>Location</strong></td>
-        <td><%= @registration.event.location %></td>
-      </tr>
-      <tr>
-        <td><strong>Start date</strong></td>
-        <td><%= nice_time @registration.event.start_date %></td>
-      </tr>
-      <tr>
-        <td><strong>End date</strong></td>
-        <td><%= nice_time @registration.event.end_date %></td>
-      </tr>
-      <tr>
-        <td><strong>Website</strong></td>
-        <td><a href="<%= @registration.event.website %>"><%= @registration.event.website %></a></td>
-      </tr>
-    </tbody>
-  </table>
-
-    <p>Below is your personal barcode (ticket type: <%= @registration.access_levels.first.try :name %>).</p>
-    <br />
-    <%= image_tag attachments['barcode.png'].url %>
-    <%= image_tag attachments['barcode-tilted.png'].url %>
-    <br />
-    Barcode number: <%= @registration.barcode %>
-    <br />
-
-    <p><strong>Do not forget to print this email and bring it with you. This email acts as your ticket. Without it, you will not be granted access to <%= @registration.event.name %>.</strong><p>
-
-  <p>If you have any problems, you can contact us via mail: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
-
-  <% if @registration.event.registration_cancelable %>
-      <p>If you cannot come: <%= link_to "cancel", cancel_event_registration_url(event_id: @registration.event.id, id: @registration.id, barcode: @registration.barcode)  %></p>
-  <%end %>
-  <p>Kind regards,<br /><%= @registration.event.club.name %></p>
-
-  <% unless @registration.event.signature.blank? %>
-    <%= simple_format @registration.event.signature %>
-  <% end %>
-
-  </body>
-</html>
+<!--[if mso]>
+<style type=�text/css�>
+  .rarr{line-height:0; vertical-align:1px;}
+</style>
+<![endif]-->
+<table style="min-width: 320px;" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff"><!-- fix for gmail -->
+  <tbody>
+  <tr>
+    <td class="hide" style="line-height: 0;">
+      <div style="white-space: nowrap; font: 15px/0 courier;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table class="flexible" style="margin: 0 auto;" width="620" cellspacing="0" cellpadding="0" align="center"><!-- fix for gmail -->
+        <tbody>
+        <tr>
+          <td class="hide">
+            <table style="width: 620px !important;" width="620" cellspacing="0" cellpadding="0">
+              <tbody>
+              <tr>
+                <td style="min-width: 620px; font-size: 0; line-height: 0;">&nbsp;</td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <!-- main -->
+        <tr>
+          <td class="plr-0" style="padding: 18px 0 30px 30px;">
+            <table width="100%" cellspacing="0" cellpadding="0"><!-- header -->
+              <tbody>
+              <tr>
+                <td class="plr-15" style="padding: 0 181px 29px 0;">
+                  <table width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr>
+                      <td valign="top" width="90"><a style="color: #007dd6; text-decoration: none;" href="http://www.ugent.be/" target="_blank"> <img style="vertical-align: top; width: 90px;" src="http://www.communicatie.ugent.be/nieuwsbrief/logo200.png" alt="Universiteit gent" width="90" /> </a></td>
+                      <td width="20">&nbsp;</td>
+                      <td valign="top">
+                        <table cellspacing="0" cellpadding="0" align="right">
+                          <tbody>
+                          <tr>
+                            <td class="pr-15" style="font: 17px/18px Arial, Helvetica, sans-serif; color: #007dd6;"><strong><%= @registration.event.name %></strong><br /> <span style="font-size: 14px;"><%= nice_date @registration.event.start_date %></span></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <!-- post -->
+              <tr>
+                <td class="plr-15" style="padding: 25px 30px 26px 0;">
+                  <table width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr>
+                      <td style="padding: 0 0 18px; font: bold 16px/21px Arial, Helvetica, sans-serif; color: #06c;">Ticket <%= @registration.event.name %></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 0 0 39px; border-bottom: 2px solid #ececf1;">
+                        <table width="100%" cellspacing="0" cellpadding="0">
+                          <tbody>
+                          <tr class="table-holder"><th class="tfoot" style="vertical-align: top; padding: 0;" align="left" width="368">
+                            <table width="100%" cellspacing="0" cellpadding="0">
+                              <tbody>
+                              <tr>
+                                <td class="pr-15" style="padding: 0 30px 24px 0; font: 13px/18px Arial, Helvetica, sans-serif; color: #202020;">Dear <%= @registration.name %><br />Thank you for confirming your presence. This e-mail is your personal ticket for this event. Do not forget to print this email and bring the ticket with you.
+                                  <br/>
+                                  If you won&apos;t be able to attend, we kindly ask you to let us know via the link to the annulation page below. If you experience problems or have questions, do not hesitate to contact us by <%= @registration.event.contact_email %>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <table width="151" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                      <td class="active-d" style="mso-padding-alt: 4px 14px 10px; font: 13px/25px Arial, Helvetica, sans-serif;" align="center" bgcolor="#e8eff9"><a style="padding: 8px 14px; color: #1e64c8; text-decoration: none; display: block;" href="<%= @registration.event.website %>" target="_blank"> <span class="rarr">&rarr;</span>&nbsp;&nbsp;Meer info </a></td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </th><th class="trow" style="padding: 0;" width="18" height="12">&nbsp;</th><th class="thead" style="vertical-align: top; padding: 0;" align="left">
+                            <table width="100%" cellspacing="0" cellpadding="0">
+                              <tbody>
+                              <tr>
+                                <td style="padding: 2px 0 0;"><img style="vertical-align: top;" src="barcode-tilted.png" alt="" width="100" height="200" /></td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </th></tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <!-- block -->
+              <tr>
+                <td class="pl-15" style="padding: 0 0 5px;">
+                  <table width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr>
+                      <td style="padding: 17px 20px 0px;" bgcolor="#0066cc">
+                        <table width="100%" cellspacing="0" cellpadding="0">
+                          <tbody>
+                          <tr>
+                            <td style="padding: 0 0 15px; font: bold 16px/20px Arial, Helvetica, sans-serif; color: #fff;"><%= @registration.event.name %></td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 0 0 15px; font: 16px/23px Arial, Helvetica, sans-serif; color: #fff;">Start date<br /> <span style="font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;" > <%= nice_time @registration.event.start_date %></span></td>
+                            <td style="padding: 0 0 15px; font: 16px/23px Arial, Helvetica, sans-serif; color: #fff;">End date<br /> <span style="font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;"> <%= nice_time @registration.event.end_date %></span></td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 0 0 15px; font: 16px/23px Arial, Helvetica, sans-serif; color: #fff;">Location<br /> <span style="font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;"> <%= @registration.event.location %></span></td>
+                            <td style="padding: 0 0 15px; font: 16px/23px Arial, Helvetica, sans-serif; color: #fff;">Barcode number <br/> <span style="font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;"> <%= @registration.barcode %></span></td>
+                          </tr>
+                          <% if @registration.event.registration_cancelable %>
+                              <tr>
+                                <td style="padding: 0 0 15px; font: 16px/23px Arial, Helvetica, sans-serif; color: #fff;">To cancel <%= link_to "click here", cancel_event_registration_url(event_id: @registration.event.id, id: @registration.id, barcode: @registration.barcode), style='font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;'  %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <!-- footer -->
+              <tr>
+                <td class="plr-15" style="padding: 0 30px 0 0;">
+                  <table width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr>
+                      <img src='barcode.png'>
+                    </tr>
+                    <tr>
+                      <% unless @registration.event.signature.blank? %>
+                          <%= simple_format @registration.event.signature %>
+                      <% end %>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
