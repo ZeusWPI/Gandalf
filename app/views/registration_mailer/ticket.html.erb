@@ -124,7 +124,7 @@
                           </tr>
                           <% if @registration.event.registration_cancelable %>
                               <tr>
-                                <td style="padding: 0 0 15px; font: 16px/23px Arial, Helvetica, sans-serif; color: #fff;">To cancel <%= link_to "click here", cancel_event_registration_url(event_id: @registration.event.id, id: @registration.id, barcode: @registration.barcode), style='font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;'  %></td>
+                                <td style="padding: 0 0 15px; font: 16px/23px Arial, Helvetica, sans-serif; color: #fff;">To cancel <%= link_to "click here", cancel_event_registration_url(event_id: @registration.event.id, id: @registration.id, barcode: @registration.barcode), {style=>'font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;'}  %></td>
                               </tr>
                           <% end %>
                           </tbody>
