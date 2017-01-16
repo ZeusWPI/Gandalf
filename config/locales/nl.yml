@@ -25,6 +25,10 @@ nl:
       deleted:
         title: 'Ticket verwijderd'
         click_here_website: 'Klik hier om naar de event website te gaan.'
+  forms:
+    field:
+      telephone:
+        privacy_declaration: 'Uw telefoonnummer wordt vertrouwelijk gehouden, en zal enkel gebruikt worden om uw persoonlijke eindscore te sms&apos;en.'
   tickets:
     left: 'over'
     login_required: 'Sommige tickets kunnen enkel besteld worden als je lid bent van de organiserende vereniging.'
@@ -32,9 +36,10 @@ nl:
     login_cas: 'met CAS om de tickets te kunnen bestellen.'
     no_available: 'No tickets available at the moment!'
   mail:
-    ticket_start: "Dear %{name}<br />Thank you for confirming your presence. This e-mail is your personal ticket for this event. Do not forget to print this email and bring the ticket with you.
-              <br/>
-       If you won&apos;t be able to attend, we kindly ask you to let us know via the link to the annulation page below. If you experience problems or have questions, do not hesitate to contact us by %{mail}"
+    ticket_start: "Beste %{name}<br/><br/>
+    Bedankt om uw aanwezigheid te bevestigen. Deze e-mail geldt als uw persoonlijke ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/>
+                   <br/>
+                   Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande pagina. Bij vragen of problemen kan u terecht op %{mail}."
     more_info: "Meer info"
     cancel: "Om te annuleren"
     click_here: "klik hier"
