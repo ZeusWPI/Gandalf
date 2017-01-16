@@ -7,6 +7,7 @@ nl:
         email: "E-mail"
         phone_number: "Telefoonnummer"
         register: 'Registreer'
+        comment: 'Afstudeerjaar en -richting'
   event:
     description: 'Beschrijving'
     organisation: 'Organisatie'

@@ -52,8 +52,8 @@ class RegistrationsController < ApplicationController
   end
 
   def destroy_cancel
-    registration = Registration.find_by! id: params[:id], barcode: params[:barcode]
-    event = registration.event
+    @registration = Registration.find_by! id: params[:id], barcode: params[:barcode]
+    @event = registration.event
     if registration.event.registration_cancelable
       registration.destroy!
     else
