@@ -2,22 +2,22 @@
 
 <div class="row">
   <div class="col-sm-5">
-    <h2>Description</h2>
+    <h2><%= t('event.description') %></h2>
     <table class="sideways-table">
       <tr>
-        <td>Organisation</td>
+        <td><%= t('event.organisation') %></td>
         <td><%= @event.club.name %></td>
       </tr>
       <tr>
-        <td>Location</td>
+        <td><%= t('event.location') %></td>
         <td><%= @event.location %></td>
       </tr>
       <tr>
-        <td>Start date</td>
+        <td><%= t('event.start_date') %></td>
         <td><%= nice_time @event.start_date %></td>
       </tr>
       <tr>
-        <td>End date</td>
+        <td><%= t('event.end_date') %></td>
         <td><%= nice_time @event.end_date %></td>
       </tr>
       <tr>
@@ -26,17 +26,17 @@
         </td>
       </tr>
       <tr>
-        <td>Website</td>
+        <td><%= t('event.website') %></td>
         <td><%= link_to @event.website, @event.website %></td>
       </tr>
       <tr>
-        <td>Contact e-mail</td>
+        <td><%= t('event.contact_mail') %></td>
         <td><%= mail_to @event.contact_email, @event.contact_email %></td>
       </tr>
     </table>
 
     <% unless @event.access_levels.blank? %>
-      <h2>Tickets</h2>
+      <h2><%= t('activerecord.attributes.registration.access_levels')%></h2>
       <div class="row">
         <div class="col-sm-12">
           <ul class="list-group">
@@ -50,15 +50,15 @@
   </div>
 
   <div class="col-sm-4 col-sm-offset-1">
-    <h2>Register</h2>
+    <h2><%= t('event.register') %></h2>
     <% unless @event.access_levels.find_all{ |al| al.requires_login? }.blank? %>
-      Some tickets of this event can only be registered for if you are a member of the organiser's organisation.<br />
-      <%= link_to "Login", new_user_session_path %> using CAS to register for these tickets.
+      <%= t('tickets.login_required') %><br />
+      <%= link_to t('tickets.login'), new_user_session_path %> <%= t('tickets.login_cas') %>
     <% end %>
     <% if can? :register, @event and not @event.access_levels.find_all{ |al| can? :register, al }.blank? %>
       <%= render partial: "registrations/form" %>
     <% else %>
-      No tickets available at the moment!
+      <%= t('tickets.no_available') %>
     <% end %>
   </div>
 </div>

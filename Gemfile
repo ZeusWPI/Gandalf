@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0'
 
+# I18N
+gem 'rails-i18n', '~> 4.0'
+
 # We <3 New Relic
 gem 'newrelic_rpm'
 

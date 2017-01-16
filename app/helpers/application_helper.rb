@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # Prettify helpers
   def nice_time(f)
-    f.try { |d| d.strftime("%a %d %b %Y %H:%M") }
+    f.try { |d| l(d, format: "%a %d %b %Y %H:%M") }
   end
 
   def datepicker_time(f)
@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def nice_date(f)
-    f.try { |d| d.strftime('%a %d %b %Y')}
+    f.try { |d| l(d, format: '%a %d %b %Y')}
   end
 
   def euro(f)

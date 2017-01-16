@@ -1,0 +1,51 @@
+nl:
+  activerecord:
+    attributes:
+      registration:
+        access_levels: "Ticket"
+        name: "Naam"
+        email: "E-mail"
+        phone_number: "Telefoonnummer"
+        register: 'Registreer'
+  event:
+    description: 'Beschrijving'
+    organisation: 'Organisatie'
+    location: 'Locatie'
+    start_date: 'Startdatum'
+    end_date: 'Einddatum'
+    website: 'Website'
+    contact_mail: 'Contact e-mail'
+    register: 'Registreer'
+    barcode_number: 'Barcode nummer'
+    cancel:
+      title: 'Schrijf u uit voor %{event}'
+      button: 'Schrijf mij nu uit!'
+      closed: 'Sorry, uitschrijven is niet meer mogelijk.'
+      deleted:
+        title: 'Ticket verwijderd'
+        click_here_website: 'Klik hier om naar de event website te gaan.'
+  tickets:
+    left: 'over'
+    login_required: 'Sommige tickets kunnen enkel besteld worden als je lid bent van de organiserende vereniging.'
+    login: 'Log in'
+    login_cas: 'met CAS om de tickets te kunnen bestellen.'
+    no_available: 'No tickets available at the moment!'
+  mail:
+    ticket_start: "Dear %{name}<br />Thank you for confirming your presence. This e-mail is your personal ticket for this event. Do not forget to print this email and bring the ticket with you.
+              <br/>
+       If you won&apos;t be able to attend, we kindly ask you to let us know via the link to the annulation page below. If you experience problems or have questions, do not hesitate to contact us by %{mail}"
+    more_info: "Meer info"
+    cancel: "Om te annuleren"
+    click_here: "klik hier"
+  flash:
+    succes: "Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn."
+
+  helpers:
+    label:
+      event:
+        club_id: "Organisatie"
+  datagrid:
+    table:
+      order:
+        asc: '↑'
+        desc: '↓'

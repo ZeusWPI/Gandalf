@@ -15,12 +15,12 @@
     <%= javascript_tag do %>
       window.ticketsWithComments = <%= @event.access_levels.find_all(&:has_comment).map(&:id).to_json %>
     <% end %>
-    <%= f.submit "Register", class: 'btn btn-group btn-primary' %>
+    <%= f.submit "Registreer", class: 'btn btn-group btn-primary' %>
   <% end %>
   </p>
 
-  <div class="well well-sm">
+  <!--<div class="well well-sm">
     Payments can only be done by bank transfer, <strong>not by credit card</strong>.
-  </div>
+  </div>-->
 
 </div>

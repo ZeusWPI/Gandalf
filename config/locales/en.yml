@@ -23,6 +23,14 @@ en:
     attributes:
       registration:
         access_levels: "Ticket"
+  tickets:
+    left: 'over'
+    login_required: "Some tickets of this event can only be registered for if you are a member of the organiser's organisation."
+    login: 'Login'
+    login_cas: 'using CAS to register for these tickets.'
+    no_available: 'No tickets available at the moment!'
+  flash:
+    succes: "Registration successful. Please check your mailbox for your ticket."
 
   helpers:
     label:

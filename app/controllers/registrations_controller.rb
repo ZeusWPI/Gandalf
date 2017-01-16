@@ -92,7 +92,7 @@ class RegistrationsController < ApplicationController
         RegistrationMailer.confirm_registration(@registration).deliver_now
       end
 
-      flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."
+      flash[:success] = t('flash.succes') # or further payment information."
       respond_with @event
     else
       render "events/show"
