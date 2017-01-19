@@ -41,8 +41,7 @@ nl:
                    <br/>
                    Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande pagina. Bij vragen of problemen kan u terecht op %{mail}."
     more_info: "Meer info"
-    cancel: "Om te annuleren"
-    click_here: "klik hier"
+    cancel: "Klik hier om u uit te schrijven."
   flash:
     succes: "Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn."
 
