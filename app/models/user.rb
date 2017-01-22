@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
   # this should add all extra CAS attributes returned by the server to the current session
   # extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
   def cas_extra_attributes=(extra_attributes)
+    logger.info "Attributes: #{extra_attributes}"
     extra_attributes.each do |name, value|
       # I prefer a case over reflection; this is safer if we suddenly get an
       # extra attribute without column
@@ -68,8 +69,12 @@ class User < ActiveRecord::Base
         self.cas_givenname = value
       when :surname
         self.cas_surname = value
-      when :ugentStudentID
+      when :ugentID
         self.cas_ugentStudentID = value
+      when :ugentStudentID
+        unless Rails.env.production? # field is only available in production
+          self.cas_ugentStudentID = value
+        end
       when :mail
         self.cas_mail = value
       when :uid
