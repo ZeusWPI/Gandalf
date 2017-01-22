@@ -26,7 +26,9 @@ class Registration < ActiveRecord::Base
 
   scope :paid, -> { where("price <= paid") }
 
-  validates :name, presence: true, uniqueness: { scope: :event_id }
+  validates :name, presence: true
+  # Names shouldn't be unique, because people can have te same name
+  #validates :name, presence: true, uniqueness: { scope: :event_id }
   # Uniqueness temporarily disabled; see the Partner model for the reason
   #validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
