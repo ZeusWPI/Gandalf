@@ -37,6 +37,7 @@ class Registration < ActiveRecord::Base
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true
   validates :phone_number, presence: true, if: 'phone_number_required?'
+  validates :comment, presence: true, if: 'comment_required?'
 
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
@@ -130,6 +131,18 @@ class Registration < ActiveRecord::Base
   end
 
   def phone_number_required?
-    return event && event.phone_number_state == 'required'
+    event && event.phone_number_state == 'required'
+  end
+
+  def comment_required?
+    unless event && event.id == 1
+      return false
+    end
+    access_levels.each do |access_level|
+      if access_level.has_comment
+        return true
+      end
+    end
+    false
   end
 end
