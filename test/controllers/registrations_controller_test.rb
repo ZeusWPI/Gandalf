@@ -52,7 +52,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
 
     email = ActionMailer::Base.deliveries.last
-    assert_match(/Registration for/, email.subject)
+    assert_match(/Registratie voor/, email.subject)
   end
 
   test "resend sends ticket email when is_paid" do
@@ -61,7 +61,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
 
     email = ActionMailer::Base.deliveries.last
-    assert_match(/Ticket for/, email.subject)
+    assert_match(/Ticket voor/, email.subject)
   end
 
   test "signature of registration emails can be branded" do
@@ -74,7 +74,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
 
     email = ActionMailer::Base.deliveries.last
-    assert_match(/Registration for/, email.subject)
+    assert_match(/Registratie voor/, email.subject)
     # Both html and plaintext mail should contain the signature
     assert_match(/Een signatuur/, email.parts.first.body.to_s)
     assert_match(/Een signatuur/, email.parts.second.body.to_s)
@@ -90,7 +90,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
 
     email = ActionMailer::Base.deliveries.last
-    assert_match(/Ticket for/, email.subject)
+    assert_match(/Ticket voor/, email.subject)
     # We only have a html part (and 2 png parts) here
     assert_match(/Een signatuur/, email.parts.first.body.to_s)
   end
@@ -112,7 +112,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       end
       assert_equal registration.price, registration.reload.paid
       email = ActionMailer::Base.deliveries.last
-      assert_match(/Ticket for/, email.subject)
+      assert_match(/Ticket voor/, email.subject)
     end
 
   end
@@ -136,7 +136,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       end
       assert registration.price > registration.reload.paid
       email = ActionMailer::Base.deliveries.last
-      assert_match(/Registration for/, email.subject)
+      assert_match(/Registratie voor/, email.subject)
     end
 
   end
@@ -161,7 +161,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       assert registration.price < registration.reload.paid
 
       email = ActionMailer::Base.deliveries[-2]
-      assert_match(/Ticket for/, email.subject)
+      assert_match(/Ticket voor/, email.subject)
 
       email = ActionMailer::Base.deliveries[-1]
       assert_match(/Overpayment for/, email.subject)
