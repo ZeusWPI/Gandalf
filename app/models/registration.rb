@@ -42,6 +42,8 @@ class Registration < ActiveRecord::Base
   validates :payment_code, presence: true, uniqueness: true
   validates :phone_number, presence: true, if: 'phone_number_required?'
   validates :comment, presence: true, if: 'comment_required?'
+  validates :title, presence: true, if: 'extra_info_required?'
+  validates :job_function, presence: true, if: 'extra_info_required?'
 
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
@@ -153,5 +155,9 @@ class Registration < ActiveRecord::Base
       end
     end
     false
+  end
+
+  def extra_info_required?
+    event.extra_info
   end
 end

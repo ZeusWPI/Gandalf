@@ -5,7 +5,7 @@
 
   <%= form_for [@event, @registration], url: basic_event_registrations_path(@event) do |f| %>
     <% if @registration.event.extra_info %>
-        <%= form_radio_field f, :title, @registration.title, Registration.personal_title, true, 'registration.titles' %>
+        <%= form_radio_field f, :title, @registration.title, Registration.personal_title, false, true, 'registration.titles' %>
     <% end %>
     <%= form_text_field f, :name %>
     <% if @registration.event.extra_info %>

@@ -54,9 +54,9 @@ module ApplicationHelper
     render partial: "form_number_field", locals: {f: f, tag: tag}
   end
 
-  def form_radio_field(f, tag, selected_state, states, do_translate=false, t_prefix='')
+  def form_radio_field(f, tag, selected_state, states, show_label=true, do_translate=false, t_prefix='')
     render partial: "form_radio_field", locals: {f: f, tag: tag, selected_state: selected_state, states: states,
-                                                 do_translate: do_translate, t_prefix: t_prefix }
+                                                 show_label: show_label, do_translate: do_translate, t_prefix: t_prefix }
   end
 
   def form_collection_select(f, *args)
