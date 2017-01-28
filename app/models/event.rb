@@ -27,6 +27,7 @@
 #  signature               :text
 #  registration_cancelable :boolean
 #  phone_number_state      :string           default("optional")
+#  extra_info              :boolean          default(FALSE)
 #
 
 class Event < ActiveRecord::Base
