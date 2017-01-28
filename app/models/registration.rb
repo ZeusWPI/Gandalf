@@ -123,6 +123,11 @@ class Registration < ActiveRecord::Base
     end
   end
 
+
+  def self.personal_title
+    [:prof, :dr, :ms, :mr, :mx]
+  end
+
   private
 
   def from_cents(value)

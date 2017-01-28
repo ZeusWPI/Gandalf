@@ -2,6 +2,8 @@ nl:
   activerecord:
     attributes:
       registration:
+        title: 'Titel'
+        job_function: 'Functie'
         access_levels: "Ticket"
         name: "Naam"
         email: "E-mail"
@@ -25,6 +27,13 @@ nl:
       deleted:
         title: 'Ticket verwijderd'
         click_here_website: 'Klik hier om naar de event website te gaan.'
+  registration:
+    titles:
+      prof: 'prof.'
+      dr: 'dr.'
+      ms: 'mevr.'
+      mr: 'dhr.'
+      mx: 'mx.'
   forms:
     field:
       telephone:
