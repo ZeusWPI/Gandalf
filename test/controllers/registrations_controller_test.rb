@@ -164,7 +164,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       assert_match(/Ticket voor/, email.subject)
 
       email = ActionMailer::Base.deliveries[-1]
-      assert_match(/Overpayment for/, email.subject)
+      assert_match(/Teveel betaald voor/, email.subject)
     end
 
   end
