@@ -158,6 +158,6 @@ class Registration < ActiveRecord::Base
   end
 
   def extra_info_required?
-    event.extra_info
+    event && event.extra_info
   end
 end
