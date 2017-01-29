@@ -2,7 +2,6 @@
 #
 # Table name: events
 #
-
 #  id                        :integer          not null, primary key
 #  name                      :string
 #  start_date                :datetime
