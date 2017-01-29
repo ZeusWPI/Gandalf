@@ -6,9 +6,11 @@ nl:
         access_levels: Ticket
         comment: Opmerkingen
         email: E-mail
+        job_function: Functie
         name: Naam
         phone_number: Telefoonnummer
         register: Registreer
+        title: Titel
   datagrid:
     table:
       order:
@@ -46,7 +48,7 @@ nl:
   mail:
     cancel: Klik hier om u uit te schrijven.
     more_info: Meer info
-    ticket_start: Beste %{name}<br/><br/> Bedankt om uw aanwezigheid te bevestigen. Deze e-mail geldt als uw persoonlijk ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/> <br/> Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande uitschrijflink. Bij vragen of problemen kan u terecht op %{mail}.
+    ticket_start: Beste %{salutation}%{name}<br/><br/> Bedankt om uw aanwezigheid te bevestigen. Deze e-mail geldt als uw persoonlijk ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/> <br/> Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande uitschrijflink. Bij vragen of problemen kan u terecht op %{mail}.
   mailers:
     registration:
       subjects:
@@ -54,6 +56,13 @@ nl:
         confirm: Registratie voor %{event}
         overpayment: Teveel betaald voor %{event}
         ticket: Ticket voor %{event}
+  registration:
+    titles:
+      dr: dr.
+      mr: dhr.
+      ms: mevr.
+      mx: mx.
+      prof: prof.
   tickets:
     left: over
     login: Log in

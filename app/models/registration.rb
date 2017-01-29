@@ -42,6 +42,8 @@ class Registration < ActiveRecord::Base
   validates :payment_code, presence: true, uniqueness: true
   validates :phone_number, presence: true, if: 'phone_number_required?'
   validates :comment, presence: true, if: 'comment_required?'
+  validates :title, presence: true, if: 'extra_info_required?'
+  validates :job_function, presence: true, if: 'extra_info_required?'
 
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
@@ -123,6 +125,22 @@ class Registration < ActiveRecord::Base
     end
   end
 
+  def self.personal_titles
+    [:prof, :dr, :ms, :mr, :mx]
+  end
+
+  def self.personal_titles_scope
+    'registration.titles'
+  end
+
+  def salutation
+    unless title
+      return ''
+    end
+
+    I18n.t(title, scope: Registration.personal_titles_scope) + ' '
+  end
+
   private
 
   def from_cents(value)
@@ -148,5 +166,9 @@ class Registration < ActiveRecord::Base
       end
     end
     false
+  end
+
+  def extra_info_required?
+    event && event.extra_info
   end
 end

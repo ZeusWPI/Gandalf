@@ -151,10 +151,14 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description, :registration_cancelable, :phone_number_state, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count, :signature)
+    params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date,
+                                  :description, :registration_cancelable, :extra_info, :phone_number_state,
+                                  :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count,
+                                  :signature)
   end
 
   def event_create_params
-    params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description, :registration_cancelable, :phone_number_state)
+    params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date,
+                                  :description, :registration_cancelable, :extra_info, :phone_number_state)
   end
 end

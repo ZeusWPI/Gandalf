@@ -4,7 +4,13 @@
   <%= render partial: 'flash' %>
 
   <%= form_for [@event, @registration], url: basic_event_registrations_path(@event) do |f| %>
+    <% if @registration.event.extra_info %>
+        <%= form_radio_field f, :title, @registration.title, Registration.personal_titles, false, true, Registration.personal_titles_scope %>
+    <% end %>
     <%= form_text_field f, :name %>
+    <% if @registration.event.extra_info %>
+      <%= form_text_field f, :job_function %>
+    <% end %>
     <%= form_email_field f, :email %>
     <%= f.hidden_field :student_number %>
     <% if @registration.event.ask_phone_number? %>
