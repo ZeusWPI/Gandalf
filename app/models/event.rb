@@ -77,6 +77,20 @@ class Event < ActiveRecord::Base
     self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
   end
 
+  def comment_title
+    if id == 1
+      return 'Afstudeerjaar en -richting' #TODO: maybe add to database if this used in more cases
+    end
+    nil
+  end
+
+  def show_telephone_disclaimer
+    if id == 1
+      return true
+    end
+    false
+  end
+
   def generate_xls
     self.export_status = 'generating'
     self.save

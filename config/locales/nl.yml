@@ -4,7 +4,7 @@ nl:
     attributes:
       registration:
         access_levels: Ticket
-        comment: Afstudeerjaar en -richting
+        comment: Opmerkingen
         email: E-mail
         name: Naam
         phone_number: Telefoonnummer
