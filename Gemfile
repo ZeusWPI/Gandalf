@@ -6,6 +6,9 @@ gem 'rails', '~> 4.0'
 # I18N
 gem 'rails-i18n', '~> 4.0'
 
+# I18n tasks, simplify the process, find missing keys
+gem 'i18n-tasks', '~> 0.9.9'
+
 # We <3 New Relic
 gem 'newrelic_rpm'
 
