@@ -1,62 +1,62 @@
+---
 nl:
   activerecord:
     attributes:
       registration:
-        access_levels: "Ticket"
-        name: "Naam"
-        email: "E-mail"
-        phone_number: "Telefoonnummer"
-        register: 'Registreer'
-        comment: 'Afstudeerjaar en -richting'
-  event:
-    description: 'Beschrijving'
-    organisation: 'Organisatie'
-    location: 'Locatie'
-    start_date: 'Startdatum'
-    end_date: 'Einddatum'
-    website: 'Website'
-    contact_mail: 'Contact e-mail'
-    register: 'Registreer'
-    barcode_number: 'Barcode nummer'
-    cancel:
-      title: 'Schrijf u uit voor %{event}'
-      button: 'Schrijf mij nu uit!'
-      closed: 'Sorry, uitschrijven is niet meer mogelijk.'
-      deleted:
-        title: 'Ticket verwijderd'
-        click_here_website: 'Klik hier om naar de event website te gaan.'
-  forms:
-    field:
-      telephone:
-        privacy_declaration: "Uw telefoonnummer wordt vertrouwelijk gehouden, en zal enkel gebruikt worden om uw persoonlijke eindscore te sms'en."
-  tickets:
-    left: 'over'
-    login_required: 'Studenten en personeel moeten zich eerst inloggen.'
-    login: 'Log in'
-    login_cas: 'met CAS om de tickets te kunnen bestellen.'
-    no_available: 'No tickets available at the moment!'
-  mail:
-    ticket_start: "Beste %{name}<br/><br/>
-    Bedankt om uw aanwezigheid te bevestigen. Deze e-mail geldt als uw persoonlijk ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/>
-                   <br/>
-                   Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande uitschrijflink. Bij vragen of problemen kan u terecht op %{mail}."
-    more_info: "Meer info"
-    cancel: "Klik hier om u uit te schrijven."
-  flash:
-    succes: "Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn."
-  mailers:
-    registration:
-      subjects:
-        confirm: "Registratie voor %{event}"
-        ticket: "Ticket voor %{event}"
-        overpayment: "Teveel betaald voor %{event}"
-        cancel: "Uitschrijven voor %{event}"
-  helpers:
-    label:
-      event:
-        club_id: "Organisatie"
+        access_levels: Ticket
+        comment: Opmerkingen
+        email: E-mail
+        name: Naam
+        phone_number: Telefoonnummer
+        register: Registreer
   datagrid:
     table:
       order:
-        asc: '↑'
-        desc: '↓'
+        asc: "↑"
+        desc: "↓"
+  dutch: Nederlands
+  english: English
+  event:
+    barcode_number: Barcode nummer
+    cancel:
+      button: Schrijf mij nu uit!
+      closed: Sorry, uitschrijven is niet meer mogelijk.
+      deleted:
+        click_here_website: Klik hier om naar de event website te gaan.
+        title: Ticket verwijderd
+      title: Schrijf u uit voor %{event}
+    contact_mail: Contact e-mail
+    description: Beschrijving
+    end_date: Einddatum
+    location: Locatie
+    organisation: Organisatie
+    register: Registreer
+    start_date: Startdatum
+    website: Website
+  flash:
+    succes: Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn.
+  forms:
+    field:
+      telephone:
+        privacy_declaration: Uw telefoonnummer wordt vertrouwelijk gehouden, en zal enkel gebruikt worden om uw persoonlijke eindscore te sms'en.
+  helpers:
+    label:
+      event:
+        club_id: Organisatie
+  mail:
+    cancel: Klik hier om u uit te schrijven.
+    more_info: Meer info
+    ticket_start: Beste %{name}<br/><br/> Bedankt om uw aanwezigheid te bevestigen. Deze e-mail geldt als uw persoonlijk ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/> <br/> Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande uitschrijflink. Bij vragen of problemen kan u terecht op %{mail}.
+  mailers:
+    registration:
+      subjects:
+        cancel: Uitschrijven voor %{event}
+        confirm: Registratie voor %{event}
+        overpayment: Teveel betaald voor %{event}
+        ticket: Ticket voor %{event}
+  tickets:
+    left: over
+    login: Log in
+    login_cas: met CAS om de tickets te kunnen bestellen.
+    login_required: Studenten en personeel moeten zich eerst inloggen.
+    no_available: Momenteel zijn er geen tickets beschikbaar!

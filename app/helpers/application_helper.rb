@@ -30,8 +30,8 @@ module ApplicationHelper
     render partial: "form_url_field", locals: {f: f, tag: tag}
   end
 
-  def form_text_area(f, tag)
-    render partial: "form_text_area", locals: {f: f, tag: tag}
+  def form_text_area(f, tag, label_text=nil)
+    render partial: "form_text_area", locals: {f: f, tag: tag, label_text: label_text}
   end
 
   def form_fancy_text_area(f, tag)
@@ -42,8 +42,8 @@ module ApplicationHelper
     render partial: "form_email_field", locals: {f: f, tag: tag}
   end
 
-  def form_telephone_field(f, tag)
-    render partial: "form_telephone_field", locals: {f: f, tag: tag}
+  def form_telephone_field(f, tag, show_disclaimer)
+    render partial: "form_telephone_field", locals: {f: f, tag: tag, show_disclaimer: show_disclaimer}
   end
 
   def form_date_field(f, tag, id, value)

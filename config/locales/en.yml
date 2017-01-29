@@ -1,38 +1,62 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+---
 en:
   activerecord:
     attributes:
       registration:
-        access_levels: "Ticket"
-  tickets:
-    left: 'over'
-    login_required: "Some tickets of this event can only be registered for if you are a member of the organiser's organisation."
-    login: 'Login'
-    login_cas: 'using CAS to register for these tickets.'
-    no_available: 'No tickets available at the moment!'
+        access_levels: Ticket
+        comment: Comments
+        email: E-mail
+        name: Name
+        phone_number: Phone number
+        register: Register
+  datagrid:
+    table:
+      order:
+        asc: "↑"
+        desc: "↓"
+  dutch: Nederlands
+  english: English
+  event:
+    barcode_number: Barcode number
+    cancel:
+      button: Cancel my registration now!
+      closed: Sorry, cancelling is no longer possible.
+      deleted:
+        click_here_website: Click here to visit the event website.
+        title: Registration cancelled
+      title: Cancel your ticket for %{event}
+    contact_mail: Contact e-mail
+    description: Description
+    end_date: End date
+    location: Location
+    organisation: Organisation
+    register: Register
+    start_date: Start date
+    website: Website
   flash:
-    succes: "Registration successful. Please check your mailbox for your ticket."
-
+    succes: Registration successful. Please check your mailbox for your ticket.
+  forms:
+    field:
+      telephone:
+        privacy_declaration: Your phone number will be kept confidential, and will only be used for texting your personal score.
   helpers:
     label:
       event:
-        club_id: "Organisation"
+        club_id: Organisation
+  mail:
+    cancel: Click here to cancel your registration.
+    more_info: More info
+    ticket_start: Dear Sir or Madam %{name}<br/><br/> Thank you for confirming your attendance. This e-mail functions as your personal ticket for this event. Do not forget to print this e-mail and bring it along.<br/> <br/> In the case you will no longer be able to attend, we ask you nicely to let us know through the link below. For questions or problems you can contact %{mail}.
+  mailers:
+    registration:
+      subjects:
+        cancel: Cancel registration for %{event}
+        confirm: Register for %{event}
+        overpayment: Overpayment for %{event}
+        ticket: Ticket for %{event}
+  tickets:
+    left: left
+    login: Login
+    login_cas: using CAS to register for these tickets.
+    login_required: Some tickets of this event can only be registered for if you are a member of the organiser's organisation.
+    no_available: No tickets available at the moment!

@@ -17,6 +17,8 @@
 #  barcode_data   :string
 #  payment_code   :string
 #  phone_number   :string
+#  title          :string
+#  job_function   :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
