@@ -1,5 +1,8 @@
 <div class="form-group">
   <%= f.label tag %>:<br/>
   <%= f.telephone_field tag, class: 'form-control' %>
-  <small><%= t('forms.field.telephone.privacy_declaration') %></small>
+
+  <% if show_disclaimer %>
+    <small><%= t('forms.field.telephone.privacy_declaration') %></small>
+  <% end %>
 </div>

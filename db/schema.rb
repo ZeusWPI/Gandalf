@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170128205146) do
+ActiveRecord::Schema.define(version: 20170129135614) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20170128205146) do
     t.datetime "registration_open_date"
     t.datetime "registration_close_date"
     t.string   "bank_number"
-    t.boolean  "show_ticket_count",       default: true
+    t.boolean  "show_ticket_count",         default: true
     t.string   "contact_email"
     t.string   "export_file_name"
     t.string   "export_content_type"
@@ -102,11 +102,13 @@ ActiveRecord::Schema.define(version: 20170128205146) do
     t.boolean  "show_statistics"
     t.string   "export_status"
     t.integer  "club_id"
-    t.boolean  "registration_open",       default: true
+    t.boolean  "registration_open",         default: true
     t.text     "signature"
     t.boolean  "registration_cancelable"
-    t.string   "phone_number_state",      default: "optional"
-    t.boolean  "extra_info",              default: false
+    t.string   "phone_number_state",        default: "optional"
+    t.boolean  "extra_info",                default: false
+    t.string   "comment_title"
+    t.boolean  "show_telephone_disclaimer", default: false
   end
 
   create_table "included_zones", force: :cascade do |t|

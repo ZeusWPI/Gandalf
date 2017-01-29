@@ -1,4 +1,10 @@
 <ul class="nav-tertiary nav navbar-nav navbar-right">
+  <% if I18n.locale == :en %>
+       <li><a href="<%= url_for params.merge({:locale => 'nl'}) %>"><%= t('dutch') %></a></li>
+  <% end %>
+  <% if I18n.locale == :nl %>
+        <li><a href="<%= url_for params.merge({:locale => 'en'}) %>"><%= t('english') %></a></li>
+  <% end %>
   <% if user_signed_in? %>
     <li><a><span>Logged in as <%= current_user.display_name %></span></a></li>
     <li><%= link_to destroy_user_session_path(current_user), method: :delete do %><span>Logout</span><% end %></li>

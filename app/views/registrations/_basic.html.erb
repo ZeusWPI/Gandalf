@@ -14,14 +14,14 @@
     <%= form_email_field f, :email %>
     <%= f.hidden_field :student_number %>
     <% if @registration.event.ask_phone_number? %>
-      <%= form_telephone_field f, :phone_number %>
+      <%= form_telephone_field f, :phone_number, @event.show_telephone_disclaimer %>
     <% end %>
     <%= form_collection_select f, :access_levels, @event.access_levels.find_all { |al| can? :register, al }, :id, :name_with_price %>
-    <%= form_text_area f, :comment %>
+    <%= form_text_area f, :comment, @event.comment_title %>
     <%= javascript_tag do %>
       window.ticketsWithComments = <%= @event.access_levels.find_all(&:has_comment).map(&:id).to_json %>
     <% end %>
-    <%= f.submit t('event.register'), class: 'btn btn-group btn-primary' %>
+    <%= f.submit t('event.register', default: 'Register'), class: 'btn btn-group btn-primary' %>
   <% end %>
   </p>
 
