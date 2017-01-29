@@ -1,4 +1,5 @@
 nl:
+  english: 'English'
   activerecord:
     attributes:
       registration:
