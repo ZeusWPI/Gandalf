@@ -135,10 +135,10 @@ class Registration < ActiveRecord::Base
 
   def salutation
     unless title
-      ''
+      return ''
     end
 
-    t(title, scope: Registration.personal_titles_scope) + ' '
+    I18n.t(title, scope: Registration.personal_titles_scope) + ' '
   end
 
   private
