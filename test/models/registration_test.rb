@@ -17,6 +17,8 @@
 #  barcode_data   :string
 #  payment_code   :string
 #  phone_number   :string
+#  title          :string
+#  job_function   :string
 #
 
 require 'test_helper'

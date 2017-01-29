@@ -2,31 +2,34 @@
 #
 # Table name: events
 #
-#  id                      :integer          not null, primary key
-#  name                    :string
-#  start_date              :datetime
-#  end_date                :datetime
-#  location                :string
-#  website                 :string
-#  description             :text
-#  created_at              :datetime
-#  updated_at              :datetime
-#  registration_open_date  :datetime
-#  registration_close_date :datetime
-#  bank_number             :string
-#  show_ticket_count       :boolean          default(TRUE)
-#  contact_email           :string
-#  export_file_name        :string
-#  export_content_type     :string
-#  export_file_size        :integer
-#  export_updated_at       :datetime
-#  show_statistics         :boolean
-#  export_status           :string
-#  club_id                 :integer
-#  registration_open       :boolean          default(TRUE)
-#  signature               :text
-#  registration_cancelable :boolean
-#  phone_number_state      :string           default("optional")
+#  id                        :integer          not null, primary key
+#  name                      :string
+#  start_date                :datetime
+#  end_date                  :datetime
+#  location                  :string
+#  website                   :string
+#  description               :text
+#  created_at                :datetime
+#  updated_at                :datetime
+#  registration_open_date    :datetime
+#  registration_close_date   :datetime
+#  bank_number               :string
+#  show_ticket_count         :boolean          default(TRUE)
+#  contact_email             :string
+#  export_file_name          :string
+#  export_content_type       :string
+#  export_file_size          :integer
+#  export_updated_at         :datetime
+#  show_statistics           :boolean
+#  export_status             :string
+#  club_id                   :integer
+#  registration_open         :boolean          default(TRUE)
+#  signature                 :text
+#  registration_cancelable   :boolean
+#  phone_number_state        :string           default("optional")
+#  extra_info                :boolean          default(FALSE)
+#  comment_title             :string
+#  show_telephone_disclaimer :boolean          default(FALSE)
 #
 
 class Event < ActiveRecord::Base
@@ -75,20 +78,6 @@ class Event < ActiveRecord::Base
 
   def prettify_bank_number
     self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
-  end
-
-  def comment_title
-    if id == 1
-      return 'Afstudeerjaar en -richting' #TODO: maybe add to database if this used in more cases
-    end
-    nil
-  end
-
-  def show_telephone_disclaimer
-    if id == 1
-      return true
-    end
-    false
   end
 
   def generate_xls
