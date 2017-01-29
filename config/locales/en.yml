@@ -4,7 +4,7 @@ en:
     attributes:
       registration:
         access_levels: Ticket
-        comment: Graduation year and specialization
+        comment: Comments
         email: E-mail
         name: Name
         phone_number: Phone number
