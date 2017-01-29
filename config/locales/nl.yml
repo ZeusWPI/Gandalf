@@ -45,7 +45,7 @@ nl:
     login_cas: 'met CAS om de tickets te kunnen bestellen.'
     no_available: 'No tickets available at the moment!'
   mail:
-    ticket_start: "Beste %{name}<br/><br/>
+    ticket_start: "Beste %{salutation}%{name}<br/><br/>
     Bedankt om uw aanwezigheid te bevestigen. Deze e-mail geldt als uw persoonlijk ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/>
                    <br/>
                    Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande uitschrijflink. Bij vragen of problemen kan u terecht op %{mail}."

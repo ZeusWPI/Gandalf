@@ -68,7 +68,7 @@
                               <tbody>
                               <tr>
                                 <td class="pr-15" style="padding: 0 30px 24px 0; font: 13px/18px Arial, Helvetica, sans-serif; color: #202020;">
-                                  <%= raw t('mail.ticket_start', :name => @registration.name, :mail=>@registration.event.contact_email)%>
+                                  <%= raw t('mail.ticket_start', :salutation => @registration.salutation, :name => @registration.name, :mail=>@registration.event.contact_email)%>
                                 </td>
                               </tr>
                               <tr>

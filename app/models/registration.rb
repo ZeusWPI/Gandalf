@@ -125,9 +125,20 @@ class Registration < ActiveRecord::Base
     end
   end
 
-
-  def self.personal_title
+  def self.personal_titles
     [:prof, :dr, :ms, :mr, :mx]
+  end
+
+  def self.personal_titles_scope
+    'registration.titles'
+  end
+
+  def salutation
+    unless title
+      ''
+    end
+
+    t(title, scope: Registration.personal_titles_scope) + ' '
   end
 
   private

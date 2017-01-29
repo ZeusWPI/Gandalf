@@ -4,6 +4,6 @@
   <% end %>
 
   <% states.each do |state, _| %>
-      <label class="btn btn-primary<%= ' active ' if state.to_s == selected_state  %>"> <%= f.radio_button(tag, state) %><%= do_translate ? t(t_prefix + '.'  + state.to_s) : state.capitalize %></label>
+      <label class="btn btn-primary<%= ' active ' if state.to_s == selected_state  %>"> <%= f.radio_button(tag, state) %><%= do_translate ? t(state.to_s, scope: scope) : state.capitalize %></label>
 <% end %>
 </div>
