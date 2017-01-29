@@ -59,4 +59,4 @@ nl:
     login: Log in
     login_cas: met CAS om de tickets te kunnen bestellen.
     login_required: Studenten en personeel moeten zich eerst inloggen.
-    no_available: No tickets available at the moment!
+    no_available: Momenteel zijn er geen tickets beschikbaar!

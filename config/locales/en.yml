@@ -20,7 +20,7 @@ en:
     barcode_number: Barcode number
     cancel:
       button: Cancel my registration now!
-      closed: Sorry, cancelling is not longer possible.
+      closed: Sorry, cancelling is no longer possible.
       deleted:
         click_here_website: Click here to visit the event website.
         title: Registration cancelled
@@ -52,7 +52,7 @@ en:
       subjects:
         cancel: Cancel registration for %{event}
         confirm: Register for %{event}
-        overpayment: Paid too much for %{event}
+        overpayment: Overpayment for %{event}
         ticket: Ticket for %{event}
   tickets:
     left: left
