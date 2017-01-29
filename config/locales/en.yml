@@ -6,9 +6,11 @@ en:
         access_levels: Ticket
         comment: Comments
         email: E-mail
+        job_function: Job function
         name: Name
         phone_number: Phone number
         register: Register
+        title: Title
   datagrid:
     table:
       order:
@@ -46,7 +48,7 @@ en:
   mail:
     cancel: Click here to cancel your registration.
     more_info: More info
-    ticket_start: Dear Sir or Madam %{name}<br/><br/> Thank you for confirming your attendance. This e-mail functions as your personal ticket for this event. Do not forget to print this e-mail and bring it along.<br/> <br/> In the case you will no longer be able to attend, we ask you nicely to let us know through the link below. For questions or problems you can contact %{mail}.
+    ticket_start: Dear %{salutation}%{name}<br/><br/> Thank you for confirming your attendance. This e-mail functions as your personal ticket for this event. Do not forget to print this e-mail and bring it along.<br/> <br/> In the case you will no longer be able to attend, we ask you nicely to let us know through the link below. For questions or problems you can contact %{mail}.
   mailers:
     registration:
       subjects:
@@ -54,6 +56,13 @@ en:
         confirm: Register for %{event}
         overpayment: Overpayment for %{event}
         ticket: Ticket for %{event}
+  registration:
+    titles:
+      dr: Dr
+      mr: Mr
+      ms: Ms
+      mx: Mx
+      prof: Prof
   tickets:
     left: left
     login: Login

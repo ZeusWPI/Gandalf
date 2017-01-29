@@ -3,14 +3,14 @@ nl:
   activerecord:
     attributes:
       registration:
-        title: Titel
-        job_function: Functie
         access_levels: Ticket
         comment: Opmerkingen
         email: E-mail
+        job_function: Functie
         name: Naam
         phone_number: Telefoonnummer
         register: Registreer
+        title: Titel
   datagrid:
     table:
       order:
@@ -18,13 +18,6 @@ nl:
         desc: "↓"
   dutch: Nederlands
   english: English
-  registration:
-    titles:
-      prof: 'prof.'
-      dr: 'dr.'
-      ms: 'mevr.'
-      mr: 'dhr.'
-      mx: 'mx.'
   event:
     barcode_number: Barcode nummer
     cancel:
@@ -63,6 +56,13 @@ nl:
         confirm: Registratie voor %{event}
         overpayment: Teveel betaald voor %{event}
         ticket: Ticket voor %{event}
+  registration:
+    titles:
+      dr: dr.
+      mr: dhr.
+      ms: mevr.
+      mx: mx.
+      prof: prof.
   tickets:
     left: over
     login: Log in
