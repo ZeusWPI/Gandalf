@@ -12,7 +12,7 @@ module OmniAuth
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
       option :client_options, {
-        site:          'https://kelder.zeus.ugent.be',
+        site:          'https://adams.ugent.be',
         authorize_url: '/oauth/oauth2/authorize/',
         token_url:     '/oauth/oauth2/token/',
       }
