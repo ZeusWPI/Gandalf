@@ -19,6 +19,7 @@
 #  phone_number   :string
 #  title          :string
 #  job_function   :string
+#  admin_note     :string
 #
 
 class Registration < ActiveRecord::Base

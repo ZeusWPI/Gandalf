@@ -8,7 +8,8 @@
 require 'webmock'
 WebMock.allow_net_connect!
 url = 'http://student.ugent.be/hydra/api/2.0/associations.json'
-hash = JSON(HTTParty.get(url).body)
+#hash = JSON(HTTParty.get(url).body)
+hash = []
 WebMock.disable_net_connect!
 
 hash.each do |club|
