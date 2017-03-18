@@ -100,6 +100,10 @@ class Registration < ActiveRecord::Base
     self.save!
   end
 
+  def family_name
+     self.name.split(' ', 2).last
+  end
+
   def self.find_payment_code_from_csv(csvline)
     match = /GAN\d+/.match(csvline)
     if match
