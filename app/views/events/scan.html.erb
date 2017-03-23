@@ -16,7 +16,7 @@
             <tr><th>Student number:</th><td> <%= @registration.student_number %></td></tr>
             <tr><th>Registered at:</th><td><%= nice_time @registration.created_at %></td></tr>
             <tr><th>Barcode:</th><td><%= @registration.barcode %></td></tr>
-            <tr><th>Ticket:</th><td> <%= @registration.access_levels[0].name %></td></tr>
+            <tr><th>Ticket:</th><td> <%= @registration.access_levels[0].name if @registration.access_levels[0] %></td></tr>
             <% unless @registration.comment.blank? %>
               <tr><th>Comment:</th><td> <%= @registration.comment %></td></tr>
             <% end %>
