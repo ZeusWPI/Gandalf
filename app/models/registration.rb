@@ -42,7 +42,8 @@ class Registration < ActiveRecord::Base
   #validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
   validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
-    uniqueness: { scope: :event }, allow_blank: true
+     allow_blank: true
+  #TODO: fix student_number uniqueness when having a plus one
   validates :student_number, presence: true, if: "access_levels.first.try(:requires_login?)"
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
