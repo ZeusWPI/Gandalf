@@ -6,9 +6,13 @@ en:
         access_levels: Ticket
         comment: Comments
         email: E-mail
+        has_plus_one: Plus one?
         job_function: Job function
         name: Name
         phone_number: Phone number
+        plus_one_firstname: Plus one first name
+        plus_one_lastname: Plus one last name
+        plus_one_title: Plus one title
         register: Register
         title: Title
   datagrid:
