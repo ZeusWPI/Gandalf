@@ -52,7 +52,7 @@ nl:
   mail:
     cancel: Klik hier om u uit te schrijven.
     more_info: Meer info
-    ticket_start: Beste %{salutation}%{name}<br/><br/> Bedankt om uw aanwezigheid te bevestigen. Deze e-mail geldt als uw persoonlijk ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/> <br/> Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande uitschrijflink. Bij vragen of problemen kan u terecht op %{mail}.
+    ticket_start: Beste %{salutation}%{name}<br/><br/> Bedankt om uw aanwezigheid te bevestigen. <br/><br/><span style='padding: 0 0 18px; font: bold 16px/21px Arial, Helvetica, sans-serif; color: #06c;'>Programma</span><br/> De zaaldeuren openen om 19.00 uur; om 19.15 uur vindt er een introductie plaats bij het concert. Alle genodigden dienen uiterlijk om 19.45 uur aanwezig te zijn in de zaal. Na het concert wordt u vriendelijk uitgenodigd op de receptie. <br/> Deze e-mail geldt als uw persoonlijk ticket voor dit event. Vergeet niet om deze e-mail af te drukken en dit ticket mee te nemen.<br/> <br/> Indien u door omstandigheden niet kan komen, vragen we u vriendelijk dit te laten weten via de onderstaande uitschrijflink. Bij vragen of problemen kan u terecht op %{mail}.
   mailers:
     registration:
       subjects:
