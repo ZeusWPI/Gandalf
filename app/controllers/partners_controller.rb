@@ -81,9 +81,11 @@ class PartnersController < ApplicationController
     if @partner.confirmed
       flash.now[:error] = "You have already registered for this event. Please check your mailbox."
     else
+
       @registration = @event.registrations.new(
         email:          @partner.email,
-        name:           @partner.name,
+        lastname:       @partner.name.split(' ', 2).first,
+        firstname:      @partner.name.split(' ', 2).last,
         student_number: nil,
         comment:        nil,
         price:          @partner.access_level.price,

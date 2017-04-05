@@ -7,7 +7,8 @@
     <% if @registration.event.extra_info %>
         <%= form_radio_field f, :title, @registration.title, Registration.personal_titles, false, true, Registration.personal_titles_scope %>
     <% end %>
-    <%= form_text_field f, :name %>
+    <%= form_text_field f, :firstname %>
+    <%= form_text_field f, :lastname %>
     <% if @registration.event.extra_info %>
       <%= form_text_field f, :job_function %>
     <% end %>

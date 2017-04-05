@@ -71,7 +71,7 @@ class RegistrationsController < ApplicationController
     authorize! :register, requested_access_level
 
     # Make the registration
-    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :name, :student_number, :comment, :phone_number)
+    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :firstname, :lastname, :student_number, :comment, :phone_number)
     @registration.access_levels << requested_access_level
     @registration.price = requested_access_level.price
     @registration.paid = 0
@@ -102,7 +102,7 @@ class RegistrationsController < ApplicationController
   def advanced
     # TODO can can
     @event = Event.find params.require(:event_id)
-    @registration = @event.registrations.create params.require(:registration).permit(:email, :name)
+    @registration = @event.registrations.create params.require(:registration).permit(:email, :firstname, :lastname)
     params.require(:registration).require(:checkboxes).each do |access_level, periods|
       periods.each do |period, checked|
         if checked == "on" then

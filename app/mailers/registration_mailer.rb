@@ -4,7 +4,7 @@ class RegistrationMailer < ActionMailer::Base
 
   def confirm_registration(registration)
     @registration = registration
-    mail to: "#{registration.name} <#{registration.email}>", subject: t('mailers.registration.subjects.confirm', :event => registration.event.name)
+    mail to: "#{registration.lastname} #{registration.firstname} <#{registration.email}>", subject: t('mailers.registration.subjects.confirm', :event => registration.event.name)
   end
 
   def ticket(registration)
@@ -18,18 +18,18 @@ class RegistrationMailer < ActionMailer::Base
     tilted_image = Magick::Image.from_blob(image).first.rotate!(-90).to_blob
     attachments.inline['barcode-tilted.png'] = tilted_image
 
-    mail to: "#{registration.name} <#{registration.email}>", subject: t('mailers.registration.subjects.ticket', :event => registration.event.name)
+    mail to: "#{registration.lastname} #{registration.firstname} <#{registration.email}>", subject: t('mailers.registration.subjects.ticket', :event => registration.event.name)
   end
 
   def notify_overpayment(registration)
     @registration = registration
-    mail to: "#{registration.name} <#{registration.email}>", subject: t('mailers.registration.subjects.overpayment', :event => registration.event.name)
+    mail to: "#{registration.lastname} #{registration.firstname} <#{registration.email}>", subject: t('mailers.registration.subjects.overpayment', :event => registration.event.name)
   end
 
   def confirm_cancel(registration, event)
     @registration = registration
     @event = event
 
-    mail to: "#{registration.name} <#{registration.email}>", subject: t('mailers.registration.subjects.cancel', :event => registration.event.name)
+    mail to: "#{registration.lastname} #{registration.firstname} <#{registration.email}>", subject: t('mailers.registration.subjects.cancel', :event => registration.event.name)
   end
 end

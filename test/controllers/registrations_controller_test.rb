@@ -200,7 +200,8 @@ class RegistrationsControllerTest < ActionController::TestCase
       registration: {
         access_levels: 2,
         email: "a@b.com",
-        name: "Ab Cd",
+        firstname: "Ab",
+        lastname: "cd",
         student_number: 123,
         comment: ""
       }

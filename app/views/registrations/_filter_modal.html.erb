@@ -7,7 +7,7 @@
       </div>
       <%= form_for @registrationsgrid, url: event_registrations_path, method: :get do |f| %>
       <div class="modal-body">
-        <%= form_text_field f, :name %>
+        <%= form_text_field f, :lastname %>
         <%= form_text_field f, :email %>
         <%= form_text_field f, :payment_code %>
         <%= form_check_box f, :only_paid %>

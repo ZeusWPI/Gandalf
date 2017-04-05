@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  barcode        :string
-#  name           :string
+#  lastname       :string
 #  email          :string
 #  created_at     :datetime
 #  updated_at     :datetime
@@ -20,6 +20,7 @@
 #  title          :string
 #  job_function   :string
 #  admin_note     :string
+#  firstname      :string
 #
 
 class Registration < ActiveRecord::Base
@@ -29,7 +30,8 @@ class Registration < ActiveRecord::Base
 
   scope :paid, -> { where("price <= paid") }
 
-  validates :name, presence: true
+  validates :firstname, presence: true
+  validates :lastname, presence: true
   # Names shouldn't be unique, because people can have te same name
   #validates :name, presence: true, uniqueness: { scope: :event_id }
   # Uniqueness temporarily disabled; see the Partner model for the reason
@@ -63,7 +65,7 @@ class Registration < ActiveRecord::Base
     end
   end
 
-  default_scope { order "name ASC" }
+  default_scope { order "lastname ASC" }
 
   def paid
     from_cents read_attribute(:paid)
@@ -100,8 +102,12 @@ class Registration < ActiveRecord::Base
     self.save!
   end
 
+  def name
+    return "#{self.lastname} #{self.firstname}"
+  end
+
   def family_name
-     self.name.split(' ', 2).last
+     self.lastname
   end
 
   def self.find_payment_code_from_csv(csvline)
