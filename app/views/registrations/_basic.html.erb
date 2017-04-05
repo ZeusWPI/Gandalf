@@ -19,10 +19,10 @@
     <% end %>
     <%= form_collection_select f, :access_levels, @event.access_levels.find_all { |al| can? :register, al }, :id, :name_with_price %>
     <% if @registration.event.allow_plus_one %>
-          <%= form_check_box f, :has_plus_one %>
-    <div class="plus_one" style="">
+          <%= form_check_box f, :has_plus_one, options={:onclick=>"$('.plus_one').toggle()"} %>
+    <div class="plus_one" style="<%= 'display:none' unless @registration.has_plus_one %>">
       <% if @registration.event.extra_info %>
-          <%= form_radio_field f, :plus_one_title, @registration.plus_one_title, Registration.personal_titles, false, true, Registration.personal_titles_scope %>
+          <%= form_radio_field f, :plus_one_title, @registration.plus_one_title, Registration.personal_titles, true, true, Registration.personal_titles_scope %>
       <% end %>
       <%= form_text_field f, :plus_one_firstname %>
       <%= form_text_field f, :plus_one_lastname %>

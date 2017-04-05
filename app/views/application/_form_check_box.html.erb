@@ -2,5 +2,9 @@
   <label>
     <%= f.label tag %>
   </label>
-  <%= f.check_box tag %>
+  <% if options %>
+      <%= f.check_box tag, options %>
+  <% else %>
+      <%= f.check_box tag %>
+  <% end %>
 </div>

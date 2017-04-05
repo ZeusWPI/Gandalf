@@ -1,5 +1,6 @@
 ---
 nl:
+  plus_one_title: Partner aanspreking
   activerecord:
     attributes:
       registration:
@@ -11,7 +12,7 @@ nl:
         phone_number: Telefoonnummer
         register: Registreer
         title: Aanspreking
-        has_plus_one: Partner?
+        has_plus_one: Vergezeld door partner?
         plus_one_title: Partner aanspreking
         plus_one_firstname: Partner voornaam
         plus_one_lastname: Partner achternaam

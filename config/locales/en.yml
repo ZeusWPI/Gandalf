@@ -6,13 +6,13 @@ en:
         access_levels: Ticket
         comment: Comments
         email: E-mail
-        has_plus_one: Plus one?
+        has_plus_one: Accompanied by partner?
         job_function: Job function
         name: Name
         phone_number: Phone number
-        plus_one_firstname: Plus one first name
-        plus_one_lastname: Plus one last name
-        plus_one_title: Plus one title
+        plus_one_firstname: Partner first name
+        plus_one_lastname: Partner last name
+        plus_one_title: Partner title
         register: Register
         title: Title
   datagrid:
@@ -62,6 +62,7 @@ en:
         confirm: Register for %{event}
         overpayment: Overpayment for %{event}
         ticket: Ticket for %{event}
+  plus_one_title: Partner title
   registration:
     titles:
       dr: Dr
