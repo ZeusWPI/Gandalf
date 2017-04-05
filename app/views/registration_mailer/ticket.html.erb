@@ -139,9 +139,9 @@
                 <td class="plr-15" style="padding: 0 30px 0 0;">
                   <table width="100%" cellspacing="0" cellpadding="0">
                     <tbody>
-                    <tr>
-                      <%= image_tag attachments['barcode.png'].url %>
-                    </tr>
+                    <!--<tr>
+                      <%% image_tag attachments['barcode.png'].url %>
+                    </tr>-->
                     <tr>
                       <% unless @registration.event.signature.blank? %>
                           <%= simple_format @registration.event.signature %>
