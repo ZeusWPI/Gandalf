@@ -71,7 +71,7 @@ class RegistrationsController < ApplicationController
     authorize! :register, requested_access_level
 
     # Make the registration
-    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :firstname, :lastname, :student_number, :comment, :phone_number)
+    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :firstname, :lastname, :student_number, :comment, :phone_number, :has_plus_one, :plus_one_title, :plus_one_firstname, :plus_one_lastname)
     @registration.access_levels << requested_access_level
     @registration.price = requested_access_level.price
     @registration.paid = 0
@@ -84,6 +84,20 @@ class RegistrationsController < ApplicationController
 
     # Send the confirmation email.
     if not @registration.errors.any?
+      if @event.allow_plus_one and @registration.has_plus_one
+        plus_one_registration = @event.registrations.new :title => @registration.plus_one_title, :email => @registration.email, :firstname => @registration.plus_one_firstname, :lastname => @registration.plus_one_lastname, :job_function => @registration.job_function, :comment => @registration.comment, :student_number=>@registration.student_number
+        plus_one_registration.access_levels << requested_access_level
+        plus_one_registration.price = requested_access_level.price
+        plus_one_registration.paid = 0
+
+        plus_one_registration.save!
+        plus_one_registration.generate_barcode
+        if plus_one_registration.is_paid
+          RegistrationMailer.ticket(plus_one_registration).deliver_now
+        else
+          RegistrationMailer.confirm_registration(plus_one_registration).deliver_now
+        end
+      end
       @registration.generate_barcode
 
       if @registration.is_paid

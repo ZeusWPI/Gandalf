@@ -2,25 +2,29 @@
 #
 # Table name: registrations
 #
-#  id             :integer          not null, primary key
-#  barcode        :string
-#  lastname       :string
-#  email          :string
-#  created_at     :datetime
-#  updated_at     :datetime
-#  event_id       :integer
-#  paid           :integer
-#  student_number :string
-#  price          :integer
-#  checked_in_at  :datetime
-#  comment        :text
-#  barcode_data   :string
-#  payment_code   :string
-#  phone_number   :string
-#  title          :string
-#  job_function   :string
-#  admin_note     :string
-#  firstname      :string
+#  id                 :integer          not null, primary key
+#  barcode            :string
+#  lastname           :string
+#  email              :string
+#  created_at         :datetime
+#  updated_at         :datetime
+#  event_id           :integer
+#  paid               :integer
+#  student_number     :string
+#  price              :integer
+#  checked_in_at      :datetime
+#  comment            :text
+#  barcode_data       :string
+#  payment_code       :string
+#  phone_number       :string
+#  title              :string
+#  job_function       :string
+#  admin_note         :string
+#  firstname          :string
+#  has_plus_one       :boolean
+#  plus_one_title     :string
+#  plus_one_firstname :string
+#  plus_one_lastname  :string
 #
 
 require 'test_helper'
