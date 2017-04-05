@@ -17,9 +17,10 @@ class EventsController < ApplicationController
 
   def show
     @registration = @event.registrations.build
-
+    #TODO: fix me: change to correct CAS attribute
     if current_user
-      @registration.name = current_user.display_name
+      @registration.firstname = current_user.display_name.split(' ', 2).first
+      @registration.lastname = current_user.display_name.split(' ', 2).last
       @registration.student_number = current_user.cas_ugentStudentID
       @registration.email = current_user.cas_mail
     end
@@ -100,7 +101,8 @@ class EventsController < ApplicationController
   def scan_name
     @event = Event.find params.require(:id)
     authorize! :update, @event
-    @registration = @event.registrations.find_by name: params.require(:name)
+    #TODO: fix me search by combination of first and lastname
+    @registration = @event.registrations.find_by lastname: params.require(:name)
     check_in
   end
 

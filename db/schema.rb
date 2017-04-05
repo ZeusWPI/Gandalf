@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318165735) do
+ActiveRecord::Schema.define(version: 20170405143237) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20170318165735) do
     t.boolean  "extra_info",                default: false
     t.string   "comment_title"
     t.boolean  "show_telephone_disclaimer", default: false
+    t.boolean  "allow_plus_one"
   end
 
   create_table "included_zones", force: :cascade do |t|
@@ -169,7 +170,7 @@ ActiveRecord::Schema.define(version: 20170318165735) do
 
   create_table "registrations", force: :cascade do |t|
     t.string   "barcode"
-    t.string   "name"
+    t.string   "lastname"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -185,6 +186,11 @@ ActiveRecord::Schema.define(version: 20170318165735) do
     t.string   "title"
     t.string   "job_function"
     t.string   "admin_note"
+    t.string   "firstname"
+    t.boolean  "has_plus_one"
+    t.string   "plus_one_title"
+    t.string   "plus_one_firstname"
+    t.string   "plus_one_lastname"
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"

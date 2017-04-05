@@ -2,7 +2,7 @@ class PartnerMailer < ActionMailer::Base
 
   def send_token(partner)
     @partner = partner
-    mail to: "#{partner.name} <#{partner.email}>", subject: "Partner token for #{partner.name}"
+    mail to: "#{partner.name}  <#{partner.email}>", subject: "Partner token for #{partner.name}"
   end
 
   def invitation(partner)

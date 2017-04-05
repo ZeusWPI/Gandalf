@@ -100,7 +100,7 @@ class PartnersControllerTest < ActionController::TestCase
 
     # Get latest registration here
     r = Registration.find_by_name "KBC"
-    assert r.name = p.name
+    assert r.lastname = p.name.split(' ', 2).first
     assert r.email = p.email
     assert r.event_id = p.event_id
     assert r.price = p.access_level.price

@@ -2,24 +2,29 @@
 #
 # Table name: registrations
 #
-#  id             :integer          not null, primary key
-#  barcode        :string
-#  name           :string
-#  email          :string
-#  created_at     :datetime
-#  updated_at     :datetime
-#  event_id       :integer
-#  paid           :integer
-#  student_number :string
-#  price          :integer
-#  checked_in_at  :datetime
-#  comment        :text
-#  barcode_data   :string
-#  payment_code   :string
-#  phone_number   :string
-#  title          :string
-#  job_function   :string
-#  admin_note     :string
+#  id                 :integer          not null, primary key
+#  barcode            :string
+#  lastname           :string
+#  email              :string
+#  created_at         :datetime
+#  updated_at         :datetime
+#  event_id           :integer
+#  paid               :integer
+#  student_number     :string
+#  price              :integer
+#  checked_in_at      :datetime
+#  comment            :text
+#  barcode_data       :string
+#  payment_code       :string
+#  phone_number       :string
+#  title              :string
+#  job_function       :string
+#  admin_note         :string
+#  firstname          :string
+#  has_plus_one       :boolean
+#  plus_one_title     :string
+#  plus_one_firstname :string
+#  plus_one_lastname  :string
 #
 
 require 'test_helper'
@@ -28,7 +33,7 @@ class RegistrationTest < ActiveSupport::TestCase
   verify_fixtures Registration
 
   def setup
-    @r1 = Registration.new(student_number: "01", name: "test", email: "test@test.com", payment_code: Registration.create_payment_code, price: 1, paid: 0)
+    @r1 = Registration.new(student_number: "01", lastname: "test", firstname: "Teo", email: "test@test.com", payment_code: Registration.create_payment_code, price: 1, paid: 0)
     @r2 = @r1.dup
     @r2.payment_code = Registration.create_payment_code
   end

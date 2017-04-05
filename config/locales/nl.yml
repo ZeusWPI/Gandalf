@@ -10,7 +10,11 @@ nl:
         name: Naam
         phone_number: Telefoonnummer
         register: Registreer
-        title: Titel
+        title: Aanspreking
+        has_plus_one: Partner?
+        plus_one_title: Partner aanspreking
+        plus_one_firstname: Partner voornaam
+        plus_one_lastname: Partner achternaam
   datagrid:
     table:
       order:

@@ -30,6 +30,7 @@
 #  extra_info                :boolean          default(FALSE)
 #  comment_title             :string
 #  show_telephone_disclaimer :boolean          default(FALSE)
+#  allow_plus_one            :boolean
 #
 
 require 'test_helper'

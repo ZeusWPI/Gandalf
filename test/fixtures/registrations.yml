@@ -2,24 +2,29 @@
 #
 # Table name: registrations
 #
-#  id             :integer          not null, primary key
-#  barcode        :string
-#  name           :string
-#  email          :string
-#  created_at     :datetime
-#  updated_at     :datetime
-#  event_id       :integer
-#  paid           :integer
-#  student_number :string
-#  price          :integer
-#  checked_in_at  :datetime
-#  comment        :text
-#  barcode_data   :string
-#  payment_code   :string
-#  phone_number   :string
-#  title          :string
-#  job_function   :string
-#  admin_note     :string
+#  id                 :integer          not null, primary key
+#  barcode            :string
+#  lastname           :string
+#  email              :string
+#  created_at         :datetime
+#  updated_at         :datetime
+#  event_id           :integer
+#  paid               :integer
+#  student_number     :string
+#  price              :integer
+#  checked_in_at      :datetime
+#  comment            :text
+#  barcode_data       :string
+#  payment_code       :string
+#  phone_number       :string
+#  title              :string
+#  job_function       :string
+#  admin_note         :string
+#  firstname          :string
+#  has_plus_one       :boolean
+#  plus_one_title     :string
+#  plus_one_firstname :string
+#  plus_one_lastname  :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -28,7 +33,8 @@ one:
   id: 1
   barcode: 1234567891231
   barcode_data: 123456789123
-  name: Tom Naessens
+  firstname: Tom
+  lastname: Naessens
   email: supermail@gmail.com
   student_number: 1
   event_id: 1
@@ -40,7 +46,8 @@ two:
   id: 2
   barcode: 2222222222222
   barcode_data: 22222222222
-  name: Maarten Herthoge
+  firstname: Maarten
+  lastname: Herthoge
   email: fakemail@gmail.com
   student_number: 2
   event_id: 2
@@ -52,7 +59,8 @@ three:
   id: 3
   barcode: 012345678901
   barcode_data: 012345678901
-  name: Felix Van der Jeugt
+  firstname: Felix
+  lastname: Van der Jeugt
   email: felix.vanderjeblarghugt@gmail.com
   student_number: 3
   event_id: 1
@@ -64,7 +72,8 @@ four:
   id: 4
   barcode: 012345678902
   barcode_data: 012345678902
-  name: Felix Van der Jeugd
+  firstname: Felix
+  lastname: Van der Jeugd
   email: felix.vanderjeugd@gmail.com
   student_number: 4
   event_id: 1
@@ -78,7 +87,8 @@ capacity_registration_<%= n %>:
   barcode: 123456789123
   barcode_data: 123456789123
   email: capacity<%= n %>@test.com
-  name: Capacity Tester <%= n %>
+  firstname: Tester <%= n %>
+  lastname: Capacity
   paid: 0
   price: 0
   student_number: <%= 100 + n %>
