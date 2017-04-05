@@ -52,6 +52,8 @@ en:
   mail:
     cancel: Click here to cancel your registration.
     more_info: More info
+    ticket_eventinfo: The theatre hall will open at 7:00 p.m.; at 7:15 p.m. there is an introduction to the concert. All guests must be present in the theatre hall no later than 7:45 p.m. The concert will be followed by a reception.
+    ticket_program: Program
     ticket_start: Dear %{salutation}%{name}<br/><br/> Thank you for confirming your attendance. This e-mail functions as your personal ticket for this event. Do not forget to print this e-mail and bring it along.<br/> <br/> In the case you will no longer be able to attend, we ask you nicely to let us know through the link below. For questions or problems you can contact %{mail}.
   mailers:
     registration:
