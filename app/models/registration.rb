@@ -53,6 +53,10 @@ class Registration < ActiveRecord::Base
   validates :title, presence: true, if: 'extra_info_required?'
   validates :job_function, presence: true, if: 'extra_info_required?'
 
+  validates :plus_one_title, presence: true, if: 'has_plus_one?'
+  validates :plus_one_firstname, presence: true, if: 'has_plus_one?'
+  validates :plus_one_lastname, presence: true, if: 'has_plus_one?'
+
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
   before_validation do |record|
