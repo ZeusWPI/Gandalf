@@ -1,5 +1,8 @@
 <span class="nowrap">
   <%= link_to raw('<i class="glyphicon glyphicon-comment"></i> Info'), info_event_registration_path(registration.event, registration), class: 'btn btn-xs btn-default', remote: true %>
   <%= link_to raw('<i class="glyphicon glyphicon-retweet"></i> Resend'), resend_event_registration_path(registration.event, registration), class: 'btn btn-xs btn-default', remote: true %>
+  <% if registration.checked_in_at.nil? %>
+    <%= link_to raw('<i class="glyphicon glyphicon-log-in"></i> Check in'), check_in_event_path(registration.event, code: registration.barcode), method: 'post', class: 'btn btn-xs btn-warning', data: { confirm: 'Manually check in this person?' } %>
+  <% end %>
   <%= link_to raw('<i class="glyphicon glyphicon-trash"></i> Delete'), event_registration_path(registration.event, registration), class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?' }, remote: true, method: :delete %>
 </span>
