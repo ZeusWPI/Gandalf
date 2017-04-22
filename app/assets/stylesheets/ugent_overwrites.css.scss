@@ -1,0 +1,23 @@
+ul.nav-tabs li:before {
+  content: "";
+}
+
+.glyphicon-calendar {
+    font-size: 14px
+}
+
+.nav-tabs {
+  margin-bottom: 15px !important;
+}
+
+
+.checkbox {
+  label {
+    padding-left: 0px !important;
+  }
+
+  input[type="checkbox"] {
+    margin-left: 5px;
+  }
+}
+

@@ -6,9 +6,6 @@ gem 'rails', '~> 4.0'
 # We <3 New Relic
 gem 'newrelic_rpm'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0'
 
@@ -19,7 +16,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+install_if -> {RUBY_PLATFORM !~ /darwin/} do
+  gem 'therubyracer', platforms: :ruby
+end
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -53,7 +52,7 @@ end
 gem 'devise'
 gem 'devise_cas_authenticatable'
 # Omniauth as extra development backdoor
-gem 'omniauth-oauth2'
+gem 'omniauth-oauth2', '~> 1.3.1'
 
 # Token authentication for partners
 gem 'simple_token_authentication'
@@ -115,7 +114,7 @@ gem 'jc-validates_timeliness'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem 'airbrake'
+gem 'airbrake', '~> 4.3'
 
 gem 'rmagick'
 
@@ -129,6 +128,8 @@ gem 'twitter-typeahead-rails'
 gem 'simple_enum'
 
 group :development do
+  gem 'sqlite3'
+
   gem 'rails-erd'
 
   gem 'capistrano', '~> 3.1'

@@ -37,6 +37,9 @@ Isengard::Application.routes.draw do
       member do
         get 'resend'
         get 'info'
+
+        get 'cancel/:barcode', to: 'registrations#show_cancel',  as: 'cancel'
+        delete 'cancel/:barcode', to: 'registrations#destroy_cancel',  as: 'cancel_destroy'
       end
 
       collection do

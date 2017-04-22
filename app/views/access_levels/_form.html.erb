@@ -4,7 +4,7 @@
     <td><%= f.number_field :capacity, class: 'form-control', placeholder: 0 %></td>
     <td><%= f.text_field :price, value: number_with_precision(f.object.price, precision: 2), class: 'form-control', placeholder: "0.00" %></td>
     <td width="130px">
-      <%= f.collection_select :permit, AccessLevel.permits.keys, :itself, lambda {|k| translate(k)} %>
+      <%= f.collection_select :permit, AccessLevel.permits.keys, :itself, lambda {|k| translate(k)}, {}, { class: 'form-control' } %>
     </td>
     <td><div class="checkbox"><%= f.check_box :has_comment %></div></td>
     <td><div class="checkbox"><%= f.check_box :hidden %></div></td>

@@ -1,15 +1,15 @@
 # config valid only for Capistrano 3.1
 # lock '3.1.0'
 
-set :application, 'Gandalf'
+set :application, 'Events'
 set :repo_url, 'git@github.com:ZeusWPI/Gandalf.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
-set :branch, 'master'
-set :deploy_to, '/home/gandalf/production'
+set :branch, 'yolo-ugent'
+set :deploy_to, '/home/events/production'
 
 # Default value for :linked_files is []
 set :linked_files, %w{config/database.yml config/secrets.yml}

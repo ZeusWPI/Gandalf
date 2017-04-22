@@ -65,8 +65,11 @@ Isengard::Application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   #
+  # Set default mail address
+  config.action_mailer.default_options = { from: "no-reply@events.ugent.be" }
+
   config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.default_url_options = { host: 'event.fkgent.be' }
+  config.action_mailer.default_url_options = { host: 'events.ugent.be' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).

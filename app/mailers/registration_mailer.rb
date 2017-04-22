@@ -2,8 +2,6 @@ class RegistrationMailer < ActionMailer::Base
 
   helper ApplicationHelper
 
-  default from: "noreply@event.fkgent.be"
-
   def confirm_registration(registration)
     @registration = registration
     mail to: "#{registration.name} <#{registration.email}>", subject: "Registration for #{registration.event.name}"
@@ -28,4 +26,10 @@ class RegistrationMailer < ActionMailer::Base
     mail to: "#{registration.name} <#{registration.email}>", subject: "Overpayment for #{registration.event.name}"
   end
 
+  def confirm_cancel(registration, event)
+    @registration = registration
+    @event = event
+
+    mail to: "#{registration.name} <#{registration.email}>", subject: "Cancellation for #{event.name}"
+  end
 end
