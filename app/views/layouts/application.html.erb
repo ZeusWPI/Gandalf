@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gandalf<%= if content_for?(:title_tag) then yield(:title_tag) end %></title>
+    <title>UGent<%= if content_for?(:title_tag) then yield(:title_tag) end %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -19,54 +19,39 @@
     <% if content_for?(:og_description) %>
       <meta property="og:description" content="<%= yield(:og_description) %>" />
     <% end %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://styleguide.ugent.be/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://styleguide.ugent.be/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://styleguide.ugent.be/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://styleguide.ugent.be/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://styleguide.ugent.be/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://styleguide.ugent.be/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://styleguide.ugent.be/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://styleguide.ugent.be/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://styleguide.ugent.be/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://styleguide.ugent.be/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://styleguide.ugent.be/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://styleguide.ugent.be/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://styleguide.ugent.be/favicon-16x16.png">
+    <link rel="icon" sizes="16x16 32x32" href="https://styleguide.ugent.be/favicon.ico">
+    <link rel="manifest" href="https://styleguide.ugent.be/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to "Gandalf", root_path, class: 'navbar-brand' %>
-        </div>
+    <div class="fluid-container">
+      <div class="row">
+        <%= render partial: "layouts/header" %>
+      </div>
+    </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Events", events_path %></li>
-          </ul>
-
-          <%= render partial: "layouts/login", locals: {classes: "hidden-xs navbar-right"} %>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= mail_to "gandalf@zeus.ugent.be", "Send feedback" %></li>
-            <% if can? :crud, Event %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
-              <ul class="dropdown-menu" data-no-turbolink>
-                <li><%= link_to "Create event", new_event_path %></li>
-              </ul>
-            </li>
-            <% end %>
-            <% if user_signed_in? %>
-            <li>
-              <a>Logged in as <%= current_user.display_name %></a>
-            </li>
-            <% end %>
-          </ul>
-
-          <%= render partial: "layouts/login", locals: {classes: 'visible-xs'} %>
-
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.navbar-collapse -->
-    </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="container">
+    <div class="fluid-container main-content">
       <div class="row">
         <div class="col-xs-12">
           <%= yield %>
@@ -74,10 +59,6 @@
       </div>
     </div>
 
-    <hr>
-
-    <footer>
-      <p>&copy; <a href="http://zeus.ugent.be/" target="_blank">Zeus WPI</a> 2013-<%= Time.now.year %></p>
-    </footer>
+    <%= render partial: "layouts/footer" %>
   </body>
 </html>

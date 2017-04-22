@@ -1,22 +1,11 @@
-<div class="navbar-form <%= classes %>">
-  <div class="form-group">
-    <% if user_signed_in? %>
-      <div class="form-group">
-        <%= button_to "Logout", destroy_user_session_path(current_user), class: "btn btn-default form-control",  method: :delete %>
-      </div>
-    <% else %>
-      <div class="form-group">
-        <div class="button-group">
-          <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
-        </div>
-      </div>
-      <% if Rails.env.development? %>
-        <div class="form-group">
-          <div class="button-group">
-            <%= button_to "Login (dev)", dev_login_path, class: "btn form-control" %>
-          </div>
-        </div>
-      <% end %>
+<ul class="nav-tertiary nav navbar-nav navbar-right">
+  <% if user_signed_in? %>
+    <li><a><span>Logged in as <%= current_user.display_name %></span></a></li>
+    <li><%= link_to destroy_user_session_path(current_user), method: :delete do %><span>Logout</span><% end %></li>
+  <% else %>
+    <li><%= link_to new_user_session_path do %><span>Login</span><% end %></li>
+    <% if Rails.env.development? %>
+      <li><%= link_to dev_login_path, method: :post do %><span>Login (dev)</span><% end %></li>
     <% end %>
-  </div>
-</div>
+  <% end %>
+</ul>

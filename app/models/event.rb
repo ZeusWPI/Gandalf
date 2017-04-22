@@ -25,6 +25,8 @@
 #  club_id                 :integer
 #  registration_open       :boolean          default(TRUE)
 #  signature               :text
+#  registration_cancelable :boolean
+#  phone_number_state      :string           default("optional")
 #
 
 class Event < ActiveRecord::Base
@@ -39,6 +41,7 @@ class Event < ActiveRecord::Base
 
   has_many :periods, dependent: :destroy
 
+
   validates :description, presence: true
   validates :end_date, presence: true
   validates :location, presence: true
@@ -46,6 +49,7 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :club, presence: true
   validates :start_date, presence: true
+  validates :phone_number_state, presence: true
 
   validates :contact_email, email: true
   validates_with IBANValidator
@@ -61,6 +65,14 @@ class Event < ActiveRecord::Base
 
   before_save :prettify_bank_number
 
+  def self.phone_number_states
+    [:optional, :required, :disabled]
+  end
+
+  def ask_phone_number?
+    phone_number_state != 'disabled'
+  end
+
   def prettify_bank_number
     self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
   end
@@ -71,9 +83,9 @@ class Event < ActiveRecord::Base
     xls = Spreadsheet::Workbook.new
     sheet = xls.create_worksheet
 
-    sheet.update_row 0, "Naam", "Email", "Studentnummer", "Ticket", "Comment", "Te betalen"
+    sheet.update_row 0, 'Naam', 'Email', 'Studentnummer', 'Telefoonnummer', 'Ticket', 'Comment', 'Te betalen'
     registrations.each.with_index do |reg, i|
-      sheet.update_row i + 1, reg.name, reg.email, reg.student_number, reg.access_levels.first.name, reg.comment, reg.to_pay
+      sheet.update_row i + 1, reg.name, reg.email, reg.student_number, reg.phone_number, reg.access_levels.first.name, reg.comment, reg.to_pay
     end
     data = Tempfile.new(["export", ".xls"])
 

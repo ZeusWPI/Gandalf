@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206153124) do
+ActiveRecord::Schema.define(version: 20170111204432) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20160206153124) do
     t.integer  "club_id"
     t.boolean  "registration_open",       default: true
     t.text     "signature"
+    t.boolean  "registration_cancelable"
+    t.string   "phone_number_state",      default: "optional"
   end
 
   create_table "included_zones", force: :cascade do |t|
@@ -176,6 +178,7 @@ ActiveRecord::Schema.define(version: 20160206153124) do
     t.text     "comment"
     t.string   "barcode_data"
     t.string   "payment_code"
+    t.string   "phone_number"
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
