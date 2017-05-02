@@ -87,9 +87,9 @@ class Event < ActiveRecord::Base
     xls = Spreadsheet::Workbook.new
     sheet = xls.create_worksheet
 
-    sheet.update_row 0, 'Naam', 'Email', 'Studentnummer', 'Telefoonnummer', 'Ticket', 'Comment', 'Admin note', 'Te betalen'
+    sheet.update_row 0, 'Titel', 'Voornaam', 'Achternaam','Email', 'Studentnummer', 'Telefoonnummer', 'Ticket', 'Comment', 'Admin note', 'Te betalen', 'Functie', 'Registratiedatum', 'Partner'
     registrations.each.with_index do |reg, i|
-      sheet.update_row i + 1, reg.name, reg.email, reg.student_number, reg.phone_number, reg.access_levels.first.name, reg.comment, reg.admin_note, reg.to_pay
+      sheet.update_row i + 1, reg.title, reg.firstname, reg.lastname, reg.email, reg.student_number, reg.phone_number, reg.access_levels.first.name, reg.comment, reg.admin_note, reg.to_pay, reg.job_function, reg.created_at, "#{reg.plus_one_title} #{reg.plus_one_firstname} #{reg.plus_one_lastname}"
     end
     data = Tempfile.new(["export", ".xls"])
 
