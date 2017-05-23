@@ -23,13 +23,6 @@ hash.each do |club|
   club.save
 end
 
-# Zeus peoples
-#club = Club.new do |c|
-#  c.internal_name = 'zeus'
-#  c.display_name = 'Zeus WPI'
-#  c.full_name = nil
-#end
-#club.save
 
 #ugent = Club.new do |c|
 #  c.internal_name = 'ugent'

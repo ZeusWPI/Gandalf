@@ -24,13 +24,13 @@ class Club < ActiveRecord::Base
     full_name ? full_name : display_name
   end
 
-  def ordered_clubs
+  def self.ordered_clubs
     # improve speed
-    zeus = Club.find(:internal_name => 'zeus')
-    ugent = Club.find(:internal_name => 'ugent')
+    zeus = Club.where(internal_name: 'zeus').first
+    ugent = Club.where(internal_name: 'ugent').first
 
     # ordering like it's 1999
-    clubs = Club.all_except([zeus, ugent]).sort_by {|c| c.internal_name}
+    clubs = Club.except(zeus.id, ugent.id).sort_by {|c| c.internal_name}
     [zeus, ugent] + clubs
   end
 end
