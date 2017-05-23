@@ -11,7 +11,6 @@
     <%= form_check_box f, :registration_cancelable %>
     <%= form_check_box f, :extra_info %>
     <%= form_radio_field f, :phone_number_state, @event.phone_number_state, Event.phone_number_states %>
-
     <%= form_fancy_text_area f, :description %>
 
     <%= f.button :submit, class: 'btn btn-primary' %>

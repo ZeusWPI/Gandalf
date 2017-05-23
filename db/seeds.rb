@@ -8,35 +8,35 @@
 require 'webmock'
 WebMock.allow_net_connect!
 url = 'http://student.ugent.be/hydra/api/2.0/associations.json'
-#hash = JSON(HTTParty.get(url).body)
-hash = []
+hash = JSON(HTTParty.get(url).body)
+#hash = []
 WebMock.disable_net_connect!
 
 hash.each do |club|
-  next unless club['parentAssociation'] == 'FK'
+  #next unless club['parentAssociation'] == 'FK'
 
   club = Club.new do |c|
-    c.internal_name = club['internalName'].downcase
-    c.display_name = club['displayName']
-    c.full_name = club['fullName'] unless club['fullName'].blank?
+    c.internal_name = club['internal_name'].downcase
+    c.display_name = club['display_name']
+    c.full_name = club['full_name'] unless club['full_name'].blank?
   end
   club.save
 end
 
 # Zeus peoples
-club = Club.new do |c|
-  c.internal_name = 'zeus'
-  c.display_name = 'Zeus WPI'
-  c.full_name = nil
-end
-club.save
+#club = Club.new do |c|
+#  c.internal_name = 'zeus'
+#  c.display_name = 'Zeus WPI'
+#  c.full_name = nil
+#end
+#club.save
 
-ugent = Club.new do |c|
-  c.internal_name = 'ugent'
-  c.display_name = 'Universiteit Gent'
-  c.full_name = nil
-end
-ugent.save
+#ugent = Club.new do |c|
+#  c.internal_name = 'ugent'
+#  c.display_name = 'Universiteit Gent'
+#  c.full_name = nil
+#end
+#ugent.save
 
 # Create an event
 event = Event.new do |e|
@@ -46,6 +46,6 @@ event = Event.new do |e|
   e.end_date = Date.tomorrow
   e.location = "Blarghkasteel"
   e.contact_email = "blargh@blargher.bla"
-  e.club = ugent
+  e.club = Club.first
 end
 event.save!

@@ -25,6 +25,7 @@
 #  plus_one_title     :string
 #  plus_one_firstname :string
 #  plus_one_lastname  :string
+#  club               :Club
 #
 
 require 'test_helper'

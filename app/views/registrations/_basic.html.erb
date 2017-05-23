@@ -32,7 +32,9 @@
     <%= javascript_tag do %>
       window.ticketsWithComments = <%= @event.access_levels.find_all(&:has_comment).map(&:id).to_json %>
     <% end %>
-    <%= f.submit t('event.register', default: 'Register'), class: 'btn btn-group btn-primary' %>
+      <%= form_collection_select f, :club, Club.find_each, :id, :name, clazz:'typeahead' %>
+
+      <%= f.submit t('event.register', default: 'Register'), class: 'btn btn-group btn-primary' %>
   <% end %>
 
   <!--<div class="well well-sm">
@@ -40,3 +42,5 @@
   </div>-->
 
 </div>
+
+

@@ -25,6 +25,7 @@
 #  plus_one_title     :string
 #  plus_one_firstname :string
 #  plus_one_lastname  :string
+#  club               :Club
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

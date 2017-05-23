@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405143237) do
+ActiveRecord::Schema.define(version: 20170523185122) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -81,36 +81,8 @@ ActiveRecord::Schema.define(version: 20170405143237) do
   add_index "enrolled_clubs_members", ["club_id"], name: "index_enrolled_clubs_members_on_club_id"
   add_index "enrolled_clubs_members", ["user_id"], name: "index_enrolled_clubs_members_on_user_id"
 
-  create_table "events", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.string   "location"
-    t.string   "website"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "registration_open_date"
-    t.datetime "registration_close_date"
-    t.string   "bank_number"
-    t.boolean  "show_ticket_count",         default: true
-    t.string   "contact_email"
-    t.string   "export_file_name"
-    t.string   "export_content_type"
-    t.integer  "export_file_size"
-    t.datetime "export_updated_at"
-    t.boolean  "show_statistics"
-    t.string   "export_status"
-    t.integer  "club_id"
-    t.boolean  "registration_open",         default: true
-    t.text     "signature"
-    t.boolean  "registration_cancelable"
-    t.string   "phone_number_state",        default: "optional"
-    t.boolean  "extra_info",                default: false
-    t.string   "comment_title"
-    t.boolean  "show_telephone_disclaimer", default: false
-    t.boolean  "allow_plus_one"
-  end
+# Could not dump table "events" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "included_zones", force: :cascade do |t|
     t.integer  "zone_id"
@@ -168,33 +140,8 @@ ActiveRecord::Schema.define(version: 20170405143237) do
 
   add_index "promos", ["event_id"], name: "index_promos_on_event_id"
 
-  create_table "registrations", force: :cascade do |t|
-    t.string   "barcode"
-    t.string   "lastname"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "event_id"
-    t.integer  "paid"
-    t.string   "student_number"
-    t.integer  "price"
-    t.datetime "checked_in_at"
-    t.text     "comment"
-    t.string   "barcode_data"
-    t.string   "payment_code"
-    t.string   "phone_number"
-    t.string   "title"
-    t.string   "job_function"
-    t.string   "admin_note"
-    t.string   "firstname"
-    t.boolean  "has_plus_one"
-    t.string   "plus_one_title"
-    t.string   "plus_one_firstname"
-    t.string   "plus_one_lastname"
-  end
-
-  add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
-  add_index "registrations", ["payment_code"], name: "index_registrations_on_payment_code", unique: true
+# Could not dump table "registrations" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "users", force: :cascade do |t|
     t.string   "username",            default: "", null: false
