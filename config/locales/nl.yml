@@ -16,6 +16,7 @@ nl:
         plus_one_title: Partner aanspreking
         plus_one_firstname: Partner voornaam
         plus_one_lastname: Partner achternaam
+        club: Vereniging
   datagrid:
     table:
       order:
@@ -40,6 +41,9 @@ nl:
     register: Registreer
     start_date: Startdatum
     website: Website
+    registration:
+      club:
+        info: Tim schrijft hier een mini tekstje voor!
   flash:
     succes: Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn.
   forms:

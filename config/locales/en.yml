@@ -39,6 +39,9 @@ en:
     register: Register
     start_date: Start date
     website: Website
+    registration:
+      club:
+        info: Tim schrijft hier een mini tekstje voor!
   flash:
     succes: Registration successful. Please check your mailbox for your ticket.
   forms:

@@ -32,7 +32,10 @@
     <%= javascript_tag do %>
       window.ticketsWithComments = <%= @event.access_levels.find_all(&:has_comment).map(&:id).to_json %>
     <% end %>
-      <%= form_collection_select f, :club, Club.find_each, :id, :name, clazz:'typeahead' %>
+      <% if @registration.event.can_add_club%>
+          <p><%= t('event.registration.club.info')%></p>
+        <%= form_collection_select f, :club, Club.find_each, :id, :name %>
+      <%end%>
 
       <%= f.submit t('event.register', default: 'Register'), class: 'btn btn-group btn-primary' %>
   <% end %>
