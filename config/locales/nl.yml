@@ -12,6 +12,8 @@ nl:
         phone_number: Telefoonnummer
         register: Registreer
         title: Aanspreking
+        firstname: Voornaam
+        lastname: Achternaam
         has_plus_one: Vergezeld door partner?
         plus_one_title: Partner aanspreking
         plus_one_firstname: Partner voornaam
@@ -44,6 +46,7 @@ nl:
     registration:
       club:
         info: Tim schrijft hier een mini tekstje voor!
+    payments: Betalingen kunnen enkel via bank overschrijvingen gebeuren, <strong>niet via bankkaarten</strong>.
   flash:
     succes: Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn.
   forms:
