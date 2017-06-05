@@ -42,6 +42,7 @@ en:
     registration:
       club:
         info: Tim schrijft hier een mini tekstje voor!
+    payments: Betalingen kunnen enkel via bank overschrijvingen gebeuren, <strong>niet via bankkaarten</strong>.
   flash:
     succes: Registration successful. Please check your mailbox for your ticket.
   forms:

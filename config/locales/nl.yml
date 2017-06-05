@@ -18,7 +18,7 @@ nl:
         plus_one_title: Partner aanspreking
         plus_one_firstname: Partner voornaam
         plus_one_lastname: Partner achternaam
-        club: Vereniging
+        club_id: Vereniging
   datagrid:
     table:
       order:
