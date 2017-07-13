@@ -12,11 +12,13 @@ nl:
         phone_number: Telefoonnummer
         register: Registreer
         title: Aanspreking
+        firstname: Voornaam
+        lastname: Achternaam
         has_plus_one: Vergezeld door partner?
         plus_one_title: Partner aanspreking
         plus_one_firstname: Partner voornaam
         plus_one_lastname: Partner achternaam
-        club: Vereniging
+        club_id: Vereniging
   datagrid:
     table:
       order:
@@ -44,6 +46,7 @@ nl:
     registration:
       club:
         info: Het Stichtingsbal is een initiatief voor en door studentenverenigingen. U schenkt €1 per ticket aan de vereniging die u hieronder selecteert. Heeft u geen vereniging van uw voorkeur kiest u gewoon ‘Universiteit Gent’.
+    payments: Betalingen kunnen enkel via bank overschrijvingen gebeuren, <strong>niet via bankkaarten</strong>.
   flash:
     succes: Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn.
   forms:

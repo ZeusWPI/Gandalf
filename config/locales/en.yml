@@ -42,6 +42,7 @@ en:
     registration:
       club:
         info: Het Stichtingsbal is een initiatief voor en door studentenverenigingen. U schenkt €1 per ticket aan de vereniging die u hieronder selecteert. Heeft u geen vereniging van uw voorkeur kiest u gewoon ‘Universiteit Gent’.
+    payments: Payments are only possible through bank transfers, <strong>no credit or debit cards</strong>.
   flash:
     succes: Registration successful. Please check your mailbox for your ticket.
   forms:
