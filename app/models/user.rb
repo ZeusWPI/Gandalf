@@ -37,22 +37,24 @@ class User < ActiveRecord::Base
     end
 
     # using httparty because it is much easier to read than net/http code
-    resp = HTTParty.get(Rails.application.secrets.fk_auth_url, :query => {
-              :k => digest(username, Rails.application.secrets.fk_auth_key),
-              :u => username
-           })
+    resp = HTTParty.get("#{ Rails.application.secrets.fk_auth_url }/#{ username }/FKEnrolment",
+                        :headers => {
+                            'X-Authorization' => Rails.application.secrets.fk_auth_key,
+                            'Accept' => 'application/json'
+                        })
 
-    # this will only return the club name if control-hash matches
-    if resp.body != 'FAIL'
+    # this will only return the club names if control-hash matches
+    # and timestamp roughly around our current server time (5 minute tolerance)
+    if resp.success?
       hash = JSON[resp.body]
+      clubs = hash['clubs'].map { |club| club['internal_name'] }
+      timestamp = hash['timestamp']
 
-      clubs_dig = hash['data'].map { |c| c['internalName'] }
-      dig = digest(Rails.application.secrets.fk_auth_salt, username, clubs_dig)
-
-      # Process clubs if the controle is correct
-      if hash['controle'] == dig
-        self.clubs = Club.where(internal_name: clubs_dig)
+      dig = digest(Rails.application.secrets.fk_auth_salt, ugent_login, timestamp, clubs)
+      if (Time.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
+        self.clubs = Club.where internal_name: clubs
       end
+
       self.save!
     end
   end
