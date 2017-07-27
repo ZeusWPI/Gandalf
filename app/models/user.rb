@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     end
 
     # using httparty because it is much easier to read than net/http code
-    resp = HTTParty.get("#{ Rails.application.secrets.fk_auth_url }/#{ username }/FKEnrolment",
+    resp = HTTParty.get("#{ Rails.application.secrets.fk_auth_url }/#{ username }/Gandalf",
                         :headers => {
                             'X-Authorization' => Rails.application.secrets.fk_auth_key,
                             'Accept' => 'application/json'
