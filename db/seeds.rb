@@ -8,7 +8,7 @@
 #
 require 'webmock'
 WebMock.allow_net_connect!
-url = 'https://raw.githubusercontent.com/ZeusWPI/hydra/master/iOS/Resources/Associations.json'
+url = 'https://raw.githubusercontent.com/ZeusWPI/hydra/62c7a07f7c3db3fc4460929338d3a3b1bbd06bdb/iOS/Resources/Associations.json'
 hash = JSON(HTTParty.get(url).body)
 WebMock.disable_net_connect!
 
