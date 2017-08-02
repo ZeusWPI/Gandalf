@@ -91,7 +91,7 @@ class UserTest < ActiveSupport::TestCase
         ].join('-')
     )
 
-    return {
+    hash = {
         timestamp: timestamp,
         casname: casname,
         sign: sign,
@@ -99,6 +99,8 @@ class UserTest < ActiveSupport::TestCase
             internal_name: club
         }}
     }
+
+    hash.to_json
   end
 
   # Converts input to it's json representation with beginning and starting quote stripped
