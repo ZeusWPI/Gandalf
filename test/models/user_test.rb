@@ -25,13 +25,13 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    stub_request(:get, "http://fkgent.be/clubs/tnnaesse/Gandalf").
+    stub_request(:get, "https://intranet.fkgent.be/clubs/tnnaesse/Gandalf").
         to_return(body: build_fk_response(:tnnaesse, %w(zeus zeus2)))
 
-    stub_request(:get, "http://fkgent.be/clubs/mherthog/Gandalf").
+    stub_request(:get, "https://intranet.fkgent.be/clubs/mherthog/Gandalf").
         to_return(body: build_fk_response(:mherthog, %w(fkcentraal)))
 
-    stub_request(:get, "http://fkgent.be/clubs/tvwillem/Gandalf").
+    stub_request(:get, "https://intranet.fkgent.be/clubs/tvwillem/Gandalf").
        to_return(body: build_fk_response(:tvwillem, []))
 
     stub_request(:get, "http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json").
