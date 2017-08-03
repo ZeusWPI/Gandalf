@@ -86,7 +86,7 @@ class UserTest < ActiveSupport::TestCase
         [
             Rails.application.secrets.fk_auth_salt,
             casname,
-            clean_json(@timestamp),
+            clean_json(timestamp),
             clubs
         ].join('-')
     )
