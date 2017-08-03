@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
       clubs = hash['clubs'].map { |club| club['internal_name'] }
       timestamp = hash['timestamp']
 
-      dig = digest(Rails.application.secrets.fk_auth_salt, ugent_login, timestamp, clubs)
+      dig = digest(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
       if (Time.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
         self.clubs = Club.where internal_name: clubs
       end
