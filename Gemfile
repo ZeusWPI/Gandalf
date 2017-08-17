@@ -133,6 +133,8 @@ gem 'twitter-typeahead-rails'
 # Enum support with prefixes
 gem 'simple_enum'
 
+gem 'mollie-api-ruby'
+
 group :development do
   gem 'sqlite3'
 

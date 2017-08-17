@@ -25,7 +25,9 @@
 #  plus_one_title     :string
 #  plus_one_firstname :string
 #  plus_one_lastname  :string
-#  club               :Club
+#  club_id            :integer
+#  payment_method     :string
+#  payment_id         :string
 #
 
 require 'test_helper'

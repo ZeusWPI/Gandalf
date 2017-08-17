@@ -1,6 +1,7 @@
 ---
 nl:
   plus_one_title: Partner aanspreking
+  payment_method: Betalingswijze
   activerecord:
     attributes:
       registration:
@@ -19,6 +20,7 @@ nl:
         plus_one_firstname: Partner voornaam
         plus_one_lastname: Partner achternaam
         club_id: Vereniging
+        payment_method: Betalingswijze
   datagrid:
     table:
       order:
@@ -27,6 +29,9 @@ nl:
   dutch: Nederlands
   english: English
   event:
+    payment_methods:
+          mollie: bankkaarten (Mollie)
+          wiretransfer: overschrijving
     barcode_number: Barcode nummer
     cancel:
       button: Schrijf mij nu uit!
@@ -46,7 +51,7 @@ nl:
     registration:
       club:
         info: Het Stichtingsbal is een initiatief voor en door studentenverenigingen. U schenkt €1 per ticket aan de vereniging die u hieronder selecteert. Heeft u geen vereniging van uw voorkeur kiest u gewoon ‘Universiteit Gent’.
-    payments: Betalingen kunnen enkel via bank overschrijvingen gebeuren, <strong>niet via bankkaarten</strong>.
+    payments: Betalingen kunnen via bank overschrijvingen alsook bankkaarten gebeuren.
   flash:
     succes: Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn.
   forms:

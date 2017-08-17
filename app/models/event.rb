@@ -31,7 +31,7 @@
 #  comment_title             :string
 #  show_telephone_disclaimer :boolean          default(FALSE)
 #  allow_plus_one            :boolean
-#  can_add_club              :bool
+#  can_add_club              :boolean
 #
 
 class Event < ActiveRecord::Base
@@ -81,6 +81,15 @@ class Event < ActiveRecord::Base
   def prettify_bank_number
     self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
   end
+
+  def payment_methods
+    ['wiretransfer', 'mollie']
+  end
+
+  def self.payment_methods_scope
+    'event.payment_methods'
+  end
+
 
   def generate_xls
     self.export_status = 'generating'

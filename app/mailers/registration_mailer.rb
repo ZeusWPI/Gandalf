@@ -32,4 +32,11 @@ class RegistrationMailer < ActionMailer::Base
 
     mail to: "#{registration.lastname} #{registration.firstname} <#{registration.email}>", subject: t('mailers.registration.subjects.cancel', :event => registration.event.name)
   end
+
+  def payment_failed(registration, event)
+    @registration = registration
+    @event = event
+
+    mail to: "#{registration.lastname} #{registration.firstname} <#{registration.email}>", subject: t('mailers.registration.subjects.failed', :event => registration.event.name)
+  end
 end
