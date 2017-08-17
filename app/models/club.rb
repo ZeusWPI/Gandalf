@@ -30,7 +30,7 @@ class Club < ActiveRecord::Base
     ugent = Club.where(internal_name: 'ugent').first
 
     # ordering like it's 1999
-    clubs = Club.except(zeus.id, ugent.id).sort_by {|c| c.internal_name}
+    clubs = Club.except(zeus).except(ugent).sort_by {|c| c.name}
     [zeus, ugent] + clubs
   end
 end
