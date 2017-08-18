@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<p>Dear <%= @registration.name %>,</p>
+
+<p>You received this mail because the payment for this ticket failed:</p>
+
+<table>
+  <tbody>
+  <tr>
+    <td><strong>Event</strong></td>
+    <td><%= @event.name %></td>
+  </tr>
+  <tr>
+    <td><strong>Organisation</strong></td>
+    <td><%= @event.club.name %></td>
+  </tr>
+  <tr>
+    <td><strong>Location</strong></td>
+    <td><%= @event.location %></td>
+  </tr>
+  <tr>
+    <td><strong>Start date</strong></td>
+    <td><%= nice_time @event.start_date %></td>
+  </tr>
+  <tr>
+    <td><strong>End date</strong></td>
+    <td><%= nice_time @event.end_date %></td>
+  </tr>
+  <tr>
+    <td><strong>Website</strong></td>
+    <td><a href="<%= @event.website %>"><%= @event.website %></a></td>
+  </tr>
+  </tbody>
+</table>
+
+<p>If you have any problems, you can contact us via mail: <%= mail_to @event.contact_email, @event.contact_email %></p>
+
+<p>It's possible to create a new ticket on our website.</p>
+
+<p>Kind regards,<br /><%= @event.club.name %></p>
+
+<% unless @event.signature.blank? %>
+    <%= simple_format @event.signature %>
+<% end %>
+
+</body>
+</html>

@@ -31,7 +31,7 @@
 #  comment_title             :string
 #  show_telephone_disclaimer :boolean          default(FALSE)
 #  allow_plus_one            :boolean
-#  can_add_club              :bool
+#  can_add_club              :boolean
 #
 
 require 'test_helper'

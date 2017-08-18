@@ -1,4 +1,6 @@
 Isengard::Application.routes.draw do
+  post 'payment_webhook/mollie'
+
   devise_for :partners
   devise_for :users, controllers: {
     omniauth_callbacks: 'omniauth_callback',

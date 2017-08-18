@@ -1,3 +1,5 @@
+require 'mollie/api/client'
+
 class RegistrationsController < ApplicationController
 
   before_action :authenticate_user!, only: [:index, :destroy, :resend, :update, :email, :upload]
@@ -71,7 +73,7 @@ class RegistrationsController < ApplicationController
     authorize! :register, requested_access_level
 
     # Make the registration
-    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :firstname, :lastname, :student_number, :comment, :phone_number, :has_plus_one, :plus_one_title, :plus_one_firstname, :plus_one_lastname, :club_id)
+    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :firstname, :lastname, :student_number, :comment, :phone_number, :has_plus_one, :plus_one_title, :plus_one_firstname, :plus_one_lastname, :club_id, :payment_method)
     @registration.access_levels << requested_access_level
     @registration.price = requested_access_level.price
     @registration.paid = 0
@@ -103,7 +105,14 @@ class RegistrationsController < ApplicationController
       if @registration.is_paid
         RegistrationMailer.ticket(@registration).deliver_now
       else
-        RegistrationMailer.confirm_registration(@registration).deliver_now
+        if @registration.payment_method == 'mollie'
+          payment = create_mollie_payment
+          redirect_to payment.payment_url
+          flash[:success] = t('flash.succes')
+          return
+        else
+          RegistrationMailer.confirm_registration(@registration).deliver_now
+        end
       end
 
       flash[:success] = t('flash.succes') # or further payment information."
@@ -214,6 +223,21 @@ class RegistrationsController < ApplicationController
       redirect_to action: :index
     end
 
+  end
+
+  def create_mollie_payment
+    mollie = Mollie::API::Client.new(Rails.application.secrets.mollie_api_key)
+
+    payment = mollie.payments.create(
+        amount:       @registration.price,
+        description:  'Ticket: ' + @registration.event.name,
+        redirect_url: url_for(@registration.event),
+        webhook_url:  url_for(controller: :payment_webhook, action: 'mollie'),
+        metadata:     { registration_id: @registration.id}
+    )
+    @registration.payment_id=payment.id
+    @registration.save!
+    payment
   end
 
 end
