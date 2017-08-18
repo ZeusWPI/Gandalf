@@ -75,6 +75,7 @@ nl:
         confirm: Registratie voor %{event}
         overpayment: Teveel betaald voor %{event}
         ticket: Ticket voor %{event}
+        failed: Aankoop ticket voor %{event} mislukt
   registration:
     titles:
       dr: dr.

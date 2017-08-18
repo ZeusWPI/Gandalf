@@ -77,6 +77,7 @@ class RegistrationsController < ApplicationController
     @registration.access_levels << requested_access_level
     @registration.price = requested_access_level.price
     @registration.paid = 0
+    @registration.payment_method = 'mollie'
 
     # overwrite student_number so setting this will not work
     if requested_access_level.requires_login?
