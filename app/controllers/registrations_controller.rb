@@ -109,7 +109,7 @@ class RegistrationsController < ApplicationController
         if @registration.payment_method == 'mollie'
           payment = create_mollie_payment
           redirect_to payment.payment_url
-          flash[:success] = t('flash.succes')
+          flash[:info] = t('flash.mollie')
           return
         else
           RegistrationMailer.confirm_registration(@registration).deliver_now

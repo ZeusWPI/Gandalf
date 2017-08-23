@@ -54,6 +54,7 @@ nl:
     payments: Betalingen kunnen via bank overschrijvingen alsook bankkaarten gebeuren.
   flash:
     succes: Registratie succesvol. Uw ticket zou nu in uw mailbox toegekomen moeten zijn.
+    mollie: Uw registratie is verwerkt, controleer uw mailbox voor de status.
   forms:
     field:
       telephone:

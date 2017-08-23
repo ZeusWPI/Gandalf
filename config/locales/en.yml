@@ -45,6 +45,7 @@ en:
     payments: Payments are only possible through bank transfers, <strong>no credit or debit cards</strong>.
   flash:
     succes: Registration successful. Please check your mailbox for your ticket.
+    mollie: Registration is being processed, check your mailbox for the current status.
   forms:
     field:
       telephone:
