@@ -8,16 +8,20 @@ class PaymentWebhookController < ApplicationController
     payment_id = params[:id]
 
     payment = mollie.payments.get payment_id
-    registration = Registration.find_by_payment_id payment_id
+    registrations = Registration.where(payment_id: payment_id)
 
     if payment.paid?
-      registration.paid = payment.amount
-      RegistrationMailer.ticket(registration).deliver_now
-      registration.save!
+      registrations.each do |reg|
+        reg.paid = payment.amount / reg.number_of_tickets
+        RegistrationMailer.ticket(reg).deliver_now
+        reg.save!
+      end
     elsif ['cancelled', 'expired', 'failed'].include? payment.status
-      RegistrationMailer.payment_failed(registration, registration.event).deliver_now
+      RegistrationMailer.payment_failed(registrations.first, registrations.first.event).deliver_now
 
-      registration.destroy!
+      registrations.each do |reg|
+        reg.destroy!
+      end
     end
     render :nothing => true, :status => 200, :content_type => 'text/html'
   end

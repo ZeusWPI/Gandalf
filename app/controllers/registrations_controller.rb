@@ -73,7 +73,8 @@ class RegistrationsController < ApplicationController
     authorize! :register, requested_access_level
 
     # Make the registration
-    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :firstname, :lastname, :student_number, :comment, :phone_number, :has_plus_one, :plus_one_title, :plus_one_firstname, :plus_one_lastname, :club_id, :payment_method)
+    @registration = @event.registrations.new params.require(:registration).permit(:title, :email, :job_function, :firstname, :lastname, :student_number, :comment, :phone_number, :has_plus_one, :plus_one_title, :plus_one_firstname, :plus_one_lastname, :club_id, :payment_method, :number_of_tickets)
+    @registration.sequence_number = 1
     @registration.access_levels << requested_access_level
     @registration.price = requested_access_level.price
     @registration.paid = 0
@@ -83,43 +84,95 @@ class RegistrationsController < ApplicationController
     if requested_access_level.requires_login?
       @registration.student_number = current_user.cas_ugentStudentID
     end
-    @registration.save
 
-    # Send the confirmation email.
-    if not @registration.errors.any?
-      if @event.allow_plus_one and @registration.has_plus_one
-        plus_one_registration = @event.registrations.new :title => @registration.plus_one_title, :email => @registration.email, :firstname => @registration.plus_one_firstname, :lastname => @registration.plus_one_lastname, :job_function => @registration.job_function, :comment => @registration.comment, :student_number=>@registration.student_number
-        plus_one_registration.access_levels << requested_access_level
-        plus_one_registration.price = requested_access_level.price
-        plus_one_registration.paid = 0
-
-        plus_one_registration.save!
-        plus_one_registration.generate_barcode
-        if plus_one_registration.is_paid
-          RegistrationMailer.ticket(plus_one_registration).deliver_now
-        else
-          RegistrationMailer.confirm_registration(plus_one_registration).deliver_now
+    if @registration.number_of_tickets > 1
+      if requested_access_level.tickets_left == nil or requested_access_level.tickets_left >= @registration.number_of_tickets
+        @registrations = [@registration] + 2.upto(@registration.number_of_tickets).map do |n|
+          reg = @event.registrations.new :title => @registration.title, :email => @registration.email, :firstname => @registration.firstname, :lastname => @registration.lastname, :job_function => @registration.job_function, :comment => @registration.comment, :student_number=>@registration.student_number, :club_id => @registration.club_id, :number_of_tickets => @registration.number_of_tickets
+          reg.access_levels << requested_access_level
+          reg.price = requested_access_level.price
+          reg.paid = 0
+          reg.sequence_number = n
+          reg.payment_method = 'mollie'
+          reg
         end
-      end
-      @registration.generate_barcode
 
-      if @registration.is_paid
-        RegistrationMailer.ticket(@registration).deliver_now
+        Registration.transaction do
+          @registrations.each { |r| r.save! }
+        end
+
+        if not @registration.errors.any? and not @registrations.last.errors.any?
+          @registrations.each { |r| r.generate_barcode }
+
+          if @registration.is_paid
+            @registrations.each { |r| RegistrationMailer.ticket(r).deliver_now }
+          else
+            if @registration.payment_method == 'mollie'
+              mollie = Mollie::API::Client.new(Rails.application.secrets.mollie_api_key)
+
+              payment = mollie.payments.create(
+                  amount:       @registration.price*@registration.number_of_tickets,
+                  description:  "Ticket (#{@registration.number_of_tickets}): #{@registration.event.name}",
+                  redirect_url: url_for(@registration.event),
+                  webhook_url:  url_for(controller: :payment_webhook, action: 'mollie'),
+                  metadata:     { registration_ids: @registrations.map { |r| r.id }}
+              )
+
+              @registrations.each do |r|
+                r.payment_id = payment.id
+                r.save!
+              end
+
+              redirect_to payment.payment_url
+              flash[:info] = t('flash.mollie')
+              return
+            end
+          end
+        end
+
       else
-        if @registration.payment_method == 'mollie'
-          payment = create_mollie_payment
-          redirect_to payment.payment_url
-          flash[:info] = t('flash.mollie')
-          return
-        else
-          RegistrationMailer.confirm_registration(@registration).deliver_now
-        end
+        @registration.errors.add(:number_of_tickets, "Not enough tickets available.")
       end
-
-      flash[:success] = t('flash.succes') # or further payment information."
-      respond_with @event
-    else
       render "events/show"
+    else
+      @registration.save
+
+      # Send the confirmation email.
+      if not @registration.errors.any?
+        if @event.allow_plus_one and @registration.has_plus_one
+          plus_one_registration = @event.registrations.new :title => @registration.plus_one_title, :email => @registration.email, :firstname => @registration.plus_one_firstname, :lastname => @registration.plus_one_lastname, :job_function => @registration.job_function, :comment => @registration.comment, :student_number=>@registration.student_number
+          plus_one_registration.access_levels << requested_access_level
+          plus_one_registration.price = requested_access_level.price
+          plus_one_registration.paid = 0
+
+          plus_one_registration.save!
+          plus_one_registration.generate_barcode
+          if plus_one_registration.is_paid
+            RegistrationMailer.ticket(plus_one_registration).deliver_now
+          else
+            RegistrationMailer.confirm_registration(plus_one_registration).deliver_now
+          end
+        end
+        @registration.generate_barcode
+
+        if @registration.is_paid
+          RegistrationMailer.ticket(@registration).deliver_now
+        else
+          if @registration.payment_method == 'mollie'
+            payment = create_mollie_payment
+            redirect_to payment.payment_url
+            flash[:info] = t('flash.mollie')
+            return
+          else
+            RegistrationMailer.confirm_registration(@registration).deliver_now
+          end
+        end
+
+        flash[:success] = t('flash.succes') # or further payment information."
+        respond_with @event
+      else
+        render "events/show"
+      end
     end
   end
 

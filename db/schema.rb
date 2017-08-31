@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817125038) do
+ActiveRecord::Schema.define(version: 20170831210541) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string   "name"
@@ -195,6 +195,8 @@ ActiveRecord::Schema.define(version: 20170817125038) do
     t.integer  "club_id"
     t.string   "payment_method"
     t.string   "payment_id"
+    t.integer  "number_of_tickets",  default: 1
+    t.integer  "sequence_number",    default: 1
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"

@@ -40,7 +40,7 @@
                         <table cellspacing="0" cellpadding="0" align="right">
                           <tbody>
                           <tr>
-                            <td class="pr-15" style="font: 17px/18px Arial, Helvetica, sans-serif; color: #007dd6;"><strong><%= @registration.event.name %></strong><br /> <span style="font-size: 14px;"><%= nice_date @registration.event.start_date %></span></td>
+                            <td class="pr-15" style="font: 17px/18px Arial, Helvetica, sans-serif; color: #007dd6;"><strong><%= @registration.event.name %></strong><br /> <span style="font-size: 14px;"><%= nice_date @registration.event.start_date %></span><%if @registration.number_of_tickets > 1 %><br/>Ticket <%= @registration.sequence_number%>/<%= @registration.number_of_tickets %><%end%></td>
                           </tr>
                           </tbody>
                           </tbody>

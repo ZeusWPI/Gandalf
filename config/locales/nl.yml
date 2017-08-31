@@ -21,6 +21,7 @@ nl:
         plus_one_lastname: Partner achternaam
         club_id: Vereniging
         payment_method: Betalingswijze
+        number_of_tickets: Aantal tickets
   datagrid:
     table:
       order:
@@ -76,7 +77,9 @@ nl:
         confirm: Registratie voor %{event}
         overpayment: Teveel betaald voor %{event}
         ticket: Ticket voor %{event}
+        multiple_ticket: Ticket voor %{event} %{sequence_number}/%{number_of_tickets}
         failed: Aankoop ticket voor %{event} mislukt
+        multiple_failed: Aankoop %{number_of_tickets } tickets voor %{event} mislukt
   registration:
     titles:
       dr: dr.

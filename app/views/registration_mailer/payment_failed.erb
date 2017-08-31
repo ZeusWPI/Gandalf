@@ -34,6 +34,12 @@
     <td><strong>Website</strong></td>
     <td><a href="<%= @event.website %>"><%= @event.website %></a></td>
   </tr>
+  <% if @registration.number_of_tickets > 1%>
+    <tr>
+      <td><strong>Number of tickets</strong></td>
+      <td><%= @registration.number_of_tickets %> tickets</td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 

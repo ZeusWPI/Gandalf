@@ -4,11 +4,16 @@ en:
     attributes:
       registration:
         access_levels: Ticket
+        club_id: Association
         comment: Comments
         email: E-mail
+        firstname: Firstname
         has_plus_one: Accompanied by partner?
         job_function: Job function
+        lastname: Lastname
         name: Name
+        number_of_tickets: Number of tickets
+        payment_method: Payment method
         phone_number: Phone number
         plus_one_firstname: Partner first name
         plus_one_lastname: Partner last name
@@ -36,16 +41,19 @@ en:
     end_date: End date
     location: Location
     organisation: Organisation
+    payment_methods:
+      mollie: debit cards
+      wiretransfer: bank transfer
+    payments: Payments are only possible through debit cards and bitcoin.
     register: Register
-    start_date: Start date
-    website: Website
     registration:
       club:
-        info: Het Stichtingsbal is een initiatief voor en door studentenverenigingen. U schenkt €1 per ticket aan de vereniging die u hieronder selecteert. Heeft u geen vereniging van uw voorkeur kiest u gewoon ‘Universiteit Gent’.
-    payments: Payments are only possible through debit cards and bitcoin.
+        info: The foundation ball (Stichtingsbal) is an initiative by en through the student associations. You donate €1 per ticket to the selected association.
+    start_date: Start date
+    website: Website
   flash:
-    succes: Registration successful. Please check your mailbox for your ticket.
     mollie: Registration is being processed, check your mailbox for the current status.
+    succes: Registration successful. Please check your mailbox for your ticket.
   forms:
     field:
       telephone:
@@ -65,8 +73,12 @@ en:
       subjects:
         cancel: Cancel registration for %{event}
         confirm: Register for %{event}
+        failed: Aankoop ticket voor %{event} mislukt
+        multiple_failed: Buying %{number_of_tickets } tickets for %{event} failed
+        multiple_ticket: Ticket for %{event} %{sequence_number}/%{number_of_tickets}
         overpayment: Overpayment for %{event}
         ticket: Ticket for %{event}
+  payment_method: Payment method
   plus_one_title: Partner title
   registration:
     titles:
