@@ -74,7 +74,7 @@ en:
         cancel: Cancel registration for %{event}
         confirm: Register for %{event}
         failed: Aankoop ticket voor %{event} mislukt
-        multiple_failed: Buying %{number_of_tickets } tickets for %{event} failed
+        multiple_failed: Buying %{number_of_tickets} tickets for %{event} failed
         multiple_ticket: Ticket for %{event} %{sequence_number}/%{number_of_tickets}
         overpayment: Overpayment for %{event}
         ticket: Ticket for %{event}

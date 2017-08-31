@@ -79,7 +79,7 @@ nl:
         ticket: Ticket voor %{event}
         multiple_ticket: Ticket voor %{event} %{sequence_number}/%{number_of_tickets}
         failed: Aankoop ticket voor %{event} mislukt
-        multiple_failed: Aankoop %{number_of_tickets } tickets voor %{event} mislukt
+        multiple_failed: Aankoop %{number_of_tickets} tickets voor %{event} mislukt
   registration:
     titles:
       dr: dr.
