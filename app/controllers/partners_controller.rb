@@ -84,8 +84,8 @@ class PartnersController < ApplicationController
 
       @registration = @event.registrations.new(
         email:          @partner.email,
-        lastname:       @partner.name.split(' ', 2).first,
-        firstname:      @partner.name.split(' ', 2).last,
+        lastname:       @partner.name.split(' ', 2).last,
+        firstname:      @partner.name.split(' ', 2).first,
         student_number: nil,
         comment:        nil,
         price:          @partner.access_level.price,
