@@ -12,7 +12,7 @@
   </tr>
   <% @stats.each do |s| %>
       <tr>
-        <td><%= Club.find_by_id(s.first).name %></td>
+        <td><%= Club.find_by_id(s.first).try :name %></td>
         <td><%= s.last %></td>
       </tr>
   <% end %>
