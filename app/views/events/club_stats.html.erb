@@ -1,0 +1,20 @@
+<%= render partial: "events/tabs" %>
+
+<h2>Club stats</h2>
+
+<%= render partial: 'flash' %>
+
+<table class="table table-striped table-hover">
+  <tbody>
+  <tr>
+    <th>Club</th>
+    <th>Tickets sold</th>
+  </tr>
+  <% @stats.each do |s| %>
+      <tr>
+        <td><%= Club.find_by_id(s.first).name %></td>
+        <td><%= s.last %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

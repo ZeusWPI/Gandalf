@@ -86,6 +86,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def club_stats
+    @event = Event.find params.require(:id)
+    authorize! :view_stats, @event
+   
+    if not @event.registrations.empty?
+      @stats = @event.registrations.paid.group(:club_id).count.sort_by{|k, v| v}.reverse
+    else
+      @stats = []
+    end
+  end
+
   def scan
     @event = Event.find params.require(:id)
     authorize! :update, @event

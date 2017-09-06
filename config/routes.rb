@@ -56,6 +56,7 @@ Isengard::Application.routes.draw do
       get 'statistics'
       get 'scan'
       get 'list_registrations'
+      get 'club_stats'
       post 'scan_barcode'
       post 'scan_name'
     end
