@@ -86,52 +86,54 @@ class RegistrationsController < ApplicationController
     end
 
     if @registration.number_of_tickets > 1
-      if requested_access_level.tickets_left == nil or requested_access_level.tickets_left >= @registration.number_of_tickets
-        @registrations = [@registration] + 2.upto(@registration.number_of_tickets).map do |n|
-          reg = @event.registrations.new :title => @registration.title, :email => @registration.email, :firstname => @registration.firstname, :lastname => @registration.lastname, :job_function => @registration.job_function, :comment => @registration.comment, :student_number=>@registration.student_number, :club_id => @registration.club_id, :number_of_tickets => @registration.number_of_tickets
-          reg.access_levels << requested_access_level
-          reg.price = requested_access_level.price
-          reg.paid = 0
-          reg.sequence_number = n
-          reg.payment_method = 'mollie'
-          reg
-        end
+      if @registration.valid?
+        if requested_access_level.tickets_left == nil or requested_access_level.tickets_left >= @registration.number_of_tickets
+          @registrations = [@registration] + 2.upto(@registration.number_of_tickets).map do |n|
+            reg = @event.registrations.new :title => @registration.title, :email => @registration.email, :firstname => @registration.firstname, :lastname => @registration.lastname, :job_function => @registration.job_function, :comment => @registration.comment, :student_number=>@registration.student_number, :club_id => @registration.club_id, :number_of_tickets => @registration.number_of_tickets
+            reg.access_levels << requested_access_level
+            reg.price = requested_access_level.price
+            reg.paid = 0
+            reg.sequence_number = n
+            reg.payment_method = 'mollie'
+            reg
+          end
 
-        Registration.transaction do
-          @registrations.each { |r| r.save! }
-        end
+          Registration.transaction do
+            @registrations.each { |r| r.save! }
+          end
 
-        if not @registration.errors.any? and not @registrations.last.errors.any?
-          @registrations.each { |r| r.generate_barcode }
+          if not @registration.errors.any? and not @registrations.last.errors.any?
+            @registrations.each { |r| r.generate_barcode }
 
-          if @registration.is_paid
-            @registrations.each { |r| RegistrationMailer.ticket(r).deliver_now }
-          else
-            if @registration.payment_method == 'mollie'
-              mollie = Mollie::API::Client.new(Rails.application.secrets.mollie_api_key)
+            if @registration.is_paid
+              @registrations.each { |r| RegistrationMailer.ticket(r).deliver_now }
+            else
+              if @registration.payment_method == 'mollie'
+                mollie = Mollie::API::Client.new(Rails.application.secrets.mollie_api_key)
 
-              payment = mollie.payments.create(
-                  amount:       @registration.price*@registration.number_of_tickets,
-                  description:  "Ticket (#{@registration.number_of_tickets}): #{@registration.event.name}",
-                  redirect_url: url_for(@registration.event),
-                  webhook_url:  url_for(controller: :payment_webhook, action: 'mollie'),
-                  metadata:     { registration_ids: @registrations.map { |r| r.id }}
-              )
+                payment = mollie.payments.create(
+                    amount:       @registration.price*@registration.number_of_tickets,
+                    description:  "Ticket (#{@registration.number_of_tickets}): #{@registration.event.name}",
+                    redirect_url: url_for(@registration.event),
+                    webhook_url:  url_for(controller: :payment_webhook, action: 'mollie'),
+                    metadata:     { registration_ids: @registrations.map { |r| r.id }}
+                )
 
-              @registrations.each do |r|
-                r.payment_id = payment.id
-                r.save!
+                @registrations.each do |r|
+                  r.payment_id = payment.id
+                  r.save!
+                end
+
+                redirect_to payment.payment_url
+                flash[:info] = t('flash.mollie')
+                return
               end
-
-              redirect_to payment.payment_url
-              flash[:info] = t('flash.mollie')
-              return
             end
           end
-        end
 
-      else
-        @registration.errors.add(:number_of_tickets, "Not enough tickets available.")
+        else
+          @registration.errors.add(:number_of_tickets, "Not enough tickets available.")
+        end
       end
       render "events/show"
     else
