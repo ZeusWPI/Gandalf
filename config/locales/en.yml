@@ -48,9 +48,14 @@ en:
     register: Register
     registration:
       club:
-        info: The foundation ball (Stichtingsbal) is an initiative by en through the student associations. You donate €1 per ticket to the selected association.
+        info: The foundation ball (Stichtingsbal) is an initiative from the student associations. You donate €1 per ticket to the selected association.
     start_date: Start date
     website: Website
+  events:
+    club_stats:
+      club: Club
+      tickets_sold: Tickets sold
+      title: Tickets sold ranking
   flash:
     mollie: Registration is being processed, check your mailbox for the current status.
     succes: Registration successful. Please check your mailbox for your ticket.

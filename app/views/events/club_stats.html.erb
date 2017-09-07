@@ -1,20 +1,29 @@
 <%= render partial: "events/tabs" %>
 
-<h2>Club stats</h2>
 
 <%= render partial: 'flash' %>
 
-<table class="table table-striped table-hover">
-  <tbody>
-  <tr>
-    <th>Club</th>
-    <th>Tickets sold</th>
-  </tr>
-  <% @stats.each do |s| %>
+<div class="row">
+  <div class="col-sm-12">
+    <h2><%= t('events.club_stats.title')%></h2>
+
+    <table class="table table-striped table-hover">
+      <tbody>
       <tr>
-        <td><%= Club.find_by_id(s.first).try :name %></td>
-        <td><%= s.last %></td>
+        <th><%= t('events.club_stats.club')%></th>
+        <th><%= t('events.club_stats.tickets_sold')%></th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      <% @stats.each do |s| %>
+          <% if !s.first.nil? and not [2,3].include? s.first  %>
+              <tr>
+                <td><%= Club.find_by_id(s.first).name %></td>
+                <td><%= s.last %></td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <small>Als jouw vereniging er nog niet bij staat, heeft deze nog geen tickets verkocht.</small>
+  </div>
+</div>
+

@@ -3,7 +3,7 @@
 class EventsController < ApplicationController
 
   # order is important here, we need to be authenticated before we can check permission
-  before_filter :authenticate_user!, except: [:show, :index]
+  before_filter :authenticate_user!, except: [:show, :index, :club_stats]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
 
   respond_to :html, :js, :ics
@@ -88,7 +88,6 @@ class EventsController < ApplicationController
 
   def club_stats
     @event = Event.find params.require(:id)
-    authorize! :view_stats, @event
 
     if not @event.registrations.empty?
       @stats = @event.registrations.paid.group(:club_id).count.sort_by{|k, v| v}.reverse
