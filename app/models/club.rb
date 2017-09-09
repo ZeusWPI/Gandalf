@@ -26,11 +26,10 @@ class Club < ActiveRecord::Base
 
   def self.ordered_clubs
     # improve speed
-    zeus = Club.where(internal_name: 'zeus').first
-    ugent = Club.where(internal_name: 'ugent').first
+    ugent = Club.find_by_internal_name 'ugent'
 
     # ordering like it's 1999
-    clubs = Club.except(zeus).except(ugent).sort_by {|c| c.name}
-    [zeus, ugent] + clubs
+    clubs = Club.except(ugent).sort_by {|c| c.name}
+    [ugent] + clubs
   end
 end
