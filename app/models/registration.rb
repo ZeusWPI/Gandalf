@@ -60,6 +60,8 @@ class Registration < ActiveRecord::Base
   validates :plus_one_firstname, presence: true, if: 'has_plus_one?'
   validates :plus_one_lastname, presence: true, if: 'has_plus_one?'
 
+  validate :must_select_club
+
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
   before_validation do |record|
@@ -78,6 +80,14 @@ class Registration < ActiveRecord::Base
   end
 
   default_scope { order "lastname ASC" }
+
+  def must_select_club
+    if event&.can_add_club?
+      if club_id.blank? || !Club.exists?(club_id)
+        errors.add(:club_id, :no_club_id)
+      end
+    end
+  end
 
   def paid
     from_cents read_attribute(:paid)

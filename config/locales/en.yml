@@ -20,6 +20,10 @@ en:
         plus_one_title: Partner title
         register: Register
         title: Title
+    errors:
+      models:
+        registration:
+          no_club_id: ": You have to choose an association to donate €1 to. If you don't have a preference, we suggest 'Zeus WerkgroeP Informatica', the association who made this ticket application possible."
   datagrid:
     table:
       order:
@@ -49,6 +53,7 @@ en:
     registration:
       club:
         info: The foundation ball (Stichtingsbal) is an initiative from the student associations. You donate €1 per ticket to the selected association.
+        prompt: Select an association
     start_date: Start date
     website: Website
   events:

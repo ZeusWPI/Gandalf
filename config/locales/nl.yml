@@ -22,6 +22,10 @@ nl:
         club_id: Vereniging
         payment_method: Betalingswijze
         number_of_tickets: Aantal tickets
+    errors:
+      models:
+        registration:
+          no_club_id: ": Je moet een vereniging opgeven waaraan je €1 schenkt. Heb je geen voorkeur kunnen we je 'Zeus WerkgroeP Informatica' aanbevelen die deze ticketapplicatie mogelijk hebben gemaakt."
   datagrid:
     table:
       order:
@@ -51,7 +55,8 @@ nl:
     website: Website
     registration:
       club:
-        info: Het Stichtingsbal is een initiatief voor en door studentenverenigingen. U schenkt €1 per ticket aan de vereniging die u hieronder selecteert. Heeft u geen vereniging van uw voorkeur kiest u gewoon ‘Universiteit Gent’.
+        info: Het Stichtingsbal is een initiatief voor en door studentenverenigingen. U schenkt €1 per ticket aan de vereniging die u hieronder selecteert.
+        prompt: Selecteer een vereniging
     payments: Betalingen kunnen enkel via bankkaarten gebeuren.
   events:
     club_stats:

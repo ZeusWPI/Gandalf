@@ -35,7 +35,7 @@
     <% end %>
       <% if @registration.event.can_add_club%>
           <p><%= t('event.registration.club.info')%></p>
-        <%= form_collection_select f, :club_id, Club.ordered_clubs, :id, :name %>
+        <%= form_collection_select f, :club_id, Club.ordered_clubs, :id, :name, prompt: t('event.registration.club.prompt') %>
           <%= stylesheet_link_tag  '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css' %>
           <%= stylesheet_link_tag  'https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css' %>
           <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js' %>
