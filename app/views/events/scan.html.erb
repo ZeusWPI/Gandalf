@@ -23,6 +23,9 @@
             <% unless @registration.comment.blank? %>
               <tr><th>Comment:</th><td> <%= @registration.comment %></td></tr>
             <% end %>
+            <% if @registration.number_of_tickets > 1 %>
+                <tr><th>Ticket:</th><td> <%= @registration.sequence_number %>/<%= @registration.number_of_tickets %></td></tr>
+            <% end %>
           </table>
         </div>
       </div>
@@ -51,6 +54,7 @@
             <div class="input-group">
               <input required type="text" class="form-control typeahead"
                 placeholder="Start searching by entering a name or an email" name="name" id="name">
+              <input required type="hidden" name="registration_id" id="registration_id">
               <span class="input-group-btn">
                 <button class="btn btn-primary" name="button" type="submit">
                   Submit
@@ -70,9 +74,12 @@
 <script>
 var json = '<%= list_registrations_event_path %>';
 var registrations = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'email'),
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('firstname', 'lastname', 'sequence_number','email'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '<%= list_registrations_event_path %>'
+    prefetch: {
+        url: '<%= list_registrations_event_path %>',
+        cache: false
+    }
 });
 
 registrations.initialize();
@@ -85,22 +92,38 @@ $('#name').typeahead(
     },
     {
         name: 'registrations',
-        displayKey: 'name',
+        displayKey: function (reg) {
+            return reg.firstname + " " + reg.lastname + " (" + reg.sequence_number + "/"  + reg.number_of_tickets + ")";
+        },
         source: registrations.ttAdapter(),
         templates: {
             suggestion: function(registration) {
                 var container = $('<div/>');
+                if (registration.checked_in_at !== null) {
+                    container.addClass("tt-danger");
+                }
+
                 var name = $('<span/>', {
                     class: "typeahead-scan-name",
-                    text: registration.name
+                    text: registration.firstname + ' ' + registration.lastname
                 });
                 var email = $('<span/>', {
                     class: "typeahead-scan-email",
                     text: registration.email
-                })
-                return container.append(name).append(email);
+                });
+                container.append(name).append(email);
+                if (registration.number_of_tickets > 1) {
+                    var extra = $('<span/>', {
+                        class: "typeahead-scan-tickets",
+                        text: "Ticket: " + registration.sequence_number + "/" + registration.number_of_tickets
+                    });
+                    container.append("<br/>").append(extra);
+                }
+                return container;
             }
         }
     }
-);
+).on('typeahead:selected', function(obj, datum) {
+    $('#registration_id').val(datum.id)
+});
 </script>
