@@ -112,7 +112,6 @@ class EventsController < ApplicationController
     @event = Event.find params.require(:id)
     authorize! :update, @event
     #TODO: fix me search by combination of first and lastname
-    puts params
     @registration = @event.registrations.find_by id: params.require(:registration_id)
     check_in
   end
