@@ -23,7 +23,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :cas_authenticatable, :omniauthable
+  devise :cas_authenticatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   after_create :fetch_club, :fetch_enrolled_clubs
 
@@ -118,6 +118,13 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(username: auth.uid).first_or_create do |user|
       user.username = auth.uid
+    end
+  end
+
+
+  def self.from_google_omniauth(auth)
+    where(email: auth.uid).first_or_create do |user|
+      user.username = auth.info.email
     end
   end
 end

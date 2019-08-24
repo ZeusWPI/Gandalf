@@ -9,7 +9,7 @@ set :repo_url, 'git@github.com:ZeusWPI/Gandalf.git'
 
 # Default deploy_to directory is /var/www/my_app
 set :branch, 'yolo-ugent'
-set :deploy_to, '/home/events/production'
+set :deploy_to, '/var/www/events.studentkickoff.be'
 
 # Default value for :linked_files is []
 set :linked_files, %w{config/database.yml config/secrets.yml}
@@ -24,7 +24,7 @@ set :log_level, :debug
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
+set :rbenv_path, '/var/www/events.studentkickoff.be/.rbenv'
 namespace :deploy do
 
   desc 'Restart application'

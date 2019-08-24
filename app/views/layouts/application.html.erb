@@ -51,7 +51,8 @@
       </div>
     </div>
 
-    <div class="fluid-container main-content">
+	<%= render partial: "layouts/login", locals: {classes: "hidden-xs navbar-right"} %>    
+<div class="fluid-container main-content">
       <div class="row">
         <div class="col-xs-12">
           <%= yield %>

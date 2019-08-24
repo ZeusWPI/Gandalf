@@ -8,6 +8,8 @@ require 'capistrano/rails'
 #require 'capistrano/rvm'
 require 'capistrano/rbenv'
 
+#set :rbenv_type, :user
+
 # Whenever recipe
 require "whenever/capistrano"
 

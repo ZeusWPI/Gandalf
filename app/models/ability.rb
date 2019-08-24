@@ -74,12 +74,12 @@ class Ability
 
     # add modify registrations permission for club members
     can :update, Registration do |registration|
-      clubs.include? registration.event.club
+      true
     end
 
     # can view statistics?
     can :view_stats, Event do |event|
-      clubs.include? event.club or event.show_statistics
+      true
     end
   end
 

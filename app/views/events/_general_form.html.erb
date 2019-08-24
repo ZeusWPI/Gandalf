@@ -2,10 +2,9 @@
   <%= form_for @event do |f| %>
 
     <%= form_text_field f, :name %>
-    <%= form_collection_select f, :club_id, current_user.clubs, :id, :name %>
-    <%= form_text_field f, :location %>
-    <%= form_url_field f, :website %>
-    <%= form_email_field f, :contact_email %>
+    <% form_text_field f, :location %>
+    <% form_url_field f, :website %>
+    <% form_email_field f, :contact_email %>
     <%= form_date_field f, :start_date, "start", datepicker_time(f.object.start_date) %>
     <%= form_date_field f, :end_date, "end", datepicker_time(f.object.end_date) %>
     <%= form_check_box f, :registration_cancelable %>

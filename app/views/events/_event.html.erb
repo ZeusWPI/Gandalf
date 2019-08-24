@@ -1,7 +1,5 @@
 <tr>
   <td><%= link_to event.name, event_path(event)%></td>
-  <td><%= event.club.name %></td>
-  <td><%= event.location %></td>
   <td><%= nice_time(event.start_date) %></td>
   <td><%= nice_time(event.end_date) %></td>
   <td>

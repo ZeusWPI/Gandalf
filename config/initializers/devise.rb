@@ -266,3 +266,7 @@ end
 Devise.cas_client_config_options = {
     :encode_extra_attributes_as => :raw
 }
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :google_oauth2, Rails.application.secrets.google_client_id, Rails.application.secrets.google_secret_id
+end
