@@ -164,6 +164,10 @@ class Registration < ActiveRecord::Base
     I18n.t(title, scope: Registration.personal_titles_scope) + ' '
   end
 
+  def self.meal_preference
+    [:vlees, :veggie]
+  end
+
   private
 
   def from_cents(value)

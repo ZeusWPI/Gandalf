@@ -23,7 +23,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :cas_authenticatable, :omniauthable, omniauth_providers: [:google_oauth2]
+  devise :cas_authenticatable, :omniauthable, omniauth_providers: [:google_oauth2, :zeuswpi]
 
   after_create :fetch_club, :fetch_enrolled_clubs
 
@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 
   # return the club this user can manage
   def fetch_club
+    return true
     def digest(*args)
       Digest::SHA256.hexdigest args.join('-')
     end
