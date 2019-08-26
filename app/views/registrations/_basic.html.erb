@@ -28,6 +28,7 @@
       <%= form_text_field f, :plus_one_lastname %>
     </div>
     <% end %>
+    <%= form_radio_field f, :comment, @registration.comment, Registration.meal_preference, true, true, 'registration.comment' %>
     <%= form_collection_select f, :number_of_tickets, (1..10), :to_i, :to_s %>
     <%# <%= form_text_area f, :comment, @event.comment_title %>
     <%# <%= javascript_tag do % >
