@@ -6,6 +6,13 @@
 
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@font-face {
+  font-family: 'LeagueGothic-Regular';
+  src: url('https://studentkickoff.be/assets/fonts/leaguegothic-regular-webfont.woff2') format('woff2'),
+       url('https://studentkickoff.be/assets/fonts/leaguegothic-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 html {
     font-family: sans-serif;
@@ -1401,7 +1408,7 @@ textarea {
 }
 
 a {
-    color: #1E64C8;
+    color: #1b95d4;
     text-decoration: none
 }
 
@@ -1690,7 +1697,7 @@ mark,
 }
 
 .text-primary {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 a.text-primary:hover,
@@ -1739,7 +1746,7 @@ a.text-danger:focus {
 }
 
 .bg-primary {
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 a.bg-primary:hover,
@@ -3925,7 +3932,7 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
     color: #fff;
-    background-color: #1E64C8;
+    background-color: #1b95d4;
     border-color: #1b59b2
 }
 
@@ -3988,12 +3995,12 @@ fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary.focus,
 fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
-    background-color: #1E64C8;
+    background-color: #1b95d4;
     border-color: #1b59b2
 }
 
 .btn-primary .badge {
-    color: #1E64C8;
+    color: #1b95d4;
     background-color: #fff
 }
 
@@ -4294,7 +4301,7 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .btn-link {
-    color: #1E64C8;
+    color: #1b95d4;
     font-weight: normal;
     border-radius: 0
 }
@@ -4487,7 +4494,7 @@ tbody.collapse.in {
     color: #fff;
     text-decoration: none;
     outline: 0;
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 .dropdown-menu>.disabled>a,
@@ -4983,7 +4990,7 @@ tbody.collapse.in {
 .nav .open>a:hover,
 .nav .open>a:focus {
     background-color: #eee;
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 .nav .nav-divider {
@@ -5043,7 +5050,7 @@ tbody.collapse.in {
 .nav-pills>li.active>a:hover,
 .nav-pills>li.active>a:focus {
     color: #fff;
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 .nav-stacked>li {
@@ -5809,7 +5816,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     padding: 6px 12px;
     line-height: 1.23529;
     text-decoration: none;
-    color: #1E64C8;
+    color: #1b95d4;
     background-color: #fff;
     border: 1px solid #ddd;
     margin-left: -1px
@@ -5846,8 +5853,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination>.active>span:focus {
     z-index: 2;
     color: #fff;
-    background-color: #1E64C8;
-    border-color: #1E64C8;
+    background-color: #1b95d4;
+    border-color: #1b95d4;
     cursor: default
 }
 
@@ -5995,7 +6002,7 @@ a.label:focus {
 }
 
 .label-primary {
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 .label-primary[href]:hover,
@@ -6069,7 +6076,7 @@ a.label:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 .alert {
@@ -7007,7 +7014,7 @@ a.thumbnail.active {
 }
 
 body {
-    font-family: "PannoTextLight", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 17px;
     line-height: 1.23529
 }
@@ -7024,7 +7031,7 @@ h5,
 .h5,
 h6,
 .h6 {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     margin: 10px 0
 }
 
@@ -7047,7 +7054,7 @@ h1,
 .h1,
 h2,
 .h2 {
-    color: #1E64C8;
+    color: #1b95d4;
     text-transform: none
 }
 
@@ -7095,12 +7102,12 @@ h6,
 
 .lead {
     font-size: 17px;
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     line-height: 1.23529
 }
 
 strong {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     font-weight: normal
 }
 
@@ -7174,12 +7181,6 @@ aside img {
     font-family: 'PannoTextSemiBold';
     src: url('<%= asset_path 'ugentpannotext-semibold-web.eot' %>');
     src: url('<%= asset_path 'ugentpannotext-semibold-web.eot' %>') format("embedded-opentype"), url('<%= asset_path 'ugentpannotext-semibold-web.woff' %>') format("woff"), url('<%= asset_path 'ugentpannotext-semibold-web.ttf' %>') format("truetype")
-}
-
-@font-face {
-    font-family: 'PannoTextMedium';
-    src: url('<%= asset_path 'ugentpannotext-medium-web.eot' %>');
-    src: url('<%= asset_path 'ugentpannotext-medium-web.eot' %>') format("embedded-opentype"), url('<%= asset_path 'ugentpannotext-medium-web.woff' %>') format("woff"), url('<%= asset_path 'ugentpannotext-medium-web.ttf' %>') format("truetype")
 }
 
 @font-face {
@@ -7307,7 +7308,7 @@ aside img {
 
 label,
 dt {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     font-weight: 300
 }
 
@@ -7337,7 +7338,7 @@ table td.spacer {
 }
 
 table th {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     padding-right: 20px
 }
 
@@ -7413,7 +7414,7 @@ ul {
 
 ul li:before {
     content: "→";
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     font-size: 16px;
     color: inherit;
     margin-right: 6px;
@@ -7435,11 +7436,11 @@ ul ol {
 }
 
 a {
-    color: #1E64C8;
+    color: #1b95d4;
     text-decoration: none;
     -ms-word-break: break-word;
     word-break: break-word;
-    border-bottom: 1px solid #1E64C8;
+    border-bottom: 1px solid #1b95d4;
     -webkit-transition: border-color .15s ease-in-out;
     -o-transition: border-color .15s ease-in-out;
     transition: border-color .15s ease-in-out
@@ -7447,7 +7448,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #1E64C8;
+    color: #1b95d4;
     text-decoration: none;
     border-color: transparent
 }
@@ -7493,7 +7494,7 @@ h3 a:focus {
 }
 
 .standalone-link i.fa {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 .standalone-link span {
@@ -7509,12 +7510,12 @@ h3 a:focus {
 }
 
 .standalone-link.heavy i {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 .standalone-link:hover span,
 .standalone-link:focus span {
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 .has-icon {
@@ -7530,7 +7531,7 @@ h3 a:focus {
 
 .has-icon:hover span,
 .has-icon:focus span {
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 dl {
@@ -7538,7 +7539,7 @@ dl {
 }
 
 dl dt {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     line-height: 1.23529
 }
 
@@ -7607,9 +7608,9 @@ a .fa {
 .panno-arrow-right,
 .panno-arrow-left,
 .panno-plus {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     font-size: 16px;
-    color: #1E64C8;
+    color: #1b95d4;
     margin-right: 6px
 }
 
@@ -7752,7 +7753,7 @@ a .fa {
 .pageheader .navbar-default .nav-primary>li>a,
 .pageheader .navbar-default .nav-primary>li>a:hover,
 .pageheader .navbar-default .nav-primary>li>a:focus {
-    color: #1E64C8;
+    color: #1b95d4;
     background-color: transparent;
     text-transform: uppercase;
     text-decoration: none;
@@ -7776,11 +7777,11 @@ a .fa {
 
 .pageheader .navbar-default .nav-primary>li>a:hover span,
 .pageheader .navbar-default .nav-primary>li>a:focus span {
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 .pageheader .navbar-default .nav-primary>li.active>a span {
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 .pageheader .navbar-default .navbar-nav .dropdown .dropdown-toggle {
@@ -7835,7 +7836,7 @@ a .fa {
         color: #fff
     }
     .pageheader .navbar-default .navbar-nav .dropdown .dropdown-menu li:hover a {
-        color: #1E64C8
+        color: #1b95d4
     }
     .pageheader .navbar-default .navbar-nav .dropdown .dropdown-menu li:first-child {
         border-top: 1px solid #ccc
@@ -7977,8 +7978,8 @@ a .fa {
 }
 
 .pageheader .search-container input {
-    font-family: "PannoTextMedium", Arial, sans-serif;
-    color: #1E64C8;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
+    color: #1b95d4;
     padding: 3px 10px;
     border: 0;
     box-shadow: 0;
@@ -8014,14 +8015,14 @@ a .fa {
 
 @media (max-width: 767px) {
     .pageheader.faculty button.btn-primary {
-        background-color: #1E64C8;
+        background-color: #1b95d4;
         color: #fff
     }
 }
 
 @media (max-width: 767px) {
     .pageheader .navbar-default {
-        background-color: #1E64C8
+        background-color: #1b95d4
     }
     .pageheader .navbar-default .toggle-search {
         position: absolute;
@@ -8160,7 +8161,7 @@ a .fa {
     }
     .pageheader .nav-primary {
         font-size: 20px;
-        font-family: "PannoTextMedium", Arial, sans-serif;
+        font-family: "LeagueGothic-Regular", Arial, sans-serif;
         margin-left: -15px
     }
     .pageheader .toggle-search {
@@ -8238,8 +8239,8 @@ a .fa {
 .linklist li a:hover,
 .linklist li a:focus,
 .linklist li a.selected {
-    color: #1E64C8;
-    border-color: #1E64C8
+    color: #1b95d4;
+    border-color: #1b95d4
 }
 
 .linklist li ul {
@@ -8270,11 +8271,11 @@ a .fa {
 .linklist.linklist-dark a:hover,
 .linklist.linklist-dark a:focus,
 .linklist.linklist-dark a.selected {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 .bg-tertiary .linklist li:before {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 .content-header-home .linklist li i,
@@ -8303,7 +8304,7 @@ a .fa {
 
 .content-header-home .image-container {
     position: relative;
-    background-color: #1E64C8;
+    background-color: #1b95d4;
     background-image: none;
     height: 200px;
     margin: 0 10px
@@ -8333,7 +8334,7 @@ a .fa {
     margin-top: -20px;
     z-index: 2;
     padding: 20px;
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 .content-header-home .display .standalone-link {
@@ -8376,7 +8377,7 @@ a .fa {
         width: 100%;
         margin-left: 0;
         padding: 20px;
-        background-color: #1E64C8
+        background-color: #1b95d4
     }
 }
 
@@ -8398,7 +8399,7 @@ a .fa {
 .content-header-subhome .image-container {
     margin-left: -10px;
     position: relative;
-    background-color: #1E64C8;
+    background-color: #1b95d4;
     display: none
 }
 
@@ -8492,10 +8493,10 @@ a .fa {
     display: inline-block;
     padding: 13px 15px 12px;
     color: #fff;
-    background-color: #1E64C8;
+    background-color: #1b95d4;
     font-size: 17px;
     line-height: 15px;
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     border: 0;
     max-width: calc(100vw - 30px);
     overflow: hidden;
@@ -8521,14 +8522,14 @@ a .fa {
 
 .btn-primary,
 .btn-primary i {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 .btn-primary:focus,
 .btn-primary:hover,
 .btn-primary i:focus,
 .btn-primary i:hover {
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 .btn-primary:focus,
@@ -8585,7 +8586,7 @@ a .fa {
 .btn-default i:hover,
 .btn-default i:focus i,
 .btn-default i:hover i {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 
@@ -8612,7 +8613,7 @@ a .fa {
 
 .result-item h2 a:hover,
 .result-item h2 a:focus {
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 .result-item .breadcrumb {
@@ -8716,13 +8717,13 @@ a .fa {
 
 .pagination>li>a {
     font-size: 14px;
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     width: 31px;
     height: 31px;
     background-color: #e9f0fa;
     border: 0 !important;
     border-radius: 0 !important;
-    color: #1E64C8;
+    color: #1b95d4;
     padding: 6px 0;
     text-align: center;
     word-break: normal
@@ -8754,7 +8755,7 @@ a .fa {
 
 .pagination>li>a:hover,
 .pagination>li>a:focus {
-    background-color: #1E64C8;
+    background-color: #1b95d4;
     color: #fff
 }
 
@@ -8766,7 +8767,7 @@ a .fa {
 }
 
 .pagination>li.active a {
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 .inpage-nav-container .h2 {
@@ -8785,8 +8786,8 @@ a .fa {
 }
 
 .inpage-nav-container nav .linklist a.nav-active {
-    border-bottom: 1px solid #1E64C8;
-    color: #1E64C8
+    border-bottom: 1px solid #1b95d4;
+    color: #1b95d4
 }
 
 .panel-group .panel {
@@ -8809,7 +8810,7 @@ a .fa {
 
 .panel-group .panel-heading .panel-title {
     text-transform: none;
-    color: #1E64C8
+    color: #1b95d4
 }
 
 .panel-group .panel-heading .panel-title i {
@@ -8844,7 +8845,7 @@ a .fa {
 
 .panel-group .panel-heading .panel-title a[aria-expanded="true"] {
     color: #fff;
-    background: #1E64C8
+    background: #1b95d4
 }
 
 .panel-group .panel-heading .panel-title a[aria-expanded="true"] .glyphicon-plus {
@@ -8876,8 +8877,8 @@ a .fa {
 .example-layout div[class*='col-']>div {
     width: 100%;
     height: 100%;
-    border: 1px solid #1E64C8;
-    color: #1E64C8;
+    border: 1px solid #1b95d4;
+    color: #1b95d4;
     position: relative;
     text-align: center;
     line-height: 120px
@@ -8888,11 +8889,11 @@ blockquote {
     width: 100%;
     padding: 15px 20px;
     border-left: 0;
-    color: #1E64C8
+    color: #1b95d4
 }
 
 blockquote p {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     font-size: 20px;
     line-height: 1.3
 }
@@ -8916,7 +8917,7 @@ blockquote p {
 
 .news-aside .readmore,
 .events-aside .readmore {
-    font-family: "PannoTextMedium", Arial, sans-serif;
+    font-family: "LeagueGothic-Regular", Arial, sans-serif;
     position: relative;
     padding-left: 18px;
     display: inline-block
@@ -8946,7 +8947,7 @@ blockquote p {
 .news-aside .has-image h3,
 .events-aside .has-image h3 {
     font-family: "PannoTextNormal", Arial, sans-serif;
-    color: #1E64C8;
+    color: #1b95d4;
     margin-bottom: 25px
 }
 
@@ -8974,7 +8975,7 @@ blockquote p {
 
 .newsitem h3 a:hover,
 .newsitem h3 a:focus {
-    border-color: #1E64C8
+    border-color: #1b95d4
 }
 
 .linklist-events {
@@ -8992,8 +8993,8 @@ blockquote p {
 }
 
 .linklist-events li a:hover .h3 span {
-    color: #1E64C8;
-    border-color: #1E64C8
+    color: #1b95d4;
+    border-color: #1b95d4
 }
 
 .linklist-events .date-container {
@@ -9114,7 +9115,7 @@ blockquote p {
 
 .table-newsoverview a {
     font-family: "PannoTextLight", Arial, sans-serif;
-    color: #1E64C8;
+    color: #1b95d4;
     margin-top: 0;
     margin-bottom: 0;
     line-height: 20px;
@@ -9188,7 +9189,7 @@ footer .container-share .fa {
     margin-left: 0;
     font-size: 18px;
     background-color: #fff;
-    color: #1E64C8;
+    color: #1b95d4;
     text-decoration: none
 }
 
@@ -9346,12 +9347,12 @@ footer .container-share .fa:hover.fa-instagram {
 
 .banner.bg-tertiary:hover .read-more span,
 .banner.bg-tertiary:focus .read-more span {
-    border-bottom: 1px solid #1E64C8
+    border-bottom: 1px solid #1b95d4
 }
 
 .banner.bg-tertiary .read-more,
 .banner.bg-tertiary i {
-    color: #1E64C8
+    color: #1b95d4
 }
 
 @media (max-width: 767px) {
@@ -9882,7 +9883,7 @@ footer .container-share .fa:hover.fa-instagram {
 }
 
 .bg-primary {
-    background-color: #1E64C8
+    background-color: #1b95d4
 }
 
 .bg-secondary {
@@ -9940,7 +9941,7 @@ footer .container-share .fa:hover.fa-instagram {
     line-height: 1;
     color: #fff;
     text-align: center;
-    background-color: #1E64C8;
+    background-color: #1b95d4;
     border: 0;
     border-radius: 0
 }
@@ -10291,7 +10292,7 @@ footer .container-share .fa:hover.fa-instagram {
     .pageheader .branding-container .svg * *:not(rect),
     .page-footer .svg *:not(rect),
     .page-footer .svg * *:not(rect) {
-        fill: #1E64C8 !important
+        fill: #1b95d4 !important
     }
     .pageheader .branding-container {
         bottom: 67px
