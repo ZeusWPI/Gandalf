@@ -66,10 +66,18 @@ Isengard::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   #
   # Set default mail address
-  config.action_mailer.default_options = { from: "no-reply@events.ugent.be" }
+  config.action_mailer.default_options = { from: "events@studentkickoff.be" }
 
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.default_url_options = { host: 'events.ugent.be' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { 
+      address: 'smtp.office365.com',
+      port: 587,
+      user_name: "Events@studentkickoff.be",
+      password: Rails.application.secrets.office365password,
+      authentication: :login,
+      encryption: :tls
+    }
+  config.action_mailer.default_url_options = { host: 'events.studentkickoff.be' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).

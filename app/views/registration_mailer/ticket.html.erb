@@ -34,13 +34,13 @@
                   <table width="100%" cellspacing="0" cellpadding="0">
                     <tbody>
                     <tr>
-                      <td valign="top" width="90"><a style="color: #007dd6; text-decoration: none;" href="http://www.ugent.be/" target="_blank"> <img style="vertical-align: top; width: 90px;" src="http://www.communicatie.ugent.be/nieuwsbrief/logo200.png" alt="Universiteit gent" width="90" /> </a></td>
+                      <td valign="top" width="90"><a style="color: #1b95d4; text-decoration: none;" href="http://www.studentkickoff.be/" target="_blank"> <img style="vertical-align: top; width: 90px;" src="https://studentkickoff.be/assets/images/logo_sko_animated.svg" alt="Student Kick-Off" width="90" /> </a></td>
                       <td width="20">&nbsp;</td>
                       <td valign="top">
                         <table cellspacing="0" cellpadding="0" align="right">
                           <tbody>
                           <tr>
-                            <td class="pr-15" style="font: 17px/18px Arial, Helvetica, sans-serif; color: #007dd6;"><strong><%= @registration.event.name %></strong><br /> <span style="font-size: 14px;"><%= nice_date @registration.event.start_date %></span><%if @registration.number_of_tickets > 1 %><br/>Ticket <%= @registration.sequence_number%>/<%= @registration.number_of_tickets %><%end%></td>
+                            <td class="pr-15" style="font: 17px/18px Arial, Helvetica, sans-serif; color: #1b95d4;"><strong><%= @registration.event.name %></strong><br /> <span style="font-size: 14px;"><%= nice_date @registration.event.start_date %></span><%if @registration.number_of_tickets > 1 %><br/>Ticket <%= @registration.sequence_number%>/<%= @registration.number_of_tickets %><%end%></td>
                           </tr>
                           </tbody>
                           </tbody>
@@ -57,7 +57,7 @@
                   <table width="100%" cellspacing="0" cellpadding="0">
                     <tbody>
                     <tr>
-                      <td style="padding: 0 0 18px; font: bold 16px/21px Arial, Helvetica, sans-serif; color: #06c;">Ticket <%= @registration.event.name %></td>
+                      <td style="padding: 0 0 18px; font: bold 16px/21px Arial, Helvetica, sans-serif; color: #1b95d4;">Ticket <%= @registration.event.name %></td>
                     </tr>
                     <tr>
                       <td style="padding: 0 0 39px; border-bottom: 2px solid #ececf1;">
@@ -69,7 +69,7 @@
                               <tr>
                                 <td class="pr-15" style="padding: 0 30px 24px 0; font: 13px/18px Arial, Helvetica, sans-serif; color: #202020;">
                                   <%= raw t('mail.ticket_start', :salutation => @registration.salutation, :name => @registration.name, :mail=>@registration.event.contact_email)%>
-                                 <!-- <br/><br/><span style="padding: 0 0 18px; font: bold 16px/21px Arial, Helvetica, sans-serif; color: #06c;"><%= t('mail.ticket_program') %></span>
+                                 <!-- <br/><br/><span style="padding: 0 0 18px; font: bold 16px/21px Arial, Helvetica, sans-serif; color: #1b95d4;"><%= t('mail.ticket_program') %></span>
                                   <br/> < %= t('mail.ticket_eventinfo') %>-->
                                 </td>
                               </tr>
@@ -78,7 +78,7 @@
                                   <table width="151" cellspacing="0" cellpadding="0">
                                     <tbody>
                                     <tr>
-                                      <td class="active-d" style="mso-padding-alt: 4px 14px 10px; font: 13px/25px Arial, Helvetica, sans-serif;" align="center" bgcolor="#e8eff9"><a style="padding: 8px 14px; color: #1e64c8; text-decoration: none; display: block;" href="<%= @registration.event.website %>" target="_blank"> <span class="rarr">&rarr;</span><%= t('mail.more_info')%></a></td>
+                                      <td class="active-d" style="mso-padding-alt: 4px 14px 10px; font: 13px/25px Arial, Helvetica, sans-serif;" align="center" bgcolor="#fab73e"><a style="padding: 8px 14px; color: #1b95d4; text-decoration: none; display: block;" href="<%= @registration.event.website %>" target="_blank"> <span class="rarr">&rarr;</span><%= t('mail.more_info')%></a></td>
                                     </tr>
                                     </tbody>
                                   </table>

@@ -16,7 +16,7 @@
   </tr>
   <tr>
     <td><strong>Organisation</strong></td>
-    <td><%= @event.club.name %></td>
+    <td>Student Kick-Off<%#= @event.club.name %></td>
   </tr>
   <tr>
     <td><strong>Location</strong></td>
@@ -47,7 +47,7 @@
 
 <p>It's possible to create a new ticket on our website.</p>
 
-<p>Kind regards,<br /><%= @event.club.name %></p>
+<p>Kind regards,<br />Student Kick-Off<%#= @event.club.name %></p>
 
 <% unless @event.signature.blank? %>
     <%= simple_format @event.signature %>

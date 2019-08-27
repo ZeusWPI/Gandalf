@@ -10,7 +10,7 @@
   <% end %>
 </h1>
 
-<% if can? :view_stats, @event or can? :crud, @event %>
+<% if can? :view_stats, @event and can? :crud, @event %>
 <div class="row">
   <div class="col-lg-12">
     <ul class="nav nav-tabs">
