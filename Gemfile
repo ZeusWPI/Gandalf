@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.2'
 
 # We <3 New Relic
 gem 'newrelic_rpm'
@@ -138,7 +138,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry-byebug'
+  #gem 'pry-byebug'
 end
 
 group :production do
