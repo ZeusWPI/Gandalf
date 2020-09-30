@@ -8,17 +8,21 @@
 #
 require 'webmock'
 WebMock.allow_net_connect!
-url = 'https://raw.githubusercontent.com/ZeusWPI/hydra/62c7a07f7c3db3fc4460929338d3a3b1bbd06bdb/iOS/Resources/Associations.json'
-hash = JSON(HTTParty.get(url).body)
+url = 'https://dsa.ugent.be/api/verenigingen'
+hash = JSON(HTTParty.get(url).body)["associations"]
 WebMock.disable_net_connect!
 
+puts hash
+
 hash.each do |club|
-  next unless club['parentAssociation'] == 'FKCENTRAAL'
+  puts club
+  next unless club['path'].include?('fk')
+  puts "From fk!"
 
   club = Club.new do |c|
-    c.internal_name = club['internalName'].downcase
-    c.display_name = club['displayName']
-    c.full_name = club['fullName'] unless club['fullName'].blank?
+    c.internal_name = club['abbreviation'].downcase
+    c.display_name = club['name']
+    c.full_name = club['name'] unless club['name'].blank?
   end
   club.save
 end
