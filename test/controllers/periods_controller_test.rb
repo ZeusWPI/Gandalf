@@ -14,7 +14,7 @@ class PeriodsControllerTest < ActionController::TestCase
       }
     }, format: 'js'
 
-    assert_redirected_to new_user_session_path
+  assert_response 401
   end
 
   test "creation requires event crud" do
