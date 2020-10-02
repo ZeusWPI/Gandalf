@@ -62,7 +62,7 @@ GEM
     bootsnap (1.4.8)
       msgpack (~> 1.0)
     builder (3.2.4)
-    cancan (1.6.10)
+    cancancan (3.1.0)
     capistrano (3.14.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -323,6 +323,9 @@ GEM
     tins (1.25.0)
       sync
     ttfunk (1.6.2.1)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     twitter-typeahead-rails (0.11.1)
       actionpack (>= 3.1)
       jquery-rails
@@ -355,7 +358,7 @@ DEPENDENCIES
   annotate
   barcodes!
   bootsnap
-  cancan
+  cancancan
   capistrano (~> 3.1)
   capistrano-rails (~> 1.1)
   capistrano-rbenv
@@ -397,6 +400,7 @@ DEPENDENCIES
   spreadsheet
   sqlite3
   therubyracer
+  turbolinks
   twitter-typeahead-rails
   uglifier
   webmock

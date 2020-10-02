@@ -5,6 +5,8 @@ gem 'rails', '~> 5.0'
 
 gem 'bootsnap'
 
+gem 'turbolinks'
+
 # We <3 New Relic
 gem 'newrelic_rpm'
 
@@ -58,7 +60,7 @@ gem 'omniauth-oauth2'
 gem 'simple_token_authentication'
 
 # CanCan is used for authorization
-gem 'cancan'
+gem 'cancancan'
 gem 'httparty'
 
 # Logging is awesome, and paper_trail even more

@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require ckeditor-jquery
+//= require chartkick
+//= require Chart.bundle
 //= require select2
 //= require twitter/typeahead.min
 //= require_tree .

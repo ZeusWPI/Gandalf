@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :restrict_to_development
+  before_action :restrict_to_development
 
   def login
     u = User.find_or_create_by(username: "tnnaesse", admin: true)
