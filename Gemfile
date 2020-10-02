@@ -75,6 +75,8 @@ end
 
 # Barcodes
 gem 'barcodes', git: "git://github.com/nudded/barcodes"
+gem 'chunky_png'
+gem 'barby'
 
 # Pagination
 gem 'will_paginate', '~> 3.0'
@@ -128,6 +130,9 @@ gem 'twitter-typeahead-rails'
 
 # Enum support with prefixes
 gem 'simple_enum'
+
+# Enable content_tag_for useage
+gem 'record_tag_helper'
 
 group :development do
   gem 'rails-erd'

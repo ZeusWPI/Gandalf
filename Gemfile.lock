@@ -58,6 +58,7 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     arel (9.0.0)
+    barby (0.6.8)
     bcrypt (3.1.16)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -90,6 +91,7 @@ GEM
     chartkick (3.4.0)
     choice (0.2.0)
     chronic (0.10.2)
+    chunky_png (1.3.12)
     ckeditor_rails (4.10.0)
       railties (>= 3.0)
     climate_control (0.2.0)
@@ -255,6 +257,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rdoc (6.2.1)
+    record_tag_helper (1.0.1)
+      actionview (>= 5)
     ref (2.0.0)
     regexp_parser (1.8.1)
     request_store (1.5.0)
@@ -356,6 +360,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  barby
   barcodes!
   bootsnap
   cancancan
@@ -365,6 +370,7 @@ DEPENDENCIES
   capistrano-rvm
   capybara
   chartkick
+  chunky_png
   ckeditor_rails
   coffee-rails
   coveralls
@@ -389,6 +395,7 @@ DEPENDENCIES
   puma
   rails (~> 5.0)
   rails-erd
+  record_tag_helper
   ri_cal
   rmagick
   sass-rails

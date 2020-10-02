@@ -111,7 +111,7 @@ class EventsController < ApplicationController
     if @event.export_status == 'done'
       render partial: 'events/export'
     else
-      redirect_to :back, status: :not_found
+      redirect_back(fallback_location: @show, status: :not_found)
     end
   end
 
