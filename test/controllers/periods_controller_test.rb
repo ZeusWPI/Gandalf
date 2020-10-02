@@ -5,7 +5,7 @@ class PeriodsControllerTest < ActionController::TestCase
 
   test "creation forces login" do
 
-    post :create, {
+    post :create, params: {
       event_id: 2,
       period: {
         name: 'Periods 1',
@@ -20,7 +20,7 @@ class PeriodsControllerTest < ActionController::TestCase
   test "creation requires event crud" do
     sign_in users(:tom)
 
-    post :create, {
+    post :create, params: {
       event_id: 2,
       period: {
         name: 'Periods 2',
@@ -36,7 +36,7 @@ class PeriodsControllerTest < ActionController::TestCase
   test "creation works" do
     sign_in users(:tom)
 
-    post :create, {
+    post :create, params: {
       format: :js,
       event_id: 1,
       period: {

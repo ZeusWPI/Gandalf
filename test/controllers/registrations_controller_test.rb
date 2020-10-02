@@ -18,7 +18,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
       # Posting the csv file
-      post :upload, {
+      post :upload, params: {
         event_id: 1,
         separator: ';',
         amount_column: 'Amount',
@@ -42,13 +42,13 @@ class RegistrationsControllerTest < ActionController::TestCase
 
   test "resend actuallly sends an email" do
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      xhr :get, :resend, event_id: events(:codenight), id: registrations(:one).id
+      get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:one).id }
     end
   end
 
   test "resend sends payment email when !is_paid" do
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      xhr :get, :resend, event_id: events(:codenight), id: registrations(:three).id
+      get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:three).id }
     end
 
     email = ActionMailer::Base.deliveries.last
@@ -57,7 +57,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
   test "resend sends ticket email when is_paid" do
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      xhr :get, :resend, event_id: events(:codenight), id: registrations(:one).id
+      get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:one).id }
     end
 
     email = ActionMailer::Base.deliveries.last
@@ -70,7 +70,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     e.save
 
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      xhr :get, :resend, event_id: e, id: registrations(:three).id
+      get :resend, xhr: true, params: { event_id: e, id: registrations(:three).id }
     end
 
     email = ActionMailer::Base.deliveries.last
@@ -86,7 +86,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     e.save
 
     assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      xhr :get, :resend, event_id: e, id: registrations(:one).id
+      get :resend, xhr: true, params: { event_id: e, id: registrations(:one).id }
     end
 
     email = ActionMailer::Base.deliveries.last
@@ -104,11 +104,11 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     [three, four].each do |registration|
       assert_difference "ActionMailer::Base.deliveries.size", +1 do
-        xhr :put, :update, {
+        put :update, xhr: true, params: {
           event_id: registration.event.id,
           id: registration.id,
           registration: { to_pay: 0 }
-        }, remote: true
+        }
       end
       assert_equal registration.price, registration.reload.paid
       email = ActionMailer::Base.deliveries.last
@@ -128,11 +128,11 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     [three, four].each do |registration|
       assert_difference "ActionMailer::Base.deliveries.size", +1 do
-        xhr :put, :update, {
+        put :update, xhr: true, params: {
           event_id: registration.event.id,
           id: registration.id,
           registration: { to_pay: to_pay }
-        }, remote: true
+        }
       end
       assert registration.price > registration.reload.paid
       email = ActionMailer::Base.deliveries.last
@@ -152,11 +152,11 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     [three, four].each do |registration|
       assert_difference "ActionMailer::Base.deliveries.size", +2 do
-        xhr :put, :update, {
+        put :update, xhr: true, params: {
           event_id: registration.event.id,
           id: registration.id,
           registration: { to_pay: to_pay }
-        }, remote: true
+        }
       end
       assert registration.price < registration.reload.paid
 
@@ -180,11 +180,11 @@ class RegistrationsControllerTest < ActionController::TestCase
     [three, four].each do |registration|
       paid, code = registration.paid, registration.payment_code
       assert_no_difference "ActionMailer::Base.deliveries.size" do
-        xhr :put, :update, {
+        put :update, xhr: true, params: {
           event_id: registration.event.id,
           id: registration.id,
           registration: { to_pay: registration.to_pay }
-        }, remote: true
+        }
       end
       assert_equal paid, registration.reload.paid
       assert_equal code, registration.reload.payment_code
