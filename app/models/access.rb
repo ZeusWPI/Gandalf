@@ -12,6 +12,6 @@
 
 class Access < ActiveRecord::Base
   belongs_to :access_level
-  belongs_to :period
+  belongs_to :period, optional: true
   belongs_to :registration
 end
