@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TicketManipulationTest < ActionDispatch::IntegrationTest
 
-  self.use_transactional_fixtures = false
+  self.use_transactional_tests = false
 
   test "add ticket" do
     sign_in users(:adminfelix)

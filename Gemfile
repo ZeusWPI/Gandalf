@@ -101,9 +101,6 @@ gem 'delayed_job_active_record'
 # Whenever cronjobs
 gem 'whenever', require: false
 
-# Coveralls
-gem 'coveralls', require: false
-
 # Deployment
 
 # Stubbing http requests

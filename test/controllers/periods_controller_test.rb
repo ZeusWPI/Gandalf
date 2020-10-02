@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PeriodsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   test "creation forces login" do
 

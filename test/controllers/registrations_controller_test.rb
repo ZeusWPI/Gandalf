@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RegistrationsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   def setup
     stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
