@@ -208,7 +208,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     assert_difference "Registration.count", +1 do
       assert_difference "ActionMailer::Base.deliveries.size", +1 do
-        post :basic, posthash
+        post :basic, params: posthash 
       end
     end
   end

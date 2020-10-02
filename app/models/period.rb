@@ -12,6 +12,6 @@
 #
 
 class Period < ActiveRecord::Base
-  belongs_to :event
+  belongs_to :event, optional: true
   has_many :accesses
 end
