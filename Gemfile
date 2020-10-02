@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 5.0'
+
+gem 'bootsnap'
 
 # We <3 New Relic
 gem 'newrelic_rpm'
@@ -10,13 +12,13 @@ gem 'newrelic_rpm'
 gem 'sqlite3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0'
+gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -24,11 +26,8 @@ gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 # add annotations of schema inside models
 gem 'annotate'
@@ -63,7 +62,7 @@ gem 'cancan'
 gem 'httparty'
 
 # Logging is awesome, and paper_trail even more
-gem 'paper_trail', '~> 4.0.0.beta'
+gem 'paper_trail'
 
 # Njam njam, IBAN
 gem 'iban-tools'
@@ -115,7 +114,7 @@ gem 'jc-validates_timeliness'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem 'airbrake'
+#gem 'airbrake', '~> 4.3'
 
 gem 'rmagick'
 
@@ -135,6 +134,8 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
   gem 'capistrano-rbenv'
+
+  gem 'listen'
 end
 
 group :development, :test do
