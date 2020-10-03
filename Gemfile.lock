@@ -116,13 +116,6 @@ GEM
     cliver (0.3.2)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
-    coffee-rails (5.0.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 5.2.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.7)
     crack (0.4.4)
     crass (1.0.6)
@@ -331,6 +324,8 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.10)
     timeliness (0.3.10)
+    tinymce-rails (5.5.1)
+      railties (>= 3.1.1)
     ttfunk (1.6.2.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
@@ -377,7 +372,6 @@ DEPENDENCIES
   capybara
   chartkick
   chunky_png
-  coffee-rails
   daemons
   datagrid
   delayed_job (~> 4.0)
@@ -412,6 +406,7 @@ DEPENDENCIES
   spreadsheet
   sqlite3
   therubyracer
+  tinymce-rails
   turbolinks
   twitter-typeahead-rails
   uglifier
