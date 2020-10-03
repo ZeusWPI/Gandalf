@@ -8,9 +8,6 @@ gem 'rails-controller-testing'
 gem 'bootsnap'
 gem 'turbolinks'
 
-# We <3 New Relic
-gem 'newrelic_rpm'
-
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
@@ -38,16 +35,6 @@ gem 'simple_form'
 # Datagrid is nice
 gem 'datagrid'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-group :test do
-  gem 'capybara'
-  gem 'poltergeist'
-end
-
 # Let's use devise for users
 gem 'devise'
 gem 'devise_cas_authenticatable'
@@ -67,9 +54,7 @@ gem 'paper_trail'
 # Njam njam, IBAN
 gem 'iban-tools', git: 'https://github.com/alphasights/iban-tools.git', branch: 'master'
 
-group :production, :deployment do
-  gem 'puma'
-end
+
 
 # Barcodes
 gem 'barcodes', git: "git://github.com/nudded/barcodes"
@@ -132,18 +117,28 @@ gem 'record_tag_helper'
 group :development do
   gem 'rails-erd'
 
-  gem 'capistrano', '~> 3.1'
-  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano', '~> 3.10'
+  gem 'capistrano-rails', '~> 1.6'
   gem 'capistrano-rvm'
   gem 'capistrano-rbenv'
 
   gem 'listen'
 end
 
-group :development, :test do
-  #gem 'pry-byebug'
-end
-
 group :production do
   gem 'mysql2' # Database
+end
+
+group :test do
+  gem 'capybara'
+  gem 'poltergeist'
+end
+
+group :production, :deployment do
+  gem 'puma'
+end
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
