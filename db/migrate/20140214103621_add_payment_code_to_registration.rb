@@ -1,4 +1,4 @@
-class AddPaymentCodeToRegistration < ActiveRecord::Migration
+class AddPaymentCodeToRegistration < ActiveRecord::Migration[4.2]
   def change
     add_column :registrations, :payment_code, :string
 

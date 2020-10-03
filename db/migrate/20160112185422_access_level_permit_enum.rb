@@ -1,4 +1,4 @@
-class AccessLevelPermitEnum < ActiveRecord::Migration
+class AccessLevelPermitEnum < ActiveRecord::Migration[4.2]
   def up
     add_column :access_levels, :permit, :string, :default => :everyone
     AccessLevel.all.each do |a|

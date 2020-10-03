@@ -1,4 +1,4 @@
-class AddRandomCheckToRegistration < ActiveRecord::Migration
+class AddRandomCheckToRegistration < ActiveRecord::Migration[4.2]
   def change
     add_column :registrations, :random_check, :integer, limit: 8
 

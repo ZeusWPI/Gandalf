@@ -1,4 +1,4 @@
-class AddConfirmedBooleanToPartners < ActiveRecord::Migration
+class AddConfirmedBooleanToPartners < ActiveRecord::Migration[4.2]
   def up
     add_column :partners, :confirmed, :boolean
   end

@@ -1,4 +1,4 @@
-class AddAttachmentExportToEvent < ActiveRecord::Migration
+class AddAttachmentExportToEvent < ActiveRecord::Migration[4.2]
   def self.up
     add_column :events, :export_file_name, :string
     add_column :events, :export_content_type, :string

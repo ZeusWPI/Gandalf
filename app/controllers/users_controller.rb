@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def login
     u = User.find_or_create_by(username: "tnnaesse", admin: true)
-    u.clubs = Club.where(internal_name: 'zeus')
+    u.clubs = [Club.find_or_create_by(internal_name: 'zeus', full_name: 'Zeus WPI', display_name: 'Zeus <3')]
     sign_in(u)
 
     redirect_to '/'

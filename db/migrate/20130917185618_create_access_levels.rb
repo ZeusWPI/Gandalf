@@ -1,4 +1,4 @@
-class CreateAccessLevels < ActiveRecord::Migration
+class CreateAccessLevels < ActiveRecord::Migration[4.2]
   def change
     create_table :access_levels do |t|
       t.string :name
