@@ -27,8 +27,7 @@
 #  signature               :text
 #
 
-class Event < ActiveRecord::Base
-
+class Event < ApplicationRecord
   belongs_to :club
 
   has_many :access_levels, dependent: :destroy
@@ -48,7 +47,7 @@ class Event < ActiveRecord::Base
   validates :start_date, presence: true
 
   validates :contact_email, email: true
-  validates_with IBANValidator
+  validates_with IbanValidator
 
 
   validates_datetime :end_date, after: :start_date

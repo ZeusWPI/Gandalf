@@ -15,7 +15,7 @@
 #  permit      :string           default('everyone')
 #
 
-class AccessLevel < ActiveRecord::Base
+class AccessLevel < ApplicationRecord
   belongs_to :event, optional: true
 
   has_many :included_zones, dependent: :destroy

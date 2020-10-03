@@ -18,7 +18,7 @@
 #  payment_code   :string
 #
 
-class Registration < ActiveRecord::Base
+class Registration < ApplicationRecord
   belongs_to :event, optional: true
 
   has_many :accesses, dependent: :destroy

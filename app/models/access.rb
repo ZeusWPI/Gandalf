@@ -10,7 +10,7 @@
 #  access_level_id :integer
 #
 
-class Access < ActiveRecord::Base
+class Access < ApplicationRecord
   belongs_to :access_level
   belongs_to :period, optional: true
   belongs_to :registration

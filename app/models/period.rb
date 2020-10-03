@@ -11,7 +11,7 @@
 #  event_id   :integer
 #
 
-class Period < ActiveRecord::Base
+class Period < ApplicationRecord
   belongs_to :event, optional: true
   has_many :accesses
 end

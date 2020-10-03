@@ -11,7 +11,7 @@
 #  sold_tickets :integer          default(0)
 #
 
-class Promo < ActiveRecord::Base
+class Promo < ApplicationRecord
   belongs_to :event
   has_and_belongs_to_many :access_levels
 

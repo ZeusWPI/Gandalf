@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 6.0'
 gem 'rails-controller-testing'
 
+# Rails required gems
 gem 'bootsnap'
-
 gem 'turbolinks'
 
 # We <3 New Relic
@@ -68,7 +68,7 @@ gem 'httparty'
 gem 'paper_trail'
 
 # Njam njam, IBAN
-gem 'iban-tools'
+gem 'iban-tools', git: 'https://github.com/alphasights/iban-tools.git', branch: 'master'
 
 group :production, :deployment do
   gem 'puma'
@@ -82,9 +82,6 @@ gem 'barby'
 # Pagination
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
-
-# WYSIWYG
-gem 'ckeditor_rails'
 
 # Statistics
 gem 'chartkick'
