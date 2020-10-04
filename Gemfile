@@ -123,6 +123,7 @@ group :development do
   gem 'capistrano-rbenv'
 
   gem 'listen'
+  gem 'letter_opener'
 end
 
 group :production do
