@@ -20,15 +20,16 @@ In short, Gandalf is a project that does everything that makes organising and ma
 ## Https
 
 You need a https setup to use cas. The process is quite simple. You need to generate a self signed certificate which is just a few commands and then
+```
+openssl genrsa -des3 -passout pass:xxxx -out server.pass.key 2048
+openssl rsa -passin pass:xxxx -in server.pass.key -out server.key
+rm server.pass.key
 
-	openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
-	openssl rsa -passin pass:x -in server.pass.key -out server.key
-	rm server.pass.key
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
 
-	openssl req -new -key server.key -out server.csr
-	openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
-
-	rails s -b 'ssl://localhost:8080?key=server.key&cert=server.crt'
+rails s -b 'ssl://localhost:8080?key=server.key&cert=server.crt'
+```
 
 # Contributors (in order of contribution)
 1. Felix Van der Jeugt
