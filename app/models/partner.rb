@@ -22,7 +22,7 @@
 #  confirmed              :boolean
 #
 
-class Partner < ActiveRecord::Base
+class Partner < ApplicationRecord
   acts_as_token_authenticatable
   has_paper_trail
 

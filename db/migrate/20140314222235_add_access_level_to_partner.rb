@@ -1,4 +1,4 @@
-class AddAccessLevelToPartner < ActiveRecord::Migration
+class AddAccessLevelToPartner < ActiveRecord::Migration[4.2]
   def up
     add_reference :partners, :access_level, index: true
   end

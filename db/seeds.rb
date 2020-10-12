@@ -8,25 +8,31 @@
 #
 require 'webmock'
 WebMock.allow_net_connect!
-url = 'https://raw.githubusercontent.com/ZeusWPI/hydra/62c7a07f7c3db3fc4460929338d3a3b1bbd06bdb/iOS/Resources/Associations.json'
-hash = JSON(HTTParty.get(url).body)
+url = 'https://dsa.ugent.be/api/verenigingen'
+data = JSON(HTTParty.get(url).body)["associations"]
 WebMock.disable_net_connect!
 
-hash.each do |club|
-  next unless club['parentAssociation'] == 'FKCENTRAAL'
+puts "Seed clubs from DSA api"
+puts "---"
+
+data.each do |association|
+  next unless association['path'].include?('fk')
+
+  puts "Add " + association['name']
 
   club = Club.new do |c|
-    c.internal_name = club['internalName'].downcase
-    c.display_name = club['displayName']
-    c.full_name = club['fullName'] unless club['fullName'].blank?
+    c.internal_name = association['abbreviation'].downcase
+    c.display_name = association['name']
+    c.full_name = association['name'] unless association['name'].blank?
   end
   club.save
 end
 
 # Zeus peoples
+puts "Add Zeus WPI <3"
 club = Club.new do |c|
   c.internal_name = 'zeus'
   c.display_name = 'Zeus WPI'
-  c.full_name = nil
+  c.full_name = 'Zeus WPI'
 end
 club.save

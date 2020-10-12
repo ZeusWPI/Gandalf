@@ -1,6 +1,6 @@
 class AccessLevelsController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:show, :new]
+  before_action :authenticate_user!, except: [:show, :new]
 
   respond_to :html, :js
 

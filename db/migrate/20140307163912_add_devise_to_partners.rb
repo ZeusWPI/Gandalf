@@ -1,4 +1,4 @@
-class AddDeviseToPartners < ActiveRecord::Migration
+class AddDeviseToPartners < ActiveRecord::Migration[4.2]
   def self.up
     change_table(:partners) do |t|
       ## Database authenticatable

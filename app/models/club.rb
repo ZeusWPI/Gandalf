@@ -10,7 +10,7 @@
 #  updated_at    :datetime
 #
 
-class Club < ActiveRecord::Base
+class Club < ApplicationRecord
 
   has_many :events
 

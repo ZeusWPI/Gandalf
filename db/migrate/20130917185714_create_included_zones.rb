@@ -1,4 +1,4 @@
-class CreateIncludedZones < ActiveRecord::Migration
+class CreateIncludedZones < ActiveRecord::Migration[4.2]
   def change
     create_table :included_zones do |t|
       t.references :zone, index: true

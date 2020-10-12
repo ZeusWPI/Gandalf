@@ -18,8 +18,9 @@
 #  payment_code   :string
 #
 
-class Registration < ActiveRecord::Base
-  belongs_to :event
+class Registration < ApplicationRecord
+  belongs_to :event, optional: true
+
   has_many :accesses, dependent: :destroy
   has_many :access_levels, through: :accesses
 
@@ -29,9 +30,8 @@ class Registration < ActiveRecord::Base
   # Uniqueness temporarily disabled; see the Partner model for the reason
   #validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
-  validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" },
-    uniqueness: { scope: :event }, allow_blank: true
-  validates :student_number, presence: true, if: "access_levels.first.try(:requires_login?)"
+  validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }, uniqueness: { scope: :event }, allow_blank: true
+  validates :student_number, presence: true, if: -> { access_levels.first.try(:requires_login?) }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true

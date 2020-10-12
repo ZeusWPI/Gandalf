@@ -9,7 +9,7 @@
 #  updated_at      :datetime
 #
 
-class IncludedZone < ActiveRecord::Base
+class IncludedZone < ApplicationRecord
   belongs_to :zone
   belongs_to :access_level
 end

@@ -1,4 +1,4 @@
-class CreateZoneAccesses < ActiveRecord::Migration
+class CreateZoneAccesses < ActiveRecord::Migration[4.2]
   def change
     create_table :zone_accesses do |t|
       t.references :zone, index: true

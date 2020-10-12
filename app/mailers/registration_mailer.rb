@@ -1,3 +1,7 @@
+require 'barby'
+require 'barby/barcode/ean_13'
+require 'barby/outputter/png_outputter'
+
 class RegistrationMailer < ActionMailer::Base
 
   helper ApplicationHelper
@@ -12,9 +16,11 @@ class RegistrationMailer < ActionMailer::Base
   def ticket(registration)
     @registration = registration
 
-    barcode = Barcodes.create('EAN13', data: registration.barcode_data, bar_width: 35, bar_height: 1500, caption_height: 300, caption_size: 275 ) # required: height > size
-
-    image = Barcodes::Renderer::Image.new(barcode).render
+    barcode = Barby::EAN13.new(registration.barcode_data)
+    pngoutputter = Barby::PngOutputter.new(barcode)
+    pngoutputter.xdim = 2
+    pngoutputter.ydim = 1
+    image = pngoutputter.to_png
     attachments.inline['barcode.png'] = image
 
     tilted_image = Magick::Image.from_blob(image).first.rotate!(-90).to_blob

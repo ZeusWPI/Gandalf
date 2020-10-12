@@ -1,4 +1,4 @@
-class DropAccessLevelPublic < ActiveRecord::Migration
+class DropAccessLevelPublic < ActiveRecord::Migration[4.2]
   def up
     AccessLevel.where(public: false).each do |a|
       a.update_attribute :hidden, true

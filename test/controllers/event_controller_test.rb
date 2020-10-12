@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EventControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   def setup
     stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
@@ -13,12 +13,12 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "should get show" do
-    get :show, id: events(:codenight).id
+    get :show, params: { id: events(:codenight).id }
     assert_response :success
   end
 
   test "should get create" do
-    post :create, id: events(:codenight).id, event: events(:codenight).attributes
+    post :create, params: { id: events(:codenight).id, event: events(:codenight).attributes }
     assert_response :redirect
   end
 
@@ -28,7 +28,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "should get update" do
-    get :update, id: events(:codenight).id, event: events(:codenight).attributes
+    get :update, params: { id: events(:codenight).id, event: events(:codenight).attributes }
     assert_response :success
   end
 
@@ -38,7 +38,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "should get scan" do
-    get :scan, id: events(:codenight).id
+    get :scan, params: { id: events(:codenight).id }
     assert_response :success
   end
 
@@ -51,32 +51,32 @@ class EventControllerTest < ActionController::TestCase
     assert e.registration_open
     assert ability.can?(:register, e)
 
-    post :toggle_registration_open, id: e.id
+    post :toggle_registration_open, params: { id: e.id }
     assert_not e.reload.registration_open
     assert_not ability.can?(:register, e)
 
-    post :toggle_registration_open, id: e.id
+    post :toggle_registration_open, params: { id: e.id }
     assert e.reload.registration_open
     assert ability.can?(:register, e)
   end
 
   test "validate correct barcode" do
-    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
   end
 
   test "validate correct name" do
-    post :scan_name, id: events(:codenight).id, name: 'Tom Naessens'
+    post :scan_name, params: { id: events(:codenight).id, name: 'Tom Naessens' } 
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
   end
 
   test "dont check in twice" do
-    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
-    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
     assert(flash[:warning].include? "Person already checked in")
   end
@@ -87,14 +87,14 @@ class EventControllerTest < ActionController::TestCase
     reg.price = 10
     reg.save
 
-    post :scan_barcode, id: events(:codenight).id, code: '1234567891231'
+    post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
     assert_nil(@registration)
     assert(flash[:warning].include? "Person has not paid yet!")
   end
 
   test "dont find registrations from other event" do
-    post :scan_barcode, id: events(:codenight).id, code: '2222222222222'
+    post :scan_barcode, params: { id: events(:codenight).id, code: '2222222222222' }
     assert_response :success
     assert_nil(@registration)
   end
@@ -102,13 +102,13 @@ class EventControllerTest < ActionController::TestCase
   test "dont check in unpaid tickets" do
     sign_out users(:tom)
     sign_in users(:maarten)
-    post :scan_barcode, id: events(:galabal).id, code: '2222222222222'
+    post :scan_barcode, params: { id: events(:galabal).id, code: '2222222222222' }
     assert_response :success
     assert(flash[:warning].include? "Person has not paid yet!")
   end
 
   test "scan page should include check digit" do
-    post :scan_barcode, id: events(:codenight), code: '1234567891231'
+    post :scan_barcode, params: { id: events(:codenight), code: '1234567891231' }
     assert_response :success
     # expect at least one <th> with value "Barcode:" and the full code with checkdigit
     assert_select "tr" do
@@ -120,7 +120,7 @@ class EventControllerTest < ActionController::TestCase
 
   test "member tickets should not be shown for wrong user" do
     sign_out users(:tom)
-    get :show, id: events(:codenight).id
+    get :show, params: { id: events(:codenight).id }
     assert_response :success
 
     assert assigns(:event)
@@ -135,7 +135,7 @@ class EventControllerTest < ActionController::TestCase
     sign_out users(:tom)
     sign_in users(:matthias)
     assert users(:matthias).enrolled_clubs.include? clubs(:zeus)
-    get :show, id: events(:codenight).id
+    get :show, params: { id: events(:codenight).id }
 
     assert_response :success
 
@@ -148,18 +148,18 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "registration form hidden when only member or hidden tickets available" do
-    get :show, id: events(:twaalfurenloop).id
+    get :show, params: { id: events(:twaalfurenloop).id }
     assert_select "#basic-registration-form", false, "Should not contain registration form"
   end
 
   test "registration form shown when a ticket is available" do
-    get :show, id: events(:codenight).id
+    get :show, params: { id: events(:codenight).id }
     assert_select "#basic-registration-form", true, "Should contain registration form"
   end
 
   test "do statistics" do
     date = "#{registrations(:one).created_at.utc.to_date}"
-    get :statistics, { id: 1 }
+    get :statistics, params: { id: 1 }
     assert_response :success
     expected = [
       { name: "Lid",       data: { date => 1 } },
@@ -182,13 +182,13 @@ class EventControllerTest < ActionController::TestCase
 
   test "registration form for student-only event shown when logged in" do
     sign_in users(:matthias)
-    get :show, id: events(:sko).id
+    get :show, params: { id: events(:sko).id }
     assert_select "#basic-registration-form", true, "Should contain registration form"
   end
 
   test "registration form for student-only event hidden when logged out" do
     sign_out users(:matthias)
-    get :show, id: events(:twaalfurenloop).id
+    get :show, params: { id: events(:twaalfurenloop).id }
     assert_select "#basic-registration-form", false, "Should not contain registration form"
   end
 
