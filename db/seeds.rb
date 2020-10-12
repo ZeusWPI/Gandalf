@@ -31,6 +31,6 @@ end
 club = Club.new do |c|
   c.internal_name = 'zeus'
   c.display_name = 'Zeus WPI'
-  c.full_name = nil
+  c.full_name = 'Zeus WPI'
 end
 club.save
