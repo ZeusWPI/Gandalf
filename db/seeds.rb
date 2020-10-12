@@ -9,25 +9,27 @@
 require 'webmock'
 WebMock.allow_net_connect!
 url = 'https://dsa.ugent.be/api/verenigingen'
-hash = JSON(HTTParty.get(url).body)["associations"]
+data = JSON(HTTParty.get(url).body)["associations"]
 WebMock.disable_net_connect!
 
-puts hash
+puts "Seed clubs from DSA api"
+puts "---"
 
-hash.each do |club|
-  puts club
-  next unless club['path'].include?('fk')
-  puts "From fk!"
+data.each do |association|
+  next unless association['path'].include?('fk')
+
+  puts "Add " + association['name']
 
   club = Club.new do |c|
-    c.internal_name = club['abbreviation'].downcase
-    c.display_name = club['name']
-    c.full_name = club['name'] unless club['name'].blank?
+    c.internal_name = association['abbreviation'].downcase
+    c.display_name = association['name']
+    c.full_name = association['name'] unless association['name'].blank?
   end
   club.save
 end
 
 # Zeus peoples
+puts "Add Zeus WPI <3"
 club = Club.new do |c|
   c.internal_name = 'zeus'
   c.display_name = 'Zeus WPI'
