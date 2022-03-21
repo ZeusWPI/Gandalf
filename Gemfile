@@ -57,7 +57,7 @@ gem 'iban-tools', git: 'https://github.com/alphasights/iban-tools.git', branch: 
 
 
 # Barcodes
-gem 'barcodes', git: "git://github.com/nudded/barcodes"
+gem 'barcodes', git: "https://github.com/nudded/barcodes"
 gem 'chunky_png'
 gem 'barby'
 
