@@ -107,7 +107,8 @@ class User < ApplicationRecord
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
     User.all.each do |user|
-      user.fetch_club
+      # TODO this is patched out, waiting for the DSA API for board members
+      # user.fetch_club
       user.fetch_enrolled_clubs
     end
   end
