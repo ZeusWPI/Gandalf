@@ -107,10 +107,8 @@ class User < ApplicationRecord
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
     User.all.each do |user|
-      if not (user.clubs.any?(|club| club.internal_name == "zeus"))
-        user.fetch_club
-        user.fetch_enrolled_clubs
-      end
+      user.fetch_club
+      user.fetch_enrolled_clubs
     end
   end
 
