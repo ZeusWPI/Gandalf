@@ -80,6 +80,7 @@ GEM
       rake (>= 10.4, < 14.0)
     barby (0.6.8)
     bcrypt (3.1.16)
+    bcrypt_pbkdf (1.1.0)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -136,6 +137,7 @@ GEM
     devise_cas_authenticatable (1.10.4)
       devise (>= 1.2.0)
       rubycas-client (>= 2.2.1)
+    ed25519 (1.3.0)
     erubi (1.9.0)
     execjs (2.7.0)
     faraday (1.0.1)
@@ -368,6 +370,7 @@ DEPENDENCIES
   annotate
   barby
   barcodes!
+  bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap
   cancancan
   capistrano (~> 3.10)
@@ -383,6 +386,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   devise_cas_authenticatable
+  ed25519 (>= 1.2, < 2.0)
   httparty
   iban-tools!
   jbuilder
