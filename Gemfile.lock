@@ -165,7 +165,6 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    libv8 (3.16.14.19)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -274,7 +273,6 @@ GEM
     rdoc (6.2.1)
     record_tag_helper (1.0.1)
       actionview (>= 5)
-    ref (2.0.0)
     regexp_parser (1.8.1)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -324,9 +322,6 @@ GEM
     sshkit (1.21.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -364,7 +359,10 @@ GEM
     zeitwerk (2.4.0)
 
 PLATFORMS
+  arm64-darwin
   ruby
+  x86_64-darwin
+  x86_64-linux
 
 DEPENDENCIES
   annotate
@@ -414,7 +412,6 @@ DEPENDENCIES
   simple_token_authentication
   spreadsheet
   sqlite3
-  therubyracer
   tinymce-rails
   turbolinks
   twitter-typeahead-rails
