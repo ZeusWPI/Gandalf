@@ -52,10 +52,8 @@ class User < ApplicationRecord
 
       dig = digest(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
       if (Time.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
-        self.clubs = Club.where internal_name: clubs
+        update_clubs!(Club.where(internal_name: clubs))
       end
-
-      self.save!
     end
   end
 
@@ -107,8 +105,7 @@ class User < ApplicationRecord
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
     User.all.each do |user|
-      # TODO this is patched out, waiting for the DSA API for board members
-      # user.fetch_club
+      user.fetch_club
       user.fetch_enrolled_clubs
     end
   end
@@ -117,5 +114,12 @@ class User < ApplicationRecord
     where(username: auth.uid).first_or_create do |user|
       user.username = auth.uid
     end
+  end
+
+  private
+
+  def update_clubs!(fk_clubs)
+    clubs_not_managed_by_fk = self.clubs.where(managed_by_fk: false)
+    self.update!(clubs: fk_clubs + clubs_not_managed_by_fk)
   end
 end

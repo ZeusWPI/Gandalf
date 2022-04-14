@@ -79,6 +79,18 @@ class UserTest < ActiveSupport::TestCase
     assert_equal tom.enrolled_clubs, [clubs(:zeus)]
   end
 
+  test "#update_clubs does not remove clubs not managed by FK" do
+    tom = users(:tom)
+    zeus = clubs(:zeus)
+    guk = clubs(:guk)
+
+    assert_equal tom.clubs, [zeus, guk]
+
+    tom.fetch_club
+
+    assert_equal tom.clubs, [zeus, guk]
+  end
+
   private
   def build_fk_response(casname, clubs)
     timestamp = Time.now

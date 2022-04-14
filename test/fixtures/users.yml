@@ -33,6 +33,7 @@ tom:
   cas_ugentStudentID: 00800857
   clubs:
     - zeus
+    - guk
 
 maarten:
   username: mherthog

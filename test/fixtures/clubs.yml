@@ -15,11 +15,16 @@
 # This model initially had no columns defined.  If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
+
 zeus:
   internal_name: zeus
   display_name: Zeus WPI
-#
+
 fk:
   internal_name: fkcentraal
   display_name: FakulteitenKonvent
+
+guk:
+  internal_name: guk
+  display_name: Gents Universitair Koor
+  managed_by_fk: false

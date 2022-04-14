@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_03_093227) do
+ActiveRecord::Schema.define(version: 2022_04_14_185101) do
 
   create_table "access_levels", force: :cascade do |t|
     t.string "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_10_03_093227) do
     t.string "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean "managed_by_fk", default: true, null: false
   end
 
   create_table "clubs_users", id: false, force: :cascade do |t|
