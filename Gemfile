@@ -5,7 +5,7 @@ gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1'
 gem 'rails-controller-testing'
 
 # Rails required gems
@@ -78,7 +78,7 @@ gem 'spreadsheet'
 
 # Run stuff in the background
 gem 'daemons'
-gem 'delayed_job', '~> 4.0', '>= 4.1.8'
+gem 'delayed_job', '~> 4.0', '>= 4.1.10'
 gem 'delayed_job_active_record'
 #
 
