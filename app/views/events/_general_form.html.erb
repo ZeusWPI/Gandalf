@@ -3,6 +3,9 @@
 
     <%= form_text_field f, :name %>
     <%= form_text_field f, :location %>
+    <% unless @event.persisted? %>
+      <%= form_collection_select f, :club_id, current_user.clubs, :id, :name %>
+    <% end %>
     <%= form_url_field f, :website %>
     <%= form_email_field f, :contact_email %>
     <%= form_date_field f, :start_date, "start", datepicker_time(f.object.start_date) %>

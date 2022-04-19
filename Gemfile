@@ -41,7 +41,9 @@ gem 'datagrid'
 # Let's use devise for users
 gem 'devise'
 gem 'devise_cas_authenticatable', '~> 1.10'
+
 # Omniauth as extra development backdoor
+gem 'omniauth', '~> 1.9.1'
 gem 'omniauth-oauth2'
 
 # Token authentication for partners
