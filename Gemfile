@@ -5,7 +5,7 @@ gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1'
 gem 'rails-controller-testing'
 
 # Rails required gems
@@ -38,7 +38,7 @@ gem 'datagrid'
 
 # Let's use devise for users
 gem 'devise'
-gem 'devise_cas_authenticatable'
+gem 'devise_cas_authenticatable', '~> 1.10'
 # Omniauth as extra development backdoor
 gem 'omniauth-oauth2'
 
@@ -78,7 +78,7 @@ gem 'spreadsheet'
 
 # Run stuff in the background
 gem 'daemons'
-gem 'delayed_job', '~> 4.0'
+gem 'delayed_job', '~> 4.0', '>= 4.1.10'
 gem 'delayed_job_active_record'
 #
 
@@ -94,7 +94,7 @@ gem 'webmock', require: false
 gem 'ri_cal'
 
 # Easy date validations
-gem 'jc-validates_timeliness'
+gem 'validates_timeliness', '~> 6.0.0.beta2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

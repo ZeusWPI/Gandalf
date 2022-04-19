@@ -86,7 +86,6 @@ class Event < ApplicationRecord
   handle_asynchronously :generate_xls
 
   def toggle_registration_open
-    self.registration_open = !self.registration_open
-    self.save
+    self.toggle!(:registration_open)
   end
 end
