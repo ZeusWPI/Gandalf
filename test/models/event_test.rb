@@ -40,17 +40,17 @@ class EventTest < ActiveSupport::TestCase
   test "enable_toggling_of_registration_status" do
     e = Event.new
 
-    assert e.registration_open
+    assert(e.registration_open)
     e.save
 
     e.toggle_registration_open
     e.save
 
-    assert_not e.registration_open
+    assert_not(e.registration_open)
 
     e.toggle_registration_open
     e.save
 
-    assert e.registration_open
+    assert(e.registration_open)
   end
 end

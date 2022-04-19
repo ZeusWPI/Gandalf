@@ -38,7 +38,7 @@ gem 'datagrid'
 
 # Let's use devise for users
 gem 'devise'
-gem 'devise_cas_authenticatable'
+gem 'devise_cas_authenticatable', '~> 1.10'
 # Omniauth as extra development backdoor
 gem 'omniauth-oauth2'
 
@@ -94,7 +94,7 @@ gem 'webmock', require: false
 gem 'ri_cal'
 
 # Easy date validations
-gem 'jc-validates_timeliness'
+gem 'validates_timeliness', '~> 6.0.0.beta2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
