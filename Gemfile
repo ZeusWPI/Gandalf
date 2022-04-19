@@ -78,7 +78,7 @@ gem 'spreadsheet'
 
 # Run stuff in the background
 gem 'daemons'
-gem 'delayed_job', '~> 4.0'
+gem 'delayed_job', '~> 4.0', '>= 4.1.8'
 gem 'delayed_job_active_record'
 #
 
