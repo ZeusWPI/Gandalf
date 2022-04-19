@@ -12,6 +12,8 @@ class EventsController < ApplicationController
     @events = Event.where('end_date > ?', DateTime.now).order(:start_date)
     if user_signed_in?
       @past_events = Event.accessible_by(current_ability).order(:name)
+    else
+      @past_events = []
     end
   end
 
