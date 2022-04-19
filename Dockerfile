@@ -1,16 +1,18 @@
 FROM ruby:3.0.4
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
+ENV RAILS_ENV=production
 
-WORKDIR /usr/src/app
+RUN apt update && apt install -y nodejs
 
-COPY Gemfile Gemfile.lock ./
+WORKDIR /app
+
+COPY ./Gemfile ./Gemfile.lock /app/
+
+RUN gem install bundler
 RUN bundle install
 
-COPY . .
+COPY . /app
 
-RUN rake db:migrate
-RUN rake db:seed
+RUN bundle exec rails assets:precompile
 
-CMD ["rails", "s", "-b", "ssl://0.0.0.0:8080?key=server.key&cert=server.crt"]
+CMD bundle exec rails s -b 0.0.0.0

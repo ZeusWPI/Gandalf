@@ -1,8 +1,31 @@
-version: '3'
-
+version: '3.3'
 
 services:
+  db:
+    image: mariadb:10.8
+    volumes:
+      - db_data:/var/lib/mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: strong-password
+      MYSQL_DATABASE: gandalf
+      MYSQL_USER: gandalf
+      MYSQL_PASSWORD: password
+
   web:
     build: .
-    ports: 
-    - "8080:8080"
+    depends_on:
+      - db
+    ports:
+      - "3003:3000"
+    restart: always
+    environment:
+      DATABASE_URL: mysql2://gandalf:password@db/gandalf
+      RAILS_LOG_TO_STDOUT: 1
+      SECRET_AUTH_USERNAME: admin
+      SECRET_AUTH_PASSWORD: admin-password
+      RAILS_SERVE_STATIC_FILES: 1
+
+volumes:
+  db_data: {}
