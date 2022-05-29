@@ -43,8 +43,7 @@ gem 'devise'
 gem 'devise_cas_authenticatable', '~> 1.10'
 
 # Omniauth as extra development backdoor
-gem 'omniauth'
-gem 'omniauth-oauth2'
+gem 'omniauth-zeuswpi'
 gem 'omniauth-rails_csrf_protection'
 
 # Token authentication for partners
