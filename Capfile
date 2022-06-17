@@ -11,3 +11,6 @@ require 'capistrano/docker'
 require 'capistrano/docker/migration'
 
 before 'docker:deploy:compose:start', 'docker:compose:down'
+
+# Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

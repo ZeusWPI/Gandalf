@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/TomNaessens/capistrano-docker.git
-  revision: 7c6481c4c78194caf793ca610770fdb25674a9bc
-  specs:
-    capistrano-docker (0.4.0)
-      capistrano (>= 3.3)
-
-GIT
   remote: https://github.com/alphasights/iban-tools.git
   revision: 811e735e31fce2d3d3b79d7d95bc65fc2bf666a3
   branch: master
@@ -19,6 +12,12 @@ GIT
     barcodes (0.0.11)
       prawn
       rmagick
+
+PATH
+  remote: ../capistrano-docker
+  specs:
+    capistrano-docker (0.4.0)
+      capistrano (>= 3.3)
 
 GEM
   remote: https://rubygems.org/
@@ -401,6 +400,7 @@ DEPENDENCIES
   barcodes!
   bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap
+  bundler (>= 2.3.11)
   cancancan
   capistrano (~> 3.17)
   capistrano-docker!
