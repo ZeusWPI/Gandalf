@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:ZeusWPI/Gandalf.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
-set :branch, 'master'
+set :branch, 'capistrano-docker'
 set :deploy_to, '/home/gandalf/production'
 
 # Default value for :linked_files is []

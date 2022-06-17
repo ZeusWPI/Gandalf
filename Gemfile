@@ -114,8 +114,8 @@ group :development do
   gem 'rails-erd'
 
   gem 'capistrano', '~> 3.17'
-  # gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
-  gem 'capistrano-docker', path: '../capistrano-docker'
+  gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
+  # gem 'capistrano-docker', path: '../capistrano-docker'
 
   gem 'listen'
   gem 'letter_opener'
