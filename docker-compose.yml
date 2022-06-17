@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     ports:
-      - "3003:3000"
+      - "3004:3000"
     restart: always
     environment:
       DATABASE_URL: mysql2://gandalf:password@db/gandalf

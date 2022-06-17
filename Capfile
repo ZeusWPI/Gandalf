@@ -9,3 +9,5 @@ install_plugin Capistrano::SCM::Git
 
 require 'capistrano/docker'
 require 'capistrano/docker/migration'
+
+before 'docker:deploy:compose:start', 'docker:compose:down'
