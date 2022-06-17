@@ -8,9 +8,8 @@ require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
 require 'capistrano/docker'
-require 'capistrano/docker/migration'
-
-before 'docker:deploy:compose:start', 'docker:compose:down'
+require 'capistrano/docker/compose/logs'
+require 'capistrano/docker/compose/migration'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
