@@ -12,7 +12,7 @@ set :branch, 'master'
 set :deploy_to, '/home/gandalf/production'
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/secrets.yml}
+set :linked_files, %w{.env config/database.yml}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -25,17 +25,7 @@ set :log_level, :debug
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app) do
-      with rails_env: fetch(:rails_env) do
-        execute "touch #{current_path}/tmp/restart.txt"
-      end
-    end
-  end
-
-  after :publishing, :restart
-
-end
+# capistrano-docker specific
+set :docker_command, "podman"
+set :docker_compose, true
+set :docker_compose_command, "podman-compose"

@@ -13,6 +13,12 @@ GIT
       prawn
       rmagick
 
+PATH
+  remote: ../capistrano-docker
+  specs:
+    capistrano-docker (0.4.0)
+      capistrano (>= 3.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -391,10 +397,8 @@ DEPENDENCIES
   bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap
   cancancan
-  capistrano (~> 3.10)
-  capistrano-rails (~> 1.6)
-  capistrano-rbenv
-  capistrano-rvm
+  capistrano (~> 3.17)
+  capistrano-docker!
   capybara
   chartkick
   chunky_png

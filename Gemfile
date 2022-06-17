@@ -113,10 +113,9 @@ gem 'record_tag_helper'
 group :development do
   gem 'rails-erd'
 
-  gem 'capistrano', '~> 3.10'
-  gem 'capistrano-rails', '~> 1.6'
-  gem 'capistrano-rvm'
-  gem 'capistrano-rbenv'
+  gem 'capistrano', '~> 3.17'
+  # gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
+  gem 'capistrano-docker', path: '../capistrano-docker'
 
   gem 'listen'
   gem 'letter_opener'
