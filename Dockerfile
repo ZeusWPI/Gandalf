@@ -12,8 +12,6 @@ RUN gem install bundler
 RUN bundle install
 
 COPY . /app
-ADD .env /app/
-ADD config/database.yml /app/config/
 
 RUN bundle exec rails assets:precompile
 
