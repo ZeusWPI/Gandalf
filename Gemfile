@@ -59,9 +59,7 @@ gem 'httparty'
 gem 'paper_trail'
 
 # Njam njam, IBAN
-gem 'iban-tools', git: 'https://github.com/alphasights/iban-tools.git', branch: 'master'
-
-
+gem 'iban-tools'
 
 # Barcodes
 gem 'barcodes', git: "https://github.com/nudded/barcodes"
@@ -119,6 +117,7 @@ group :development do
 
   gem 'capistrano', '~> 3.17'
   gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
+  # gem 'capistrano-docker', path: '../capistrano-docker'
 
   gem 'listen'
   gem 'letter_opener'

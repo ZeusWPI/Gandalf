@@ -2,7 +2,7 @@ FROM ruby:3.0.4
 
 ENV RAILS_ENV=production
 
-RUN apt update && apt install -y nodejs
+RUN apt update && apt install -y nodejs cron
 
 WORKDIR /app
 
