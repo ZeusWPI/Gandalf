@@ -28,7 +28,6 @@ services:
       SECRET_AUTH_USERNAME: admin
       SECRET_AUTH_PASSWORD: admin-password
       RAILS_SERVE_STATIC_FILES: 1
-    entrypoint: bundle exec rails s -b 0.0.0.0
 
   sidekiq:
     build: .
