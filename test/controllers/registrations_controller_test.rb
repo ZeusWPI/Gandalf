@@ -22,7 +22,7 @@ class RegistrationsControllerTest < ActionController::TestCase
         event_id: 1,
         separator: ';',
         amount_column: 'Amount',
-        csv_file: fixture_file_upload('files/unsuccesful_registration_payments.csv') }
+        csv_file: fixture_file_upload('unsuccesful_registration_payments.csv') }
     end
 
     # Check if the correct rows failed.
