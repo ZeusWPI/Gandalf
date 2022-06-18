@@ -5,3 +5,7 @@ job_type :runner,  "cd :path && bundle exec bin/rails runner -e :environment ':t
 every 1.day, :at => '4:30 am' do
   runner "User.daily_update"
 end
+
+every 1.minute do
+  runner "puts 'hello'"
+end
