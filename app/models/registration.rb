@@ -39,7 +39,7 @@ class Registration < ApplicationRecord
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
   before_validation do |record|
-    if record.payment_code.nil? then
+    if record.payment_code.nil?
       record.payment_code = Registration.create_payment_code
     end
   end
@@ -101,7 +101,7 @@ class Registration < ApplicationRecord
 
   def self.create_payment_code
     random = rand(10**15)
-    return sprintf("GAN%02d%015d", random % 97, random)
+    format("GAN%02d%015d", random % 97, random)
   end
 
   def deliver
