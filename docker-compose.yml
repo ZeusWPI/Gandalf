@@ -26,6 +26,18 @@ services:
       SECRET_AUTH_USERNAME: admin
       SECRET_AUTH_PASSWORD: admin-password
       RAILS_SERVE_STATIC_FILES: 1
+    entrypoint: bundle exec rails s -b 0.0.0.0
+
+  sidekiq:
+    build: .
+    depends_on:
+      - db
+      - redis
+    restart: always
+    environment:
+      DATABASE_URL: mysql2://gandalf:password@db/gandalf
+      REDIS_URL: redis://redis:6379
+    entrypoint: bundle exec sidekiq
 
   redis:
     image: redis:7-alpine

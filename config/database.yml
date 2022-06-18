@@ -22,6 +22,6 @@ production:
   adapter: mysql2
   database: gandalf
   username: gandalf
-  password: A521mZXFNwVX
+  password: password
   host: 127.0.0.1
   port: 3306
