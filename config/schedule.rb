@@ -1,11 +1,8 @@
 set :output, File.join(Whenever.path, "log", "cron.log")
-job_type :runner,  "cd :path && bundle exec bin/rails runner -e :environment ':task' :output"
+
+env 'GEM_HOME', '/usr/local/bundle'
 
 # Fetch clubs and enrolled clubs every day
 every 1.day, :at => '4:30 am' do
   runner "User.daily_update"
-end
-
-every 1.minute do
-  runner "puts 'hello'"
 end

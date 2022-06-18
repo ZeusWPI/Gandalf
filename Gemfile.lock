@@ -1,16 +1,9 @@
 GIT
   remote: https://github.com/TomNaessens/capistrano-docker.git
-  revision: 8426deb088902111307a3a9a2b38cfeead85e24d
+  revision: 490311def501a5d32a24e52d6952d355a85b6cfe
   specs:
     capistrano-docker (0.4.0)
       capistrano (>= 3.3)
-
-GIT
-  remote: https://github.com/alphasights/iban-tools.git
-  revision: 811e735e31fce2d3d3b79d7d95bc65fc2bf666a3
-  branch: master
-  specs:
-    iban-tools (1.0.0)
 
 GIT
   remote: https://github.com/nudded/barcodes
@@ -163,6 +156,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    iban-tools (1.0.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -414,7 +408,7 @@ DEPENDENCIES
   dotenv-rails
   ed25519 (>= 1.2, < 2.0)
   httparty
-  iban-tools!
+  iban-tools
   jbuilder
   jquery-rails
   letter_opener
