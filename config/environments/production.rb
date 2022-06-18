@@ -64,7 +64,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :sendmail
   # Set base URL because emails don't have the Host header context
-  config.action_mailer.default_url_options = { :host => 'https://smtprelay.ugent.be' }
+  config.action_mailer.default_url_options = { :host => 'https://event.student.ugent.be' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
