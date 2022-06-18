@@ -120,9 +120,10 @@ class EventsController < ApplicationController
   def generate_export
     @event = Event.find params.require(:id)
     authorize! :read, @event
-    @event.export_status = "generating"
-    @event.save
-    @event.generate_xls
+
+    @event.update!(export_status: 'queueing')
+
+    GenerateRegistrationsXlsJob.perform_later(@event.id)
   end
 
   def list_registrations

@@ -76,15 +76,8 @@ gem 'tinymce-rails'
 # Statistics
 gem 'chartkick'
 
-# Attachements
-gem 'paperclip', '~> 4.0'
+# Xls
 gem 'spreadsheet'
-
-# Run stuff in the background
-gem 'daemons'
-gem 'delayed_job', '~> 4.0', '>= 4.1.10'
-gem 'delayed_job_active_record'
-#
 
 # Whenever cronjobs
 gem 'whenever', require: false
@@ -148,3 +141,5 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+gem "sidekiq", "~> 6.5"

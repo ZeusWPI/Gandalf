@@ -18,5 +18,7 @@ module Isengard
 
     # Mussels from Brussels
     config.time_zone = 'Brussels'
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

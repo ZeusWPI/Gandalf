@@ -118,22 +118,14 @@ GEM
     choice (0.2.0)
     chronic (0.10.2)
     chunky_png (1.4.0)
-    climate_control (0.2.0)
     cliver (0.3.2)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     concurrent-ruby (1.1.10)
+    connection_pool (2.2.5)
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    daemons (1.4.1)
     datagrid (1.6.3)
       rails (>= 4.0)
-    delayed_job (4.1.10)
-      activesupport (>= 3.0, < 8.0)
-    delayed_job_active_record (4.1.7)
-      activerecord (>= 3.0, < 8.0)
-      delayed_job (>= 3.0, < 5)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -188,7 +180,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.15.0)
+    minitest (5.16.0)
     msgpack (1.5.1)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -228,11 +220,6 @@ GEM
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
-    paperclip (4.2.4)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      cocaine (~> 0.5.5)
-      mime-types
     pdf-core (0.9.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
@@ -292,6 +279,7 @@ GEM
     rdoc (6.3.3)
     record_tag_helper (1.0.1)
       actionview (>= 5)
+    redis (4.6.0)
     regexp_parser (2.3.0)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -320,6 +308,10 @@ GEM
     sdoc (2.3.1)
       rdoc (>= 5.0, < 6.4.0)
     select2-rails (4.0.13)
+    sidekiq (6.5.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     simple_enum (2.3.2)
       activesupport (>= 4.0.0)
     simple_form (5.1.0)
@@ -378,7 +370,7 @@ GEM
       will_paginate (>= 3.0.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.5.4)
+    zeitwerk (2.6.0)
 
 PLATFORMS
   arm64-darwin
@@ -401,10 +393,7 @@ DEPENDENCIES
   capybara
   chartkick
   chunky_png
-  daemons
   datagrid
-  delayed_job (~> 4.0, >= 4.1.10)
-  delayed_job_active_record
   devise
   devise_cas_authenticatable (~> 1.10)
   ed25519 (>= 1.2, < 2.0)
@@ -418,7 +407,6 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   omniauth-zeuswpi
   paper_trail
-  paperclip (~> 4.0)
   poltergeist
   puma
   rails (~> 6.1)
@@ -430,6 +418,7 @@ DEPENDENCIES
   sass-rails
   sdoc
   select2-rails
+  sidekiq (~> 6.5)
   simple_enum
   simple_form
   simple_token_authentication

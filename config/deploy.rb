@@ -34,7 +34,6 @@ namespace :deploy do
         execute "touch #{current_path}/tmp/restart.txt"
       end
     end
-    invoke 'delayed_job:restart'
   end
 
   after :publishing, :restart

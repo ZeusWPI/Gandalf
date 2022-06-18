@@ -54,36 +54,13 @@ class Event < ApplicationRecord
   validates_datetime :registration_close_date, after: :registration_open_date,
     unless: lambda { |o| o.registration_close_date.blank? or o.registration_open_date.blank? }
 
-  has_attached_file :export
-  validates_attachment_file_name :export, :matches => /.*/
-  validates_attachment_content_type :export, :content_type => /.*/
+  has_one_attached :registration_xls
 
   before_save :prettify_bank_number
 
   def prettify_bank_number
     self.bank_number = IBANTools::IBAN.new(self.bank_number).prettify if bank_number_changed?
   end
-
-  def generate_xls
-    self.export_status = 'generating'
-    self.save
-    xls = Spreadsheet::Workbook.new
-    sheet = xls.create_worksheet
-
-    sheet.update_row 0, "Naam", "Email", "Studentnummer", "Ticket", "Comment", "Te betalen"
-    registrations.each.with_index do |reg, i|
-      sheet.update_row i + 1, reg.name, reg.email, reg.student_number, reg.access_levels.first.name, reg.comment, reg.to_pay
-    end
-    data = Tempfile.new(["export", ".xls"])
-
-    xls.write(data)
-
-    self.export = data
-    self.export_status = 'done'
-    self.save!
-    data.close
-  end
-  handle_asynchronously :generate_xls
 
   def toggle_registration_open
     self.toggle!(:registration_open)
