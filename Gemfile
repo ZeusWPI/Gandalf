@@ -103,7 +103,7 @@ gem 'twitter-typeahead-rails'
 # Enum support with prefixes
 gem 'simple_enum'
 
-# Enable content_tag_for useage
+# Enable content_tag_for usage
 gem 'record_tag_helper'
 
  # Database
@@ -127,6 +127,10 @@ group :test do
 
   # Temporary lock until the flaky test issue is fixed on Minitest side that's present in 5.16.0
   gem 'minitest', '= 5.15.0'
+end
+
+group :development, :test do
+  gem 'rails_style', github: 'ZeusWPI/rails_style'
 end
 
 group :production, :deployment do

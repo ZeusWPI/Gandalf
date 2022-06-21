@@ -1,0 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  rails_style:
+    - default.yml
