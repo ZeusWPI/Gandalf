@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
@@ -10,11 +9,11 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.where('end_date > ?', DateTime.now).order(:start_date)
-    if user_signed_in?
-      @past_events = Event.accessible_by(current_ability).order(:name)
-    else
-      @past_events = []
-    end
+    @past_events = if user_signed_in?
+                     Event.accessible_by(current_ability).order(:name)
+                   else
+                     []
+                   end
   end
 
   def show
@@ -27,11 +26,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 
   def destroy
     @event.destroy!
@@ -41,9 +38,7 @@ class EventsController < ApplicationController
   def update
     authorize! :update, @event
 
-    if @event.update(event_params)
-      flash.now[:success] = "Successfully updated event."
-    end
+    flash.now[:success] = "Successfully updated event." if @event.update(event_params)
 
     render action: :edit
   end
@@ -69,7 +64,9 @@ class EventsController < ApplicationController
     @event = Event.find params.require(:id)
     authorize! :view_stats, @event
 
-    if not @event.registrations.empty?
+    if @event.registrations.empty?
+      @data = []
+    else
 
       min, max = @event.registrations.pluck(:created_at).minmax
       zeros = {}
@@ -85,8 +82,6 @@ class EventsController < ApplicationController
         }
       end
 
-    else
-      @data = []
     end
   end
 
@@ -138,12 +133,11 @@ class EventsController < ApplicationController
 
   def check_in
     if @registration
-      if not @registration.is_paid
+      if !@registration.is_paid
         flash.now[:warning] =
-          "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
+          "Person has not paid yet! Resting amount: €#{@registration.to_pay}"
       elsif @registration.checked_in_at
-        flash.now[:warning] = "Person already checked in at " +
-                              view_context.nice_time(@registration.checked_in_at) + "!"
+        flash.now[:warning] = "Person already checked in at #{view_context.nice_time(@registration.checked_in_at)}!"
       else
         flash.now[:success] = "Person has been scanned!"
         @registration.checked_in_at = Time.now

@@ -2,8 +2,6 @@
 
 class IbanValidator < ActiveModel::Validator
   def validate(record)
-    unless record.bank_number.blank? || IBANTools::IBAN.valid?(record.bank_number)
-      record.errors.add(:bank_number, 'is not a valid IBAN.')
-    end
+    record.errors.add(:bank_number, 'is not a valid IBAN.') unless record.bank_number.blank? || IBANTools::IBAN.valid?(record.bank_number)
   end
 end

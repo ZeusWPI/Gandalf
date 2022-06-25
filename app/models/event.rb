@@ -52,7 +52,7 @@ class Event < ApplicationRecord
 
   validates_datetime :end_date, after: :start_date
   validates_datetime :registration_close_date, after: :registration_open_date,
-                                               unless: lambda { |o| o.registration_close_date.blank? or o.registration_open_date.blank? }
+                                               unless: ->(o) { o.registration_close_date.blank? or o.registration_open_date.blank? }
 
   has_one_attached :registration_xls
 

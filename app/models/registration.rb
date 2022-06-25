@@ -43,14 +43,12 @@ class Registration < ApplicationRecord
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
   before_validation do |record|
-    if record.payment_code.nil?
-      record.payment_code = Registration.create_payment_code
-    end
+    record.payment_code = Registration.create_payment_code if record.payment_code.nil?
   end
 
   after_save do |record|
     record.access_levels.each do |access_level|
-      if (access_level.capacity != nil) && (access_level.registrations.count > access_level.capacity)
+      if !access_level.capacity.nil? && (access_level.registrations.count > access_level.capacity)
         record.errors.add :access_levels, "type is sold out."
         raise ActiveRecord::Rollback
       end
@@ -97,9 +95,9 @@ class Registration < ApplicationRecord
   def self.find_payment_code_from_csv(csvline)
     match = /GAN\d+/.match(csvline)
     if match
-      return Registration.find_by(payment_code: match[0])
+      Registration.find_by(payment_code: match[0])
     else
-      return false
+      false
     end
   end
 
@@ -109,9 +107,7 @@ class Registration < ApplicationRecord
   end
 
   def deliver
-    if self.barcode.nil?
-      self.generate_barcode
-    end
+    self.generate_barcode if self.barcode.nil?
 
     if self.is_paid
       RegistrationMailer.ticket(self).deliver_later
@@ -132,7 +128,7 @@ class Registration < ApplicationRecord
   end
 
   def to_cents(value)
-    if value.is_a? String then value.sub!(',', '.') end
+    value.sub!(',', '.') if value.is_a? String
     (value.to_f * 100).to_int
   end
 end

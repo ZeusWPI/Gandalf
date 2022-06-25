@@ -6,8 +6,7 @@ class PartnersControllerTest < ActionController::TestCase
   include ActionMailer::TestHelper
   include Devise::Test::ControllerHelpers
 
-  def setup
-  end
+  def setup; end
 
   test "should get index" do
     sign_in users(:tom)

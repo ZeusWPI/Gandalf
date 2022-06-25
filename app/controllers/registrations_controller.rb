@@ -59,13 +59,11 @@ class RegistrationsController < ApplicationController
     @registration.paid = 0
 
     # overwrite student_number so setting this will not work
-    if requested_access_level.requires_login?
-      @registration.student_number = current_user.cas_ugentStudentID
-    end
+    @registration.student_number = current_user.cas_ugentStudentID if requested_access_level.requires_login?
     @registration.save!
 
     # Send the confirmation email.
-    if not @registration.errors.any?
+    if @registration.errors.none?
       @registration.deliver
 
       flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."
@@ -81,7 +79,7 @@ class RegistrationsController < ApplicationController
     @registration = @event.registrations.create!(params.require(:registration).permit(:email, :name))
     params.require(:registration).require(:checkboxes).each do |access_level, periods|
       periods.each do |period, checked|
-        if checked == "on" then
+        if checked == "on"
           access = @registration.accesses.build access_level_id: access_level, period_id: period
           access.save!
         end
@@ -104,11 +102,7 @@ class RegistrationsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :read, @event
     to_id = params['to'].to_i
-    if to_id == -1
-      to = @event.registrations.pluck(:email)
-    else
-      to = @event.access_levels.find(to_id).registrations.pluck(:email)
-    end
+    to = to_id == -1 ? @event.registrations.pluck(:email) : @event.access_levels.find(to_id).registrations.pluck(:email)
     MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver_later
     redirect_to event_registrations_path(@event)
   end
@@ -134,7 +128,7 @@ class RegistrationsController < ApplicationController
         amount = row[paid].sub(',', '.')
         begin
           amount = Float(amount)
-        rescue
+        rescue StandardError
           fails << row
           next
         end

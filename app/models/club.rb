@@ -22,6 +22,6 @@ class Club < ApplicationRecord
   validates :internal_name, uniqueness: true
 
   def name
-    full_name ? full_name : display_name
+    full_name || display_name
   end
 end

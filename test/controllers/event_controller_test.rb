@@ -65,22 +65,22 @@ class EventControllerTest < ActionController::TestCase
   test "validate correct barcode" do
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert(flash[:success].include?("Person has been scanned"))
   end
 
   test "validate correct name" do
     post :scan_name, params: { id: events(:codenight).id, name: 'Tom Naessens' }
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert(flash[:success].include?("Person has been scanned"))
   end
 
   test "dont check in twice" do
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert(flash[:success].include?("Person has been scanned"))
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
-    assert(flash[:warning].include? "Person already checked in")
+    assert(flash[:warning].include?("Person already checked in"))
   end
 
   test "show unpaid for checked in unpaid tickets" do
@@ -90,7 +90,7 @@ class EventControllerTest < ActionController::TestCase
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
     assert_nil(@registration)
-    assert(flash[:warning].include? "Person has not paid yet!")
+    assert(flash[:warning].include?("Person has not paid yet!"))
   end
 
   test "dont find registrations from other event" do
@@ -104,7 +104,7 @@ class EventControllerTest < ActionController::TestCase
     sign_in users(:maarten)
     post :scan_barcode, params: { id: events(:galabal).id, code: '2222222222222' }
     assert_response :success
-    assert(flash[:warning].include? "Person has not paid yet!")
+    assert(flash[:warning].include?("Person has not paid yet!"))
   end
 
   test "scan page should include check digit" do
@@ -156,7 +156,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
-    date = "#{registrations(:one).created_at.utc.to_date}"
+    date = registrations(:one).created_at.utc.to_date.to_s
     get :statistics, params: { id: 1 }
     assert_response :success
     expected = [
@@ -169,8 +169,8 @@ class EventControllerTest < ActionController::TestCase
     ]
     expected.zip(assigns(:data)).each do |e, a|
       assert e[:name] == a[:name], "Mismatching names. Expected #{e[:name]} got #{a[:name]}"
-      e[:data].keys.each do |k|
-        assert (a[:data].has_key? k), "Missing date for #{e[:name]}: #{k}"
+      e[:data].each_key do |k|
+        assert (a[:data].key? k), "Missing date for #{e[:name]}: #{k}"
         assert e[:data][k] == a[:data][k],
                "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
       end

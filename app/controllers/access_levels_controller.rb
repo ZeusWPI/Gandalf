@@ -70,7 +70,7 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     @access_level = AccessLevel.find params.require(:id)
-    @access_level.hidden = not(@access_level.hidden)
+    @access_level.hidden = !@access_level.hidden
     @access_level.save!
   end
 

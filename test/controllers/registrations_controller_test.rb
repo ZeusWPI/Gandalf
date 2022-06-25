@@ -131,7 +131,8 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_equal 0.05, four.paid
 
     [three, four].each do |registration|
-      paid, code = registration.paid, registration.payment_code
+      paid = registration.paid
+      code = registration.payment_code
       assert_no_difference "ActionMailer::Base.deliveries.size" do
         put :update, xhr: true, params: {
           event_id: registration.event.id,

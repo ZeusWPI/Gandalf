@@ -53,9 +53,7 @@ class User < ApplicationRecord
       timestamp = hash['timestamp']
 
       dig = digest(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
-      if (Time.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
-        self.clubs = Club.where internal_name: clubs
-      end
+      self.clubs = Club.where internal_name: clubs if (Time.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
 
       self.save!
     end
@@ -86,7 +84,7 @@ class User < ApplicationRecord
   # return Givenname + surname or username if these don't exist
   def display_name
     if cas_surname && cas_givenname
-      cas_givenname + ' ' + cas_surname
+      "#{cas_givenname} #{cas_surname}"
     else
       username
     end
@@ -99,7 +97,7 @@ class User < ApplicationRecord
 
     if resp.code == 200
       clubs = JSON[resp.body].map(&:downcase).map { |c| c.gsub('-', '') }
-      if !clubs.empty?
+      unless clubs.empty?
         self.enrolled_clubs = Club.where(internal_name: clubs)
         self.save!
       end
@@ -108,11 +106,7 @@ class User < ApplicationRecord
 
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
-    User.all.find_each do |user|
-      # TODO: this is patched out, waiting for the DSA API for board members
-      # user.fetch_club
-      user.fetch_enrolled_clubs
-    end
+    User.all.find_each(&:fetch_enrolled_clubs)
   end
 
   def self.from_omniauth(auth)

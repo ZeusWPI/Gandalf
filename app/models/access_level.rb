@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 # == Schema Information
@@ -34,21 +33,19 @@ class AccessLevel < ApplicationRecord
   validates :capacity, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
 
   validate do |access_level|
-    if access_level.price > 0 && access_level.event.bank_number.blank?
-      access_level.errors.add :event_id, "has no bank number."
-    end
+    access_level.errors.add :event_id, "has no bank number." if access_level.price > 0 && access_level.event.bank_number.blank?
   end
 
   default_scope { order "price, name" }
   scope :public?, -> { where(hidden: false) }
 
-  as_enum :permit, %w(everyone students enrolled members), prefix: true, source: :permit, map: :string
+  as_enum :permit, %w[everyone students enrolled members], prefix: true, source: :permit, map: :string
 
   def requires_login?
-    not(permit_everyone?)
+    !permit_everyone?
   end
 
-  def set_zones_by_ids zones
+  def set_zones_by_ids(zones)
     self.zones = self.event.zones.find zones
     self.save!
   end
@@ -70,7 +67,7 @@ class AccessLevel < ApplicationRecord
   end
 
   def price=(value)
-    if value.is_a? String then value.sub!(',', '.') end
+    value.sub!(',', '.') if value.is_a? String
     write_attribute(:price, (value.to_f * 100).to_int)
   end
 end
