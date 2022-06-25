@@ -3,21 +3,25 @@
 # Table name: users
 #
 #  id                  :integer          not null, primary key
-#  username            :string           default(""), not null
-#  remember_created_at :datetime
-#  sign_in_count       :integer          default(0), not null
-#  current_sign_in_at  :datetime
-#  last_sign_in_at     :datetime
-#  current_sign_in_ip  :string
-#  last_sign_in_ip     :string
-#  created_at          :datetime
-#  updated_at          :datetime
+#  admin               :boolean
 #  cas_givenname       :string
+#  cas_mail            :string
 #  cas_surname         :string
 #  cas_ugentStudentID  :string
-#  cas_mail            :string
 #  cas_uid             :string
-#  admin               :boolean
+#  current_sign_in_at  :datetime
+#  current_sign_in_ip  :string
+#  last_sign_in_at     :datetime
+#  last_sign_in_ip     :string
+#  remember_created_at :datetime
+#  sign_in_count       :integer          default(0), not null
+#  username            :string           default(""), not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+# Indexes
+#
+#  index_users_on_username  (username) UNIQUE
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

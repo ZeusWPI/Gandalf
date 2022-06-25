@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module AccessLevelsHelper
-  def visibility_icon(al)
-    if al.hidden
+  def visibility_icon(access_level)
+    if access_level.hidden
       '<i class="glyphicon glyphicon-eye-open visibility"></i> Show'
     else
       '<i class="glyphicon glyphicon-eye-close visibility"></i> Hide'

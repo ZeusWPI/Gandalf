@@ -8,18 +8,25 @@ require 'barby/barcode/ean_13'
 #
 #  id             :integer          not null, primary key
 #  barcode        :string
-#  name           :string
+#  barcode_data   :string
+#  checked_in_at  :datetime
+#  comment        :text
 #  email          :string
+#  name           :string
+#  paid           :integer
+#  payment_code   :string
+#  price          :integer
+#  student_number :string
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer
-#  paid           :integer
-#  student_number :string
-#  price          :integer
-#  checked_in_at  :datetime
-#  comment        :text
-#  barcode_data   :string
-#  payment_code   :string
+#
+# Indexes
+#
+#  index_registrations_on_event_id                     (event_id)
+#  index_registrations_on_name_and_event_id            (name,event_id) UNIQUE
+#  index_registrations_on_payment_code                 (payment_code) UNIQUE
+#  index_registrations_on_student_number_and_event_id  (student_number,event_id) UNIQUE
 #
 
 class Registration < ApplicationRecord
@@ -81,7 +88,7 @@ class Registration < ApplicationRecord
     write_attribute(:price, to_cents(value))
   end
 
-  def is_paid
+  def paid?
     self.price <= self.paid
   end
 
@@ -111,11 +118,7 @@ class Registration < ApplicationRecord
 
     if self.is_paid
       RegistrationMailer.ticket(self).deliver_later
-
-      if self.paid > self.price
-        RegistrationMailer.notify_overpayment(self).deliver_later
-      end
-
+      RegistrationMailer.notify_overpayment(self).deliver_later if self.paid > self.price
     else
       RegistrationMailer.confirm_registration(self).deliver_later
     end

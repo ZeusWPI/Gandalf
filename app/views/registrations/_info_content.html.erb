@@ -22,7 +22,7 @@
       <td>
         <ul class="no-margin no-padding">
           <% version.changeset.each do |name, change| %>
-            <%= raw("<li>#{nice_changeset(name, change)}</li>") unless version.event == 'create' %>
+            <%= raw("<li>#{nice_changeset(name, change, @registration.price)}</li>") unless version.event == 'create' %>
           <% end %>
         </ul>
       </td>

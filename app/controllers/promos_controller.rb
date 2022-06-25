@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PromosController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :confirm]
+  before_action :authenticate_user!
 
   respond_to :html, :js
 

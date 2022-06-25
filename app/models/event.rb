@@ -63,6 +63,6 @@ class Event < ApplicationRecord
   end
 
   def toggle_registration_open
-    self.toggle!(:registration_open)
+    self.toggle(:registration_open).save!
   end
 end

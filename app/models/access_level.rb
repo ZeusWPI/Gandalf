@@ -5,15 +5,19 @@
 # Table name: access_levels
 #
 #  id          :integer          not null, primary key
-#  name        :string
-#  event_id    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
 #  capacity    :integer
-#  price       :integer
 #  has_comment :boolean
 #  hidden      :boolean
-#  permit      :string           default('everyone')
+#  name        :string
+#  permit      :string           default("everyone")
+#  price       :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  event_id    :integer
+#
+# Indexes
+#
+#  index_access_levels_on_event_id  (event_id)
 #
 
 class AccessLevel < ApplicationRecord
@@ -45,7 +49,7 @@ class AccessLevel < ApplicationRecord
     !permit_everyone?
   end
 
-  def set_zones_by_ids(zones)
+  def zones_by_ids=(zones)
     self.zones = self.event.zones.find zones
     self.save!
   end

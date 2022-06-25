@@ -4,18 +4,25 @@
 #
 #  id             :integer          not null, primary key
 #  barcode        :string
-#  name           :string
+#  barcode_data   :string
+#  checked_in_at  :datetime
+#  comment        :text
 #  email          :string
+#  name           :string
+#  paid           :integer
+#  payment_code   :string
+#  price          :integer
+#  student_number :string
 #  created_at     :datetime
 #  updated_at     :datetime
 #  event_id       :integer
-#  paid           :integer
-#  student_number :string
-#  price          :integer
-#  checked_in_at  :datetime
-#  comment        :text
-#  barcode_data   :string
-#  payment_code   :string
+#
+# Indexes
+#
+#  index_registrations_on_event_id                     (event_id)
+#  index_registrations_on_name_and_event_id            (name,event_id) UNIQUE
+#  index_registrations_on_payment_code                 (payment_code) UNIQUE
+#  index_registrations_on_student_number_and_event_id  (student_number,event_id) UNIQUE
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

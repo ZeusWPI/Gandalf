@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_18_142556) do
+ActiveRecord::Schema.define(version: 2022_06_25_163117) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.string "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["internal_name"], name: "index_clubs_on_internal_name", unique: true
   end
 
   create_table "clubs_users", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -143,6 +144,7 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.boolean "confirmed"
     t.index ["access_level_id"], name: "index_partners_on_access_level_id"
     t.index ["authentication_token"], name: "index_partners_on_authentication_token"
+    t.index ["name", "event_id"], name: "index_partners_on_name_and_event_id", unique: true
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
   end
 
@@ -181,7 +183,9 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.string "barcode_data"
     t.string "payment_code"
     t.index ["event_id"], name: "index_registrations_on_event_id"
+    t.index ["name", "event_id"], name: "index_registrations_on_name_and_event_id", unique: true
     t.index ["payment_code"], name: "index_registrations_on_payment_code", unique: true
+    t.index ["student_number", "event_id"], name: "index_registrations_on_student_number_and_event_id", unique: true
   end
 
   create_table "users", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

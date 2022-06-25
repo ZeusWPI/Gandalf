@@ -3,15 +3,19 @@
 # Table name: access_levels
 #
 #  id          :integer          not null, primary key
-#  name        :string
-#  event_id    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
 #  capacity    :integer
-#  price       :integer
 #  has_comment :boolean
 #  hidden      :boolean
-#  permit      :string           default('everyone')
+#  name        :string
+#  permit      :string           default("everyone")
+#  price       :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  event_id    :integer
+#
+# Indexes
+#
+#  index_access_levels_on_event_id  (event_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
@@ -44,7 +48,7 @@ unlimited:
   price: 0
 
 <% 3.times do |n| %>
-limited_<%= n %>:
+limited<%= n %>:
   id: <%= 100 + n %>
   name: <%= "Limited#{n}" %>
   price: 0

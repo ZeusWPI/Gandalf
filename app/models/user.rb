@@ -5,21 +5,25 @@
 # Table name: users
 #
 #  id                  :integer          not null, primary key
-#  username            :string           default(""), not null
-#  remember_created_at :datetime
-#  sign_in_count       :integer          default(0), not null
-#  current_sign_in_at  :datetime
-#  last_sign_in_at     :datetime
-#  current_sign_in_ip  :string
-#  last_sign_in_ip     :string
-#  created_at          :datetime
-#  updated_at          :datetime
+#  admin               :boolean
 #  cas_givenname       :string
+#  cas_mail            :string
 #  cas_surname         :string
 #  cas_ugentStudentID  :string
-#  cas_mail            :string
 #  cas_uid             :string
-#  admin               :boolean
+#  current_sign_in_at  :datetime
+#  current_sign_in_ip  :string
+#  last_sign_in_at     :datetime
+#  last_sign_in_ip     :string
+#  remember_created_at :datetime
+#  sign_in_count       :integer          default(0), not null
+#  username            :string           default(""), not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+# Indexes
+#
+#  index_users_on_username  (username) UNIQUE
 #
 
 class User < ApplicationRecord
@@ -34,9 +38,7 @@ class User < ApplicationRecord
 
   # return the club this user can manage
   def fetch_club
-    def digest(*args)
-      Digest::SHA256.hexdigest args.join('-')
-    end
+    digest = ->(*args) { Digest::SHA256.hexdigest args.join('-') }
 
     # using httparty because it is much easier to read than net/http code
     resp = HTTParty.get("#{Rails.application.secrets.fk_auth_url}/#{username}/Gandalf",
@@ -52,7 +54,7 @@ class User < ApplicationRecord
       clubs = hash['clubs'].map { |club| club['internal_name'] }
       timestamp = hash['timestamp']
 
-      dig = digest(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
+      dig = digest.call(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
       self.clubs = Club.where internal_name: clubs if (Time.zone.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
 
       self.save!

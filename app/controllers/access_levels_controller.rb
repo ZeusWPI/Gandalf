@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AccessLevelsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :new]
+  before_action :authenticate_user!, except: [:show]
 
   respond_to :html, :js
 
@@ -62,7 +62,7 @@ class AccessLevelsController < ApplicationController
     zones = params.require(:access_level).require(:zones)
     # Features introduced in new versions apparently suck pretty hard
     # manually parse the output here from collection_check_boxes, because rails
-    access_level.set_zones_by_ids(zones[0..-2].map { |z| z.split.first.to_i })
+    access_level.zones_by_ids = zones[0..-2].map { |z| z.split.first.to_i }
     redirect_to @event
   end
 

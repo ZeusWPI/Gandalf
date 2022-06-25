@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module RegistrationsHelper
-  def nice_changeset(name, change)
+  def nice_changeset(name, change, registration_price)
     case name
     when 'paid'
-      "Changed the amount paid from #{euro(@registration.price - (change[0] / 100))} to #{euro(@registration.price - change[1])}"
+      "Changed the amount paid from #{euro(registration_price - (change[0] / 100))} to #{euro(registration_price - change[1])}"
     when 'checked_in_at'
       "Checked in at #{nice_time change[1]}"
     when 'payment_code'

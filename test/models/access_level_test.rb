@@ -5,15 +5,19 @@
 # Table name: access_levels
 #
 #  id          :integer          not null, primary key
-#  name        :string
-#  event_id    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
 #  capacity    :integer
-#  price       :integer
-#  public      :boolean          default(TRUE)
 #  has_comment :boolean
 #  hidden      :boolean
+#  name        :string
+#  permit      :string           default("everyone")
+#  price       :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  event_id    :integer
+#
+# Indexes
+#
+#  index_access_levels_on_event_id  (event_id)
 #
 
 require 'test_helper'

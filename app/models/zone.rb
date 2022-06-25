@@ -6,9 +6,14 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  event_id   :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  event_id   :integer
+#
+# Indexes
+#
+#  index_zones_on_event_id           (event_id)
+#  index_zones_on_name_and_event_id  (name,event_id) UNIQUE
 #
 
 class Zone < ApplicationRecord

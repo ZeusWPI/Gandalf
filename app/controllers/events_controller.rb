@@ -133,7 +133,7 @@ class EventsController < ApplicationController
 
   def check_in
     if @registration
-      if !@registration.is_paid
+      if !@registration.paid?
         flash.now[:warning] =
           "Person has not paid yet! Resting amount: €#{@registration.to_pay}"
       elsif @registration.checked_in_at

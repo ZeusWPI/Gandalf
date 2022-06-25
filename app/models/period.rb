@@ -5,12 +5,16 @@
 # Table name: periods
 #
 #  id         :integer          not null, primary key
-#  starts     :datetime
 #  ends       :datetime
 #  name       :string
+#  starts     :datetime
 #  created_at :datetime
 #  updated_at :datetime
 #  event_id   :integer
+#
+# Indexes
+#
+#  index_periods_on_event_id  (event_id)
 #
 
 class Period < ApplicationRecord
