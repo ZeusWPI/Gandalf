@@ -1,5 +1,6 @@
-class SignInController < ApplicationController
+# frozen_string_literal: true
 
+class SignInController < ApplicationController
   before_action :authenticate_partner_from_token!
   before_action :authenticate_partner!
 
@@ -30,5 +31,4 @@ class SignInController < ApplicationController
       flash[:error] = "Something went wrong. Make sure you click the link or copy the whole link (including parameters)! #{view_context.mail_to @event.contact_email, "Contact us"} if the problem persists.".html_safe
     end
   end
-
 end

@@ -1,5 +1,6 @@
-class AccessLevelsController < ApplicationController
+# frozen_string_literal: true
 
+class AccessLevelsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :new]
 
   respond_to :html, :js
@@ -24,7 +25,7 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     @access_level = @event.access_levels.find(params.require(:id))
-    @access_level.update update_params
+    @access_level.update!(update_params)
 
     respond_with @access_level
   end
@@ -32,7 +33,7 @@ class AccessLevelsController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
-    @access_level = @event.access_levels.create update_params
+    @access_level = @event.access_levels.create!(update_params)
     respond_with @access_level
   end
 
@@ -44,13 +45,13 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     access_level = AccessLevel.find params.require(:id)
-    unless access_level.registrations.any?
+    if access_level.registrations.any?
+      render :index
+    else
       # Save the name so we can respond it as we still have to
       # be able to delete it
       @id = access_level.id
-      access_level.destroy
-    else
-      render :index
+      access_level.destroy!
     end
   end
 
@@ -61,7 +62,7 @@ class AccessLevelsController < ApplicationController
     zones = params.require(:access_level).require(:zones)
     # Features introduced in new versions apparently suck pretty hard
     # manually parse the output here from collection_check_boxes, because rails
-    access_level.set_zones_by_ids zones[0..-2].map { |z| z.split.first.to_i }
+    access_level.set_zones_by_ids(zones[0..-2].map { |z| z.split.first.to_i })
     redirect_to @event
   end
 
@@ -70,11 +71,10 @@ class AccessLevelsController < ApplicationController
     authorize! :update, @event
     @access_level = AccessLevel.find params.require(:id)
     @access_level.hidden = not(@access_level.hidden)
-    @access_level.save
+    @access_level.save!
   end
 
   def parse_advanced
     @advanced = params[:advanced] == 'true'
   end
-
 end

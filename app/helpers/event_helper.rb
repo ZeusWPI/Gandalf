@@ -1,5 +1,6 @@
-module EventHelper
+# frozen_string_literal: true
 
+module EventHelper
   def color_for_tickets_left(al)
     return "default" if al.capacity.blank?
 
@@ -12,5 +13,4 @@ module EventHelper
       "default"
     end
   end
-
 end

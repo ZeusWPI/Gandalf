@@ -1,7 +1,7 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 
 class EventsController < ApplicationController
-
   # order is important here, we need to be authenticated before we can check permission
   before_action :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy
+    @event.destroy!
     redirect_to action: :index
   end
 
@@ -60,7 +60,7 @@ class EventsController < ApplicationController
   def create
     authorize! :create, Event
 
-    @event = Event.create(event_create_params)
+    @event = Event.create!(event_create_params)
 
     respond_with @event
   end
@@ -72,7 +72,7 @@ class EventsController < ApplicationController
     if not @event.registrations.empty?
 
       min, max = @event.registrations.pluck(:created_at).minmax
-      zeros = Hash[]
+      zeros = {}
       while min <= max
         zeros[min.strftime("%Y-%m-%d")] = 0
         min += 1.day
@@ -109,7 +109,6 @@ class EventsController < ApplicationController
     check_in
   end
 
-
   def export_status
     @event = Event.find params.require(:id)
     authorize! :read, @event
@@ -136,8 +135,8 @@ class EventsController < ApplicationController
   end
 
   private
-  def check_in
 
+  def check_in
     if @registration
       if not @registration.is_paid
         flash.now[:warning] =

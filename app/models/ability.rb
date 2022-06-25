@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
@@ -82,5 +84,4 @@ class Ability
       clubs.include? event.club or event.show_statistics
     end
   end
-
 end

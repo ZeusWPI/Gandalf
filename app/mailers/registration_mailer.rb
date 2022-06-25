@@ -1,5 +1,4 @@
 class RegistrationMailer < ActionMailer::Base
-
   helper ApplicationHelper
 
   default from: "noreply@student.ugent.be"
@@ -24,5 +23,4 @@ class RegistrationMailer < ActionMailer::Base
     @registration = registration
     mail to: "#{registration.name} <#{registration.email}>", subject: "Overpayment for #{registration.event.name}"
   end
-
 end

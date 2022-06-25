@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class PeriodsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   test "creation forces login" do
-
     post :create, params: {
       event_id: 2,
       period: {

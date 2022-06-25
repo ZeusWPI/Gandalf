@@ -1,5 +1,6 @@
-module AccessLevelsHelper
+# frozen_string_literal: true
 
+module AccessLevelsHelper
   def visibility_icon(al)
     if al.hidden
       '<i class="glyphicon glyphicon-eye-open visibility"></i> Show'
@@ -14,5 +15,4 @@ module AccessLevelsHelper
     }
     translations[permit.to_sym] || permit
   end
-
 end

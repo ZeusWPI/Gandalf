@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: clubs
@@ -11,7 +13,6 @@
 #
 
 class Club < ApplicationRecord
-
   has_many :events
 
   has_and_belongs_to_many :users

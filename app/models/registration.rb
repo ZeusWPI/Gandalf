@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'barby/barcode/ean_13'
 
 # == Schema Information
@@ -30,7 +32,7 @@ class Registration < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :event_id }
   # Uniqueness temporarily disabled; see the Partner model for the reason
-  #validates :email, presence: true, uniqueness: { scope: :event_id }
+  # validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
   validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }, uniqueness: { scope: :event }, allow_blank: true
   validates :student_number, presence: true, if: -> { access_levels.first.try(:requires_login?) }

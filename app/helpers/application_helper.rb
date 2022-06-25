@@ -1,5 +1,6 @@
-module ApplicationHelper
+# frozen_string_literal: true
 
+module ApplicationHelper
   # Prettify helpers
   def nice_time(f)
     f.try { |d| d.strftime("%a %d %b %Y %H:%M") }

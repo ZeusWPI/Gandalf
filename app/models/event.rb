@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -48,7 +50,6 @@ class Event < ApplicationRecord
 
   validates :contact_email, email: true
   validates_with IbanValidator
-
 
   validates_datetime :end_date, after: :start_date
   validates_datetime :registration_close_date, after: :registration_open_date,

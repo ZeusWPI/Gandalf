@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class PartnersControllerTest < ActionController::TestCase
@@ -56,8 +58,7 @@ class PartnersControllerTest < ActionController::TestCase
 
   test "should show already confirmed on already confirmed" do
     p = partners(:KBC)
-    p.confirmed = true
-    p.save
+    p.update!(confirmed: true)
 
     sign_in(p)
 
@@ -69,8 +70,7 @@ class PartnersControllerTest < ActionController::TestCase
   test "should not allow another registration on confirm when already confirmed" do
     assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +0 do
       p = partners(:KBC)
-      p.confirmed = true
-      p.save
+      p.update!(confirmed: true)
 
       sign_in(p)
 
@@ -105,5 +105,4 @@ class PartnersControllerTest < ActionController::TestCase
     assert r.event_id = p.event_id
     assert r.price = p.access_level.price
   end
-
 end

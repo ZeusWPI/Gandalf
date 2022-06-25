@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class RegistrationsControllerTest < ActionController::TestCase
@@ -12,7 +14,6 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test "uploading partially failed registrations" do
-
     # Quick check for the used fixture
     three = registrations(:three)
     assert_equal 0, three.paid
@@ -38,7 +39,6 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     # Check if the success registration got changed.
     assert_equal 0.01, three.reload.paid
-
   end
 
   test "resend sends an email" do
@@ -120,9 +120,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       end
       assert registration.price < registration.reload.paid
     end
-
   end
-
 
   test "manual not changing mails nor changes the code" do
     three = registrations(:three)
@@ -146,7 +144,6 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test "basic registration" do
-
     # setting up data
     galabal = events(:galabal)
     posthash = {

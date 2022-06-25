@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'dotenv-rails'
 
 gem 'bundler', '>= 2.3.11'
 
-gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
+gem 'ed25519', '>= 1.2', '< 2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1'
@@ -42,8 +44,8 @@ gem 'devise'
 gem 'devise_cas_authenticatable', '~> 2.0'
 
 # Omniauth as extra development backdoor
-gem 'omniauth-zeuswpi'
 gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-zeuswpi'
 
 # Token authentication for partners
 gem 'simple_token_authentication'
@@ -59,8 +61,8 @@ gem 'paper_trail'
 gem 'iban-tools'
 
 # Barcodes
-gem 'chunky_png'
 gem 'barby'
+gem 'chunky_png'
 
 # Pagination
 gem 'will_paginate', '~> 3.0'
@@ -92,8 +94,6 @@ gem 'validates_timeliness', '~> 6.0.0.beta2'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-#gem 'airbrake', '~> 4.3'
-
 # select2 is beautiful
 gem 'select2-rails'
 
@@ -115,8 +115,9 @@ group :development do
   gem 'capistrano', '~> 3.17'
   gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
 
-  gem 'listen'
   gem 'letter_opener'
+
+  gem 'listen'
 
   gem 'web-console'
 end

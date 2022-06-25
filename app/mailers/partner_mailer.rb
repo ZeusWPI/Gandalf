@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PartnerMailer < ActionMailer::Base
   default from: "noreply@student.ugent.be"
 
@@ -10,5 +12,4 @@ class PartnerMailer < ActionMailer::Base
     @partner = partner
     mail to: "#{partner.name} <#{partner.email}>", subject: "Invitation for #{partner.name}"
   end
-
 end

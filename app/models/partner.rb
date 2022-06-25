@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: partners
@@ -47,5 +49,4 @@ class Partner < ApplicationRecord
   def deliver
     PartnerMailer.invitation(self).deliver_later
   end
-
 end

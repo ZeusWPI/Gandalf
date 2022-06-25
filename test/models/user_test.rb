@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -23,7 +25,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-
   def setup
     stub_request(:get, "https://intranet.fkgent.be/clubs/tnnaesse/Gandalf").
         to_return(body: build_fk_response(:tnnaesse, %w(zeus zeus2)))
@@ -80,6 +81,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   private
+
   def build_fk_response(casname, clubs)
     timestamp = Time.now
     sign = Digest::SHA256.hexdigest(
@@ -89,15 +91,17 @@ class UserTest < ActiveSupport::TestCase
             clean_json(timestamp),
             clubs
         ].join('-')
-    )
+      )
 
     hash = {
         timestamp: timestamp,
         casname: casname,
         sign: sign,
-        clubs: clubs.map { |club| {
+        clubs: clubs.map do |club|
+          {
             internal_name: club
-        }}
+          }
+        end
     }
 
     hash.to_json
@@ -107,5 +111,4 @@ class UserTest < ActiveSupport::TestCase
   def clean_json(str)
     str.to_json.sub(/^\A"(.*)"\z$/, '\\1') # Make sure this is the same string that is sent in the JSON
   end
-
 end

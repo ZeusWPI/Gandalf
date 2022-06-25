@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OmniauthCallbackController < Devise::OmniauthCallbacksController
   def zeuswpi
     @user = User.from_omniauth(request.env["omniauth.auth"])

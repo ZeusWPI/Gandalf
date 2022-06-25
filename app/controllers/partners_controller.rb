@@ -1,5 +1,6 @@
-class PartnersController < ApplicationController
+# frozen_string_literal: true
 
+class PartnersController < ApplicationController
   before_action :authenticate_user!, except: [:show, :confirm]
   before_action :authenticate_partner!, only: [:show, :confirm]
 
@@ -30,7 +31,7 @@ class PartnersController < ApplicationController
 
     @partner = @event.partners.new params.require(:partner).permit(:name, :email)
     @partner.access_level = al
-    @partner.save
+    @partner.save!
 
     respond_with @partner
   end
@@ -51,7 +52,7 @@ class PartnersController < ApplicationController
 
     @partner = @event.partners.find params.require(:id)
     @partner.access_level = al
-    @partner.update params.require(:partner).permit(:name, :email)
+    @partner.update!(params.require(:partner).permit(:name, :email))
 
     respond_with @partner
   end
@@ -61,7 +62,7 @@ class PartnersController < ApplicationController
     authorize! :update, @event
 
     @partner = @event.partners.find params.require(:id)
-    @partner.destroy
+    @partner.destroy!
   end
 
   def resend
@@ -141,7 +142,6 @@ class PartnersController < ApplicationController
         flash[:success] = success_msg
         redirect_to action: :index
       end
-
     rescue CSV::MalformedCSVError
       flash[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
       redirect_to action: :index
@@ -150,5 +150,4 @@ class PartnersController < ApplicationController
       redirect_to action: :index
     end
   end
-
 end

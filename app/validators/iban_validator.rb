@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IbanValidator < ActiveModel::Validator
   def validate(record)
     unless record.bank_number.blank? or IBANTools::IBAN.valid? record.bank_number

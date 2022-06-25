@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class EventControllerTest < ActionController::TestCase
@@ -83,9 +85,7 @@ class EventControllerTest < ActionController::TestCase
 
   test "show unpaid for checked in unpaid tickets" do
     reg = registrations(:one)
-    reg.checked_in_at = Time.now
-    reg.price = 10
-    reg.save
+    reg.update!(checked_in_at: Time.now, price: 10)
 
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
@@ -117,7 +117,6 @@ class EventControllerTest < ActionController::TestCase
     end
   end
 
-
   test "member tickets should not be shown for wrong user" do
     sign_out users(:tom)
     get :show, params: { id: events(:codenight).id }
@@ -144,7 +143,6 @@ class EventControllerTest < ActionController::TestCase
       assert_select "option", count: 1, text: "Unlimited"
       assert_select "option", count: 1, text: "Member"
     end
-
   end
 
   test "registration form hidden when only member or hidden tickets available" do
@@ -174,10 +172,9 @@ class EventControllerTest < ActionController::TestCase
       e[:data].keys.each do |k|
         assert (a[:data].has_key? k), "Missing date for #{e[:name]}: #{k}"
         assert e[:data][k] == a[:data][k],
-          "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
+               "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
       end
     end
-
   end
 
   test "registration form for student-only event shown when logged in" do
@@ -191,5 +188,4 @@ class EventControllerTest < ActionController::TestCase
     get :show, params: { id: events(:twaalfurenloop).id }
     assert_select "#basic-registration-form", false, "Should not contain registration form"
   end
-
 end

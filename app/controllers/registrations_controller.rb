@@ -1,5 +1,6 @@
-class RegistrationsController < ApplicationController
+# frozen_string_literal: true
 
+class RegistrationsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :destroy, :resend, :update, :email, :upload]
 
   require 'csv'
@@ -29,7 +30,7 @@ class RegistrationsController < ApplicationController
     authorize! :destroy, @event
     registration = Registration.find params.require(:id)
     @id = registration.id
-    registration.destroy
+    registration.destroy!
   end
 
   def info
@@ -61,7 +62,7 @@ class RegistrationsController < ApplicationController
     if requested_access_level.requires_login?
       @registration.student_number = current_user.cas_ugentStudentID
     end
-    @registration.save
+    @registration.save!
 
     # Send the confirmation email.
     if not @registration.errors.any?
@@ -77,12 +78,12 @@ class RegistrationsController < ApplicationController
   def advanced
     # TODO can can
     @event = Event.find params.require(:event_id)
-    @registration = @event.registrations.create params.require(:registration).permit(:email, :name)
+    @registration = @event.registrations.create!(params.require(:registration).permit(:email, :name))
     params.require(:registration).require(:checkboxes).each do |access_level, periods|
       periods.each do |period, checked|
         if checked == "on" then
           access = @registration.accesses.build access_level_id: access_level, period_id: period
-          access.save
+          access.save!
         end
       end
     end
@@ -122,7 +123,6 @@ class RegistrationsController < ApplicationController
 
     begin
       CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
-
         registration = Registration.find_payment_code_from_csv(row.to_s)
         # If the registration doesn't exist
         unless registration
@@ -141,7 +141,7 @@ class RegistrationsController < ApplicationController
 
         registration.paid += amount
         registration.payment_code = Registration.create_payment_code
-        registration.save
+        registration.save!
 
         registration.deliver
 
@@ -163,7 +163,5 @@ class RegistrationsController < ApplicationController
       flash[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
       redirect_to action: :index
     end
-
   end
-
 end

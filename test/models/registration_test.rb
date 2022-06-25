@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: registrations
@@ -69,8 +71,7 @@ class RegistrationTest < ActiveSupport::TestCase
   end
 
   def teardown
-    @r1.destroy
-    @r2.destroy
+    @r1.destroy!
+    @r2.destroy!
   end
-
 end

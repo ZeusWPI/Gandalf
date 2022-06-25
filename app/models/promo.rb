@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: promos
@@ -27,12 +29,10 @@ class Promo < ApplicationRecord
   def self.generate_bulk(amount, limit, access_levels, event)
     amount.times do
       promo = self.new(code: 12.times.map { SecureRandom.random_number(10) }.join,
-         limit: limit)
+                       limit: limit)
       promo.access_levels = access_levels
       promo.event = event
       promo.save!
     end
   end
-
-
 end

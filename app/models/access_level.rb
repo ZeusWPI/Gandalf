@@ -1,4 +1,6 @@
 # coding: utf-8
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: access_levels
@@ -48,14 +50,14 @@ class AccessLevel < ApplicationRecord
 
   def set_zones_by_ids zones
     self.zones = self.event.zones.find zones
-    self.save
+    self.save!
   end
 
   def name_with_price
     if price > 0
       "#{name} - €#{'%0.2f' % price}"
     else
-       name
+      name
     end
   end
 
@@ -71,5 +73,4 @@ class AccessLevel < ApplicationRecord
     if value.is_a? String then value.sub!(',', '.') end
     write_attribute(:price, (value.to_f * 100).to_int)
   end
-
 end

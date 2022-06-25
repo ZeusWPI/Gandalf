@@ -1,5 +1,6 @@
-class PromosController < ApplicationController
+# frozen_string_literal: true
 
+class PromosController < ApplicationController
   before_action :authenticate_user!, except: [:show, :confirm]
 
   respond_to :html, :js
@@ -21,7 +22,7 @@ class PromosController < ApplicationController
     authorize! :update, @event
     @promo = @event.promos.new update_params
     @promo.access_levels = @promo.event.access_levels.where(id: params.require(:promo)[:access_levels].split(','))
-    @promo.save
+    @promo.save!
     respond_with @promo
   end
 
@@ -29,7 +30,7 @@ class PromosController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     @promo = @event.promos.find(params.require(:id))
-    @promo.update update_params
+    @promo.update!(update_params)
     @promo.access_levels = @promo.event.access_levels.where(id: params.require(:promo)[:access_levels].split(','))
 
     respond_with @promo
@@ -43,13 +44,13 @@ class PromosController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     promo = @event.promos.find(params.require(:id))
-    unless promo.tickets_sold?
+    if promo.tickets_sold?
+      render :index
+    else
       # Save the name so we can respond it as we still have to
       # be able to delete it
       @id = promo.id
-      promo.destroy
-    else
-      render :index
+      promo.destroy!
     end
   end
 
@@ -71,5 +72,4 @@ class PromosController < ApplicationController
       redirect_to event_promos_path(@event)
     end
   end
-
 end
