@@ -19,10 +19,9 @@
 #
 # Indexes
 #
-#  index_registrations_on_event_id                     (event_id)
-#  index_registrations_on_name_and_event_id            (name,event_id) UNIQUE
-#  index_registrations_on_payment_code                 (payment_code) UNIQUE
-#  index_registrations_on_student_number_and_event_id  (student_number,event_id) UNIQUE
+#  index_registrations_on_event_id           (event_id)
+#  index_registrations_on_name_and_event_id  (name,event_id) UNIQUE
+#  index_registrations_on_payment_code       (payment_code) UNIQUE
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

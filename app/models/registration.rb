@@ -23,10 +23,9 @@ require 'barby/barcode/ean_13'
 #
 # Indexes
 #
-#  index_registrations_on_event_id                     (event_id)
-#  index_registrations_on_name_and_event_id            (name,event_id) UNIQUE
-#  index_registrations_on_payment_code                 (payment_code) UNIQUE
-#  index_registrations_on_student_number_and_event_id  (student_number,event_id) UNIQUE
+#  index_registrations_on_event_id           (event_id)
+#  index_registrations_on_name_and_event_id  (name,event_id) UNIQUE
+#  index_registrations_on_payment_code       (payment_code) UNIQUE
 #
 
 class Registration < ApplicationRecord
@@ -41,7 +40,10 @@ class Registration < ApplicationRecord
   # Uniqueness temporarily disabled; see the Partner model for the reason
   # validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
-  validates :student_number, format: { with: /\A[0-9]*\Z/, message: "has invalid format" }, uniqueness: { scope: :event }, allow_blank: true
+  validates :student_number, # rubocop:disable Rails/UniqueValidationWithoutIndex as partial indexes aren't supported on Sqlite
+            format: { with: /\A[0-9]*\Z/, message: "has invalid format" },
+            uniqueness: { scope: :event },
+            allow_blank: true
   validates :student_number, presence: true, if: -> { access_levels.first.try(:requires_login?) }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -110,7 +112,7 @@ class Registration < ApplicationRecord
 
   def self.create_payment_code
     random = rand(10**15)
-    format("GAN%02d%015d", random % 97, random)
+    format("GAN%<check>02d%<number>015d", check: random % 97, number: random)
   end
 
   def deliver

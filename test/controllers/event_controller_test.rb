@@ -8,7 +8,16 @@ class EventControllerTest < ActionController::TestCase
   def setup
     stub_request(:get, "http://fkgent.be/api_isengard_v2.php")
       .with(query: hash_including(u: 'tnnaesse'))
-      .to_return(body: '{"data":[{"internalName":"zeus","displayName":"Zeus WPI"},{"internalName":"zeus2","displayName":"Zeus WPI2"}],"controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"}')
+      .to_return(
+        body: <<~JSON
+          {
+            "data": [
+              {"internalName":"zeus","displayName":"Zeus WPI"},
+              {"internalName":"zeus2","displayName":"Zeus WPI2"}],
+              "controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"
+          }
+        JSON
+      )
 
     @controller = EventsController.new
     sign_in users(:tom)
@@ -171,8 +180,7 @@ class EventControllerTest < ActionController::TestCase
       assert_equal e[:name], a[:name], "Mismatching names. Expected #{e[:name]} got #{a[:name]}"
       e[:data].each_key do |k|
         assert (a[:data].key? k), "Missing date for #{e[:name]}: #{k}"
-        assert_equal e[:data][k], a[:data][k],
-                     "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
+        assert_equal e[:data][k], a[:data][k], "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
       end
     end
   end

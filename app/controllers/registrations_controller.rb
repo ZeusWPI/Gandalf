@@ -154,7 +154,8 @@ class RegistrationsController < ApplicationController
         redirect_to action: :index
       end
     rescue CSV::MalformedCSVError
-      flash[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
+      flash[:error] = %( The file could not be parsed. Make sure that you uploaded the correct file
+        and that the column separator settings have been set to the correct separator. ).squish
       redirect_to action: :index
     end
   end

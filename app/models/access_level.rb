@@ -56,7 +56,7 @@ class AccessLevel < ApplicationRecord
 
   def name_with_price
     if price.positive?
-      "#{name} - €#{'%0.2f' % price}"
+      "#{name} - €#{format('%0.2f', price)}"
     else
       name
     end

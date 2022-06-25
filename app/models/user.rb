@@ -49,16 +49,17 @@ class User < ApplicationRecord
 
     # this will only return the club names if control-hash matches
     # and timestamp roughly around our current server time (5 minute tolerance)
-    if resp.success?
-      hash = JSON[resp.body]
-      clubs = hash['clubs'].map { |club| club['internal_name'] }
-      timestamp = hash['timestamp']
 
-      dig = digest.call(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
-      self.clubs = Club.where internal_name: clubs if (Time.zone.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
+    return unless resp.success?
 
-      self.save!
-    end
+    hash = JSON[resp.body]
+    clubs = hash['clubs'].map { |club| club['internal_name'] }
+    timestamp = hash['timestamp']
+
+    dig = digest.call(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
+    self.clubs = Club.where internal_name: clubs if (Time.zone.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
+
+    self.save!
   end
 
   # this should add all extra CAS attributes returned by the server to the current session
@@ -97,13 +98,14 @@ class User < ApplicationRecord
     resp = HTTParty.get("http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
                  { key: Rails.application.secrets.enrollment_key, ugent_nr: self.cas_ugentStudentID })
 
-    if resp.code == 200
-      clubs = JSON[resp.body].map(&:downcase).map { |c| c.gsub('-', '') }
-      unless clubs.empty?
-        self.enrolled_clubs = Club.where(internal_name: clubs)
-        self.save!
-      end
-    end
+    return unless resp.code == 200
+
+    clubs = JSON[resp.body].map(&:downcase).map { |c| c.gsub('-', '') }
+
+    return if clubs.empty?
+
+    self.enrolled_clubs = Club.where(internal_name: clubs)
+    self.save!
   end
 
   # specifies the daily update for a users (enrolled) clubs

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_25_163117) do
+ActiveRecord::Schema.define(version: 2022_06_25_162853) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -185,7 +185,6 @@ ActiveRecord::Schema.define(version: 2022_06_25_163117) do
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["name", "event_id"], name: "index_registrations_on_name_and_event_id", unique: true
     t.index ["payment_code"], name: "index_registrations_on_payment_code", unique: true
-    t.index ["student_number", "event_id"], name: "index_registrations_on_student_number_and_event_id", unique: true
   end
 
   create_table "users", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

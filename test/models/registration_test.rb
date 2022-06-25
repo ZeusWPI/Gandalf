@@ -21,10 +21,9 @@
 #
 # Indexes
 #
-#  index_registrations_on_event_id                     (event_id)
-#  index_registrations_on_name_and_event_id            (name,event_id) UNIQUE
-#  index_registrations_on_payment_code                 (payment_code) UNIQUE
-#  index_registrations_on_student_number_and_event_id  (student_number,event_id) UNIQUE
+#  index_registrations_on_event_id           (event_id)
+#  index_registrations_on_name_and_event_id  (name,event_id) UNIQUE
+#  index_registrations_on_payment_code       (payment_code) UNIQUE
 #
 
 require 'test_helper'
@@ -33,7 +32,14 @@ class RegistrationTest < ActiveSupport::TestCase
   verify_fixtures Registration
 
   def setup
-    @r1 = Registration.new(student_number: "01", name: "test", email: "test@test.com", payment_code: Registration.create_payment_code, price: 1, paid: 0)
+    @r1 = Registration.new(
+      student_number: "01",
+      name: "test",
+      email: "test@test.com",
+      payment_code: Registration.create_payment_code,
+      price: 1,
+      paid: 0
+    )
     @r2 = @r1.dup
     @r2.payment_code = Registration.create_payment_code
   end

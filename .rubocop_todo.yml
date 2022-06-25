@@ -6,13 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns, IgnoredPatterns.
-# URISchemes: http, https
-Layout/LineLength:
-  Max: 215
-
 # Offense count: 6
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb
@@ -31,24 +24,3 @@ Rails/HasManyOrHasOneDependent:
     - 'app/models/access_level.rb'
     - 'app/models/club.rb'
     - 'app/models/period.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: format, sprintf, percent
-Style/FormatString:
-  Exclude:
-    - 'app/models/access_level.rb'
-
-# Offense count: 2
-# Configuration parameters: MaxUnannotatedPlaceholdersAllowed, IgnoredMethods.
-# SupportedStyles: annotated, template, unannotated
-Style/FormatStringToken:
-  EnforcedStyle: unannotated
-
-# Offense count: 3
-# Configuration parameters: MinBodyLength, AllowConsecutiveConditionals.
-Style/GuardClause:
-  Exclude:
-    - 'app/controllers/events_controller.rb'
-    - 'app/models/user.rb'

@@ -19,11 +19,11 @@ class EventsController < ApplicationController
   def show
     @registration = @event.registrations.build
 
-    if current_user
-      @registration.name = current_user.display_name
-      @registration.student_number = current_user.cas_ugentStudentID
-      @registration.email = current_user.cas_mail
-    end
+    return unless current_user
+
+    @registration.name = current_user.display_name
+    @registration.student_number = current_user.cas_ugentStudentID
+    @registration.email = current_user.cas_mail
   end
 
   def new; end
@@ -150,7 +150,20 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count, :signature)
+    params.require(:event).permit(
+      :name,
+      :location,
+      :website,
+      :contact_email,
+      :start_date,
+      :end_date,
+      :description,
+      :bank_number,
+      :registration_close_date,
+      :registration_open_date,
+      :show_ticket_count,
+      :signature
+    )
   end
 
   def event_create_params
