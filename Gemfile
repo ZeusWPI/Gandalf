@@ -38,7 +38,7 @@ gem 'datagrid'
 
 # Let's use devise for users
 gem 'devise'
-gem 'devise_cas_authenticatable', '~> 1.10'
+gem 'devise_cas_authenticatable', '~> 2.0'
 
 # Omniauth as extra development backdoor
 gem 'omniauth-zeuswpi'
