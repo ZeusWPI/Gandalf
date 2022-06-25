@@ -19,7 +19,7 @@ updates:
       timezone: Europe/Brussels
     open-pull-requests-limit: 10
     reviewers:
-      - chvp
+      - TomNaessens
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
