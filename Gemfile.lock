@@ -384,7 +384,7 @@ DEPENDENCIES
   barcodes!
   bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap
-  bundler (= 2.3.11)
+  bundler (~> 2.3.11)
   cancancan
   capistrano (~> 3.10)
   capistrano-rails (~> 1.6)
