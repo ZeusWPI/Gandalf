@@ -228,6 +228,8 @@ GEM
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
+    psych (4.0.4)
+      stringio
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -276,7 +278,8 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rdoc (6.3.3)
+    rdoc (6.4.0)
+      psych (>= 4.0.0)
     record_tag_helper (1.0.1)
       actionview (>= 5)
     redis (4.6.0)
@@ -305,8 +308,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sdoc (2.3.1)
-      rdoc (>= 5.0, < 6.4.0)
+    sdoc (2.4.0)
+      rdoc (>= 5.0)
     select2-rails (4.0.13)
     sidekiq (6.5.1)
       connection_pool (>= 2.2.2)
@@ -334,6 +337,7 @@ GEM
     sshkit (1.21.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stringio (3.0.2)
     thor (1.2.1)
     tilt (2.0.10)
     timeliness (0.4.4)
