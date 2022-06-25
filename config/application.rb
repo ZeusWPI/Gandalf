@@ -20,5 +20,7 @@ module Isengard
     config.time_zone = 'Brussels'
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.rack_cas.server_url = "https://login.ugent.be"
   end
 end

@@ -6,8 +6,6 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   config.secret_key = '6be99adcecd95b55d389b1b80960f5323eca75c6f0d88285517c58904329ab454af61299ac8bcbac4e966cd9582c8e1f1c370c35f07d94fcc384648012c8647d'
 
-  config.cas_base_url = "https://login.ugent.be"
-
   config.cas_logout_url_param = 'destination'
   config.cas_destination_logout_param_name = 'url'
 
@@ -262,7 +260,3 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
-
-Devise.cas_client_config_options = {
-    :encode_extra_attributes_as => :raw
-}
