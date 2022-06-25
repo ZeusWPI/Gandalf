@@ -11,9 +11,10 @@ class Ability
     alias_action :new, :create, :read, :update, :destroy, :to => :crud
 
     # Delegate with user precedence
-    if entity.kind_of? User
+    case entity
+    when User
       user_rules(entity)
-    elsif entity.kind_of? Partner
+    when Partner
       partner_rules(entity)
     end
   end
@@ -28,7 +29,7 @@ class Ability
   def user_rules(user)
     clubs = user.try(:clubs)
     enrolled_clubs = user.try(:enrolled_clubs)
-    if !clubs.blank?
+    if clubs.present?
       can :create, Event
       can :show, Event
       can :crud, Event, ["? IN (?)", :club_id, clubs.pluck(:id)] do |e|
@@ -49,9 +50,9 @@ class Ability
     can :register, Event do |event|
       if !event.registration_open
         false
-      elsif !event.registration_open_date.blank? && !event.registration_close_date.blank?
+      elsif event.registration_open_date.present? && event.registration_close_date.present?
         event.registration_open_date <= DateTime.now && event.registration_close_date >= DateTime.now
-      elsif !event.registration_open_date.blank? && event.registration_close_date.blank?
+      elsif event.registration_open_date.present? && event.registration_close_date.blank?
         event.registration_open_date <= DateTime.now
       else
         true

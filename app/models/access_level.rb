@@ -34,7 +34,7 @@ class AccessLevel < ApplicationRecord
   validates :capacity, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
 
   validate do |access_level|
-    if access_level.price > 0 and access_level.event.bank_number.blank?
+    if access_level.price > 0 && access_level.event.bank_number.blank?
       access_level.errors.add :event_id, "has no bank number."
     end
   end

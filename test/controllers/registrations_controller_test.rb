@@ -7,8 +7,8 @@ class RegistrationsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup
-    stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
-      with(query: hash_including(u: "")).to_return(body: 'FAIL')
+    stub_request(:get, "http://fkgent.be/api_isengard_v2.php")
+      .with(query: hash_including(u: "")).to_return(body: 'FAIL')
 
     sign_in users(:tom)
   end
@@ -24,7 +24,8 @@ class RegistrationsControllerTest < ActionController::TestCase
         event_id: 1,
         separator: ';',
         amount_column: 'Amount',
-        csv_file: fixture_file_upload('unsuccesful_registration_payments.csv') }
+        csv_file: fixture_file_upload('unsuccesful_registration_payments.csv')
+      }
     end
 
     # Check if the correct rows failed.

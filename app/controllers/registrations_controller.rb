@@ -76,7 +76,7 @@ class RegistrationsController < ApplicationController
   end
 
   def advanced
-    # TODO can can
+    # TODO: can can
     @event = Event.find params.require(:event_id)
     @registration = @event.registrations.create!(params.require(:registration).permit(:email, :name))
     params.require(:registration).require(:checkboxes).each do |access_level, periods|
@@ -107,7 +107,7 @@ class RegistrationsController < ApplicationController
     if to_id == -1
       to = @event.registrations.pluck(:email)
     else
-      to = @event.access_levels.find_by_id(to_id).registrations.pluck(:email)
+      to = @event.access_levels.find(to_id).registrations.pluck(:email)
     end
     MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver_later
     redirect_to event_registrations_path(@event)
@@ -148,7 +148,7 @@ class RegistrationsController < ApplicationController
         counter += 1
       end
 
-      success_msg = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
+      success_msg = "Updated #{ActionController::Base.helpers.pluralize counter, 'payment'} successfully."
       if fails.any?
         flash.now[:success] = success_msg
         flash.now[:error] = "The rows listed below contained an invalid code, please fix them by hand."

@@ -35,8 +35,8 @@ class RegistrationTest < ActiveSupport::TestCase
     @r1.event = events(:codenight)
     @r1.save!
     @r2.event = events(:codenight)
-    assert !@r2.valid?
-    assert !@r2.errors[:student_number].blank?
+    assert_not @r2.valid?
+    assert_not @r2.errors[:student_number].blank?
   end
 
   test "student_number should work for multiple events" do
@@ -49,19 +49,19 @@ class RegistrationTest < ActiveSupport::TestCase
   test "student_number should be present on members-only tickets" do
     @r1.student_number = ""
     @r1.access_levels << access_levels(:members_only)
-    assert !@r1.save
+    assert_not @r1.save
   end
 
   test "student_number should be present on enrolled-only tickets" do
     @r1.student_number = ""
     @r1.access_levels << access_levels(:enrolled_only)
-    assert !@r1.save
+    assert_not @r1.save
   end
 
   test "student_number should be present on students-only tickets" do
     @r1.student_number = ""
     @r1.access_levels << access_levels(:students_only)
-    assert !@r1.save
+    assert_not @r1.save
   end
 
   test "student_number can be blank on tickets available for everyone" do

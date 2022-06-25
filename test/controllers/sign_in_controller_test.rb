@@ -2,5 +2,5 @@
 
 require 'test_helper'
 
-class SignInControllerTest < ActionController::TestCase
+class SignInControllerTest < ActionDispatch::IntegrationTest
 end

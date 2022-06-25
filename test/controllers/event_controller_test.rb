@@ -6,9 +6,9 @@ class EventControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup
-    stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
-      with(query: hash_including(u: 'tnnaesse')).
-      to_return(body: '{"data":[{"internalName":"zeus","displayName":"Zeus WPI"},{"internalName":"zeus2","displayName":"Zeus WPI2"}],"controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"}')
+    stub_request(:get, "http://fkgent.be/api_isengard_v2.php")
+      .with(query: hash_including(u: 'tnnaesse'))
+      .to_return(body: '{"data":[{"internalName":"zeus","displayName":"Zeus WPI"},{"internalName":"zeus2","displayName":"Zeus WPI2"}],"controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"}')
 
     @controller = EventsController.new
     sign_in users(:tom)
@@ -69,7 +69,7 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "validate correct name" do
-    post :scan_name, params: { id: events(:codenight).id, name: 'Tom Naessens' } 
+    post :scan_name, params: { id: events(:codenight).id, name: 'Tom Naessens' }
     assert_response :success
     assert(flash[:success].include? "Person has been scanned")
   end

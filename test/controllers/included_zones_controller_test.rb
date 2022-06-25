@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class IncludedZonesControllerTest < ActionController::TestCase
+class IncludedZonesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

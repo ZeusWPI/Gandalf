@@ -26,22 +26,22 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    stub_request(:get, "https://intranet.fkgent.be/clubs/tnnaesse/Gandalf").
-        to_return(body: build_fk_response(:tnnaesse, %w(zeus zeus2)))
+    stub_request(:get, "https://intranet.fkgent.be/clubs/tnnaesse/Gandalf")
+      .to_return(body: build_fk_response(:tnnaesse, %w(zeus zeus2)))
 
-    stub_request(:get, "https://intranet.fkgent.be/clubs/mherthog/Gandalf").
-        to_return(body: build_fk_response(:mherthog, %w(fkcentraal)))
+    stub_request(:get, "https://intranet.fkgent.be/clubs/mherthog/Gandalf")
+      .to_return(body: build_fk_response(:mherthog, %w(fkcentraal)))
 
-    stub_request(:get, "https://intranet.fkgent.be/clubs/tvwillem/Gandalf").
-       to_return(body: build_fk_response(:tvwillem, []))
+    stub_request(:get, "https://intranet.fkgent.be/clubs/tvwillem/Gandalf")
+      .to_return(body: build_fk_response(:tvwillem, []))
 
-    stub_request(:get, "http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json").
-        with(query: {ugent_nr: "00800857", key: "#development#"}).
-        to_return(body: '["zeus"]')
+    stub_request(:get, "http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json")
+      .with(query: { ugent_nr: "00800857", key: "#development#" })
+      .to_return(body: '["zeus"]')
 
-    stub_request(:get, "http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json").
-        with(query: {ugent_nr: "", key: "#development#"}).
-        to_return(body: '[]')
+    stub_request(:get, "http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json")
+      .with(query: { ugent_nr: "", key: "#development#" })
+      .to_return(body: '[]')
   end
 
   verify_fixtures User
@@ -85,23 +85,23 @@ class UserTest < ActiveSupport::TestCase
   def build_fk_response(casname, clubs)
     timestamp = Time.now
     sign = Digest::SHA256.hexdigest(
-        [
-            Rails.application.secrets.fk_auth_salt,
-            casname,
-            clean_json(timestamp),
-            clubs
-        ].join('-')
-      )
+      [
+        Rails.application.secrets.fk_auth_salt,
+        casname,
+        clean_json(timestamp),
+        clubs
+      ].join('-')
+    )
 
     hash = {
-        timestamp: timestamp,
-        casname: casname,
-        sign: sign,
-        clubs: clubs.map do |club|
-          {
-            internal_name: club
-          }
-        end
+      timestamp: timestamp,
+      casname: casname,
+      sign: sign,
+      clubs: clubs.map do |club|
+               {
+                 internal_name: club
+               }
+             end
     }
 
     hash.to_json

@@ -7,64 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 
-# Offense count: 12
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: leading, trailing
-Layout/DotPosition:
-  Exclude:
-    - 'test/controllers/event_controller_test.rb'
-    - 'test/controllers/registrations_controller_test.rb'
-    - 'test/controllers/welcome_controller_test.rb'
-    - 'test/models/user_test.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: consistent, consistent_relative_to_receiver, special_for_inner_method_call, special_for_inner_method_call_in_parentheses
-Layout/FirstArgumentIndentation:
-  Exclude:
-    - 'test/models/user_test.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_brackets
-Layout/FirstArrayElementIndentation:
-  Exclude:
-    - 'test/models/user_test.rb'
-
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_braces
-Layout/FirstHashElementIndentation:
-  Exclude:
-    - 'app/helpers/access_levels_helper.rb'
-    - 'app/models/user.rb'
-    - 'test/models/user_test.rb'
-
-# Offense count: 11
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowMultipleStyles, EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle.
-# SupportedHashRocketStyles: key, separator, table
-# SupportedColonStyles: key, separator, table
-# SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
-Layout/HashAlignment:
-  Exclude:
-    - 'app/controllers/partners_controller.rb'
-    - 'app/mailers/mass_mailer.rb'
-    - 'app/models/event.rb'
-    - 'app/models/promo.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: normal, indented_internal_methods
-Layout/IndentationConsistency:
-  Exclude:
-    - 'test/controllers/periods_controller_test.rb'
-
 # Offense count: 7
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns, IgnoredPatterns.
@@ -73,114 +15,9 @@ Layout/LineLength:
   Max: 215
 
 # Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: symmetrical, new_line, same_line
-Layout/MultilineHashBraceLayout:
-  Exclude:
-    - 'test/controllers/registrations_controller_test.rb'
-
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented, indented_relative_to_receiver
-Layout/MultilineMethodCallIndentation:
-  Exclude:
-    - 'test/models/user_test.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented
-Layout/MultilineOperationIndentation:
-  Exclude:
-    - 'app/controllers/events_controller.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Layout/SpaceAfterComma:
-  Exclude:
-    - 'app/grids/registrations_grid.rb'
-    - 'app/models/user.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.
-# SupportedStylesForExponentOperator: space, no_space
-Layout/SpaceAroundOperators:
-  Exclude:
-    - 'app/helpers/registrations_helper.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
-# SupportedStyles: space, no_space
-# SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceInsideBlockBraces:
-  Exclude:
-    - 'app/models/user.rb'
-
-# Offense count: 33
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces.
-# SupportedStyles: space, no_space, compact
-# SupportedStylesForEmptyBraces: space, no_space
-Layout/SpaceInsideHashLiteralBraces:
-  Exclude:
-    - 'app/controllers/events_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/promo.rb'
-    - 'app/models/registration.rb'
-    - 'app/models/user.rb'
-    - 'test/models/user_test.rb'
-
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: space, no_space
-Layout/SpaceInsideStringInterpolation:
-  Exclude:
-    - 'app/models/user.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: final_newline, final_blank_line
-Layout/TrailingEmptyLines:
-  Exclude:
-    - 'app/models/application_record.rb'
-    - 'app/validators/email_validator.rb'
-    - 'app/validators/iban_validator.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'test/controllers/event_controller_test.rb'
-    - 'test/controllers/registrations_controller_test.rb'
-
-# Offense count: 1
 Lint/NestedMethodDefinition:
   Exclude:
     - 'app/models/user.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: strict, consistent
-Lint/SymbolConversion:
-  Exclude:
-    - 'app/controllers/sign_in_controller.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
-Lint/UnusedMethodArgument:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/omniauth_callback_controller.rb'
-    - 'app/helpers/access_levels_helper.rb'
 
 # Offense count: 5
 # Configuration parameters: CountComments, CountAsOne.
@@ -218,63 +55,6 @@ Naming/PredicateName:
 Naming/VariableNumber:
   Exclude:
     - 'test/helpers/event_helper_test.rb'
-
-# Offense count: 5
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: SafeAutocorrect, Include.
-# Include: **/test/**/*.rb
-Rails/ActionControllerTestCase:
-  Exclude:
-    - 'test/controllers/access_levels_controller_test.rb'
-    - 'test/controllers/included_zones_controller_test.rb'
-    - 'test/controllers/promos_controller_test.rb'
-    - 'test/controllers/sign_in_controller_test.rb'
-    - 'test/controllers/zones_controller_test.rb'
-
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/ApplicationMailer:
-  Exclude:
-    - 'app/mailers/mass_mailer.rb'
-    - 'app/mailers/partner_mailer.rb'
-    - 'app/mailers/registration_mailer.rb'
-
-# Offense count: 5
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: Include.
-# Include: **/test/**/*
-Rails/AssertNot:
-  Exclude:
-    - 'test/models/registration_test.rb'
-
-# Offense count: 1
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/DeprecatedActiveModelErrorsMethods:
-  Exclude:
-    - 'app/validators/iban_validator.rb'
-
-# Offense count: 6
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: Whitelist, AllowedMethods, AllowedReceivers.
-# Whitelist: find_by_sql
-# AllowedMethods: find_by_sql
-# AllowedReceivers: Gem::Specification
-Rails/DynamicFindBy:
-  Exclude:
-    - 'app/controllers/partners_controller.rb'
-    - 'app/controllers/registrations_controller.rb'
-    - 'app/controllers/sign_in_controller.rb'
-    - 'app/models/registration.rb'
-    - 'test/controllers/partners_controller_test.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: Include, IgnoredMethods.
-# Include: app/models/**/*.rb
-# IgnoredMethods: order, limit, select, lock
-Rails/FindEach:
-  Exclude:
-    - 'app/models/user.rb'
 
 # Offense count: 6
 # Configuration parameters: Include.
@@ -316,21 +96,6 @@ Rails/OutputSafety:
     - 'app/controllers/partners_controller.rb'
     - 'app/controllers/sign_in_controller.rb'
 
-# Offense count: 5
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: NotNilAndNotEmpty, NotBlank, UnlessBlank.
-Rails/Present:
-  Exclude:
-    - 'app/models/ability.rb'
-    - 'test/models/registration_test.rb'
-
-# Offense count: 2
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/RedundantPresenceValidationOnBelongsTo:
-  Exclude:
-    - 'app/models/event.rb'
-    - 'app/models/promo.rb'
-
 # Offense count: 1
 # Configuration parameters: ForbiddenMethods, AllowedMethods.
 # ForbiddenMethods: decrement!, decrement_counter, increment!, increment_counter, insert, insert!, insert_all, insert_all!, toggle!, touch, touch_all, update_all, update_attribute, update_column, update_columns, update_counters, upsert, upsert_all
@@ -358,54 +123,6 @@ Rails/UniqueValidationWithoutIndex:
     - 'app/models/partner.rb'
     - 'app/models/registration.rb'
 
-# Offense count: 5
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: always, conditionals
-Style/AndOr:
-  Exclude:
-    - 'app/controllers/partners_controller.rb'
-    - 'app/models/access_level.rb'
-    - 'app/models/registration.rb'
-    - 'app/models/user.rb'
-    - 'app/validators/iban_validator.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, ProceduralMethods, FunctionalMethods, IgnoredMethods, AllowBracesOnProceduralOneLiners, BracesRequiredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining, always_braces
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# IgnoredMethods: lambda, proc, it
-Style/BlockDelimiters:
-  Exclude:
-    - 'test/models/user_test.rb'
-
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'test/test_helper.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: is_a?, kind_of?
-Style/ClassCheck:
-  Exclude:
-    - 'app/models/ability.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: Keywords, RequireColon.
-# Keywords: TODO, FIXME, OPTIMIZE, HACK, REVIEW, NOTE
-Style/CommentAnnotation:
-  Exclude:
-    - 'app/controllers/registrations_controller.rb'
-    - 'app/models/user.rb'
-
 # Offense count: 3
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
@@ -415,31 +132,6 @@ Style/ConditionalAssignment:
     - 'app/controllers/application_controller.rb'
     - 'app/controllers/events_controller.rb'
     - 'app/controllers/registrations_controller.rb'
-
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Exclude:
-    - 'app/controllers/events_controller.rb'
-    - 'app/controllers/welcome_controller.rb'
-    - 'test/controllers/partners_controller_test.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Style/Encoding:
-  Exclude:
-    - 'app/controllers/events_controller.rb'
-    - 'app/models/access_level.rb'
-
-# Offense count: 3
-# This cop supports safe autocorrection (--autocorrect).
-Style/ExpandPathArguments:
-  Exclude:
-    - 'Rakefile'
-    - 'config.ru'
-    - 'test/test_helper.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -657,16 +349,6 @@ Style/StringConcatenation:
     - 'app/models/user.rb'
     - 'test/test_helper.rb'
 
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiteralsInInterpolation:
-  Exclude:
-    - 'app/controllers/partners_controller.rb'
-    - 'app/controllers/registrations_controller.rb'
-    - 'app/controllers/sign_in_controller.rb'
-
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowMethodsWithArguments, IgnoredMethods, AllowComments.
@@ -675,10 +357,3 @@ Style/SymbolProc:
   Exclude:
     - 'app/models/user.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: WordRegex.
-# SupportedStyles: percent, brackets
-Style/WordArray:
-  EnforcedStyle: percent
-  MinSize: 4

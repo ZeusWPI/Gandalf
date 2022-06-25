@@ -15,7 +15,7 @@ class PeriodsControllerTest < ActionController::TestCase
       }
     }, format: 'js'
 
-  assert_response 401
+    assert_response 401
   end
 
   test "creation requires event crud" do

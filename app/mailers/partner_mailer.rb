@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class PartnerMailer < ActionMailer::Base
-  default from: "noreply@student.ugent.be"
+class PartnerMailer < ApplicationMailer
+  default from: "noreply@event.student.ugent.be"
 
   def send_token(partner)
     @partner = partner

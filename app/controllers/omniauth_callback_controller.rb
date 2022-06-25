@@ -6,7 +6,7 @@ class OmniauthCallbackController < Devise::OmniauthCallbacksController
     sign_in_and_redirect @user
   end
 
-  def after_omniauth_failure_path_for(scope)
+  def after_omniauth_failure_path_for(_scope)
     root_path
   end
 end

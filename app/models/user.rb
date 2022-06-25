@@ -39,10 +39,10 @@ class User < ApplicationRecord
     end
 
     # using httparty because it is much easier to read than net/http code
-    resp = HTTParty.get("#{ Rails.application.secrets.fk_auth_url }/#{ username }/Gandalf",
+    resp = HTTParty.get("#{Rails.application.secrets.fk_auth_url}/#{username}/Gandalf",
                         :headers => {
-                            'X-Authorization' => Rails.application.secrets.fk_auth_key,
-                            'Accept' => 'application/json'
+                          'X-Authorization' => Rails.application.secrets.fk_auth_key,
+                          'Accept' => 'application/json'
                         })
 
     # this will only return the club names if control-hash matches
@@ -85,7 +85,7 @@ class User < ApplicationRecord
 
   # return Givenname + surname or username if these don't exist
   def display_name
-    if cas_surname and cas_givenname
+    if cas_surname && cas_givenname
       cas_givenname + ' ' + cas_surname
     else
       username
@@ -95,10 +95,10 @@ class User < ApplicationRecord
   # fetch clubs where user is enrolled in
   def fetch_enrolled_clubs
     resp = HTTParty.get("http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
-                 {key: Rails.application.secrets.enrollment_key, ugent_nr: self.cas_ugentStudentID})
+                 { key: Rails.application.secrets.enrollment_key, ugent_nr: self.cas_ugentStudentID })
 
     if resp.code == 200
-      clubs = JSON[resp.body].map(&:downcase).map {|c| c.gsub('-','')}
+      clubs = JSON[resp.body].map(&:downcase).map { |c| c.gsub('-', '') }
       if !clubs.empty?
         self.enrolled_clubs = Club.where(internal_name: clubs)
         self.save!
@@ -108,8 +108,8 @@ class User < ApplicationRecord
 
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
-    User.all.each do |user|
-      # TODO this is patched out, waiting for the DSA API for board members
+    User.all.find_each do |user|
+      # TODO: this is patched out, waiting for the DSA API for board members
       # user.fetch_club
       user.fetch_enrolled_clubs
     end

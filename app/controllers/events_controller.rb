@@ -143,7 +143,7 @@ class EventsController < ApplicationController
           "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
       elsif @registration.checked_in_at
         flash.now[:warning] = "Person already checked in at " +
-          view_context.nice_time(@registration.checked_in_at) + "!"
+                              view_context.nice_time(@registration.checked_in_at) + "!"
       else
         flash.now[:success] = "Person has been scanned!"
         @registration.checked_in_at = Time.now

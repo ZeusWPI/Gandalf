@@ -18,9 +18,8 @@ class Promo < ApplicationRecord
   has_and_belongs_to_many :access_levels
 
   validates :code, presence: true
-  validates :limit, numericality: {only_integer: true, greater_than: 0}
+  validates :limit, numericality: { only_integer: true, greater_than: 0 }
   validates :access_levels, presence: true
-  validates :event, presence: true
 
   def tickets_sold?
     self.sold_tickets != 0

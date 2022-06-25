@@ -34,7 +34,7 @@ class Registration < ApplicationRecord
   # Uniqueness temporarily disabled; see the Partner model for the reason
   # validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
-  validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }, uniqueness: { scope: :event }, allow_blank: true
+  validates :student_number, format: { with: /\A[0-9]*\Z/, message: "has invalid format" }, uniqueness: { scope: :event }, allow_blank: true
   validates :student_number, presence: true, if: -> { access_levels.first.try(:requires_login?) }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -50,7 +50,7 @@ class Registration < ApplicationRecord
 
   after_save do |record|
     record.access_levels.each do |access_level|
-      if access_level.capacity != nil and access_level.registrations.count > access_level.capacity
+      if (access_level.capacity != nil) && (access_level.registrations.count > access_level.capacity)
         record.errors.add :access_levels, "type is sold out."
         raise ActiveRecord::Rollback
       end
@@ -97,7 +97,7 @@ class Registration < ApplicationRecord
   def self.find_payment_code_from_csv(csvline)
     match = /GAN\d+/.match(csvline)
     if match
-      return Registration.find_by_payment_code(match[0])
+      return Registration.find_by(payment_code: match[0])
     else
       return false
     end

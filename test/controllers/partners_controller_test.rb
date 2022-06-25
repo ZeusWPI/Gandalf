@@ -68,7 +68,7 @@ class PartnersControllerTest < ActionController::TestCase
   end
 
   test "should not allow another registration on confirm when already confirmed" do
-    assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +0 do
+    assert_difference "Event.find_by(name: events(:codenight).name).registrations.count", +0 do
       p = partners(:KBC)
       p.update!(confirmed: true)
 
@@ -85,7 +85,7 @@ class PartnersControllerTest < ActionController::TestCase
   end
 
   test "should add registration on confirm" do
-    assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +1 do
+    assert_difference "Event.find_by(name: events(:codenight).name).registrations.count", +1 do
       sign_in partners(:KBC)
       post :confirm, xhr: true, params: { event_id: 1, id: 1 }
     end
@@ -93,13 +93,13 @@ class PartnersControllerTest < ActionController::TestCase
 
   test "should confirm correct access level for correct event" do
     p = partners(:KBC)
-    assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +1 do
+    assert_difference "Event.find_by(name: events(:codenight).name).registrations.count", +1 do
       sign_in p
       post :confirm, xhr: true, params: { event_id: 1, id: 1 }
     end
 
     # Get latest registration here
-    r = Registration.find_by_name "KBC"
+    r = Registration.find_by name: "KBC"
     assert r.name = p.name
     assert r.email = p.email
     assert r.event_id = p.event_id

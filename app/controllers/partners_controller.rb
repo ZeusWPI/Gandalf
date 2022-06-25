@@ -14,7 +14,7 @@ class PartnersController < ApplicationController
 
   def show
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find_by_id params.require(:id)
+    @partner = @event.partners.find(params.require(:id))
 
     authorize! :read, @partner
   end
@@ -69,13 +69,13 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :read, @event
 
-    partner = @event.partners.find params.require(:id)
+    partner = @event.partners.find(params.require(:id))
     partner.deliver
   end
 
   def confirm
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find_by_id params.require(:id)
+    @partner = @event.partners.find(params.require(:id))
 
     authorize! :register, @partner
 
@@ -83,20 +83,20 @@ class PartnersController < ApplicationController
       flash.now[:error] = "You have already registered for this event. Please check your mailbox."
     else
       @registration = @event.registrations.new(
-        email:          @partner.email,
-        name:           @partner.name,
+        email: @partner.email,
+        name: @partner.name,
         student_number: nil,
-        comment:        nil,
-        price:          @partner.access_level.price,
-        paid:           0
+        comment: nil,
+        price: @partner.access_level.price,
+        paid: 0
       )
       @registration.access_levels << @partner.access_level
       @partner.confirmed = true
-      if @registration.save and @partner.save
+      if @registration.save && @partner.save
         @registration.deliver
         flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
       else
-        flash.now[:error] = "Is seems there already is someone with your name and/or email registered for this event. #{view_context.mail_to @event.contact_email, "Contact us"} if this is not correct.".html_safe
+        flash.now[:error] = "Is seems there already is someone with your name and/or email registered for this event. #{view_context.mail_to @event.contact_email, 'Contact us'} if this is not correct.".html_safe
       end
     end
   end
@@ -105,7 +105,7 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    headers = ['name', 'email', 'error']
+    headers = %w[name email error]
 
     sep = params.require(:upload).require(:separator)
     al = @event.access_levels.find params.require(:upload).require(:access_level)
@@ -131,7 +131,7 @@ class PartnersController < ApplicationController
         counter += 1
       end
 
-      success_msg = "Added #{ActionController::Base.helpers.pluralize counter, "partners"} successfully."
+      success_msg = "Added #{ActionController::Base.helpers.pluralize counter, 'partners'} successfully."
       if fails.any?
         flash.now[:success] = success_msg unless counter == 0
         flash.now[:error] = "The rows listed below contained errors, please fix them by hand."

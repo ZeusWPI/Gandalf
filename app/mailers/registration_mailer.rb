@@ -1,4 +1,6 @@
-class RegistrationMailer < ActionMailer::Base
+# frozen_string_literal: true
+
+class RegistrationMailer < ApplicationMailer
   helper ApplicationHelper
 
   default from: "noreply@student.ugent.be"

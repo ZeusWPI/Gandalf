@@ -9,9 +9,9 @@ module AccessLevelsHelper
     end
   end
 
-  def translate(permit, options = {})
+  def translate(permit, _options = {})
     translations = {
-        enrolled: 'FK-members'
+      enrolled: 'FK-members'
     }
     translations[permit.to_sym] || permit
   end
