@@ -7,7 +7,7 @@
     <% else %>
       <div class="form-group">
         <div class="button-group">
-          <%= button_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-success form-control" %>
         </div>
       </div>
       <% if Rails.env.development? %>
