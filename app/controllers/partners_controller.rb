@@ -133,7 +133,7 @@ class PartnersController < ApplicationController
 
       success_msg = "Added #{ActionController::Base.helpers.pluralize counter, 'partners'} successfully."
       if fails.any?
-        flash.now[:success] = success_msg unless counter == 0
+        flash.now[:success] = success_msg unless counter.zero?
         flash.now[:error] = "The rows listed below contained errors, please fix them by hand."
         @csvheaders = headers
         @csvfails = fails

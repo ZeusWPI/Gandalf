@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
     # using httparty because it is much easier to read than net/http code
     resp = HTTParty.get("#{Rails.application.secrets.fk_auth_url}/#{username}/Gandalf",
-                        :headers => {
+                        headers: {
                           'X-Authorization' => Rails.application.secrets.fk_auth_key,
                           'Accept' => 'application/json'
                         })
@@ -53,7 +53,7 @@ class User < ApplicationRecord
       timestamp = hash['timestamp']
 
       dig = digest(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
-      self.clubs = Club.where internal_name: clubs if (Time.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
+      self.clubs = Club.where internal_name: clubs if (Time.zone.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
 
       self.save!
     end

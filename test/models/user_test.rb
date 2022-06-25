@@ -83,7 +83,7 @@ class UserTest < ActiveSupport::TestCase
   private
 
   def build_fk_response(casname, clubs)
-    timestamp = Time.now
+    timestamp = Time.zone.now
     sign = Digest::SHA256.hexdigest(
       [
         Rails.application.secrets.fk_auth_salt,

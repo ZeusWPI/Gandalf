@@ -8,7 +8,7 @@ class Ability
     entity ||= User.new
 
     # Aliases
-    alias_action :new, :create, :read, :update, :destroy, :to => :crud
+    alias_action :new, :create, :read, :update, :destroy, to: :crud
 
     # Delegate with user precedence
     case entity

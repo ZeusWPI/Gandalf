@@ -85,7 +85,7 @@ class EventControllerTest < ActionController::TestCase
 
   test "show unpaid for checked in unpaid tickets" do
     reg = registrations(:one)
-    reg.update!(checked_in_at: Time.now, price: 10)
+    reg.update!(checked_in_at: Time.zone.now, price: 10)
 
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success

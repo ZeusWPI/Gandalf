@@ -104,17 +104,6 @@ Rails/SkipsModelValidations:
     - 'app/models/event.rb'
 
 # Offense count: 4
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: strict, flexible
-Rails/TimeZone:
-  Exclude:
-    - 'app/controllers/events_controller.rb'
-    - 'app/models/user.rb'
-    - 'test/controllers/event_controller_test.rb'
-    - 'test/models/user_test.rb'
-
-# Offense count: 4
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb
 Rails/UniqueValidationWithoutIndex:
@@ -138,22 +127,3 @@ Style/GuardClause:
     - 'app/models/user.rb'
     - 'app/validators/email_validator.rb'
     - 'app/validators/iban_validator.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, EnforcedShorthandSyntax, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
-# SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
-# SupportedShorthandSyntax: always, never, either
-Style/HashSyntax:
-  Exclude:
-    - 'app/models/ability.rb'
-    - 'app/models/user.rb'
-
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: EnforcedStyle, IgnoredMethods.
-# SupportedStyles: predicate, comparison
-Style/NumericPredicate:
-  Exclude:
-    - 'app/controllers/partners_controller.rb'
-    - 'app/models/access_level.rb'
