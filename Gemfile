@@ -115,6 +115,8 @@ group :development do
   gem 'capistrano', '~> 3.17'
   gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
 
+  gem 'rubocop-minitest'
+
   gem 'letter_opener'
 
   gem 'listen'

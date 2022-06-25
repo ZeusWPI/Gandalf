@@ -39,7 +39,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_equal 'The rows listed below contained an invalid code, please fix them by hand.', flash[:error]
 
     # Check if the success registration got changed.
-    assert_equal 0.01, three.reload.paid
+    assert_in_delta(0.01, three.reload.paid)
   end
 
   test "resend sends an email" do
@@ -65,7 +65,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     [three, four].each do |registration|
       assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registration]) do
@@ -84,7 +84,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     to_pay = 0.01
 
@@ -105,7 +105,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     to_pay = -5
 
@@ -128,7 +128,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     [three, four].each do |registration|
       paid = registration.paid

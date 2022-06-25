@@ -50,7 +50,7 @@ class UserTest < ActiveSupport::TestCase
     tom = users(:tom)
     tom.clubs = []
 
-    assert tom.clubs.empty?
+    assert_empty tom.clubs
 
     tom.fetch_club
     assert_not tom.clubs.empty?
@@ -59,7 +59,7 @@ class UserTest < ActiveSupport::TestCase
     maarten = users(:maarten)
     maarten.clubs = []
 
-    assert maarten.clubs.empty?
+    assert_empty maarten.clubs
 
     maarten.fetch_club
     assert_not maarten.clubs.empty?
@@ -68,10 +68,10 @@ class UserTest < ActiveSupport::TestCase
     toon = users(:toon)
     toon.clubs = []
 
-    assert toon.clubs.empty?
+    assert_empty toon.clubs
 
     toon.fetch_club
-    assert toon.clubs.empty?
+    assert_empty toon.clubs
   end
 
   test "enrolled clubs is set after fetching" do
