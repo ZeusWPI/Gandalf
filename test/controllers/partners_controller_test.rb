@@ -5,8 +5,7 @@ require 'test_helper'
 class PartnersControllerTest < ActionController::TestCase
   include ActionMailer::TestHelper
   include Devise::Test::ControllerHelpers
-
-  def setup; end
+  verify_fixtures Partner
 
   test "should get index" do
     sign_in users(:tom)
@@ -51,7 +50,7 @@ class PartnersControllerTest < ActionController::TestCase
 
   test "should not confirm for other events" do
     sign_in partners(:KBC)
-    post :confirm, params: { event_id: 2, id: 1 }
+    post :confirm, params: { event_id: 2, id: partners(:KBC).id }
     assert_response :redirect
   end
 

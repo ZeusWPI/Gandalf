@@ -14,7 +14,7 @@ class PartnersController < ApplicationController
 
   def show
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find(params.require(:id))
+    @partner = @event.partners.find_by(id: params.require(:id))
 
     authorize! :read, @partner
   end
@@ -75,7 +75,7 @@ class PartnersController < ApplicationController
 
   def confirm
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find(params.require(:id))
+    @partner = @event.partners.find_by(id: params.require(:id))
 
     authorize! :register, @partner
 

@@ -3,8 +3,6 @@
 class RegistrationMailer < ApplicationMailer
   helper ApplicationHelper
 
-  default from: "noreply@student.ugent.be"
-
   def confirm_registration(registration)
     @registration = registration
     mail to: "#{registration.name} <#{registration.email}>", subject: "Registration for #{registration.event.name}"

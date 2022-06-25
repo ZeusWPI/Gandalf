@@ -35,7 +35,7 @@ class EventTest < ActiveSupport::TestCase
   verify_fixtures Event
 
   test "enable_toggling_of_registration_status" do
-    e = Event.new
+    e = events(:codenight)
 
     assert(e.registration_open)
     e.save!
