@@ -2,6 +2,9 @@ inherit_from: .rubocop_todo.yml
 
 require: rubocop-minitest
 
+Minitest/MultipleAssertions:
+  Enabled: false
+
 inherit_gem:
   rails_style:
     - default.yml
