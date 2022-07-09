@@ -131,7 +131,7 @@ group :test do
   gem 'poltergeist'
 
   # Temporary lock until the flaky test issue is fixed on Minitest side that's present in 5.16.0
-  gem 'minitest', '= 5.15.0'
+  gem 'minitest', '5.16.2'
 end
 
 group :production, :deployment do
