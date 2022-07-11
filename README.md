@@ -17,6 +17,18 @@ In short, Gandalf is a project that does everything that makes organising and ma
 7. Add Zeus WPI to your clubs: `u.clubs = [Club.find_by_internal_name(:zeus)]`
 8. Save your user: `u.save`
 
+# Manually adding users to clubs / making users admin
+
+```
+ssh gandalf@pratchett.ugent.be -p2222
+podman exec -it gandalf_web_1 /bin/bash
+bundle exec rails c
+# Making someone admin
+User.find_by(cas_mail: 'Voornaam.Familienaam@UGent.be').update!(admin: true)
+# Adding a user to a club
+Club.find_by(internal_name: 'zeus').members << User.find_by(cas_email: 'Voornaam.Familienaam@UGent.be')
+```
+
 ## Https
 
 You need a https setup to use cas. The process is quite simple. You need to generate a self signed certificate which is just a few commands and then
