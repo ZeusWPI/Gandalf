@@ -6,7 +6,7 @@ class RegistrationMailer < ActionMailer::Base
 
   helper ApplicationHelper
 
-  default from: "noreply@event.student.ugent.be"
+  default from: "noreply@student.ugent.be"
 
   def confirm_registration(registration)
     @registration = registration

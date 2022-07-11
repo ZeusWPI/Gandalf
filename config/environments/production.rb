@@ -62,7 +62,13 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtprelay.ugent.be',
+    open_timeout: 5,
+    read_timeout: 5
+  }
+
   # Set base URL because emails don't have the Host header context
   config.action_mailer.default_url_options = { :host => 'https://event.student.ugent.be' }
 
