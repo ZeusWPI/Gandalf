@@ -289,7 +289,7 @@ GEM
       railties (>= 5.0)
     rexml (3.2.5)
     ri_cal (0.8.8)
-    rmagick (4.2.5)
+    rmagick (4.2.6)
     ruby-graphviz (1.2.5)
       rexml
     ruby-ole (1.2.12.2)
