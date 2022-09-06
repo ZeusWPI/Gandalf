@@ -26,7 +26,7 @@ bundle exec rails c
 # Making someone admin
 User.find_by(cas_mail: 'Voornaam.Familienaam@UGent.be').update!(admin: true)
 # Adding a user to a club
-Club.find_by(internal_name: 'zeus').members << User.find_by(cas_mail: 'Voornaam.Familienaam@UGent.be')
+Club.find_by(internal_name: 'zeus').users << User.find_by(cas_mail: 'Voornaam.Familienaam@UGent.be')
 ```
 
 ## Https
