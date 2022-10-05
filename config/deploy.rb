@@ -33,5 +33,6 @@ set :docker_command, "podman"
 set :docker_copy_data, %w{.env config/database.yml}
 
 set :docker_compose, true
+set :docker_compose_path, "docker-compose.prod.yml"
 set :docker_compose_command, "podman-compose"
 set :docker_compose_project_name, "gandalf"
