@@ -6,7 +6,8 @@
 In short, Gandalf is a project that does everything that makes organising and managing an event a lot easier for FK-clubs of the University of Ghent. The application is written specifically for the UGent FakulteitenKonvent. It allows students to register for events and it also interacts with the FK-Enrolment database and allows members of student unions to subscribe to member-only events from their clubs.
 
 # Getting started
-1. Start your docker with the preferred services `docker compose up -d db db-test sidekiq redis`
+0. Install the prerequisites: ruby 3.0.4, preferably using [asdf](https://asdf-vm.com/)
+1. Start up dependencies (mariadb, redis, sidekiq) using `bin/dev`
 2. Set up some database data using `rails db:setup`
 3. Start the application in your favorite IDE or using `rails s`
 4. Browse to http://localhost:3000
