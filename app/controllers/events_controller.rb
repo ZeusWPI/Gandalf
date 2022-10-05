@@ -79,7 +79,10 @@ class EventsController < ApplicationController
       end
 
       @data = @event.access_levels.map do |al|
-        {name: al.name, data: zeros.merge(al.registrations.group('date(registrations.created_at)').count)}
+        {
+          name: al.name,
+          data: zeros.merge(al.registrations.group('date(registrations.created_at)').count.transform_keys { |key| key.strftime("%Y-%m-%d") })
+        }
       end
 
     else
