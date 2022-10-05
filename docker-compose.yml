@@ -6,12 +6,26 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: strong-password
       MYSQL_DATABASE: gandalf
       MYSQL_USER: gandalf
       MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  db-test:
+    image: mariadb:10.8
+    volumes:
+      - db-test_data:/var/lib/mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    environment:
+      MYSQL_ROOT_PASSWORD: strong-password
+      MYSQL_DATABASE: gandalf-test
+      MYSQL_USER: gandalf
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
 
   web:
     build: .
@@ -19,7 +33,6 @@ services:
       - db
     ports:
       - "3003:3000"
-    restart: always
     volumes:
       - storage:/app/storage
     environment:
@@ -34,7 +47,6 @@ services:
     depends_on:
       - db
       - redis
-    restart: always
     volumes:
       - storage:/app/storage
     environment:
@@ -51,5 +63,6 @@ services:
 
 volumes:
   db_data:
+  db-test_data:
   redis_data:
   storage:

@@ -16,9 +16,6 @@ gem 'rails-controller-testing'
 gem 'bootsnap'
 gem 'turbolinks'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails'
 
@@ -112,6 +109,9 @@ gem 'simple_enum'
 # Enable content_tag_for useage
 gem 'record_tag_helper'
 
+ # Database
+gem 'mysql2'
+
 group :development do
   gem 'rails-erd'
 
@@ -121,10 +121,6 @@ group :development do
 
   gem 'listen'
   gem 'letter_opener'
-end
-
-group :production do
-  gem 'mysql2' # Database
 end
 
 group :test do
