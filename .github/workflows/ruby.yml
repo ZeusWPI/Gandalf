@@ -12,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Build the stack
+        run: docker-compose up -d db-test
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
