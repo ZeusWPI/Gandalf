@@ -35,6 +35,5 @@ end
 #
 #  index_partners_on_access_level_id       (access_level_id)
 #  index_partners_on_authentication_token  (authentication_token)
-#  index_partners_on_name_and_event_id     (name,event_id) UNIQUE
 #  index_partners_on_reset_password_token  (reset_password_token) UNIQUE
 #

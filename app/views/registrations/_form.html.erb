@@ -8,7 +8,7 @@
       <%= form_email_field f, :email %>
       <%= f.hidden_field :student_number %>
 
-      <%= form_collection_select f, :access_levels, @event.access_levels.find_all { |al| can? :register, al }, :id, :name_with_price %>
+      <%= form_collection_select f, :access_level, @event.access_levels.find_all { |al| can? :register, al }, :id, :name_with_price %>
       <%= form_text_area f, :comment %>
       <%= javascript_tag do %>
         window.ticketsWithComments = <%= @event.access_levels.find_all(&:has_comment).map(&:id).to_json %>

@@ -3,9 +3,7 @@
 require 'barby/barcode/ean_13'
 class Registration < ApplicationRecord
   belongs_to :event, optional: true
-
-  has_many :accesses, dependent: :destroy
-  has_many :access_levels, through: :accesses
+  belongs_to :access_level
 
   scope :paid, -> { where("price <= paid") }
 
@@ -17,7 +15,7 @@ class Registration < ApplicationRecord
             format: { with: /\A[0-9]*\Z/, message: "has invalid format" },
             uniqueness: { scope: :event },
             allow_blank: true
-  validates :student_number, presence: true, if: -> { access_levels.first.try(:requires_login?) }
+  validates :student_number, presence: true, if: -> { access_level.requires_login? }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :payment_code, presence: true, uniqueness: true
@@ -29,11 +27,9 @@ class Registration < ApplicationRecord
   end
 
   after_save do |record|
-    record.access_levels.each do |access_level|
-      if !access_level.capacity.nil? && (access_level.registrations.count > access_level.capacity)
-        record.errors.add :access_levels, "type is sold out."
-        raise ActiveRecord::Rollback
-      end
+    if !record.access_level.capacity.nil? && (record.access_level.registrations.count > record.access_level.capacity)
+      record.errors.add :access_level, "type is sold out."
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -115,23 +111,29 @@ end
 #
 # Table name: registrations
 #
-#  id             :integer          not null, primary key
-#  barcode        :string(255)
-#  barcode_data   :string(255)
-#  checked_in_at  :datetime
-#  comment        :text(65535)
-#  email          :string(255)
-#  name           :string(255)
-#  paid           :integer
-#  payment_code   :string(255)
-#  price          :integer
-#  student_number :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
-#  event_id       :integer
+#  id              :integer          not null, primary key
+#  barcode         :string(255)
+#  barcode_data    :string(255)
+#  checked_in_at   :datetime
+#  comment         :text(65535)
+#  email           :string(255)
+#  name            :string(255)
+#  paid            :integer
+#  payment_code    :string(255)
+#  price           :integer
+#  student_number  :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  access_level_id :integer          not null
+#  event_id        :integer
 #
 # Indexes
 #
-#  index_registrations_on_event_id      (event_id)
-#  index_registrations_on_payment_code  (payment_code) UNIQUE
+#  index_registrations_on_access_level_id  (access_level_id)
+#  index_registrations_on_event_id         (event_id)
+#  index_registrations_on_payment_code     (payment_code) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (access_level_id => access_levels.id)
 #

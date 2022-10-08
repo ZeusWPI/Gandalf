@@ -132,7 +132,7 @@ class EventControllerTest < ActionController::TestCase
     assert_response :success
 
     assert assigns(:event)
-    assert_select "#registration_access_levels" do
+    assert_select "#registration_access_level" do
       assert_select "option", count: 1, text: "Lid"
       assert_select "option", count: 1, text: "Unlimited"
       assert_select "option", count: 0, text: "Member Only"
@@ -147,7 +147,7 @@ class EventControllerTest < ActionController::TestCase
 
     assert_response :success
 
-    assert_select "#registration_access_levels" do
+    assert_select "#registration_access_level" do
       assert_select "option", count: 1, text: "Lid"
       assert_select "option", count: 1, text: "Unlimited"
       assert_select "option", count: 1, text: "Member"
@@ -169,7 +169,7 @@ class EventControllerTest < ActionController::TestCase
     get :statistics, params: { id: 1 }
     assert_response :success
     expected = [
-      { name: "Lid",       data: { date => 1 } },
+      { name: "Lid",       data: { date => 3 } },
       { name: "Limited0",  data: { date => 3 } },
       { name: "Limited1",  data: { date => 3 } },
       { name: "Limited2",  data: { date => 3 } },

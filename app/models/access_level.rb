@@ -3,8 +3,7 @@
 class AccessLevel < ApplicationRecord
   belongs_to :event, optional: true
 
-  has_many :accesses, dependent: :destroy
-  has_many :registrations, through: :accesses
+  has_many :registrations
   has_many :partners
 
   validates :name, presence: true
