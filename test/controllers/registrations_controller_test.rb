@@ -48,13 +48,13 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
   end
 
-  test "resend sends payment email when !is_paid" do
+  test "resend sends payment email when !paid?" do
     assert_enqueued_email_with(RegistrationMailer, :confirm_registration, args: [registrations(:three)]) do
       get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:three).id }
     end
   end
 
-  test "resend sends ticket email when is_paid" do
+  test "resend sends ticket email when paid?" do
     assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registrations(:one)]) do
       get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:one).id }
     end

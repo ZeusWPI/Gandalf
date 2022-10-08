@@ -118,7 +118,7 @@ class Registration < ApplicationRecord
   def deliver
     self.generate_barcode if self.barcode.nil?
 
-    if self.is_paid
+    if self.paid?
       RegistrationMailer.ticket(self).deliver_later
       RegistrationMailer.notify_overpayment(self).deliver_later if self.paid > self.price
     else
