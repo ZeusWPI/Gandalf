@@ -112,9 +112,14 @@ class Registration < ApplicationRecord
     end
 
     if self.is_paid
-      RegistrationMailer.ticket(self).deliver_now
+      RegistrationMailer.ticket(self).deliver_later
+
+      if self.paid > self.price
+        RegistrationMailer.notify_overpayment(self).deliver_later
+      end
+
     else
-      RegistrationMailer.confirm_registration(self).deliver_now
+      RegistrationMailer.confirm_registration(self).deliver_later
     end
   end
 

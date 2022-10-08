@@ -91,7 +91,7 @@ class PartnersController < ApplicationController
       )
       @registration.access_levels << @partner.access_level
       @partner.confirmed = true
-      if @registration.save and @partner.save then
+      if @registration.save and @partner.save
         @registration.deliver
         flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
       else

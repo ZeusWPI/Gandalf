@@ -45,7 +45,7 @@ class Partner < ApplicationRecord
   default_scope { order "name ASC" }
 
   def deliver
-    PartnerMailer.invitation(self).deliver
+    PartnerMailer.invitation(self).deliver_later
   end
 
 end
