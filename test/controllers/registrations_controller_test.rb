@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class RegistrationsControllerTest < ActionController::TestCase
+  include ActionMailer::TestHelper
   include Devise::Test::ControllerHelpers
 
   def setup
@@ -16,8 +17,8 @@ class RegistrationsControllerTest < ActionController::TestCase
     three = registrations(:three)
     assert_equal 0, three.paid
 
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      # Posting the csv file
+    # Posting the csv file
+    assert_enqueued_emails(1) do
       post :upload, params: {
         event_id: 1,
         separator: ';',
@@ -40,59 +41,22 @@ class RegistrationsControllerTest < ActionController::TestCase
 
   end
 
-  test "resend actuallly sends an email" do
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
+  test "resend sends an email" do
+    assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registrations(:one)]) do
       get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:one).id }
     end
   end
 
   test "resend sends payment email when !is_paid" do
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
+    assert_enqueued_email_with(RegistrationMailer, :confirm_registration, args: [registrations(:three)]) do
       get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:three).id }
     end
-
-    email = ActionMailer::Base.deliveries.last
-    assert_match(/Registration for/, email.subject)
   end
 
   test "resend sends ticket email when is_paid" do
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
+    assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registrations(:one)]) do
       get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:one).id }
     end
-
-    email = ActionMailer::Base.deliveries.last
-    assert_match(/Ticket for/, email.subject)
-  end
-
-  test "signature of registration emails can be branded" do
-    e = events(:codenight)
-    e.signature = "Een signatuur"
-    e.save
-
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      get :resend, xhr: true, params: { event_id: e, id: registrations(:three).id }
-    end
-
-    email = ActionMailer::Base.deliveries.last
-    assert_match(/Registration for/, email.subject)
-    # Both html and plaintext mail should contain the signature
-    assert_match(/Een signatuur/, email.parts.first.body.to_s)
-    assert_match(/Een signatuur/, email.parts.second.body.to_s)
-  end
-
-  test "signature of ticket emails can be branded" do
-    e = events(:codenight)
-    e.signature = "Een signatuur"
-    e.save
-
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      get :resend, xhr: true, params: { event_id: e, id: registrations(:one).id }
-    end
-
-    email = ActionMailer::Base.deliveries.last
-    assert_match(/Ticket for/, email.subject)
-    # We only have a html part (and 2 png parts) here
-    assert_match(/Een signatuur/, email.parts.first.body.to_s)
   end
 
   test "manual full paying works" do
@@ -103,7 +67,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_equal 0.05, four.paid
 
     [three, four].each do |registration|
-      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+      assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registration]) do
         put :update, xhr: true, params: {
           event_id: registration.event.id,
           id: registration.id,
@@ -111,10 +75,7 @@ class RegistrationsControllerTest < ActionController::TestCase
         }
       end
       assert_equal registration.price, registration.reload.paid
-      email = ActionMailer::Base.deliveries.last
-      assert_match(/Ticket for/, email.subject)
     end
-
   end
 
   test "manual partial paying works" do
@@ -127,7 +88,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     to_pay = 0.01
 
     [three, four].each do |registration|
-      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+      assert_enqueued_email_with(RegistrationMailer, :confirm_registration, args: [registration]) do
         put :update, xhr: true, params: {
           event_id: registration.event.id,
           id: registration.id,
@@ -135,10 +96,7 @@ class RegistrationsControllerTest < ActionController::TestCase
         }
       end
       assert registration.price > registration.reload.paid
-      email = ActionMailer::Base.deliveries.last
-      assert_match(/Registration for/, email.subject)
     end
-
   end
 
   test "manual overpaying works" do
@@ -151,20 +109,16 @@ class RegistrationsControllerTest < ActionController::TestCase
     to_pay = -5
 
     [three, four].each do |registration|
-      assert_difference "ActionMailer::Base.deliveries.size", +2 do
-        put :update, xhr: true, params: {
-          event_id: registration.event.id,
-          id: registration.id,
-          registration: { to_pay: to_pay }
-        }
+      assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registration]) do
+        assert_enqueued_email_with(RegistrationMailer, :notify_overpayment, args: [registration]) do
+          put :update, xhr: true, params: {
+            event_id: registration.event.id,
+            id: registration.id,
+            registration: { to_pay: to_pay }
+          }
+        end
       end
       assert registration.price < registration.reload.paid
-
-      email = ActionMailer::Base.deliveries[-2]
-      assert_match(/Ticket for/, email.subject)
-
-      email = ActionMailer::Base.deliveries[-1]
-      assert_match(/Overpayment for/, email.subject)
     end
 
   end
@@ -207,7 +161,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     }
 
     assert_difference "Registration.count", +1 do
-      assert_difference "ActionMailer::Base.deliveries.size", +1 do
+      assert_enqueued_emails(1) do
         post :basic, params: posthash 
       end
     end
@@ -220,5 +174,4 @@ class RegistrationsControllerTest < ActionController::TestCase
     r = registrations(:two)
     assert ability.can?(:manage, r)
   end
-
 end

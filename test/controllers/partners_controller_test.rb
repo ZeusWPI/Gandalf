@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class PartnersControllerTest < ActionController::TestCase
+  include ActionMailer::TestHelper
   include Devise::Test::ControllerHelpers
 
   def setup
@@ -78,10 +79,9 @@ class PartnersControllerTest < ActionController::TestCase
   end
 
   test "should send registration mail on confirm" do
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      sign_in partners(:KBC)
-      post :confirm, xhr: true, params: { event_id: 1, id: 1 }
-    end
+    sign_in partners(:KBC)
+    post :confirm, xhr: true, params: { event_id: 1, id: 1 }
+    assert_enqueued_emails 1
   end
 
   test "should add registration on confirm" do
