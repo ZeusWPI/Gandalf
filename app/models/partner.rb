@@ -42,7 +42,6 @@ class Partner < ApplicationRecord
 
   after_save :deliver, if: :email_changed?
 
-  validates :name, uniqueness: { scope: :event_id }
   # [Tom] I commented this out to fix a current restraint:
   # We sometimes only have the emailadress of a partner, even if
   # this partner is allowed to invite 5 persons. This way, we can

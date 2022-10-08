@@ -36,7 +36,6 @@ class Registration < ApplicationRecord
 
   scope :paid, -> { where("price <= paid") }
 
-  validates :name, presence: true, uniqueness: { scope: :event_id }
   # Uniqueness temporarily disabled; see the Partner model for the reason
   # validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
