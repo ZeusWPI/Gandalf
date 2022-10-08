@@ -23,4 +23,3 @@ Rails/HasManyOrHasOneDependent:
   Exclude:
     - 'app/models/access_level.rb'
     - 'app/models/club.rb'
-    - 'app/models/period.rb'

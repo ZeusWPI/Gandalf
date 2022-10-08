@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_08_153804) do
+ActiveRecord::Schema.define(version: 2022_10_08_161736) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -31,13 +31,11 @@ ActiveRecord::Schema.define(version: 2022_10_08_153804) do
   end
 
   create_table "accesses", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "period_id"
     t.integer "registration_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "access_level_id"
     t.index ["access_level_id"], name: "index_accesses_on_access_level_id"
-    t.index ["period_id"], name: "index_accesses_on_period_id"
     t.index ["registration_id"], name: "index_accesses_on_registration_id"
   end
 
@@ -115,15 +113,6 @@ ActiveRecord::Schema.define(version: 2022_10_08_153804) do
     t.text "signature"
   end
 
-  create_table "included_zones", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "zone_id"
-    t.integer "access_level_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["access_level_id"], name: "index_included_zones_on_access_level_id"
-    t.index ["zone_id"], name: "index_included_zones_on_zone_id"
-  end
-
   create_table "orders", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "status"
     t.string "name"
@@ -160,16 +149,6 @@ ActiveRecord::Schema.define(version: 2022_10_08_153804) do
     t.index ["authentication_token"], name: "index_partners_on_authentication_token"
     t.index ["name", "event_id"], name: "index_partners_on_name_and_event_id", unique: true
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
-  end
-
-  create_table "periods", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.datetime "starts"
-    t.datetime "ends"
-    t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "event_id"
-    t.index ["event_id"], name: "index_periods_on_event_id"
   end
 
   create_table "promos", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -245,15 +224,6 @@ ActiveRecord::Schema.define(version: 2022_10_08_153804) do
     t.datetime "created_at"
     t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-  end
-
-  create_table "zones", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "name"
-    t.integer "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["event_id"], name: "index_zones_on_event_id"
-    t.index ["name", "event_id"], name: "index_zones_on_name_and_event_id", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
