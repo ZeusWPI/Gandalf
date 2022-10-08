@@ -12,7 +12,8 @@ class RegistrationTest < ActiveSupport::TestCase
       email: "test@test.com",
       payment_code: Registration.create_payment_code,
       price: 1,
-      paid: 0
+      paid: 0,
+      access_level_id: 1
     )
     @r2 = @r1.dup
     @r2.payment_code = Registration.create_payment_code
@@ -35,25 +36,25 @@ class RegistrationTest < ActiveSupport::TestCase
 
   test "student_number should be present on members-only tickets" do
     @r1.student_number = ""
-    @r1.access_levels << access_levels(:members_only)
+    @r1.access_level = access_levels(:members_only)
     assert_not @r1.save
   end
 
   test "student_number should be present on enrolled-only tickets" do
     @r1.student_number = ""
-    @r1.access_levels << access_levels(:enrolled_only)
+    @r1.access_level = access_levels(:enrolled_only)
     assert_not @r1.save
   end
 
   test "student_number should be present on students-only tickets" do
     @r1.student_number = ""
-    @r1.access_levels << access_levels(:students_only)
+    @r1.access_level = access_levels(:students_only)
     assert_not @r1.save
   end
 
   test "student_number can be blank on tickets available for everyone" do
     @r1.student_number = ""
-    @r1.access_levels << access_levels(:unlimited)
+    @r1.access_level = access_levels(:unlimited)
     assert @r1.save
   end
 
@@ -67,23 +68,29 @@ end
 #
 # Table name: registrations
 #
-#  id             :integer          not null, primary key
-#  barcode        :string(255)
-#  barcode_data   :string(255)
-#  checked_in_at  :datetime
-#  comment        :text(65535)
-#  email          :string(255)
-#  name           :string(255)
-#  paid           :integer
-#  payment_code   :string(255)
-#  price          :integer
-#  student_number :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
-#  event_id       :integer
+#  id              :integer          not null, primary key
+#  barcode         :string(255)
+#  barcode_data    :string(255)
+#  checked_in_at   :datetime
+#  comment         :text(65535)
+#  email           :string(255)
+#  name            :string(255)
+#  paid            :integer
+#  payment_code    :string(255)
+#  price           :integer
+#  student_number  :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  access_level_id :integer          not null
+#  event_id        :integer
 #
 # Indexes
 #
-#  index_registrations_on_event_id      (event_id)
-#  index_registrations_on_payment_code  (payment_code) UNIQUE
+#  index_registrations_on_access_level_id  (access_level_id)
+#  index_registrations_on_event_id         (event_id)
+#  index_registrations_on_payment_code     (payment_code) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (access_level_id => access_levels.id)
 #

@@ -19,7 +19,6 @@ two:
   event_id: 2
   price: 10
 
-
 # Capacity stuff testing
 unlimited:
   id: 3

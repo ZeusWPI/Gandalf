@@ -90,9 +90,9 @@ class PartnersController < ApplicationController
         student_number: nil,
         comment: nil,
         price: @partner.access_level.price,
-        paid: 0
+        paid: 0,
+        access_level: @partner.access_level
       )
-      @registration.access_levels << @partner.access_level
       @partner.confirmed = true
       if @registration.save && @partner.save
         @registration.deliver

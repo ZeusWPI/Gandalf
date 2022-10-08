@@ -151,7 +151,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     posthash = {
       event_id: galabal.id,
       registration: {
-        access_levels: 2,
+        access_level: 2,
         email: "a@b.com",
         name: "Ab Cd",
         student_number: 123,

@@ -49,12 +49,12 @@ class RegistrationsController < ApplicationController
 
     # Check if the user can register
     authorize! :register, @event
-    requested_access_level = @event.access_levels.find(params.require(:registration).require(:access_levels))
+    requested_access_level = @event.access_levels.find(params.require(:registration).require(:access_level))
     authorize! :register, requested_access_level
 
     # Make the registration
     @registration = @event.registrations.new params.require(:registration).permit(:email, :name, :student_number, :comment)
-    @registration.access_levels << requested_access_level
+    @registration.access_level = requested_access_level
     @registration.price = requested_access_level.price
     @registration.paid = 0
 
