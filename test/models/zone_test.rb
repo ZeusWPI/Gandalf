@@ -1,4 +1,13 @@
 # frozen_string_literal: true
+require 'test_helper'
+
+class ZoneTest < ActiveSupport::TestCase
+  verify_fixtures Zone
+
+  # test "the truth" do
+  #   assert true
+  # end
+end
 
 # == Schema Information
 #
@@ -15,13 +24,3 @@
 #  index_zones_on_event_id           (event_id)
 #  index_zones_on_name_and_event_id  (name,event_id) UNIQUE
 #
-
-require 'test_helper'
-
-class ZoneTest < ActiveSupport::TestCase
-  verify_fixtures Zone
-
-  # test "the truth" do
-  #   assert true
-  # end
-end

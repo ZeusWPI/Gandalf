@@ -1,4 +1,13 @@
 # frozen_string_literal: true
+require 'test_helper'
+
+class AccessLevelTest < ActiveSupport::TestCase
+  verify_fixtures AccessLevel
+
+  # test "the truth" do
+  #   assert true
+  # end
+end
 
 # == Schema Information
 #
@@ -19,13 +28,3 @@
 #
 #  index_access_levels_on_event_id  (event_id)
 #
-
-require 'test_helper'
-
-class AccessLevelTest < ActiveSupport::TestCase
-  verify_fixtures AccessLevel
-
-  # test "the truth" do
-  #   assert true
-  # end
-end

@@ -1,4 +1,9 @@
 # frozen_string_literal: true
+class Access < ApplicationRecord
+  belongs_to :access_level
+  belongs_to :period, optional: true
+  belongs_to :registration
+end
 
 # == Schema Information
 #
@@ -17,9 +22,3 @@
 #  index_accesses_on_period_id        (period_id)
 #  index_accesses_on_registration_id  (registration_id)
 #
-
-class Access < ApplicationRecord
-  belongs_to :access_level
-  belongs_to :period, optional: true
-  belongs_to :registration
-end

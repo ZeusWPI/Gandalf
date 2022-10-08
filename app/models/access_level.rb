@@ -1,25 +1,4 @@
 # frozen_string_literal: true
-
-# == Schema Information
-#
-# Table name: access_levels
-#
-#  id          :integer          not null, primary key
-#  capacity    :integer
-#  has_comment :boolean
-#  hidden      :boolean
-#  name        :string(255)
-#  permit      :string(255)      default("everyone")
-#  price       :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  event_id    :integer
-#
-# Indexes
-#
-#  index_access_levels_on_event_id  (event_id)
-#
-
 class AccessLevel < ApplicationRecord
   belongs_to :event, optional: true
 
@@ -75,3 +54,23 @@ class AccessLevel < ApplicationRecord
     write_attribute(:price, (value.to_f * 100).to_int)
   end
 end
+
+# == Schema Information
+#
+# Table name: access_levels
+#
+#  id          :integer          not null, primary key
+#  capacity    :integer
+#  has_comment :boolean
+#  hidden      :boolean
+#  name        :string(255)
+#  permit      :string(255)      default("everyone")
+#  price       :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  event_id    :integer
+#
+# Indexes
+#
+#  index_access_levels_on_event_id  (event_id)
+#

@@ -1,4 +1,12 @@
 # frozen_string_literal: true
+require 'test_helper'
+
+class PartnerTest < ActiveSupport::TestCase
+  verify_fixtures Partner
+  # test "the truth" do
+  #   assert true
+  # end
+end
 
 # == Schema Information
 #
@@ -29,12 +37,3 @@
 #  index_partners_on_name_and_event_id     (name,event_id) UNIQUE
 #  index_partners_on_reset_password_token  (reset_password_token) UNIQUE
 #
-
-require 'test_helper'
-
-class PartnerTest < ActiveSupport::TestCase
-  verify_fixtures Partner
-  # test "the truth" do
-  #   assert true
-  # end
-end

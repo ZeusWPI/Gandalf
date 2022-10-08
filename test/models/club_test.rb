@@ -1,4 +1,13 @@
 # frozen_string_literal: true
+require 'test_helper'
+
+class ClubTest < ActiveSupport::TestCase
+  verify_fixtures Club
+
+  # test "the truth" do
+  #   assert true
+  # end
+end
 
 # == Schema Information
 #
@@ -15,13 +24,3 @@
 #
 #  index_clubs_on_internal_name  (internal_name) UNIQUE
 #
-
-require 'test_helper'
-
-class ClubTest < ActiveSupport::TestCase
-  verify_fixtures Club
-
-  # test "the truth" do
-  #   assert true
-  # end
-end

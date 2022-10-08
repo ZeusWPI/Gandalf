@@ -1,32 +1,6 @@
 # frozen_string_literal: true
 
 require 'barby/barcode/ean_13'
-
-# == Schema Information
-#
-# Table name: registrations
-#
-#  id             :integer          not null, primary key
-#  barcode        :string(255)
-#  barcode_data   :string(255)
-#  checked_in_at  :datetime
-#  comment        :text(65535)
-#  email          :string(255)
-#  name           :string(255)
-#  paid           :integer
-#  payment_code   :string(255)
-#  price          :integer
-#  student_number :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
-#  event_id       :integer
-#
-# Indexes
-#
-#  index_registrations_on_event_id      (event_id)
-#  index_registrations_on_payment_code  (payment_code) UNIQUE
-#
-
 class Registration < ApplicationRecord
   belongs_to :event, optional: true
 
@@ -136,3 +110,28 @@ class Registration < ApplicationRecord
     (value.to_f * 100).to_int
   end
 end
+
+# == Schema Information
+#
+# Table name: registrations
+#
+#  id             :integer          not null, primary key
+#  barcode        :string(255)
+#  barcode_data   :string(255)
+#  checked_in_at  :datetime
+#  comment        :text(65535)
+#  email          :string(255)
+#  name           :string(255)
+#  paid           :integer
+#  payment_code   :string(255)
+#  price          :integer
+#  student_number :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  event_id       :integer
+#
+# Indexes
+#
+#  index_registrations_on_event_id      (event_id)
+#  index_registrations_on_payment_code  (payment_code) UNIQUE
+#

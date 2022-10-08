@@ -1,22 +1,4 @@
 # frozen_string_literal: true
-
-# == Schema Information
-#
-# Table name: promos
-#
-#  id           :integer          not null, primary key
-#  code         :string(255)
-#  limit        :integer
-#  sold_tickets :integer          default(0)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  event_id     :integer
-#
-# Indexes
-#
-#  index_promos_on_event_id  (event_id)
-#
-
 class Promo < ApplicationRecord
   belongs_to :event
   has_and_belongs_to_many :access_levels
@@ -39,3 +21,20 @@ class Promo < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: promos
+#
+#  id           :integer          not null, primary key
+#  code         :string(255)
+#  limit        :integer
+#  sold_tickets :integer          default(0)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  event_id     :integer
+#
+# Indexes
+#
+#  index_promos_on_event_id  (event_id)
+#

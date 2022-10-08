@@ -1,3 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+KBC:
+  id: 1
+  name: KBC
+  email: kbc@email.com
+  event_id: 1
+  access_level_id: 1
+  authentication_token: KBC
+
+Zeus:
+  id: 2
+  name: Zeus
+  email: zeus@email.com
+  event_id: 1
+  access_level_id: 1
+  authentication_token: zeus
+
+SKO:
+  id: 3
+  name: SKO
+  email: sko@email.com
+  event_id: 2
+  access_level_id: 1
+  authentication_token: sko
+
 # == Schema Information
 #
 # Table name: partners
@@ -27,29 +53,3 @@
 #  index_partners_on_name_and_event_id     (name,event_id) UNIQUE
 #  index_partners_on_reset_password_token  (reset_password_token) UNIQUE
 #
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-KBC:
-  id: 1
-  name: KBC
-  email: kbc@email.com
-  event_id: 1
-  access_level_id: 1
-  authentication_token: KBC
-
-Zeus:
-  id: 2
-  name: Zeus
-  email: zeus@email.com
-  event_id: 1
-  access_level_id: 1
-  authentication_token: zeus
-
-SKO:
-  id: 3
-  name: SKO
-  email: sko@email.com
-  event_id: 2
-  access_level_id: 1
-  authentication_token: sko

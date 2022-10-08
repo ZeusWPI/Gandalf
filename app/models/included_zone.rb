@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+class IncludedZone < ApplicationRecord
+  belongs_to :zone
+  belongs_to :access_level
+end
 
 # == Schema Information
 #
@@ -15,8 +19,3 @@
 #  index_included_zones_on_access_level_id  (access_level_id)
 #  index_included_zones_on_zone_id          (zone_id)
 #
-
-class IncludedZone < ApplicationRecord
-  belongs_to :zone
-  belongs_to :access_level
-end

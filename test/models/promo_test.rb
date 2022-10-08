@@ -1,4 +1,11 @@
 # frozen_string_literal: true
+require 'test_helper'
+
+class PromoTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
 
 # == Schema Information
 #
@@ -16,11 +23,3 @@
 #
 #  index_promos_on_event_id  (event_id)
 #
-
-require 'test_helper'
-
-class PromoTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-end

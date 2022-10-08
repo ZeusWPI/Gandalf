@@ -1,4 +1,17 @@
 # frozen_string_literal: true
+class Club < ApplicationRecord
+  has_many :events
+
+  has_and_belongs_to_many :users
+  # enrolled_members, not admins
+  has_and_belongs_to_many :members, join_table: :enrolled_clubs_members, class_name: 'User'
+
+  validates :internal_name, uniqueness: true
+
+  def name
+    full_name || display_name
+  end
+end
 
 # == Schema Information
 #
@@ -15,17 +28,3 @@
 #
 #  index_clubs_on_internal_name  (internal_name) UNIQUE
 #
-
-class Club < ApplicationRecord
-  has_many :events
-
-  has_and_belongs_to_many :users
-  # enrolled_members, not admins
-  has_and_belongs_to_many :members, join_table: :enrolled_clubs_members, class_name: 'User'
-
-  validates :internal_name, uniqueness: true
-
-  def name
-    full_name || display_name
-  end
-end

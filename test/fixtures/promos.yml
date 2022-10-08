@@ -1,3 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event_id: 
+  code: MyString
+  limit: 1
+
+two:
+  event_id: 
+  code: MyString
+  limit: 1
+
 # == Schema Information
 #
 # Table name: promos
@@ -14,15 +26,3 @@
 #
 #  index_promos_on_event_id  (event_id)
 #
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  event_id: 
-  code: MyString
-  limit: 1
-
-two:
-  event_id: 
-  code: MyString
-  limit: 1
