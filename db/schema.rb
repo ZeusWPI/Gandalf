@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_08_161736) do
+ActiveRecord::Schema.define(version: 2022_10_08_163759) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -23,11 +23,6 @@ ActiveRecord::Schema.define(version: 2022_10_08_161736) do
     t.boolean "hidden"
     t.string "permit", default: "everyone"
     t.index ["event_id"], name: "index_access_levels_on_event_id"
-  end
-
-  create_table "access_levels_promos", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "promo_id", null: false
-    t.integer "access_level_id", null: false
   end
 
   create_table "accesses", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -113,21 +108,6 @@ ActiveRecord::Schema.define(version: 2022_10_08_161736) do
     t.text "signature"
   end
 
-  create_table "orders", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "status"
-    t.string "name"
-    t.string "email"
-    t.string "gsm"
-    t.integer "ticket_id"
-    t.integer "event_id"
-    t.integer "paid"
-    t.integer "price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "payment_code"
-    t.index ["event_id"], name: "index_orders_on_event_id"
-  end
-
   create_table "partners", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -149,16 +129,6 @@ ActiveRecord::Schema.define(version: 2022_10_08_161736) do
     t.index ["authentication_token"], name: "index_partners_on_authentication_token"
     t.index ["name", "event_id"], name: "index_partners_on_name_and_event_id", unique: true
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
-  end
-
-  create_table "promos", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "event_id"
-    t.string "code"
-    t.integer "limit"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "sold_tickets", default: 0
-    t.index ["event_id"], name: "index_promos_on_event_id"
   end
 
   create_table "registrations", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

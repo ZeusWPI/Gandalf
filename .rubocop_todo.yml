@@ -13,7 +13,6 @@ Rails/HasAndBelongsToMany:
   Exclude:
     - 'app/models/access_level.rb'
     - 'app/models/club.rb'
-    - 'app/models/promo.rb'
     - 'app/models/user.rb'
 
 # Offense count: 3
