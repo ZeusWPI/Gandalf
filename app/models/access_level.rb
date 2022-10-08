@@ -8,8 +8,8 @@
 #  capacity    :integer
 #  has_comment :boolean
 #  hidden      :boolean
-#  name        :string
-#  permit      :string           default("everyone")
+#  name        :string(255)
+#  permit      :string(255)
 #  price       :integer
 #  created_at  :datetime
 #  updated_at  :datetime

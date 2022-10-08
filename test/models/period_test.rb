@@ -6,7 +6,7 @@
 #
 #  id         :integer          not null, primary key
 #  ends       :datetime
-#  name       :string
+#  name       :string(255)
 #  starts     :datetime
 #  created_at :datetime
 #  updated_at :datetime

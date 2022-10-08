@@ -27,11 +27,14 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    al = @event.access_levels.find(params.require(:partner).require(:access_level))
+    al = @event.access_levels.find(partner_params[:access_level_id])
+    @partner = @event.partners.new partner_params.merge(access_level: al)
 
-    @partner = @event.partners.new params.require(:partner).permit(:name, :email)
-    @partner.access_level = al
-    @partner.save!
+    if @partner.save
+      @partner.deliver
+    else
+      flash.now[:error] = "Something went wrong creating the partner"
+    end
 
     respond_with @partner
   end
@@ -48,11 +51,10 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    al = @event.access_levels.find(params.require(:partner).require(:access_level))
-
     @partner = @event.partners.find params.require(:id)
-    @partner.access_level = al
-    @partner.update!(params.require(:partner).permit(:name, :email))
+
+    al = @event.access_levels.find(partner_params[:access_level_id])
+    flash.now[:error] = "Something went wrong updating the partner" unless @partner.update(partner_params.merge(access_level: al))
 
     respond_with @partner
   end
@@ -154,5 +156,11 @@ class PartnersController < ApplicationController
       flash[:error] = "Please upload a CSV file."
       redirect_to action: :index
     end
+  end
+
+  private
+
+  def partner_params
+    params.require(:partner).permit(:name, :email, :access_level_id)
   end
 end

@@ -14,6 +14,16 @@ class AccessLevelsController < ApplicationController
     authorize! :read, @event
   end
 
+  def create
+    @event = Event.find params.require(:event_id)
+    authorize! :update, @event
+    @access_level = @event.access_levels.new(access_level_params)
+
+    flash.now[:error] = "Something went wrong creating the ticket" unless @access_level.save
+
+    respond_with @access_level
+  end
+
   def edit
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
@@ -25,20 +35,10 @@ class AccessLevelsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     @access_level = @event.access_levels.find(params.require(:id))
-    @access_level.update!(update_params)
+
+    flash.now[:error] = "Something went wrong updating the ticket" unless @access_level.update(access_level_params)
 
     respond_with @access_level
-  end
-
-  def create
-    @event = Event.find params.require(:event_id)
-    authorize! :update, @event
-    @access_level = @event.access_levels.create!(update_params)
-    respond_with @access_level
-  end
-
-  def update_params
-    params.require(:access_level).permit(:name, :capacity, :price, :has_comment, :hidden, :permit)
   end
 
   def destroy
@@ -76,5 +76,11 @@ class AccessLevelsController < ApplicationController
 
   def parse_advanced
     @advanced = params[:advanced] == 'true'
+  end
+
+  private
+
+  def access_level_params
+    params.require(:access_level).permit(:name, :capacity, :price, :has_comment, :hidden, :permit)
   end
 end

@@ -60,10 +60,9 @@ class RegistrationsController < ApplicationController
 
     # overwrite student_number so setting this will not work
     @registration.student_number = current_user.cas_ugentStudentID if requested_access_level.requires_login?
-    @registration.save!
 
     # Send the confirmation email.
-    if @registration.errors.none?
+    if @registration.save
       @registration.deliver
 
       flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."

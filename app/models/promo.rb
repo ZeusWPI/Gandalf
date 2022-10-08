@@ -5,7 +5,7 @@
 # Table name: promos
 #
 #  id           :integer          not null, primary key
-#  code         :string
+#  code         :string(255)
 #  limit        :integer
 #  sold_tickets :integer          default(0)
 #  created_at   :datetime

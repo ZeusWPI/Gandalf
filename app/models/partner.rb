@@ -5,18 +5,17 @@
 # Table name: partners
 #
 #  id                     :integer          not null, primary key
-#  authentication_token   :string
+#  authentication_token   :string(255)
 #  confirmed              :boolean
 #  current_sign_in_at     :datetime
-#  current_sign_in_ip     :string
-#  email                  :string
-#  encrypted_password     :string           default(""), not null
+#  current_sign_in_ip     :string(255)
+#  email                  :string(255)
 #  last_sign_in_at        :datetime
-#  last_sign_in_ip        :string
-#  name                   :string
+#  last_sign_in_ip        :string(255)
+#  name                   :string(255)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
-#  reset_password_token   :string
+#  reset_password_token   :string(255)
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -42,6 +41,7 @@ class Partner < ApplicationRecord
 
   after_save :deliver, if: :email_changed?
 
+  validates :name, presence: true
   # [Tom] I commented this out to fix a current restraint:
   # We sometimes only have the emailadress of a partner, even if
   # this partner is allowed to invite 5 persons. This way, we can

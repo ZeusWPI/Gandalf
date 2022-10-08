@@ -55,7 +55,8 @@ class EventsController < ApplicationController
   def create
     authorize! :create, Event
 
-    @event = Event.create!(event_create_params)
+    @event = Event.new(event_create_params)
+    flash.now[:success] = "Successfully created event." if @event.save
 
     respond_with @event
   end
