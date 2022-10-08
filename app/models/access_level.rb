@@ -3,8 +3,8 @@
 class AccessLevel < ApplicationRecord
   belongs_to :event, optional: true
 
-  has_many :registrations
-  has_many :partners
+  has_many :registrations, dependent: :restrict_with_error
+  has_many :partners, dependent: :restrict_with_error
 
   validates :name, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -63,4 +63,8 @@ end
 # Indexes
 #
 #  index_access_levels_on_event_id  (event_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (event_id => events.id) ON DELETE => cascade
 #

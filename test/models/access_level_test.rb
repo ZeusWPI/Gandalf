@@ -29,3 +29,7 @@ end
 #
 #  index_access_levels_on_event_id  (event_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (event_id => events.id) ON DELETE => cascade
+#

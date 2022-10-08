@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_08_164205) do
+ActiveRecord::Schema.define(version: 2022_10_08_195259) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -65,11 +65,14 @@ ActiveRecord::Schema.define(version: 2022_10_08_164205) do
   create_table "clubs_users", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "club_id"
     t.integer "user_id"
+    t.index ["club_id", "user_id"], name: "index_clubs_users_on_club_id_and_user_id", unique: true
+    t.index ["user_id"], name: "fk_rails_b7c6964840"
   end
 
   create_table "enrolled_clubs_members", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "club_id", null: false
     t.integer "user_id", null: false
+    t.index ["club_id", "user_id"], name: "index_enrolled_clubs_members_on_club_id_and_user_id", unique: true
     t.index ["club_id"], name: "index_enrolled_clubs_members_on_club_id"
     t.index ["user_id"], name: "index_enrolled_clubs_members_on_user_id"
   end
@@ -97,6 +100,7 @@ ActiveRecord::Schema.define(version: 2022_10_08_164205) do
     t.integer "club_id"
     t.boolean "registration_open", default: true
     t.text "signature"
+    t.index ["club_id"], name: "fk_rails_fc45ac705d"
   end
 
   create_table "partners", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -118,6 +122,7 @@ ActiveRecord::Schema.define(version: 2022_10_08_164205) do
     t.boolean "confirmed"
     t.index ["access_level_id"], name: "index_partners_on_access_level_id"
     t.index ["authentication_token"], name: "index_partners_on_authentication_token"
+    t.index ["event_id"], name: "fk_rails_188986c214"
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
   end
 
@@ -139,23 +144,6 @@ ActiveRecord::Schema.define(version: 2022_10_08_164205) do
     t.index ["access_level_id"], name: "index_registrations_on_access_level_id"
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["payment_code"], name: "index_registrations_on_payment_code", unique: true
-  end
-
-  create_table "tickets", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.datetime "checked_in_at"
-    t.integer "order_id"
-    t.string "student_number"
-    t.text "comment"
-    t.string "barcode"
-    t.string "barcode_data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "access_level_id"
-    t.string "status"
-    t.index ["access_level_id"], name: "index_tickets_on_access_level_id"
-    t.index ["order_id"], name: "index_tickets_on_order_id"
   end
 
   create_table "users", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -188,7 +176,16 @@ ActiveRecord::Schema.define(version: 2022_10_08_164205) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "access_levels", "events", on_delete: :cascade
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "clubs_users", "clubs", on_delete: :cascade
+  add_foreign_key "clubs_users", "users", on_delete: :cascade
+  add_foreign_key "enrolled_clubs_members", "clubs", on_delete: :cascade
+  add_foreign_key "enrolled_clubs_members", "users", on_delete: :cascade
+  add_foreign_key "events", "clubs", on_delete: :cascade
+  add_foreign_key "partners", "access_levels"
+  add_foreign_key "partners", "events", on_delete: :cascade
   add_foreign_key "registrations", "access_levels"
+  add_foreign_key "registrations", "events", on_delete: :cascade
 end

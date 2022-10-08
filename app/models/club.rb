@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class Club < ApplicationRecord
-  has_many :events
+  has_many :events, dependent: :destroy
 
-  has_and_belongs_to_many :users
-  # enrolled_members, not admins
-  has_and_belongs_to_many :members, join_table: :enrolled_clubs_members, class_name: 'User'
+  # Admins
+  has_many :clubs_users, dependent: nil # FKs will handle this
+  has_many :users, through: :clubs_users
+
+  # Members
+  has_many :enrolled_clubs_members, dependent: nil # FKs will handle this
+  has_many :members, through: :enrolled_clubs_members, source: :user
 
   validates :internal_name, uniqueness: true
 

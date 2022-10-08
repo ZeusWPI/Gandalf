@@ -48,7 +48,13 @@ SKO:
 #
 # Indexes
 #
+#  fk_rails_188986c214                     (event_id)
 #  index_partners_on_access_level_id       (access_level_id)
 #  index_partners_on_authentication_token  (authentication_token)
 #  index_partners_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (access_level_id => access_levels.id)
+#  fk_rails_...  (event_id => events.id) ON DELETE => cascade
 #
