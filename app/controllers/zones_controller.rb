@@ -1,5 +1,6 @@
-class ZonesController < ApplicationController
+# frozen_string_literal: true
 
+class ZonesController < ApplicationController
   # You need to be logged in for everything.
   before_action :authenticate_user!, except: :show
 
@@ -21,7 +22,7 @@ class ZonesController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
-    @zone = @event.zones.create params.require(:zone).permit(:name)
+    @zone = @event.zones.create!(params.require(:zone).permit(:name))
   end
 
   def destroy
@@ -29,7 +30,6 @@ class ZonesController < ApplicationController
     @id = zone.id
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
-    zone.destroy
+    zone.destroy!
   end
-
 end

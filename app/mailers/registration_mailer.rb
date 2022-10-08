@@ -1,8 +1,7 @@
-class RegistrationMailer < ActionMailer::Base
+# frozen_string_literal: true
 
+class RegistrationMailer < ApplicationMailer
   helper ApplicationHelper
-
-  default from: "noreply@student.ugent.be"
 
   def confirm_registration(registration)
     @registration = registration
@@ -24,5 +23,4 @@ class RegistrationMailer < ActionMailer::Base
     @registration = registration
     mail to: "#{registration.name} <#{registration.email}>", subject: "Overpayment for #{registration.event.name}"
   end
-
 end

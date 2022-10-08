@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_18_142556) do
+ActiveRecord::Schema.define(version: 2022_10_08_153804) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.string "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["internal_name"], name: "index_clubs_on_internal_name", unique: true
   end
 
   create_table "clubs_users", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -95,20 +96,20 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.datetime "end_date"
     t.string "location"
     t.string "website"
-    t.text "description"
+    t.text "description", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "registration_open_date"
     t.datetime "registration_close_date"
-    t.string "bank_number"
     t.boolean "show_ticket_count", default: true
+    t.string "bank_number"
     t.string "contact_email"
     t.string "export_file_name"
     t.string "export_content_type"
     t.integer "export_file_size"
     t.datetime "export_updated_at"
-    t.boolean "show_statistics"
     t.string "export_status"
+    t.boolean "show_statistics"
     t.integer "club_id"
     t.boolean "registration_open", default: true
     t.text "signature"
@@ -123,13 +124,27 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.index ["zone_id"], name: "index_included_zones_on_zone_id"
   end
 
+  create_table "orders", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "status"
+    t.string "name"
+    t.string "email"
+    t.string "gsm"
+    t.integer "ticket_id"
+    t.integer "event_id"
+    t.integer "paid"
+    t.integer "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "payment_code"
+    t.index ["event_id"], name: "index_orders_on_event_id"
+  end
+
   create_table "partners", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -143,6 +158,7 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.boolean "confirmed"
     t.index ["access_level_id"], name: "index_partners_on_access_level_id"
     t.index ["authentication_token"], name: "index_partners_on_authentication_token"
+    t.index ["name", "event_id"], name: "index_partners_on_name_and_event_id", unique: true
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
   end
 
@@ -173,8 +189,8 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "event_id"
-    t.integer "paid"
     t.string "student_number"
+    t.integer "paid"
     t.integer "price"
     t.datetime "checked_in_at"
     t.text "comment"
@@ -184,8 +200,25 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.index ["payment_code"], name: "index_registrations_on_payment_code", unique: true
   end
 
+  create_table "tickets", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "checked_in_at"
+    t.integer "order_id"
+    t.string "student_number"
+    t.text "comment"
+    t.string "barcode"
+    t.string "barcode_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "access_level_id"
+    t.string "status"
+    t.index ["access_level_id"], name: "index_tickets_on_access_level_id"
+    t.index ["order_id"], name: "index_tickets_on_order_id"
+  end
+
   create_table "users", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "username", default: "", null: false
+    t.string "username", null: false
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"

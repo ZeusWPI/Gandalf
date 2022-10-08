@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class RegistrationMailerTest < ActionMailer::TestCase
@@ -6,7 +8,7 @@ class RegistrationMailerTest < ActionMailer::TestCase
   test "signature of registration emails can be branded" do
     e = events(:codenight)
     e.signature = "Een signatuur"
-    e.save
+    e.save!
 
     assert_emails(1) do
       RegistrationMailer.confirm_registration(registrations(:three)).deliver_now
@@ -22,7 +24,7 @@ class RegistrationMailerTest < ActionMailer::TestCase
   test "signature of ticket emails can be branded" do
     e = events(:codenight)
     e.signature = "Een signatuur"
-    e.save
+    e.save!
 
     assert_emails(1) do
       RegistrationMailer.ticket(registrations(:one)).deliver_now

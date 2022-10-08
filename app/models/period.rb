@@ -1,17 +1,23 @@
-# == Schema Information
-#
-# Table name: periods
-#
-#  id         :integer          not null, primary key
-#  starts     :datetime
-#  ends       :datetime
-#  name       :string
-#  created_at :datetime
-#  updated_at :datetime
-#  event_id   :integer
-#
+# frozen_string_literal: true
 
 class Period < ApplicationRecord
   belongs_to :event, optional: true
   has_many :accesses
 end
+
+# == Schema Information
+#
+# Table name: periods
+#
+#  id         :integer          not null, primary key
+#  ends       :datetime
+#  name       :string(255)
+#  starts     :datetime
+#  created_at :datetime
+#  updated_at :datetime
+#  event_id   :integer
+#
+# Indexes
+#
+#  index_periods_on_event_id  (event_id)
+#

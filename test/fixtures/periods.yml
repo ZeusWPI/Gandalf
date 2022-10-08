@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: periods
-#
-#  id         :integer          not null, primary key
-#  starts     :datetime
-#  ends       :datetime
-#  name       :string
-#  created_at :datetime
-#  updated_at :datetime
-#  event_id   :integer
-#
-
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
@@ -31,3 +18,19 @@ capacity_period:
   ends: 2013-09-17 20:09:09
   name: Capacity Period
 
+# == Schema Information
+#
+# Table name: periods
+#
+#  id         :integer          not null, primary key
+#  ends       :datetime
+#  name       :string(255)
+#  starts     :datetime
+#  created_at :datetime
+#  updated_at :datetime
+#  event_id   :integer
+#
+# Indexes
+#
+#  index_periods_on_event_id  (event_id)
+#

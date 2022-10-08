@@ -1,5 +1,6 @@
-class PartnersController < ApplicationController
+# frozen_string_literal: true
 
+class PartnersController < ApplicationController
   before_action :authenticate_user!, except: [:show, :confirm]
   before_action :authenticate_partner!, only: [:show, :confirm]
 
@@ -13,7 +14,7 @@ class PartnersController < ApplicationController
 
   def show
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find_by_id params.require(:id)
+    @partner = @event.partners.find_by(id: params.require(:id))
 
     authorize! :read, @partner
   end
@@ -26,11 +27,14 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    al = @event.access_levels.find(params.require(:partner).require(:access_level))
+    al = @event.access_levels.find(partner_params[:access_level_id])
+    @partner = @event.partners.new partner_params.merge(access_level: al)
 
-    @partner = @event.partners.new params.require(:partner).permit(:name, :email)
-    @partner.access_level = al
-    @partner.save
+    if @partner.save
+      @partner.deliver
+    else
+      flash.now[:error] = "Something went wrong creating the partner"
+    end
 
     respond_with @partner
   end
@@ -47,11 +51,10 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    al = @event.access_levels.find(params.require(:partner).require(:access_level))
-
     @partner = @event.partners.find params.require(:id)
-    @partner.access_level = al
-    @partner.update params.require(:partner).permit(:name, :email)
+
+    al = @event.access_levels.find(partner_params[:access_level_id])
+    flash.now[:error] = "Something went wrong updating the partner" unless @partner.update(partner_params.merge(access_level: al))
 
     respond_with @partner
   end
@@ -61,20 +64,20 @@ class PartnersController < ApplicationController
     authorize! :update, @event
 
     @partner = @event.partners.find params.require(:id)
-    @partner.destroy
+    @partner.destroy!
   end
 
   def resend
     @event = Event.find params.require(:event_id)
     authorize! :read, @event
 
-    partner = @event.partners.find params.require(:id)
+    partner = @event.partners.find(params.require(:id))
     partner.deliver
   end
 
   def confirm
     @event = Event.find params.require(:event_id)
-    @partner = @event.partners.find_by_id params.require(:id)
+    @partner = @event.partners.find_by(id: params.require(:id))
 
     authorize! :register, @partner
 
@@ -82,20 +85,24 @@ class PartnersController < ApplicationController
       flash.now[:error] = "You have already registered for this event. Please check your mailbox."
     else
       @registration = @event.registrations.new(
-        email:          @partner.email,
-        name:           @partner.name,
+        email: @partner.email,
+        name: @partner.name,
         student_number: nil,
-        comment:        nil,
-        price:          @partner.access_level.price,
-        paid:           0
+        comment: nil,
+        price: @partner.access_level.price,
+        paid: 0
       )
       @registration.access_levels << @partner.access_level
       @partner.confirmed = true
-      if @registration.save and @partner.save
+      if @registration.save && @partner.save
         @registration.deliver
         flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
       else
-        flash.now[:error] = "Is seems there already is someone with your name and/or email registered for this event. #{view_context.mail_to @event.contact_email, "Contact us"} if this is not correct.".html_safe
+        flash.now[:error] = safe_join(
+          "It looks like there already is someone with your name and/or email registered for this event. ",
+          view_context.mail_to(@event.contact_email, 'Contact us'),
+          " if this is not correct."
+        )
       end
     end
   end
@@ -104,7 +111,7 @@ class PartnersController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
 
-    headers = ['name', 'email', 'error']
+    headers = %w[name email error]
 
     sep = params.require(:upload).require(:separator)
     al = @event.access_levels.find params.require(:upload).require(:access_level)
@@ -130,9 +137,9 @@ class PartnersController < ApplicationController
         counter += 1
       end
 
-      success_msg = "Added #{ActionController::Base.helpers.pluralize counter, "partners"} successfully."
+      success_msg = "Added #{ActionController::Base.helpers.pluralize counter, 'partners'} successfully."
       if fails.any?
-        flash.now[:success] = success_msg unless counter == 0
+        flash.now[:success] = success_msg unless counter.zero?
         flash.now[:error] = "The rows listed below contained errors, please fix them by hand."
         @csvheaders = headers
         @csvfails = fails
@@ -141,9 +148,9 @@ class PartnersController < ApplicationController
         flash[:success] = success_msg
         redirect_to action: :index
       end
-
     rescue CSV::MalformedCSVError
-      flash[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
+      flash[:error] = %( The file could not be parsed. Make sure that you uploaded the correct file
+        and that the column separator settings have been set to the correct separator. ).squish
       redirect_to action: :index
     rescue ActionController::ParameterMissing
       flash[:error] = "Please upload a CSV file."
@@ -151,4 +158,9 @@ class PartnersController < ApplicationController
     end
   end
 
+  private
+
+  def partner_params
+    params.require(:partner).permit(:name, :email, :access_level_id)
+  end
 end

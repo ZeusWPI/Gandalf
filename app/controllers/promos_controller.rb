@@ -1,6 +1,7 @@
-class PromosController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :authenticate_user!, except: [:show, :confirm]
+class PromosController < ApplicationController
+  before_action :authenticate_user!
 
   respond_to :html, :js
 
@@ -21,7 +22,7 @@ class PromosController < ApplicationController
     authorize! :update, @event
     @promo = @event.promos.new update_params
     @promo.access_levels = @promo.event.access_levels.where(id: params.require(:promo)[:access_levels].split(','))
-    @promo.save
+    @promo.save!
     respond_with @promo
   end
 
@@ -29,7 +30,7 @@ class PromosController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     @promo = @event.promos.find(params.require(:id))
-    @promo.update update_params
+    @promo.update!(update_params)
     @promo.access_levels = @promo.event.access_levels.where(id: params.require(:promo)[:access_levels].split(','))
 
     respond_with @promo
@@ -43,13 +44,13 @@ class PromosController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
     promo = @event.promos.find(params.require(:id))
-    unless promo.tickets_sold?
+    if promo.tickets_sold?
+      render :index
+    else
       # Save the name so we can respond it as we still have to
       # be able to delete it
       @id = promo.id
-      promo.destroy
-    else
-      render :index
+      promo.destroy!
     end
   end
 
@@ -58,18 +59,19 @@ class PromosController < ApplicationController
     authorize! :update, @event
     amount = params[:amount].to_i
     limit = params[:limit].to_i
-    access_levels = @event.access_levels.find(params[:access_levels].split(',')) rescue []
+    access_levels = begin
+      @event.access_levels.find(params[:access_levels].split(','))
+    rescue StandardError
+      []
+    end
 
     if amount <= 0 || limit <= 0
       flash[:error] = "Amount and Maximum uses should be greater than zero!"
-      redirect_to event_promos_path(@event)
     elsif access_levels.blank?
       flash[:error] = "Tickets should be specified"
-      redirect_to event_promos_path(@event)
     else
       Promo.generate_bulk(amount, limit, access_levels, @event)
-      redirect_to event_promos_path(@event)
     end
+    redirect_to event_promos_path(@event)
   end
-
 end

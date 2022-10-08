@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class RegistrationsControllerTest < ActionController::TestCase
@@ -5,14 +7,13 @@ class RegistrationsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup
-    stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
-      with(query: hash_including(u: "")).to_return(body: 'FAIL')
+    stub_request(:get, "http://fkgent.be/api_isengard_v2.php")
+      .with(query: hash_including(u: "")).to_return(body: 'FAIL')
 
     sign_in users(:tom)
   end
 
   test "uploading partially failed registrations" do
-
     # Quick check for the used fixture
     three = registrations(:three)
     assert_equal 0, three.paid
@@ -23,7 +24,8 @@ class RegistrationsControllerTest < ActionController::TestCase
         event_id: 1,
         separator: ';',
         amount_column: 'Amount',
-        csv_file: fixture_file_upload('unsuccesful_registration_payments.csv') }
+        csv_file: fixture_file_upload('unsuccesful_registration_payments.csv')
+      }
     end
 
     # Check if the correct rows failed.
@@ -37,8 +39,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     assert_equal 'The rows listed below contained an invalid code, please fix them by hand.', flash[:error]
 
     # Check if the success registration got changed.
-    assert_equal 0.01, three.reload.paid
-
+    assert_in_delta(0.01, three.reload.paid)
   end
 
   test "resend sends an email" do
@@ -47,13 +48,13 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
   end
 
-  test "resend sends payment email when !is_paid" do
+  test "resend sends payment email when !paid?" do
     assert_enqueued_email_with(RegistrationMailer, :confirm_registration, args: [registrations(:three)]) do
       get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:three).id }
     end
   end
 
-  test "resend sends ticket email when is_paid" do
+  test "resend sends ticket email when paid?" do
     assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registrations(:one)]) do
       get :resend, xhr: true, params: { event_id: events(:codenight), id: registrations(:one).id }
     end
@@ -64,7 +65,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     [three, four].each do |registration|
       assert_enqueued_email_with(RegistrationMailer, :ticket, args: [registration]) do
@@ -83,7 +84,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     to_pay = 0.01
 
@@ -104,7 +105,7 @@ class RegistrationsControllerTest < ActionController::TestCase
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     to_pay = -5
 
@@ -120,19 +121,18 @@ class RegistrationsControllerTest < ActionController::TestCase
       end
       assert registration.price < registration.reload.paid
     end
-
   end
-
 
   test "manual not changing mails nor changes the code" do
     three = registrations(:three)
     four = registrations(:four)
 
     assert_equal 0, three.paid
-    assert_equal 0.05, four.paid
+    assert_in_delta(0.05, four.paid)
 
     [three, four].each do |registration|
-      paid, code = registration.paid, registration.payment_code
+      paid = registration.paid
+      code = registration.payment_code
       assert_no_difference "ActionMailer::Base.deliveries.size" do
         put :update, xhr: true, params: {
           event_id: registration.event.id,
@@ -146,7 +146,6 @@ class RegistrationsControllerTest < ActionController::TestCase
   end
 
   test "basic registration" do
-
     # setting up data
     galabal = events(:galabal)
     posthash = {
@@ -162,7 +161,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     assert_difference "Registration.count", +1 do
       assert_enqueued_emails(1) do
-        post :basic, params: posthash 
+        post :basic, params: posthash
       end
     end
   end

@@ -1,13 +1,4 @@
-# == Schema Information
-#
-# Table name: zones
-#
-#  id         :integer          not null, primary key
-#  name       :string
-#  event_id   :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
+# frozen_string_literal: true
 
 class Zone < ApplicationRecord
   belongs_to :event
@@ -16,3 +7,19 @@ class Zone < ApplicationRecord
 
   validates :name, presence: true
 end
+
+# == Schema Information
+#
+# Table name: zones
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  event_id   :integer
+#
+# Indexes
+#
+#  index_zones_on_event_id           (event_id)
+#  index_zones_on_name_and_event_id  (name,event_id) UNIQUE
+#

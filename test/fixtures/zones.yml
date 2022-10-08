@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: zones
-#
-#  id         :integer          not null, primary key
-#  name       :string
-#  event_id   :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
@@ -20,3 +9,19 @@ two:
   id: 2
   name: MyString
   event_id: 2
+
+# == Schema Information
+#
+# Table name: zones
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  event_id   :integer
+#
+# Indexes
+#
+#  index_zones_on_event_id           (event_id)
+#  index_zones_on_name_and_event_id  (name,event_id) UNIQUE
+#

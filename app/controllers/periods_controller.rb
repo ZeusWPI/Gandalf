@@ -1,5 +1,6 @@
-class PeriodsController < ApplicationController
+# frozen_string_literal: true
 
+class PeriodsController < ApplicationController
   # You need to be logged in for everything.
   before_action :authenticate_user!
 
@@ -22,7 +23,7 @@ class PeriodsController < ApplicationController
   def create
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
-    @period = @event.periods.create params.require(:period).permit(:name, :starts, :ends)
+    @period = @event.periods.create!(params.require(:period).permit(:name, :starts, :ends))
   end
 
   def destroy
@@ -30,7 +31,6 @@ class PeriodsController < ApplicationController
     authorize! :update, @event
     period = Period.find params.require(:id)
     @id = period.id
-    period.destroy
+    period.destroy!
   end
-
 end

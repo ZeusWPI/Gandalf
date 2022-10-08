@@ -1,17 +1,6 @@
-# == Schema Information
-#
-# Table name: clubs
-#
-#  id            :integer          not null, primary key
-#  full_name     :string
-#  internal_name :string
-#  display_name  :string
-#  created_at    :datetime
-#  updated_at    :datetime
-#
+# frozen_string_literal: true
 
 class Club < ApplicationRecord
-
   has_many :events
 
   has_and_belongs_to_many :users
@@ -21,6 +10,22 @@ class Club < ApplicationRecord
   validates :internal_name, uniqueness: true
 
   def name
-    full_name ? full_name : display_name
+    full_name || display_name
   end
 end
+
+# == Schema Information
+#
+# Table name: clubs
+#
+#  id            :integer          not null, primary key
+#  display_name  :string(255)
+#  full_name     :string(255)
+#  internal_name :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+# Indexes
+#
+#  index_clubs_on_internal_name  (internal_name) UNIQUE
+#

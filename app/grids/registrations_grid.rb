@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationsGrid
   include Datagrid
 
@@ -9,9 +11,9 @@ class RegistrationsGrid
   filter(:name) { |value| where("lower(registrations.name) like ?", "%#{value.downcase}%") }
   filter(:email) { |value| where("lower(registrations.email) like ?", "%#{value.downcase}%") }
   filter(:access_level) { |value, scope| scope.joins(:access_levels).where(access_levels: { id: value }) }
-  filter(:payment_code) { |value| where("registrations.payment_code like ?","%#{value}%") }
-  filter(:only_paid) { |value| where("registrations.paid = registrations.price")  if value == '1' }
-  filter(:only_unpaid) { |value| where.not("registrations.paid = registrations.price")  if value == '1' }
+  filter(:payment_code) { |value| where("registrations.payment_code like ?", "%#{value}%") }
+  filter(:only_paid) { |value| where("registrations.paid = registrations.price") if value == '1' }
+  filter(:only_unpaid) { |value| where.not("registrations.paid = registrations.price") if value == '1' }
 
   column(:name)
   column(:email)

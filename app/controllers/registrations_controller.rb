@@ -1,5 +1,6 @@
-class RegistrationsController < ApplicationController
+# frozen_string_literal: true
 
+class RegistrationsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :destroy, :resend, :update, :email, :upload]
 
   require 'csv'
@@ -29,7 +30,7 @@ class RegistrationsController < ApplicationController
     authorize! :destroy, @event
     registration = Registration.find params.require(:id)
     @id = registration.id
-    registration.destroy
+    registration.destroy!
   end
 
   def info
@@ -58,13 +59,10 @@ class RegistrationsController < ApplicationController
     @registration.paid = 0
 
     # overwrite student_number so setting this will not work
-    if requested_access_level.requires_login?
-      @registration.student_number = current_user.cas_ugentStudentID
-    end
-    @registration.save
+    @registration.student_number = current_user.cas_ugentStudentID if requested_access_level.requires_login?
 
     # Send the confirmation email.
-    if not @registration.errors.any?
+    if @registration.save
       @registration.deliver
 
       flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."
@@ -75,14 +73,14 @@ class RegistrationsController < ApplicationController
   end
 
   def advanced
-    # TODO can can
+    # TODO: can can
     @event = Event.find params.require(:event_id)
-    @registration = @event.registrations.create params.require(:registration).permit(:email, :name)
+    @registration = @event.registrations.create!(params.require(:registration).permit(:email, :name))
     params.require(:registration).require(:checkboxes).each do |access_level, periods|
       periods.each do |period, checked|
-        if checked == "on" then
+        if checked == "on"
           access = @registration.accesses.build access_level_id: access_level, period_id: period
-          access.save
+          access.save!
         end
       end
     end
@@ -103,11 +101,7 @@ class RegistrationsController < ApplicationController
     @event = Event.find params.require(:event_id)
     authorize! :read, @event
     to_id = params['to'].to_i
-    if to_id == -1
-      to = @event.registrations.pluck(:email)
-    else
-      to = @event.access_levels.find_by_id(to_id).registrations.pluck(:email)
-    end
+    to = to_id == -1 ? @event.registrations.pluck(:email) : @event.access_levels.find(to_id).registrations.pluck(:email)
     MassMailer.general_message(@event.contact_email, to, params['email']['subject'], params['email']['body']).deliver_later
     redirect_to event_registrations_path(@event)
   end
@@ -122,7 +116,6 @@ class RegistrationsController < ApplicationController
 
     begin
       CSV.parse(params.require(:csv_file).read.upcase, col_sep: sep, headers: :first_row) do |row|
-
         registration = Registration.find_payment_code_from_csv(row.to_s)
         # If the registration doesn't exist
         unless registration
@@ -134,21 +127,21 @@ class RegistrationsController < ApplicationController
         amount = row[paid].sub(',', '.')
         begin
           amount = Float(amount)
-        rescue
+        rescue StandardError
           fails << row
           next
         end
 
         registration.paid += amount
         registration.payment_code = Registration.create_payment_code
-        registration.save
+        registration.save!
 
         registration.deliver
 
         counter += 1
       end
 
-      success_msg = "Updated #{ActionController::Base.helpers.pluralize counter, "payment"} successfully."
+      success_msg = "Updated #{ActionController::Base.helpers.pluralize counter, 'payment'} successfully."
       if fails.any?
         flash.now[:success] = success_msg
         flash.now[:error] = "The rows listed below contained an invalid code, please fix them by hand."
@@ -160,10 +153,9 @@ class RegistrationsController < ApplicationController
         redirect_to action: :index
       end
     rescue CSV::MalformedCSVError
-      flash[:error] = "The file could not be parsed. Make sure that you uploaded the correct file and that the column seperator settings have been set to the correct seperator."
+      flash[:error] = %( The file could not be parsed. Make sure that you uploaded the correct file
+        and that the column separator settings have been set to the correct separator. ).squish
       redirect_to action: :index
     end
-
   end
-
 end

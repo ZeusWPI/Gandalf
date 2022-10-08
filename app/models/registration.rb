@@ -1,25 +1,6 @@
+# frozen_string_literal: true
+
 require 'barby/barcode/ean_13'
-
-# == Schema Information
-#
-# Table name: registrations
-#
-#  id             :integer          not null, primary key
-#  barcode        :string
-#  name           :string
-#  email          :string
-#  created_at     :datetime
-#  updated_at     :datetime
-#  event_id       :integer
-#  paid           :integer
-#  student_number :string
-#  price          :integer
-#  checked_in_at  :datetime
-#  comment        :text
-#  barcode_data   :string
-#  payment_code   :string
-#
-
 class Registration < ApplicationRecord
   belongs_to :event, optional: true
 
@@ -28,11 +9,14 @@ class Registration < ApplicationRecord
 
   scope :paid, -> { where("price <= paid") }
 
-  validates :name, presence: true, uniqueness: { scope: :event_id }
+  validates :name, presence: true
   # Uniqueness temporarily disabled; see the Partner model for the reason
-  #validates :email, presence: true, uniqueness: { scope: :event_id }
+  # validates :email, presence: true, uniqueness: { scope: :event_id }
   validates :email, presence: true, email: true
-  validates :student_number, format: {with: /\A[0-9]*\Z/, message: "has invalid format" }, uniqueness: { scope: :event }, allow_blank: true
+  validates :student_number, # rubocop:disable Rails/UniqueValidationWithoutIndex as partial indexes aren't supported on Sqlite
+            format: { with: /\A[0-9]*\Z/, message: "has invalid format" },
+            uniqueness: { scope: :event },
+            allow_blank: true
   validates :student_number, presence: true, if: -> { access_levels.first.try(:requires_login?) }
   validates :paid, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -41,14 +25,12 @@ class Registration < ApplicationRecord
   has_paper_trail only: [:paid, :payment_code, :checked_in_at]
 
   before_validation do |record|
-    if record.payment_code.nil?
-      record.payment_code = Registration.create_payment_code
-    end
+    record.payment_code = Registration.create_payment_code if record.payment_code.nil?
   end
 
   after_save do |record|
     record.access_levels.each do |access_level|
-      if access_level.capacity != nil and access_level.registrations.count > access_level.capacity
+      if !access_level.capacity.nil? && (access_level.registrations.count > access_level.capacity)
         record.errors.add :access_levels, "type is sold out."
         raise ActiveRecord::Rollback
       end
@@ -81,7 +63,7 @@ class Registration < ApplicationRecord
     write_attribute(:price, to_cents(value))
   end
 
-  def is_paid
+  def paid?
     self.price <= self.paid
   end
 
@@ -95,29 +77,23 @@ class Registration < ApplicationRecord
   def self.find_payment_code_from_csv(csvline)
     match = /GAN\d+/.match(csvline)
     if match
-      return Registration.find_by_payment_code(match[0])
+      Registration.find_by(payment_code: match[0])
     else
-      return false
+      false
     end
   end
 
   def self.create_payment_code
     random = rand(10**15)
-    format("GAN%02d%015d", random % 97, random)
+    format("GAN%<check>02d%<number>015d", check: random % 97, number: random)
   end
 
   def deliver
-    if self.barcode.nil?
-      self.generate_barcode
-    end
+    self.generate_barcode if self.barcode.nil?
 
-    if self.is_paid
+    if self.paid?
       RegistrationMailer.ticket(self).deliver_later
-
-      if self.paid > self.price
-        RegistrationMailer.notify_overpayment(self).deliver_later
-      end
-
+      RegistrationMailer.notify_overpayment(self).deliver_later if self.paid > self.price
     else
       RegistrationMailer.confirm_registration(self).deliver_later
     end
@@ -130,7 +106,32 @@ class Registration < ApplicationRecord
   end
 
   def to_cents(value)
-    if value.is_a? String then value.sub!(',', '.') end
+    value.sub!(',', '.') if value.is_a? String
     (value.to_f * 100).to_int
   end
 end
+
+# == Schema Information
+#
+# Table name: registrations
+#
+#  id             :integer          not null, primary key
+#  barcode        :string(255)
+#  barcode_data   :string(255)
+#  checked_in_at  :datetime
+#  comment        :text(65535)
+#  email          :string(255)
+#  name           :string(255)
+#  paid           :integer
+#  payment_code   :string(255)
+#  price          :integer
+#  student_number :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  event_id       :integer
+#
+# Indexes
+#
+#  index_registrations_on_event_id      (event_id)
+#  index_registrations_on_payment_code  (payment_code) UNIQUE
+#
