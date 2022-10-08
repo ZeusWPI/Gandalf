@@ -5,14 +5,6 @@ GIT
     capistrano-docker (0.4.0)
       capistrano (>= 3.3)
 
-GIT
-  remote: https://github.com/nudded/barcodes
-  revision: a990e2b596025f5414f820f15c84b99e9eaf416b
-  specs:
-    barcodes (0.0.11)
-      prawn
-      rmagick
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -214,14 +206,10 @@ GEM
     paper_trail (13.0.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
-    pdf-core (0.9.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    prawn (2.4.0)
-      pdf-core (~> 0.9.0)
-      ttfunk (~> 1.7)
     psych (4.0.4)
       stringio
     public_suffix (5.0.0)
@@ -289,7 +277,6 @@ GEM
       railties (>= 5.0)
     rexml (3.2.5)
     ri_cal (0.8.8)
-    rmagick (4.3.0)
     ruby-graphviz (1.2.5)
       rexml
     ruby-ole (1.2.12.2)
@@ -338,7 +325,6 @@ GEM
     timeliness (0.4.4)
     tinymce-rails (6.2.0)
       railties (>= 3.1.1)
-    ttfunk (1.7.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -380,7 +366,6 @@ PLATFORMS
 DEPENDENCIES
   annotate
   barby
-  barcodes!
   bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap
   bundler (>= 2.3.11)
@@ -413,7 +398,6 @@ DEPENDENCIES
   rails-erd
   record_tag_helper
   ri_cal
-  rmagick
   sass-rails
   sdoc
   select2-rails

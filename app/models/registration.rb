@@ -1,3 +1,5 @@
+require 'barby/barcode/ean_13'
+
 # == Schema Information
 #
 # Table name: registrations
@@ -85,8 +87,8 @@ class Registration < ApplicationRecord
 
   def generate_barcode
     self.barcode_data = 12.times.map { SecureRandom.random_number(10) }.join
-    calculated_barcode = Barcodes.create('EAN13', data: self.barcode_data)
-    self.barcode = calculated_barcode.caption_data
+    calculated_barcode = Barby::EAN13.new(self.barcode_data)
+    self.barcode = calculated_barcode.to_s
     self.save!
   end
 

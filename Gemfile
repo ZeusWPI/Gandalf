@@ -59,7 +59,6 @@ gem 'paper_trail'
 gem 'iban-tools'
 
 # Barcodes
-gem 'barcodes', git: "https://github.com/nudded/barcodes"
 gem 'chunky_png'
 gem 'barby'
 
@@ -94,8 +93,6 @@ gem 'validates_timeliness', '~> 6.0.0.beta2'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 #gem 'airbrake', '~> 4.3'
-
-gem 'rmagick'
 
 # select2 is beautiful
 gem 'select2-rails'
