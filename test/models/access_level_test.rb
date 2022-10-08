@@ -9,7 +9,7 @@
 #  has_comment :boolean
 #  hidden      :boolean
 #  name        :string(255)
-#  permit      :string(255)
+#  permit      :string(255)      default("everyone")
 #  price       :integer
 #  created_at  :datetime
 #  updated_at  :datetime

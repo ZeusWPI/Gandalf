@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_08_150231) do
+ActiveRecord::Schema.define(version: 2022_10_08_153804) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2022_10_08_150231) do
     t.integer "price"
     t.boolean "has_comment"
     t.boolean "hidden"
-    t.string "permit"
+    t.string "permit", default: "everyone"
     t.index ["event_id"], name: "index_access_levels_on_event_id"
   end
 
