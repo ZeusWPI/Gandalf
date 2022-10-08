@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Access < ApplicationRecord
   belongs_to :access_level
   belongs_to :period, optional: true

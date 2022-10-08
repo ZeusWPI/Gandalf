@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Period < ApplicationRecord
   belongs_to :event, optional: true
   has_many :accesses

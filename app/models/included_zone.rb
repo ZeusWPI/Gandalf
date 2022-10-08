@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class IncludedZone < ApplicationRecord
   belongs_to :zone
   belongs_to :access_level

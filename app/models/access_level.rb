@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AccessLevel < ApplicationRecord
   belongs_to :event, optional: true
 

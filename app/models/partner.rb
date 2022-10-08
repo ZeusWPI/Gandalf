@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Partner < ApplicationRecord
   acts_as_token_authenticatable
   has_paper_trail
