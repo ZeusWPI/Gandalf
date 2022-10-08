@@ -106,7 +106,7 @@ gem 'simple_enum'
 # Enable content_tag_for usage
 gem 'record_tag_helper'
 
- # Database
+# Database
 gem 'mysql2'
 
 group :development do

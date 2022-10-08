@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require 'barby/barcode/ean_13'
 require 'barby/outputter/png_outputter'
 require 'chunky_png'
 
 class GenerateEmailBarcodes
-
   def initialize(barcode_data)
     @barcode_data = barcode_data
   end
