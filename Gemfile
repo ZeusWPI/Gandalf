@@ -117,10 +117,11 @@ group :development do
 
   gem 'capistrano', '~> 3.17'
   gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
-  # gem 'capistrano-docker', path: '../capistrano-docker'
 
   gem 'listen'
   gem 'letter_opener'
+
+  gem 'web-console'
 end
 
 group :test do

@@ -4,6 +4,13 @@ Isengard::Application.routes.draw do
     omniauth_callbacks: 'omniauth_callback',
   }
 
+  # Sidekiq UI
+  require 'sidekiq/web'
+  Sidekiq::Web.use(Rack::Auth::Basic) do |username, password|
+    username == Rails.application.secrets.sidekiq[:basic_auth][:username] && password == Rails.application.secrets.sidekiq[:basic_auth][:password]
+  end
+  mount Sidekiq::Web => '/sidekiq'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

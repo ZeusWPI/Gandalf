@@ -22,5 +22,6 @@ module Isengard
     config.active_job.queue_adapter = :sidekiq
 
     config.rack_cas.server_url = "https://login.ugent.be"
+    config.rack_cas.exclude_path = "/sidekiq"
   end
 end
