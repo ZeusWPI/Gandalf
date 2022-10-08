@@ -7,8 +7,13 @@ class User < ApplicationRecord
 
   after_create :fetch_club, :fetch_enrolled_clubs
 
-  has_and_belongs_to_many :clubs
-  has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: "Club"
+  # Clubs the user is admin of
+  has_many :clubs_users, dependent: nil # FKs will handle this
+  has_many :clubs, through: :clubs_users
+
+  # Clubs the user is enrolled in
+  has_many :enrolled_clubs_members, dependent: nil # FKs will handle this
+  has_many :enrolled_clubs, through: :enrolled_clubs_members, source: :club
 
   # return the club this user can manage
   def fetch_club

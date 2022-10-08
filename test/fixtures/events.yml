@@ -73,3 +73,11 @@ sko:
 #  updated_at              :datetime
 #  club_id                 :integer
 #
+# Indexes
+#
+#  fk_rails_fc45ac705d  (club_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (club_id => clubs.id) ON DELETE => cascade
+#

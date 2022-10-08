@@ -136,4 +136,5 @@ end
 # Foreign Keys
 #
 #  fk_rails_...  (access_level_id => access_levels.id)
+#  fk_rails_...  (event_id => events.id) ON DELETE => cascade
 #

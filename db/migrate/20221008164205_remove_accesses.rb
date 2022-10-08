@@ -3,7 +3,11 @@ class RemoveAccesses < ActiveRecord::Migration[6.1]
   # converting the many-to-many into a one-to-many
   def change
     # Cleanup registrations without tickets - they're corrupt anyway
-    Registration.where.missing(:accesses).destroy_all
+    execute <<~SQL
+      DELETE FROM registrations WHERE NOT EXISTS(
+        SELECT 1 FROM accesses where accesses.registration_id = registrations.id
+      );
+    SQL
 
     # Add a new column, make it nullable
     add_reference :registrations, :access_level, type: :integer, foreign_key: true
