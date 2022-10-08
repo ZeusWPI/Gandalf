@@ -32,9 +32,7 @@ Isengard::Application.routes.draw do
       post 'toggle_registration_open'
     end
 
-    resources :zones
     resources :access_levels do
-      resources :zones
       member do
         get 'toggle_visibility'
       end
@@ -47,8 +45,6 @@ Isengard::Application.routes.draw do
       end
 
       collection do
-        post 'basic'
-        post 'advanced'
         post 'upload'
         post 'email'
       end
@@ -61,8 +57,6 @@ Isengard::Application.routes.draw do
       post 'scan_barcode'
       post 'scan_name'
     end
-
-    resources :periods
 
     resources :partners do
       member do
@@ -81,8 +75,6 @@ Isengard::Application.routes.draw do
       end
     end
   end
-
-  patch "events/:event_id/access_level/:access_level_id/set_zones", to: "access_levels#set_zones", as: "set_zones_for_access_level"
 
   # Development backdoor
   if Rails.env.development?

@@ -4,6 +4,5 @@
   $('#access-level-errors').html('')
   $('#new_access_level')[0].reset()
 
-  <%# break advanced deliberately, how we currently do it will not continue working! %>
-  $('#table-access-levels tr:last').before('<%= escape_javascript render @access_level, advanced: false %>')
+  $('#table-access-levels tr:last').before('<%= escape_javascript render @access_level %>')
 <% end %>

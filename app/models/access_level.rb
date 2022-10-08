@@ -3,9 +3,6 @@
 class AccessLevel < ApplicationRecord
   belongs_to :event, optional: true
 
-  has_many :included_zones, dependent: :destroy
-  has_many :zones, through: :included_zones
-
   has_many :accesses, dependent: :destroy
   has_many :registrations, through: :accesses
   has_many :partners
@@ -27,11 +24,6 @@ class AccessLevel < ApplicationRecord
 
   def requires_login?
     !permit_everyone?
-  end
-
-  def zones_by_ids=(zones)
-    self.zones = self.event.zones.find zones
-    self.save!
   end
 
   def name_with_price

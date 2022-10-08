@@ -161,7 +161,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     assert_difference "Registration.count", +1 do
       assert_enqueued_emails(1) do
-        post :basic, params: posthash
+        post :create, params: posthash
       end
     end
   end
