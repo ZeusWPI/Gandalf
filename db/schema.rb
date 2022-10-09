@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_08_195259) do
+ActiveRecord::Schema.define(version: 2022_10_09_134241) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2022_10_08_195259) do
     t.integer "club_id"
     t.boolean "registration_open", default: true
     t.text "signature"
+    t.boolean "require_physical_ticket", default: false, null: false
     t.index ["club_id"], name: "fk_rails_fc45ac705d"
   end
 

@@ -163,11 +163,22 @@ class EventsController < ApplicationController
       :registration_close_date,
       :registration_open_date,
       :show_ticket_count,
-      :signature
+      :signature,
+      :require_physical_ticket
     )
   end
 
   def event_create_params
-    params.require(:event).permit(:name, :club_id, :location, :website, :contact_email, :start_date, :end_date, :description)
+    params.require(:event).permit(
+      :name,
+      :club_id,
+      :location,
+      :website,
+      :contact_email,
+      :start_date,
+      :end_date,
+      :description,
+      :require_physical_ticket
+    )
   end
 end

@@ -37,15 +37,25 @@
     </tbody>
   </table>
 
-    <p>Below is your personal barcode (ticket type: <%= @registration.access_level.name %>).</p>
-    <br />
-    <%= image_tag attachments['barcode.png'].url %>
-    <%= image_tag attachments['barcode-tilted.png'].url %>
-    <br />
-    Barcode number: <%= @registration.barcode %>
-    <br />
+  <p>Below is your personal barcode (ticket type: <%= @registration.access_level.name %>).</p>
+  <br />
+  <%= image_tag attachments['barcode.png'].url %>
+  <%= image_tag attachments['barcode-tilted.png'].url %>
+  <br />
+  Barcode number: <%= @registration.barcode %>
+  <br />
 
-    <p><strong>Do not forget to print this email and bring it with you. This email acts as your ticket. Without it, you will not be granted access to <%= @registration.event.name %>.</strong><p>
+  <p>
+    <strong>
+      <% if @registration.event.require_physical_ticket? %>
+        This event requires you to print this email and bring it with you <i>on paper</i> as your ticket.
+      <% else %>
+        This email acts as your ticket. There is no need to print it, just make sure you can show it to the organiser.
+      <% end %>
+      <br />
+      Without it, you will not be granted access to <%= @registration.event.name %>.
+    </strong>
+  <p>
 
   <p>If you have any problems, you can contact us via mail: <%= mail_to @registration.event.contact_email, @registration.event.contact_email %></p>
 
