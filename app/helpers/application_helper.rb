@@ -10,8 +10,12 @@ module ApplicationHelper
     field.try { |d| d.strftime("%Y-%m-%d %H:%M") }
   end
 
+  def nice_amount(float)
+    number_with_precision float, precision: 2
+  end
+
   def euro(float)
-    "&euro;#{number_with_precision float, precision: 2}"
+    number_to_currency(float, unit: '€')
   end
 
   # Form helpers

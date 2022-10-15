@@ -79,6 +79,7 @@ end
 #  payment_code    :string(255)
 #  price           :integer
 #  student_number  :string(255)
+#  token           :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
 #  access_level_id :integer          not null
@@ -89,6 +90,7 @@ end
 #  index_registrations_on_access_level_id  (access_level_id)
 #  index_registrations_on_event_id         (event_id)
 #  index_registrations_on_payment_code     (payment_code) UNIQUE
+#  index_registrations_on_token            (token)
 #
 # Foreign Keys
 #
