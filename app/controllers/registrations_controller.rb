@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RegistrationsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :destroy, :resend, :update, :email, :upload]
+  before_action :authenticate_user!, except: [:new, :create, :show]
 
   require 'csv'
 
@@ -66,10 +66,19 @@ class RegistrationsController < ApplicationController
       @registration.deliver
 
       flash[:success] = "Registration successful. Please check your mailbox for your ticket or further payment information."
-      respond_with @event
+
+      redirect_to event_registration_path(@registration.event, @registration.token)
     else
       render "events/show"
     end
+  end
+
+  def show
+    @registration = Registration.find_by(token: params[:token])
+    return head(:not_found) unless @registration
+
+    @event = @registration.event
+    @barcode = GenerateHtmlBarcodes.new(@registration.barcode_data).call
   end
 
   def update

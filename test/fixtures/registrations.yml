@@ -12,6 +12,7 @@ one:
   price: 0
   payment_code: <%= Registration.create_payment_code %>
   access_level_id: 1
+  token: <%= SecureRandom.uuid %>
 
 two:
   id: 2
@@ -25,6 +26,7 @@ two:
   price: 10
   payment_code: <%= Registration.create_payment_code %>
   access_level_id: 2
+  token: <%= SecureRandom.uuid %>
 
 three:
   id: 3
@@ -38,6 +40,7 @@ three:
   price: 20
   payment_code: GAN7539840256920891
   access_level_id: 1
+  token: <%= SecureRandom.uuid %>
 
 four:
   id: 4
@@ -51,6 +54,7 @@ four:
   price: 10
   payment_code: <%= Registration.create_payment_code %>
   access_level_id: 1
+  token: <%= SecureRandom.uuid %>
 
 <% 9.times do |n| %>
 capacity_registration_<%= n %>:
@@ -64,6 +68,7 @@ capacity_registration_<%= n %>:
   student_number: <%= 100 + n %>
   payment_code: <%= Registration.create_payment_code %>
   access_level_id: <%= 100 + (n % 3) %>
+  token: <%= SecureRandom.uuid %>
 <% end %>
 
 # == Schema Information
@@ -81,6 +86,7 @@ capacity_registration_<%= n %>:
 #  payment_code    :string(255)
 #  price           :integer
 #  student_number  :string(255)
+#  token           :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
 #  access_level_id :integer          not null
@@ -91,6 +97,7 @@ capacity_registration_<%= n %>:
 #  index_registrations_on_access_level_id  (access_level_id)
 #  index_registrations_on_event_id         (event_id)
 #  index_registrations_on_payment_code     (payment_code) UNIQUE
+#  index_registrations_on_token            (token)
 #
 # Foreign Keys
 #

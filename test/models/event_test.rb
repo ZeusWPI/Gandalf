@@ -42,6 +42,7 @@ end
 #  registration_close_date :datetime
 #  registration_open       :boolean          default(TRUE)
 #  registration_open_date  :datetime
+#  require_physical_ticket :boolean          default(FALSE), not null
 #  show_statistics         :boolean
 #  show_ticket_count       :boolean          default(TRUE)
 #  signature               :text(65535)

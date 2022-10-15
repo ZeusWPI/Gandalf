@@ -38,7 +38,8 @@ Isengard::Application.routes.draw do
       end
     end
     resources :role_names
-    resources :registrations do
+
+    resources :registrations, except: [:show] do
       member do
         get 'resend'
         get 'info'
@@ -49,6 +50,7 @@ Isengard::Application.routes.draw do
         post 'email'
       end
     end
+    resources :registrations, only: [:show], param: :token
 
     member do
       get 'statistics'
