@@ -54,6 +54,10 @@ gem 'simple_token_authentication'
 gem 'cancancan'
 gem 'httparty'
 
+# Glitchtip
+gem 'sentry-rails'
+gem 'sentry-ruby'
+
 # Logging is awesome, and paper_trail even more
 gem 'paper_trail'
 

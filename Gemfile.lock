@@ -332,6 +332,11 @@ GEM
     sdoc (2.4.0)
       rdoc (>= 5.0)
     select2-rails (4.0.13)
+    sentry-rails (5.5.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.5.0)
+    sentry-ruby (5.5.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sidekiq (6.5.7)
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
@@ -447,6 +452,8 @@ DEPENDENCIES
   sass-rails
   sdoc
   select2-rails
+  sentry-rails
+  sentry-ruby
   sidekiq (~> 6.5)
   simple_enum
   simple_form
