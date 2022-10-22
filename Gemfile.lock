@@ -380,7 +380,7 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.3.0)
-    validates_timeliness (6.0.0.beta2)
+    validates_timeliness (6.0.0)
       activemodel (>= 6.0.0, < 7)
       timeliness (>= 0.3.10, < 1)
     warden (1.2.9)
@@ -463,7 +463,7 @@ DEPENDENCIES
   turbolinks
   twitter-typeahead-rails
   uglifier
-  validates_timeliness (~> 6.0.0.beta2)
+  validates_timeliness (~> 6.0.0)
   web-console
   webmock
   whenever
