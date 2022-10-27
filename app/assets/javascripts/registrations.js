@@ -39,10 +39,21 @@ $(document).on('turbolinks:load', function() {
     }
   };
 
+  const hidePaymentInfoIfNeeded = function(value) {
+
+    if (value.search("€") === -1) {
+      $("#payment-info").hide();
+    } else {
+      $("#payment-info").show();
+    }
+  };
+
   $("#registration_access_level").on('change', function() {
+    hidePaymentInfoIfNeeded($("option:selected", this).text());
     return hideCommentFieldIfNeeded($(this).val());
   });
 
+  hidePaymentInfoIfNeeded($("#registration_access_level option:selected").text());
   return hideCommentFieldIfNeeded($("#registration_access_level").val());
 
 });
