@@ -20,6 +20,8 @@
 #  admin               :boolean
 #
 
+require 'set'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -29,35 +31,6 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :clubs
   has_and_belongs_to_many :enrolled_clubs, join_table: :enrolled_clubs_members, class_name: "Club"
-
-  # return the club this user can manage
-  def fetch_club
-    def digest(*args)
-      Digest::SHA256.hexdigest args.join('-')
-    end
-
-    # using httparty because it is much easier to read than net/http code
-    resp = HTTParty.get("#{ Rails.application.secrets.fk_auth_url }/#{ username }/Gandalf",
-                        :headers => {
-                            'X-Authorization' => Rails.application.secrets.fk_auth_key,
-                            'Accept' => 'application/json'
-                        })
-
-    # this will only return the club names if control-hash matches
-    # and timestamp roughly around our current server time (5 minute tolerance)
-    if resp.success?
-      hash = JSON[resp.body]
-      clubs = hash['clubs'].map { |club| club['internal_name'] }
-      timestamp = hash['timestamp']
-
-      dig = digest(Rails.application.secrets.fk_auth_salt, username, timestamp, clubs)
-      if (Time.now - DateTime.parse(timestamp)).abs < 5.minutes && hash['sign'] == dig
-        self.clubs = Club.where internal_name: clubs
-      end
-
-      self.save!
-    end
-  end
 
   # this should add all extra CAS attributes returned by the server to the current session
   # extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
@@ -104,13 +77,75 @@ class User < ApplicationRecord
     end
   end
 
+  def fk_fetch_club
+    fk_authorized_clubs = Set['chemica', 'dentalia', 'filologica', 'fk', 'gbk', 'geografica', 'geologica', 'gfk', 'hermes', 'hilok', 'khk', 'kmf', 'lila', 'lombrosiana', 'moeder-lies', 'oak', 'politeia', 'slavia', 'vbk', 'vdk', 'vek', 'veto', 'vgk-fgen', 'vgk-flwi', 'vlak', 'vlk', 'vppk', 'vrg', 'vtk', 'wina']
+    resp = HTTParty.get("#{Rails.application.secrets.fk_auth_url}/#{username}/Gandalf",
+                        headers: {
+                          'X-Authorization' => Rails.application.secrets.fk_auth_key,
+                          'Accept' => 'application/json'
+                        })
+
+    return Set.new unless resp.success?
+
+    hash = JSON[resp.body]
+    clubs = hash['clubs'].map { |club| club['internal_name'] }.to_set
+    return clubs.filter {|club| fk_authorized_clubs.include?(club)}
+  end
+
+  def self.convert_dsa_to_fk_internal(clubname)
+    {
+      'vgeschiedk' => 'vgk-flwi',
+      'vgeneesk' => 'vgk-fgen',
+      'lies' => 'moeder-lies'
+    }.fetch(clubname, clubname)
+  end
+
+  def self.update_clubs
+    resp = HTTParty.get("https://dsa.ugent.be/api/verenigingen", headers: {"Authorization" => Rails.application.secrets.dsa_key})
+    if resp.code != 200
+      # TODO @veloxion: sentry loggen?
+      return
+    end
+    dsa_clubs = JSON[resp.body]['associations']
+    cas_to_dsa_associaions = Hash.new { |hash, key| hash[key] = Set[] }
+
+    dsa_clubs.each do |club|
+      if club.key?('board_members') then
+        translated_club_id = self.convert_dsa_to_fk_internal(club['abbreviation'].downcase)
+        club['board_members'].each do |user_object|
+          cas_name = user_object['cas_name'].split('::')[1]
+          cas_to_dsa_associaions[cas_name].add(translated_club_id)
+        end
+
+        if !Club.exists?(internal_name: translated_club_id) then
+          new_club = Club.new do |c|
+            c.internal_name = translated_club_id.downcase
+            c.display_name = club['name']
+            c.full_name = club['name']
+          end
+          new_club.save
+        end
+      end
+    end
+
+    cas_to_fk_associations = User.all.to_h {
+      |user| [user.username, (user.fk_fetch_club + cas_to_dsa_associaions[user.username])]
+    }
+    cas_to_fk_associations.each do |cas_name, associations|
+      user = User.where(username: cas_name).first
+      if !user.nil? then
+        user.clubs = Club.where internal_name: associations
+        user.save!
+      end
+    end
+  end
+
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
     User.all.each do |user|
-      # TODO this is patched out, waiting for the DSA API for board members
-      # user.fetch_club
       user.fetch_enrolled_clubs
     end
+    self.update_clubs
   end
 
   def self.from_omniauth(auth)
