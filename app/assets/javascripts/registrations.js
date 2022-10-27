@@ -40,8 +40,8 @@ $(document).on('turbolinks:load', function() {
   };
 
   const hidePaymentInfoIfNeeded = function(value) {
-
-    if (value.search("€") === -1) {
+    const val = parseInt(value);
+    if (window.freeTickets && (window.freeTickets.indexOf(val) !== -1)) {
       $("#payment-info").hide();
     } else {
       $("#payment-info").show();
@@ -49,11 +49,11 @@ $(document).on('turbolinks:load', function() {
   };
 
   $("#registration_access_level").on('change', function() {
-    hidePaymentInfoIfNeeded($("option:selected", this).text());
+    hidePaymentInfoIfNeeded($(this).val());
     return hideCommentFieldIfNeeded($(this).val());
   });
 
-  hidePaymentInfoIfNeeded($("#registration_access_level option:selected").text());
+  hidePaymentInfoIfNeeded($("#registration_access_level").val());
   return hideCommentFieldIfNeeded($("#registration_access_level").val());
 
 });
