@@ -32,10 +32,10 @@ class EventsController < ApplicationController
         cal.event do |e|
           e.dtstart = @event.start_date
           e.dtend = @event.end_date
-          e.location =  @event.location
+          e.location = @event.location
           e.summary = @event.name
           e.organizer = "mailto:#{@event.contact_email}"
-          e.organizer = Icalendar::Values::CalAddress.new("mailto:#{@event.contact_email}", cn: "#{@event.club.name}")
+          e.organizer = Icalendar::Values::CalAddress.new("mailto:#{@event.contact_email}", cn: @event.club.name)
         end
         cal.publish
         render plain: cal.to_ical
