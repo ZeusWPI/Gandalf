@@ -5,8 +5,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable, :omniauthable
 
-  after_create :fetch_club, :fetch_enrolled_clubs
-
   # Clubs the user is admin of
   has_many :clubs_users, dependent: nil # FKs will handle this
   has_many :clubs, through: :clubs_users
@@ -14,6 +12,8 @@ class User < ApplicationRecord
   # Clubs the user is enrolled in
   has_many :enrolled_clubs_members, dependent: nil # FKs will handle this
   has_many :enrolled_clubs, through: :enrolled_clubs_members, source: :club
+
+  after_create :fetch_club, :fetch_enrolled_clubs
 
   # return the club this user can manage
   def fetch_club
