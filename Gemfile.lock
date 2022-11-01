@@ -150,6 +150,9 @@ GEM
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     iban-tools (1.1.0)
+    icalendar (2.8.0)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.4)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -294,7 +297,6 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
-    ri_cal (0.8.8)
     rubocop (1.36.0)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -433,6 +435,7 @@ DEPENDENCIES
   ed25519 (>= 1.2, < 2.0)
   httparty
   iban-tools
+  icalendar
   jbuilder
   jquery-rails
   letter_opener
@@ -449,7 +452,6 @@ DEPENDENCIES
   rails-erd
   rails_style!
   record_tag_helper
-  ri_cal
   rubocop-minitest
   sass-rails
   sdoc

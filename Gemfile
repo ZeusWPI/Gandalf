@@ -90,7 +90,7 @@ gem 'whenever', require: false
 gem 'webmock', require: false
 
 # export to ical
-gem 'ri_cal'
+gem 'icalendar'
 
 # Easy date validations
 gem 'validates_timeliness', '~> 6.0.0'
