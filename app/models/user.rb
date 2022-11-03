@@ -77,10 +77,11 @@ class User < ApplicationRecord
 
     hash = JSON[resp.body]
     clubs = hash['clubs'].map { |club| club['internal_name'] }.to_set
-    clubs.filter { |club| fk_authorized_clubs.include?(club) }
+    # Only return clubs FK can manage
+    clubs & fk_authorized_clubs
   end
 
-  def self.convert_dsa_to_fk_internal(clubname)
+  def convert_dsa_to_fk_internal(clubname)
     {
       'vgeschiedk' => 'vgk-flwi',
       'vgeneesk' => 'vgk-fgen',
@@ -88,51 +89,57 @@ class User < ApplicationRecord
     }.fetch(clubname, clubname)
   end
 
-  def self.update_clubs
-    resp = HTTParty.get("https://dsa.ugent.be/api/verenigingen", headers: { "Authorization" => Rails.application.secrets.dsa_key })
-    if resp.code != 200
-      # TODO: @veloxion: sentry loggen?
-      return
-    end
+  def dsa_fetch_club
+    # The DSA API request is fairly heavy (~80kb), so we cache it for 5 minutes
+    cas_to_dsa_associations = Rails.cache.fetch("dsa_api_response", expires_in: 5.minutes, skip_nil: true) do
+      api_response = HTTParty.get("https://dsa.ugent.be/api/verenigingen", headers: { "Authorization" => Rails.application.secrets.dsa_key })
+      next if api_response.code != 200
 
-    dsa_clubs = JSON[resp.body]['associations']
-    cas_to_dsa_associaions = Hash.new { |hash, key| hash[key] = Set[] }
+      return_map = Hash.new { |hash, key| hash[key] = Set[] }
+      JSON[api_response.body]['associations'].each do |club|
+        # We don't have access to the board members of all clubs, so skip the club if don't see board members
+        next unless club.key?('board_members')
 
-    dsa_clubs.each do |club|
-      next unless club.key?('board_members')
+        # The DSA API uses slightly different IDs than FK
+        translated_club_id = convert_dsa_to_fk_internal(club['abbreviation'].downcase)
 
-      translated_club_id = self.convert_dsa_to_fk_internal(club['abbreviation'].downcase)
-      club['board_members'].each do |user_object|
-        cas_name = user_object['cas_name'].split('::')[1]
-        cas_to_dsa_associaions[cas_name].add(translated_club_id)
+        # Create club (this has to happen here, since we need to access the readable name)
+        Club.find_or_create_by!(internal_name: translated_club_id) do |c|
+          c.internal_name = translated_club_id.downcase
+          c.display_name = club['name']
+          c.full_name = club['name']
+        end
+
+        club['board_members'].each do |user_object|
+          cas_name = user_object['cas_name'].split('::')[1]
+          return_map[cas_name].add(translated_club_id)
+        end
       end
+      return_map.default = nil # clear the default_proc since it can't be serialized
+      next return_map
+    end
+    cas_to_dsa_associations.fetch(self.username, Set[])
+  end
 
-      next if Club.exists?(internal_name: translated_club_id)
-
-      new_club = Club.new do |c|
+  def fetch_clubs
+    dsa_managed = dsa_fetch_club
+    fk_managed = fk_fetch_club
+    permitted_clubs = dsa_managed + fk_managed
+    permitted_clubs.each do |translated_club_id|
+      Club.find_or_create_by!(internal_name: translated_club_id) do |c|
         c.internal_name = translated_club_id.downcase
-        c.display_name = club['name']
-        c.full_name = club['name']
-      end
-      new_club.save!
-    end
-
-    cas_to_fk_associations = User.all.to_h do |user|
-      [user.username, (user.fk_fetch_club + cas_to_dsa_associaions[user.username])]
-    end
-    cas_to_fk_associations.each do |cas_name, associations|
-      user = User.where(username: cas_name).first
-      unless user.nil?
-        user.clubs = Club.where internal_name: associations
-        user.save!
+        c.display_name = translated_club_id
+        c.full_name = translated_club_id
       end
     end
+    self.clubs = Club.where internal_name: permitted_clubs
+    self.save!
   end
 
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
     User.all.find_each(&:fetch_enrolled_clubs)
-    self.update_clubs
+    User.all.find_each(&:fetch_clubs)
   end
 
   def self.from_omniauth(auth)
