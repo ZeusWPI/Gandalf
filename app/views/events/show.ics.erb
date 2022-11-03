@@ -1,8 +1,0 @@
-<%= RiCal.Calendar do |cal| %>
-  <% cal.event do |ev| %>
-    <% ev.dtstart = @event.start_date %>
-    <% ev.dtend =  @event.end_date %>
-    <% ev.location =  @event.location %>
-    <% ev.summary = @event.name %>
-  <% end %>
-<% end %>

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'dotenv-rails'
 
 gem 'bundler', '>= 2.3.11'
 
-gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
+gem 'ed25519', '>= 1.2', '< 2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1'
@@ -15,9 +17,6 @@ gem 'rails-controller-testing'
 # Rails required gems
 gem 'bootsnap'
 gem 'turbolinks'
-
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -45,8 +44,8 @@ gem 'devise'
 gem 'devise_cas_authenticatable', '~> 2.0'
 
 # Omniauth as extra development backdoor
-gem 'omniauth-zeuswpi'
 gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-zeuswpi'
 
 # Token authentication for partners
 gem 'simple_token_authentication'
@@ -55,6 +54,10 @@ gem 'simple_token_authentication'
 gem 'cancancan'
 gem 'httparty'
 
+# Glitchtip
+gem 'sentry-rails'
+gem 'sentry-ruby'
+
 # Logging is awesome, and paper_trail even more
 gem 'paper_trail'
 
@@ -62,9 +65,8 @@ gem 'paper_trail'
 gem 'iban-tools'
 
 # Barcodes
-gem 'barcodes', git: "https://github.com/nudded/barcodes"
-gem 'chunky_png'
 gem 'barby'
+gem 'chunky_png'
 
 # Pagination
 gem 'will_paginate', '~> 3.0'
@@ -88,17 +90,13 @@ gem 'whenever', require: false
 gem 'webmock', require: false
 
 # export to ical
-gem 'ri_cal'
+gem 'icalendar'
 
 # Easy date validations
-gem 'validates_timeliness', '~> 6.0.0.beta2'
+gem 'validates_timeliness', '~> 6.0.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-#gem 'airbrake', '~> 4.3'
-
-gem 'rmagick'
 
 # select2 is beautiful
 gem 'select2-rails'
@@ -109,22 +107,25 @@ gem 'twitter-typeahead-rails'
 # Enum support with prefixes
 gem 'simple_enum'
 
-# Enable content_tag_for useage
+# Enable content_tag_for usage
 gem 'record_tag_helper'
+
+# Database
+gem 'mysql2'
 
 group :development do
   gem 'rails-erd'
 
   gem 'capistrano', '~> 3.17'
   gem 'capistrano-docker', github: 'TomNaessens/capistrano-docker'
-  # gem 'capistrano-docker', path: '../capistrano-docker'
+
+  gem 'rubocop-minitest'
+
+  gem 'letter_opener'
 
   gem 'listen'
-  gem 'letter_opener'
-end
 
-group :production do
-  gem 'mysql2' # Database
+  gem 'web-console'
 end
 
 group :test do
@@ -133,6 +134,10 @@ group :test do
 
   # Temporary lock until the flaky test issue is fixed on Minitest side that's present in 5.16.0
   gem 'minitest', '= 5.15.0'
+end
+
+group :development, :test do
+  gem 'rails_style', github: 'ZeusWPI/rails_style'
 end
 
 group :production, :deployment do
@@ -144,4 +149,4 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem "sidekiq", "~> 6.5"
+gem "sidekiq", "~> 7.0"

@@ -1,12 +1,23 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class EventControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup
-    stub_request(:get, "http://fkgent.be/api_isengard_v2.php").
-      with(query: hash_including(u: 'tnnaesse')).
-      to_return(body: '{"data":[{"internalName":"zeus","displayName":"Zeus WPI"},{"internalName":"zeus2","displayName":"Zeus WPI2"}],"controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"}')
+    stub_request(:get, "http://fkgent.be/api_isengard_v2.php")
+      .with(query: hash_including(u: 'tnnaesse'))
+      .to_return(
+        body: <<~JSON
+          {
+            "data": [
+              {"internalName":"zeus","displayName":"Zeus WPI"},
+              {"internalName":"zeus2","displayName":"Zeus WPI2"}],
+              "controle":"78b385b6d773b180deddee6d5f9819771d6f75031c3ae9ea84810fa6869e1547"
+          }
+        JSON
+      )
 
     @controller = EventsController.new
     sign_in users(:tom)
@@ -63,34 +74,32 @@ class EventControllerTest < ActionController::TestCase
   test "validate correct barcode" do
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert_includes(flash[:success], "Person has been scanned")
   end
 
   test "validate correct name" do
-    post :scan_name, params: { id: events(:codenight).id, name: 'Tom Naessens' } 
+    post :scan_name, params: { id: events(:codenight).id, name: 'Tom Naessens' }
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert_includes(flash[:success], "Person has been scanned")
   end
 
   test "dont check in twice" do
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
-    assert(flash[:success].include? "Person has been scanned")
+    assert_includes(flash[:success], "Person has been scanned")
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
-    assert(flash[:warning].include? "Person already checked in")
+    assert_includes(flash[:warning], "Person already checked in")
   end
 
   test "show unpaid for checked in unpaid tickets" do
     reg = registrations(:one)
-    reg.checked_in_at = Time.now
-    reg.price = 10
-    reg.save
+    reg.update!(checked_in_at: Time.zone.now, price: 10)
 
     post :scan_barcode, params: { id: events(:codenight).id, code: '1234567891231' }
     assert_response :success
     assert_nil(@registration)
-    assert(flash[:warning].include? "Person has not paid yet!")
+    assert_includes(flash[:warning], "Person has not paid yet!")
   end
 
   test "dont find registrations from other event" do
@@ -104,7 +113,7 @@ class EventControllerTest < ActionController::TestCase
     sign_in users(:maarten)
     post :scan_barcode, params: { id: events(:galabal).id, code: '2222222222222' }
     assert_response :success
-    assert(flash[:warning].include? "Person has not paid yet!")
+    assert_includes(flash[:warning], "Person has not paid yet!")
   end
 
   test "scan page should include check digit" do
@@ -117,14 +126,13 @@ class EventControllerTest < ActionController::TestCase
     end
   end
 
-
   test "member tickets should not be shown for wrong user" do
     sign_out users(:tom)
     get :show, params: { id: events(:codenight).id }
     assert_response :success
 
     assert assigns(:event)
-    assert_select "#registration_access_levels" do
+    assert_select "#registration_access_level" do
       assert_select "option", count: 1, text: "Lid"
       assert_select "option", count: 1, text: "Unlimited"
       assert_select "option", count: 0, text: "Member Only"
@@ -134,17 +142,16 @@ class EventControllerTest < ActionController::TestCase
   test "member tickets should be shown for enrolled user" do
     sign_out users(:tom)
     sign_in users(:matthias)
-    assert users(:matthias).enrolled_clubs.include? clubs(:zeus)
+    assert_includes users(:matthias).enrolled_clubs, clubs(:zeus)
     get :show, params: { id: events(:codenight).id }
 
     assert_response :success
 
-    assert_select "#registration_access_levels" do
+    assert_select "#registration_access_level" do
       assert_select "option", count: 1, text: "Lid"
       assert_select "option", count: 1, text: "Unlimited"
       assert_select "option", count: 1, text: "Member"
     end
-
   end
 
   test "registration form hidden when only member or hidden tickets available" do
@@ -158,11 +165,11 @@ class EventControllerTest < ActionController::TestCase
   end
 
   test "do statistics" do
-    date = "#{registrations(:one).created_at.utc.to_date}"
+    date = registrations(:one).created_at.utc.to_date.to_s
     get :statistics, params: { id: 1 }
     assert_response :success
     expected = [
-      { name: "Lid",       data: { date => 1 } },
+      { name: "Lid",       data: { date => 3 } },
       { name: "Limited0",  data: { date => 3 } },
       { name: "Limited1",  data: { date => 3 } },
       { name: "Limited2",  data: { date => 3 } },
@@ -170,14 +177,12 @@ class EventControllerTest < ActionController::TestCase
       { name: "Unlimited", data: { date => 0 } }
     ]
     expected.zip(assigns(:data)).each do |e, a|
-      assert e[:name] == a[:name], "Mismatching names. Expected #{e[:name]} got #{a[:name]}"
-      e[:data].keys.each do |k|
-        assert (a[:data].has_key? k), "Missing date for #{e[:name]}: #{k}"
-        assert e[:data][k] == a[:data][k],
-          "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
+      assert_equal e[:name], a[:name], "Mismatching names. Expected #{e[:name]} got #{a[:name]}"
+      e[:data].each_key do |k|
+        assert (a[:data].key? k), "Missing date for #{e[:name]}: #{k}"
+        assert_equal e[:data][k], a[:data][k], "Mismatching counts for #{e[:name]} on #{k}: Expected #{e[:data][k]} got #{a[:data][k]}"
       end
     end
-
   end
 
   test "registration form for student-only event shown when logged in" do
@@ -191,5 +196,4 @@ class EventControllerTest < ActionController::TestCase
     get :show, params: { id: events(:twaalfurenloop).id }
     assert_select "#basic-registration-form", false, "Should not contain registration form"
   end
-
 end

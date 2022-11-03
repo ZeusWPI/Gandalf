@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -7,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def store_location
     # store last url as long as it isn't a /users path
-    session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
+    session[:previous_url] = request.fullpath unless request.fullpath =~ %r{/users}
   end
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -15,16 +17,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     session[:previous_url] || root_path
   end
 
   def current_ability
-    if current_partner
-      @current_ability ||= Ability.new(current_partner)
-    else
-      @current_ability ||= Ability.new(current_user)
-    end
+    @current_ability ||= Ability.new(current_partner || current_user)
   end
-
 end

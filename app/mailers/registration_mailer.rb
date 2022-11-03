@@ -1,12 +1,7 @@
-require 'barby'
-require 'barby/barcode/ean_13'
-require 'barby/outputter/png_outputter'
+# frozen_string_literal: true
 
-class RegistrationMailer < ActionMailer::Base
-
+class RegistrationMailer < ApplicationMailer
   helper ApplicationHelper
-
-  default from: "noreply@student.ugent.be"
 
   def confirm_registration(registration)
     @registration = registration
@@ -16,15 +11,10 @@ class RegistrationMailer < ActionMailer::Base
   def ticket(registration)
     @registration = registration
 
-    barcode = Barby::EAN13.new(registration.barcode_data)
-    pngoutputter = Barby::PngOutputter.new(barcode)
-    pngoutputter.xdim = 2
-    pngoutputter.ydim = 1
-    image = pngoutputter.to_png
-    attachments.inline['barcode.png'] = image
+    barcodes = GenerateEmailBarcodes.new(@registration.barcode_data).call
 
-    tilted_image = Magick::Image.from_blob(image).first.rotate!(-90).to_blob
-    attachments.inline['barcode-tilted.png'] = tilted_image
+    attachments.inline['barcode.png'] = barcodes.first
+    attachments.inline['barcode-tilted.png'] = barcodes.second
 
     mail to: "#{registration.name} <#{registration.email}>", subject: "Ticket for #{registration.event.name}"
   end
@@ -33,5 +23,4 @@ class RegistrationMailer < ActionMailer::Base
     @registration = registration
     mail to: "#{registration.name} <#{registration.email}>", subject: "Overpayment for #{registration.event.name}"
   end
-
 end

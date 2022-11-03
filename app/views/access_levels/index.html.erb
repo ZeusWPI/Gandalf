@@ -12,13 +12,10 @@
           <th>Allow</th>
           <th>Allows comments</th>
           <th>Hidden</th>
-          <% if @advanced %>
-            <th>Zones</th>
-          <% end %>
           <th>Actions</th>
         </thead>
         <tbody>
-          <%= render @event.access_levels, advanced: @advanced %>
+          <%= render @event.access_levels %>
           <%= render "access_levels/form", object: @event.access_levels.build, button_name: "Add Ticket" %>
         </tbody>
       </table>

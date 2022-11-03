@@ -4,6 +4,13 @@ Isengard::Application.routes.draw do
     omniauth_callbacks: 'omniauth_callback',
   }
 
+  # Sidekiq UI
+  require 'sidekiq/web'
+  Sidekiq::Web.use(Rack::Auth::Basic) do |username, password|
+    username == Rails.application.secrets.sidekiq[:basic_auth][:username] && password == Rails.application.secrets.sidekiq[:basic_auth][:password]
+  end
+  mount Sidekiq::Web => '/sidekiq'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -25,9 +32,7 @@ Isengard::Application.routes.draw do
       post 'toggle_registration_open'
     end
 
-    resources :zones
     resources :access_levels do
-      resources :zones
       member do
         get 'toggle_visibility'
       end
@@ -40,8 +45,6 @@ Isengard::Application.routes.draw do
       end
 
       collection do
-        post 'basic'
-        post 'advanced'
         post 'upload'
         post 'email'
       end
@@ -55,8 +58,6 @@ Isengard::Application.routes.draw do
       post 'scan_name'
     end
 
-    resources :periods
-
     resources :partners do
       member do
         get 'sign_in', to: 'sign_in#sign_in_partner'
@@ -67,15 +68,7 @@ Isengard::Application.routes.draw do
         post 'upload'
       end
     end
-
-    resources :promos do
-      collection do
-        post 'generate'
-      end
-    end
   end
-
-  patch "events/:event_id/access_level/:access_level_id/set_zones", to: "access_levels#set_zones", as: "set_zones_for_access_level"
 
   # Development backdoor
   if Rails.env.development?

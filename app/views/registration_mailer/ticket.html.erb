@@ -37,7 +37,7 @@
     </tbody>
   </table>
 
-    <p>Below is your personal barcode (ticket type: <%= @registration.access_levels.first.try :name %>).</p>
+    <p>Below is your personal barcode (ticket type: <%= @registration.access_level.name %>).</p>
     <br />
     <%= image_tag attachments['barcode.png'].url %>
     <%= image_tag attachments['barcode-tilted.png'].url %>

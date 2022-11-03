@@ -1,0 +1,54 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb:10.8
+    volumes:
+      - db_data:/var/lib/mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    environment:
+      MYSQL_ROOT_PASSWORD: strong-password
+      MYSQL_DATABASE: gandalf
+      MYSQL_USER: gandalf
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "3003:3000"
+    volumes:
+      - storage:/app/storage
+    environment:
+      DATABASE_URL: mysql2://gandalf:password@db/gandalf
+      RAILS_LOG_TO_STDOUT: 1
+      SECRET_AUTH_USERNAME: admin
+      SECRET_AUTH_PASSWORD: admin-password
+      RAILS_SERVE_STATIC_FILES: 1
+
+  sidekiq:
+    build: .
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - storage:/app/storage
+    environment:
+      DATABASE_URL: mysql2://gandalf:password@db/gandalf
+      REDIS_URL: redis://redis:6379
+    entrypoint: bundle exec sidekiq
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+volumes:
+  db_data:
+  redis_data:
+  storage:

@@ -8,9 +8,6 @@
   <td><%= translate access_level.permit %></td>
   <td><%= access_level.has_comment ? 'Yes' : 'No' %></td>
   <td><%= access_level.hidden ? 'Yes' : 'No' %></td>
-  <% if advanced %>
-    <td><%= render partial: 'access_levels/zones', locals: {access_level: access_level} %></td>
-  <% end %>
   <td>
     <div class="nowrap">
       <%= link_to raw(visibility_icon(access_level)), toggle_visibility_event_access_level_path(access_level.event, access_level), class: 'btn btn-xs btn-default', remote: true %>

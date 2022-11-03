@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class PartnersControllerTest < ActionController::TestCase
+  include ActionMailer::TestHelper
   include Devise::Test::ControllerHelpers
-
-  def setup
-  end
+  verify_fixtures Partner
 
   test "should get index" do
     sign_in users(:tom)
@@ -49,14 +50,13 @@ class PartnersControllerTest < ActionController::TestCase
 
   test "should not confirm for other events" do
     sign_in partners(:KBC)
-    post :confirm, params: { event_id: 2, id: 1 }
+    post :confirm, params: { event_id: 2, id: partners(:KBC).id }
     assert_response :redirect
   end
 
   test "should show already confirmed on already confirmed" do
     p = partners(:KBC)
-    p.confirmed = true
-    p.save
+    p.update!(confirmed: true)
 
     sign_in(p)
 
@@ -66,10 +66,9 @@ class PartnersControllerTest < ActionController::TestCase
   end
 
   test "should not allow another registration on confirm when already confirmed" do
-    assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +0 do
+    assert_difference "Event.find_by(name: events(:codenight).name).registrations.count", +0 do
       p = partners(:KBC)
-      p.confirmed = true
-      p.save
+      p.update!(confirmed: true)
 
       sign_in(p)
 
@@ -78,14 +77,13 @@ class PartnersControllerTest < ActionController::TestCase
   end
 
   test "should send registration mail on confirm" do
-    assert_difference "ActionMailer::Base.deliveries.size", +1 do
-      sign_in partners(:KBC)
-      post :confirm, xhr: true, params: { event_id: 1, id: 1 }
-    end
+    sign_in partners(:KBC)
+    post :confirm, xhr: true, params: { event_id: 1, id: 1 }
+    assert_enqueued_emails 1
   end
 
   test "should add registration on confirm" do
-    assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +1 do
+    assert_difference "Event.find_by(name: events(:codenight).name).registrations.count", +1 do
       sign_in partners(:KBC)
       post :confirm, xhr: true, params: { event_id: 1, id: 1 }
     end
@@ -93,17 +91,16 @@ class PartnersControllerTest < ActionController::TestCase
 
   test "should confirm correct access level for correct event" do
     p = partners(:KBC)
-    assert_difference "Event.find_by_name(events(:codenight).name).registrations.count", +1 do
+    assert_difference "Event.find_by(name: events(:codenight).name).registrations.count", +1 do
       sign_in p
       post :confirm, xhr: true, params: { event_id: 1, id: 1 }
     end
 
     # Get latest registration here
-    r = Registration.find_by_name "KBC"
+    r = Registration.find_by name: "KBC"
     assert r.name = p.name
     assert r.email = p.email
     assert r.event_id = p.event_id
     assert r.price = p.access_level.price
   end
-
 end

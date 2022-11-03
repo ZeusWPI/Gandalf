@@ -29,14 +29,14 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:	
-  activerecord:	
-    attributes:	
-      registration:	
-        access_levels: "Ticket"	
+en:
+  activerecord:
+    attributes:
+      registration:
+        access_levels: "Ticket"
 
 
   helpers:
     label:
-      event:	
-        club_id: "Organisation"	
+      event:
+        club_id: "Organisation"

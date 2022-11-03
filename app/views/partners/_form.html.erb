@@ -2,7 +2,7 @@
   <%= form_for [object.event, object], remote: true do |f| %>
     <td><%= f.text_field :name, class: 'form-control' %></td>
     <td><%= f.email_field :email, class: 'form-control' %></td>
-    <td><%= f.collection_select :access_level, object.event.access_levels, :id, :name_with_price, {}, { class: "form-control" } %></td>
+    <td><%= f.collection_select :access_level_id, object.event.access_levels, :id, :name_with_price, {}, { class: "form-control" } %></td>
     <td></td>
     <td><%= f.button button_name, class: 'btn btn-sm btn-primary' %></td>
     <%= javascript_tag do %>
@@ -13,7 +13,7 @@
       $(id).parent().find('button').on('click', function(e) {
         e.preventDefault();
         $(id).append(inputs.clone());
-        $(id).append("<input type='hidden' name='partner[access_level]' value='" + select.val() + "'>");
+        $(id).append("<input type='hidden' name='partner[access_level_id]' value='" + select.val() + "'>");
         $(id).append('<input type="hidden" name="_method" value="<%= (button_name == 'Save') ? 'put' : 'post'  %>">');
         $(id).submit();
       });

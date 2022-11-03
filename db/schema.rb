@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_18_142556) do
+ActiveRecord::Schema.define(version: 2022_10_08_195259) do
 
-  create_table "access_levels", force: :cascade do |t|
+  create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.integer "event_id"
     t.datetime "created_at"
@@ -25,33 +25,17 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.index ["event_id"], name: "index_access_levels_on_event_id"
   end
 
-  create_table "access_levels_promos", id: false, force: :cascade do |t|
-    t.integer "promo_id", null: false
-    t.integer "access_level_id", null: false
-  end
-
-  create_table "accesses", force: :cascade do |t|
-    t.integer "period_id"
-    t.integer "registration_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "access_level_id"
-    t.index ["access_level_id"], name: "index_accesses_on_access_level_id"
-    t.index ["period_id"], name: "index_accesses_on_period_id"
-    t.index ["registration_id"], name: "index_accesses_on_registration_id"
-  end
-
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -63,73 +47,68 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "clubs", force: :cascade do |t|
+  create_table "clubs", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "full_name"
     t.string "internal_name"
     t.string "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["internal_name"], name: "index_clubs_on_internal_name", unique: true
   end
 
-  create_table "clubs_users", id: false, force: :cascade do |t|
+  create_table "clubs_users", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "club_id"
     t.integer "user_id"
+    t.index ["club_id", "user_id"], name: "index_clubs_users_on_club_id_and_user_id", unique: true
+    t.index ["user_id"], name: "fk_rails_b7c6964840"
   end
 
-  create_table "enrolled_clubs_members", id: false, force: :cascade do |t|
+  create_table "enrolled_clubs_members", id: false, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "club_id", null: false
     t.integer "user_id", null: false
+    t.index ["club_id", "user_id"], name: "index_enrolled_clubs_members_on_club_id_and_user_id", unique: true
     t.index ["club_id"], name: "index_enrolled_clubs_members_on_club_id"
     t.index ["user_id"], name: "index_enrolled_clubs_members_on_user_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "location"
     t.string "website"
-    t.text "description"
+    t.text "description", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "registration_open_date"
     t.datetime "registration_close_date"
-    t.string "bank_number"
     t.boolean "show_ticket_count", default: true
+    t.string "bank_number"
     t.string "contact_email"
     t.string "export_file_name"
     t.string "export_content_type"
     t.integer "export_file_size"
     t.datetime "export_updated_at"
-    t.boolean "show_statistics"
     t.string "export_status"
+    t.boolean "show_statistics"
     t.integer "club_id"
     t.boolean "registration_open", default: true
     t.text "signature"
+    t.index ["club_id"], name: "fk_rails_fc45ac705d"
   end
 
-  create_table "included_zones", force: :cascade do |t|
-    t.integer "zone_id"
-    t.integer "access_level_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["access_level_id"], name: "index_included_zones_on_access_level_id"
-    t.index ["zone_id"], name: "index_included_zones_on_zone_id"
-  end
-
-  create_table "partners", force: :cascade do |t|
+  create_table "partners", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -143,49 +122,32 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.boolean "confirmed"
     t.index ["access_level_id"], name: "index_partners_on_access_level_id"
     t.index ["authentication_token"], name: "index_partners_on_authentication_token"
+    t.index ["event_id"], name: "fk_rails_188986c214"
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
   end
 
-  create_table "periods", force: :cascade do |t|
-    t.datetime "starts"
-    t.datetime "ends"
-    t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "event_id"
-    t.index ["event_id"], name: "index_periods_on_event_id"
-  end
-
-  create_table "promos", force: :cascade do |t|
-    t.integer "event_id"
-    t.string "code"
-    t.integer "limit"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "sold_tickets", default: 0
-    t.index ["event_id"], name: "index_promos_on_event_id"
-  end
-
-  create_table "registrations", force: :cascade do |t|
+  create_table "registrations", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "barcode"
     t.string "name"
     t.string "email"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "event_id"
-    t.integer "paid"
     t.string "student_number"
+    t.integer "paid"
     t.integer "price"
     t.datetime "checked_in_at"
     t.text "comment"
     t.string "barcode_data"
     t.string "payment_code"
+    t.integer "access_level_id", null: false
+    t.index ["access_level_id"], name: "index_registrations_on_access_level_id"
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["payment_code"], name: "index_registrations_on_payment_code", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username", default: "", null: false
+  create_table "users", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "username", null: false
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
@@ -203,7 +165,7 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "versions", force: :cascade do |t|
+  create_table "versions", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
     t.string "event", null: false
@@ -214,15 +176,16 @@ ActiveRecord::Schema.define(version: 2022_06_18_142556) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  create_table "zones", force: :cascade do |t|
-    t.string "name"
-    t.integer "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["event_id"], name: "index_zones_on_event_id"
-    t.index ["name", "event_id"], name: "index_zones_on_name_and_event_id", unique: true
-  end
-
+  add_foreign_key "access_levels", "events", on_delete: :cascade
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "clubs_users", "clubs", on_delete: :cascade
+  add_foreign_key "clubs_users", "users", on_delete: :cascade
+  add_foreign_key "enrolled_clubs_members", "clubs", on_delete: :cascade
+  add_foreign_key "enrolled_clubs_members", "users", on_delete: :cascade
+  add_foreign_key "events", "clubs", on_delete: :cascade
+  add_foreign_key "partners", "access_levels"
+  add_foreign_key "partners", "events", on_delete: :cascade
+  add_foreign_key "registrations", "access_levels"
+  add_foreign_key "registrations", "events", on_delete: :cascade
 end

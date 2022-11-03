@@ -1,7 +1,6 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 class EventsController < ApplicationController
-
   # order is important here, we need to be authenticated before we can check permission
   before_action :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource only: [:new, :show, :update, :edit, :destroy]
@@ -10,40 +9,53 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.where('end_date > ?', DateTime.now).order(:start_date)
-    if user_signed_in?
-      @past_events = Event.accessible_by(current_ability).order(:name)
-    else
-      @past_events = []
-    end
+    @past_events = if user_signed_in?
+                     Event.accessible_by(current_ability).order(:name)
+                   else
+                     []
+                   end
   end
 
   def show
     @registration = @event.registrations.build
 
-    if current_user
-      @registration.name = current_user.display_name
-      @registration.student_number = current_user.cas_ugentStudentID
-      @registration.email = current_user.cas_mail
+    return unless current_user
+
+    @registration.name = current_user.display_name
+    @registration.student_number = current_user.cas_ugentStudentID
+    @registration.email = current_user.cas_mail
+
+    respond_to do |format|
+      format.html { render :show }
+      format.ics do
+        cal = Icalendar::Calendar.new
+        cal.event do |e|
+          e.dtstart = @event.start_date
+          e.dtend = @event.end_date
+          e.location = @event.location
+          e.summary = @event.name
+          e.organizer = "mailto:#{@event.contact_email}"
+          e.organizer = Icalendar::Values::CalAddress.new("mailto:#{@event.contact_email}", cn: @event.club.name)
+        end
+        cal.publish
+        render plain: cal.to_ical
+      end
     end
   end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 
   def destroy
-    @event.destroy
+    @event.destroy!
     redirect_to action: :index
   end
 
   def update
     authorize! :update, @event
 
-    if @event.update(event_params)
-      flash.now[:success] = "Successfully updated event."
-    end
+    flash.now[:success] = "Successfully updated event." if @event.update(event_params)
 
     render action: :edit
   end
@@ -60,7 +72,8 @@ class EventsController < ApplicationController
   def create
     authorize! :create, Event
 
-    @event = Event.create(event_create_params)
+    @event = Event.new(event_create_params)
+    flash.now[:success] = "Successfully created event." if @event.save
 
     respond_with @event
   end
@@ -69,21 +82,24 @@ class EventsController < ApplicationController
     @event = Event.find params.require(:id)
     authorize! :view_stats, @event
 
-    if not @event.registrations.empty?
+    if @event.registrations.empty?
+      @data = []
+    else
 
       min, max = @event.registrations.pluck(:created_at).minmax
-      zeros = Hash[]
+      zeros = {}
       while min <= max
         zeros[min.strftime("%Y-%m-%d")] = 0
         min += 1.day
       end
 
       @data = @event.access_levels.map do |al|
-        {name: al.name, data: zeros.merge(al.registrations.group('date(registrations.created_at)').count)}
+        {
+          name: al.name,
+          data: zeros.merge(al.registrations.group('date(registrations.created_at)').count.transform_keys { |key| key.strftime("%Y-%m-%d") })
+        }
       end
 
-    else
-      @data = []
     end
   end
 
@@ -105,7 +121,6 @@ class EventsController < ApplicationController
     @registration = @event.registrations.find_by name: params.require(:name)
     check_in
   end
-
 
   def export_status
     @event = Event.find params.require(:id)
@@ -133,18 +148,17 @@ class EventsController < ApplicationController
   end
 
   private
-  def check_in
 
+  def check_in
     if @registration
-      if not @registration.is_paid
+      if !@registration.paid?
         flash.now[:warning] =
-          "Person has not paid yet! Resting amount: €" + @registration.to_pay.to_s
+          "Person has not paid yet! Resting amount: €#{@registration.to_pay}"
       elsif @registration.checked_in_at
-        flash.now[:warning] = "Person already checked in at " +
-          view_context.nice_time(@registration.checked_in_at) + "!"
+        flash.now[:warning] = "Person already checked in at #{view_context.nice_time(@registration.checked_in_at)}!"
       else
         flash.now[:success] = "Person has been scanned!"
-        @registration.checked_in_at = Time.now
+        @registration.checked_in_at = Time.zone.now
         @registration.save!
       end
     else
@@ -154,7 +168,20 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :location, :website, :contact_email, :start_date, :end_date, :description, :bank_number, :registration_close_date, :registration_open_date, :show_ticket_count, :signature)
+    params.require(:event).permit(
+      :name,
+      :location,
+      :website,
+      :contact_email,
+      :start_date,
+      :end_date,
+      :description,
+      :bank_number,
+      :registration_close_date,
+      :registration_open_date,
+      :show_ticket_count,
+      :signature
+    )
   end
 
   def event_create_params
