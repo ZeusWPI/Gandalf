@@ -64,7 +64,9 @@ class User < ApplicationRecord
   end
 
   def fk_fetch_club
-    fk_authorized_clubs = Set['chemica', 'dentalia', 'filologica', 'fk', 'gbk', 'geografica', 'geologica', 'gfk', 'hermes', 'hilok', 'khk', 'kmf', 'lila', 'lombrosiana', 'moeder-lies', 'oak', 'politeia', 'slavia', 'vbk', 'vdk', 'vek', 'veto', 'vgk-fgen', 'vgk-flwi', 'vlak', 'vlk', 'vppk', 'vrg', 'vtk', 'wina']
+    fk_authorized_clubs = Set['chemica', 'dentalia', 'filologica', 'fk', 'gbk', 'geografica', 'geologica', 'gfk', 'hermes', 'hilok', 'khk',
+                              'kmf', 'lila', 'lombrosiana', 'moeder-lies', 'oak', 'politeia', 'slavia', 'vbk', 'vdk', 'vek', 'veto',
+                              'vgk-fgen', 'vgk-flwi', 'vlak', 'vlk', 'vppk', 'vrg', 'vtk', 'wina']
     resp = HTTParty.get("#{Rails.application.secrets.fk_auth_url}/#{username}/Gandalf",
                         headers: {
                           'X-Authorization' => Rails.application.secrets.fk_auth_key,
@@ -75,7 +77,7 @@ class User < ApplicationRecord
 
     hash = JSON[resp.body]
     clubs = hash['clubs'].map { |club| club['internal_name'] }.to_set
-    return clubs.filter {|club| fk_authorized_clubs.include?(club)}
+    clubs.filter { |club| fk_authorized_clubs.include?(club) }
   end
 
   def self.convert_dsa_to_fk_internal(clubname)
@@ -87,39 +89,40 @@ class User < ApplicationRecord
   end
 
   def self.update_clubs
-    resp = HTTParty.get("https://dsa.ugent.be/api/verenigingen", headers: {"Authorization" => Rails.application.secrets.dsa_key})
+    resp = HTTParty.get("https://dsa.ugent.be/api/verenigingen", headers: { "Authorization" => Rails.application.secrets.dsa_key })
     if resp.code != 200
-      # TODO @veloxion: sentry loggen?
+      # TODO: @veloxion: sentry loggen?
       return
     end
+
     dsa_clubs = JSON[resp.body]['associations']
     cas_to_dsa_associaions = Hash.new { |hash, key| hash[key] = Set[] }
 
     dsa_clubs.each do |club|
-      if club.key?('board_members') then
-        translated_club_id = self.convert_dsa_to_fk_internal(club['abbreviation'].downcase)
-        club['board_members'].each do |user_object|
-          cas_name = user_object['cas_name'].split('::')[1]
-          cas_to_dsa_associaions[cas_name].add(translated_club_id)
-        end
+      next unless club.key?('board_members')
 
-        if !Club.exists?(internal_name: translated_club_id) then
-          new_club = Club.new do |c|
-            c.internal_name = translated_club_id.downcase
-            c.display_name = club['name']
-            c.full_name = club['name']
-          end
-          new_club.save
-        end
+      translated_club_id = self.convert_dsa_to_fk_internal(club['abbreviation'].downcase)
+      club['board_members'].each do |user_object|
+        cas_name = user_object['cas_name'].split('::')[1]
+        cas_to_dsa_associaions[cas_name].add(translated_club_id)
       end
+
+      next if Club.exists?(internal_name: translated_club_id)
+
+      new_club = Club.new do |c|
+        c.internal_name = translated_club_id.downcase
+        c.display_name = club['name']
+        c.full_name = club['name']
+      end
+      new_club.save!
     end
 
-    cas_to_fk_associations = User.all.to_h {
-      |user| [user.username, (user.fk_fetch_club + cas_to_dsa_associaions[user.username])]
-    }
+    cas_to_fk_associations = User.all.to_h do |user|
+      [user.username, (user.fk_fetch_club + cas_to_dsa_associaions[user.username])]
+    end
     cas_to_fk_associations.each do |cas_name, associations|
       user = User.where(username: cas_name).first
-      if !user.nil? then
+      unless user.nil?
         user.clubs = Club.where internal_name: associations
         user.save!
       end
