@@ -288,7 +288,7 @@ GEM
       psych (>= 4.0.0)
     record_tag_helper (1.0.1)
       actionview (>= 5)
-    redis-client (0.10.0)
+    redis-client (0.11.1)
       connection_pool
     regexp_parser (2.5.0)
     request_store (1.5.1)
@@ -340,7 +340,7 @@ GEM
       sentry-ruby (~> 5.5.0)
     sentry-ruby (5.5.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sidekiq (7.0.0)
+    sidekiq (7.0.1)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
