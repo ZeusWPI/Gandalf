@@ -9,7 +9,7 @@ zeus:
   display_name: Zeus WPI
 #
 fk:
-  internal_name: fkcentraal
+  internal_name: fk
   display_name: FakulteitenKonvent
 
 # == Schema Information
