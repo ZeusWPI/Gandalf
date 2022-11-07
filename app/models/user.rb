@@ -104,8 +104,7 @@ class User < ApplicationRecord
         translated_club_id = convert_dsa_to_fk_internal(club['abbreviation'].downcase)
 
         # Create club (this has to happen here, since we need to access the readable name)
-        Club.find_or_create_by!(internal_name: translated_club_id) do |c|
-          c.internal_name = translated_club_id.downcase
+        Club.find_or_create_by!(internal_name: translated_club_id.downcase) do |c|
           c.display_name = club['name']
           c.full_name = club['name']
         end
@@ -125,13 +124,6 @@ class User < ApplicationRecord
     dsa_managed = dsa_fetch_club
     fk_managed = fk_fetch_club
     permitted_clubs = dsa_managed + fk_managed
-    permitted_clubs.each do |translated_club_id|
-      Club.find_or_create_by!(internal_name: translated_club_id) do |c|
-        c.internal_name = translated_club_id.downcase
-        c.display_name = translated_club_id
-        c.full_name = translated_club_id
-      end
-    end
     self.clubs = Club.where internal_name: permitted_clubs
     self.save!
   end
