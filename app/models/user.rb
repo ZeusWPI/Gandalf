@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :enrolled_clubs_members, dependent: nil # FKs will handle this
   has_many :enrolled_clubs, through: :enrolled_clubs_members, source: :club
 
-  after_create :fetch_enrolled_clubs
+  after_create :fetch_club, :fetch_enrolled_clubs
 
   # this should add all extra CAS attributes returned by the server to the current session
   # extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
@@ -121,7 +121,7 @@ class User < ApplicationRecord
     cas_to_dsa_associations.fetch(self.username, Set[])
   end
 
-  def fetch_clubs
+  def fetch_club
     dsa_managed = dsa_fetch_club
     fk_managed = fk_fetch_club
     permitted_clubs = dsa_managed + fk_managed
@@ -139,7 +139,7 @@ class User < ApplicationRecord
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
     User.all.find_each(&:fetch_enrolled_clubs)
-    User.all.find_each(&:fetch_clubs)
+    User.all.find_each(&:fetch_club)
   end
 
   def self.from_omniauth(auth)
