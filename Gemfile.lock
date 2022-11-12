@@ -169,7 +169,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.18.0)
+    loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -335,10 +335,10 @@ GEM
     sdoc (2.4.0)
       rdoc (>= 5.0)
     select2-rails (4.0.13)
-    sentry-rails (5.5.0)
+    sentry-rails (5.6.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.5.0)
-    sentry-ruby (5.5.0)
+      sentry-ruby (~> 5.6.0)
+    sentry-ruby (5.6.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
     sidekiq (7.0.1)
       concurrent-ruby (< 2)
@@ -408,7 +408,7 @@ GEM
       will_paginate (>= 3.0.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   arm64-darwin
