@@ -18,12 +18,12 @@ class RegistrationsGrid
   column(:name)
   column(:email)
   column(:access_level, header: "Ticket", order: proc { |scope|
-    scope.joins(:access_levels).order("access_levels.name")
+    scope.joins(:access_level).order("access_levels.name")
   }) do |registration|
     registration.access_level.name
   end
   column(:payment_code)
-  column(:to_pay, html: true, order: "registrations.price - paid", descending: true) do |registration|
+  column(:to_pay, html: true, order: Arel.sql("price - paid"), descending: true) do |registration|
     render partial: 'registration_payment_form', locals: { registration: registration }
   end
   column(:actions, html: true) do |registration|
