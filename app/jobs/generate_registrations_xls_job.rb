@@ -11,9 +11,9 @@ class GenerateRegistrationsXlsJob < ApplicationJob
     xls = Spreadsheet::Workbook.new
 
     sheet = xls.create_worksheet
-    sheet.update_row 0, "Naam", "Email", "Studentnummer", "Ticket", "Comment", "Te betalen"
+    sheet.update_row 0, "Datum", "Naam", "Email", "Studentnummer", "Ticket", "Comment", "Te betalen"
     event.registrations.each.with_index do |reg, i|
-      sheet.update_row i + 1, reg.name, reg.email, reg.student_number, reg.access_level.name, reg.comment, reg.to_pay
+      sheet.update_row i + 1, reg.created_at, reg.name, reg.email, reg.student_number, reg.access_level.name, reg.comment, reg.to_pay
     end
 
     file = Tempfile.new
