@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'dotenv-rails'
 
-gem 'bundler', '>= 2.3.11'
+gem 'bundler', '= 2.4.8'
 
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
