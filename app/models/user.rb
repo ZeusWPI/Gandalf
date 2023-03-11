@@ -56,8 +56,10 @@ class User < ApplicationRecord
 
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
-    User.all.find_each(&:enqueue_fetch_enrolled_clubs)
-    User.all.find_each(&:enqueue_fetch_club)
+    User.all.find_each do |u|
+      User::FetchEnrolledClubsJob.set(wait: rand(240).minutes).perform_later(u.id)
+      User::FetchClubJob.set(wait: rand(240).minutes).perform_later(u.id)
+    end
   end
 
   def self.from_omniauth(auth)
