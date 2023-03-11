@@ -421,7 +421,7 @@ DEPENDENCIES
   barby
   bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap
-  bundler (>= 2.3.11)
+  bundler (= 2.4.8)
   cancancan
   capistrano (~> 3.17)
   capistrano-docker!
@@ -475,4 +475,4 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 BUNDLED WITH
-   2.3.11
+   2.4.8

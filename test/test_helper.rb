@@ -7,6 +7,8 @@ require 'rails/test_help'
 require 'capybara/rails'
 require 'capybara/poltergeist'
 
+require 'minitest/autorun'
+
 Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
 require 'webmock/minitest'
