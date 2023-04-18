@@ -1,2 +1,3 @@
 web: PORT=3000 rails s
 sidekiq: bundle exec sidekiq
+db: docker-compose up -d
