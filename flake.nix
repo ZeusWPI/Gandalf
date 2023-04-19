@@ -22,7 +22,16 @@
           default = gandalf;
           gandalf = pkgs.devshell.mkShell {
             name = "Gandalf";
-            imports = [ "${devshell}/extra/language/ruby.nix" ];
+            imports = [
+              "${devshell}/extra/language/ruby.nix"
+              "${devshell}/extra/git/hooks.nix"
+            ];
+            git.hooks = {
+              enable = true;
+              pre-commit = {
+                text = "bundle exec rubocop";
+              };
+            };
             packages = with pkgs; [
               docker
               nodejs
