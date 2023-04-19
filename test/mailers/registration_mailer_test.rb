@@ -33,6 +33,6 @@ class RegistrationMailerTest < ActionMailer::TestCase
     email = ActionMailer::Base.deliveries.last
     assert_match(/Ticket for/, email.subject)
     # We only have a html part (and 2 png parts) here
-    assert_match(/Een signatuur/, email.parts.first.body.to_s)
+    assert_match(/Een signatuur/, email.parts.first.parts.first.body.to_s)
   end
 end

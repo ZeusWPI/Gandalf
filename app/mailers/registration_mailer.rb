@@ -13,6 +13,8 @@ class RegistrationMailer < ApplicationMailer
 
     barcodes = GenerateEmailBarcodes.new(@registration.barcode_data).call
 
+    attachments["event.ics"] = GenerateIcal.new(@registration.event).call
+
     attachments.inline['barcode.png'] = barcodes.first
     attachments.inline['barcode-tilted.png'] = barcodes.second
 
