@@ -79,6 +79,7 @@ class RegistrationsController < ApplicationController
 
     @event = @registration.event
     @barcode = GenerateHtmlBarcodes.new(@registration.barcode_data).call
+    @qr_code = GenerateHtmlEpcQr.new(@registration.epc_data).call
   end
 
   def update

@@ -72,6 +72,23 @@ class Registration < ApplicationRecord
     self.save!
   end
 
+  def epc_data
+    <<~HEREDOC
+      BCD
+      002
+      1
+      SCT
+
+      #{event.club.name}
+      #{event.bank_number}
+      EUR#{format '%.2f', to_pay}
+
+
+      #{payment_code}
+
+    HEREDOC
+  end
+
   def self.find_payment_code_from_csv(csvline)
     match = /GAN\d+/.match(csvline)
     if match
