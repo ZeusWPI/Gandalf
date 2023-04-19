@@ -11,6 +11,12 @@ class AccessLevel < ApplicationRecord
   validates :capacity, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
 
   validate do |access_level|
+    if access_level.capacity && access_level.registrations.size > access_level.capacity
+      access_level.errors.add "Registration", "count exceeds capacity."
+    end
+  end
+
+  validate do |access_level|
     access_level.errors.add :event_id, "has no bank number." if access_level.price.positive? && access_level.event.bank_number.blank?
   end
 
