@@ -39,10 +39,10 @@ $(document).on('turbolinks:load', function() {
     }
   };
 
-  $("#registration_access_levels").on('change', function() {
+  $("#registration_access_level").on('change', function() {
     return hideCommentFieldIfNeeded($(this).val());
   });
 
-  return hideCommentFieldIfNeeded($("#registration_access_levels").val());
+  return hideCommentFieldIfNeeded($("#registration_access_level").val());
 
 });
