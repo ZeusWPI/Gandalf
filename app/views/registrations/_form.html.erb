@@ -12,9 +12,7 @@
       <%= form_text_area f, :comment %>
       <%= javascript_tag do %>
         window.ticketsWithComments = <%= @event.access_levels.find_all(&:has_comment).map(&:id).to_json %>
-        window.freeTickets = <%= @event.access_levels.find_all{|_| :price == 0}.map(&:id).to_json %>
-        access_levels = <%= @event.access_levels.find_all{|_| true}.to_json %>
-        console.log("poop")
+        window.freeTickets = <%= @event.access_levels.where(price: 0).map(&:id).to_json %>
       <% end %>
       <%= f.submit "Register", class: 'btn btn-group btn-primary' %>
     <% end %>
