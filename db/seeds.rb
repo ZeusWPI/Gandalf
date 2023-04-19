@@ -12,6 +12,15 @@ url = 'https://dsa.ugent.be/api/verenigingen'
 data = JSON(HTTParty.get(url).body)["associations"]
 WebMock.disable_net_connect!
 
+# Zeus peoples
+puts "Add Zeus WPI <3"
+club = Club.new do |c|
+  c.internal_name = 'zeus'
+  c.display_name = 'Zeus WPI'
+  c.full_name = 'Zeus WPI'
+end
+club.save
+
 puts "Seed clubs from DSA api"
 puts "---"
 
@@ -28,11 +37,3 @@ data.each do |association|
   club.save
 end
 
-# Zeus peoples
-puts "Add Zeus WPI <3"
-club = Club.new do |c|
-  c.internal_name = 'zeus'
-  c.display_name = 'Zeus WPI'
-  c.full_name = 'Zeus WPI'
-end
-club.save

@@ -294,6 +294,10 @@ GEM
       railties (>= 5.0)
     rexml (3.2.5)
     ri_cal (0.8.8)
+    rqrcode (2.1.2)
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 1.0)
+    rqrcode_core (1.2.0)
     rubocop (1.36.0)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -412,7 +416,6 @@ DEPENDENCIES
   barby
   bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap
-  bundler (>= 2.3.11)
   cancancan
   capistrano (~> 3.17)
   capistrano-docker!
@@ -443,6 +446,7 @@ DEPENDENCIES
   rails_style!
   record_tag_helper
   ri_cal
+  rqrcode
   rubocop-minitest
   sass-rails
   sdoc
