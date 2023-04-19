@@ -35,7 +35,7 @@ class User
       return Set.new unless resp.success?
 
       hash = JSON[resp.body]
-      clubs = hash['clubs'].map { |club| club['internal_name'].downcase }.to_set
+      clubs = hash['clubs'].to_set { |club| club['internal_name'].downcase }
       # Only return clubs FK can manage
       clubs & fk_authorized_clubs
     end

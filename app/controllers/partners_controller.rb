@@ -23,6 +23,14 @@ class PartnersController < ApplicationController
     @partner = Partner.new
   end
 
+  def edit
+    @event = Event.find params.require(:event_id)
+    authorize! :update, @event
+
+    @partner = @event.partners.find params.require(:id)
+    respond_with @partner
+  end
+
   def create
     @event = Event.find params.require(:event_id)
     authorize! :update, @event
@@ -36,14 +44,6 @@ class PartnersController < ApplicationController
       flash.now[:error] = "Something went wrong creating the partner"
     end
 
-    respond_with @partner
-  end
-
-  def edit
-    @event = Event.find params.require(:event_id)
-    authorize! :update, @event
-
-    @partner = @event.partners.find params.require(:id)
     respond_with @partner
   end
 

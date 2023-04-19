@@ -35,9 +35,13 @@ class EventsController < ApplicationController
 
   def edit; end
 
-  def destroy
-    @event.destroy!
-    redirect_to action: :index
+  def create
+    authorize! :create, Event
+
+    @event = Event.new(event_create_params)
+    flash.now[:success] = "Successfully created event." if @event.save
+
+    respond_with @event
   end
 
   def update
@@ -48,6 +52,11 @@ class EventsController < ApplicationController
     render action: :edit
   end
 
+  def destroy
+    @event.destroy!
+    redirect_to action: :index
+  end
+
   def toggle_registration_open
     @event = Event.find params.require(:id)
     authorize! :update, @event
@@ -55,15 +64,6 @@ class EventsController < ApplicationController
     @event.toggle_registration_open
 
     redirect_to action: :edit
-  end
-
-  def create
-    authorize! :create, Event
-
-    @event = Event.new(event_create_params)
-    flash.now[:success] = "Successfully created event." if @event.save
-
-    respond_with @event
   end
 
   def statistics

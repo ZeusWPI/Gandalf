@@ -5,13 +5,20 @@ class AccessLevelsController < ApplicationController
 
   respond_to :html, :js
 
+  def index
+    @event = Event.find params.require(:event_id)
+    authorize! :read, @event
+  end
+
   def show
     @access_level = AccessLevel.find params.require(:id)
   end
 
-  def index
+  def edit
     @event = Event.find params.require(:event_id)
-    authorize! :read, @event
+    authorize! :update, @event
+    @access_level = @event.access_levels.find(params.require(:id))
+    respond_with @access_level
   end
 
   def create
@@ -21,13 +28,6 @@ class AccessLevelsController < ApplicationController
 
     flash.now[:error] = "Something went wrong creating the ticket" unless @access_level.save
 
-    respond_with @access_level
-  end
-
-  def edit
-    @event = Event.find params.require(:event_id)
-    authorize! :update, @event
-    @access_level = @event.access_levels.find(params.require(:id))
     respond_with @access_level
   end
 
