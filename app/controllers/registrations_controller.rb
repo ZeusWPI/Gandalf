@@ -20,6 +20,14 @@ class RegistrationsController < ApplicationController
     @registrations = @registrations.paginate(page: params[:page], per_page: 25)
   end
 
+  def show
+    @registration = Registration.find_by(token: params[:token])
+    return head(:not_found) unless @registration
+
+    @event = @registration.event
+    @barcode = GenerateHtmlBarcodes.new(@registration.barcode_data).call
+  end
+
   def new
     @event = Event.find params.require(:event_id)
     @registration = Registration.new
@@ -52,14 +60,6 @@ class RegistrationsController < ApplicationController
     else
       render "events/show"
     end
-  end
-
-  def show
-    @registration = Registration.find_by(token: params[:token])
-    return head(:not_found) unless @registration
-
-    @event = @registration.event
-    @barcode = GenerateHtmlBarcodes.new(@registration.barcode_data).call
   end
 
   def update
