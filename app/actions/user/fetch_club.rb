@@ -21,8 +21,8 @@ class User
     private
 
     def fk_fetch_club
-      fk_authorized_clubs = Set['chemica', 'dentalia', 'filologica', 'fk', 'gbk', 'geografica', 'geologica', 'gfk', 'hermes', 'hilok', 'khk',
-                                'kmf', 'lila', 'lombrosiana', 'moeder-lies', 'oak', 'politeia', 'slavia', 'vbk', 'vdk', 'vek', 'veto',
+      fk_authorized_clubs = Set['chemica', 'dentalia', 'dsa', 'filologica', 'fk', 'gbk', 'geografica', 'geologica', 'gfk', 'hermes', 'hilok',
+                                'khk', 'kmf', 'lila', 'lombrosiana', 'moeder-lies', 'oak', 'politeia', 'slavia', 'vbk', 'vdk', 'vek', 'veto',
                                 'vgk-fgen', 'vgk-flwi', 'vlak', 'vlk', 'vppk', 'vrg', 'vtk', 'wina']
       resp = HTTParty.get(
         "#{Rails.application.secrets.fk_auth_url}/#{user.username}/Gandalf",
@@ -35,7 +35,7 @@ class User
       return Set.new unless resp.success?
 
       hash = JSON[resp.body]
-      clubs = hash['clubs'].map { |club| club['internal_name'] }.to_set
+      clubs = hash['clubs'].map { |club| club['internal_name'].downcase }.to_set
       # Only return clubs FK can manage
       clubs & fk_authorized_clubs
     end
@@ -76,6 +76,8 @@ class User
         return_map.default = nil # clear the default_proc since it can't be serialized
         next return_map
       end
+
+      return Set.new if cas_to_dsa_associations.nil?
 
       cas_to_dsa_associations.fetch(user.username, Set[])
     end
