@@ -26,6 +26,7 @@ class RegistrationsController < ApplicationController
 
     @event = @registration.event
     @barcode = GenerateHtmlBarcodes.new(@registration.barcode_data).call
+    @qr_code = GenerateEpcQr.new(@registration.epc_data).call
   end
 
   def new

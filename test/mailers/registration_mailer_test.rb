@@ -16,7 +16,7 @@ class RegistrationMailerTest < ActionMailer::TestCase
 
     email = ActionMailer::Base.deliveries.last
     assert_match(/Registration for/, email.subject)
-    assert_match(/Een signatuur/, email.parts.first.body.to_s)
+    assert_match(/Een signatuur/, email.parts.first.parts.first.body.to_s)
   end
 
   test "signature of ticket emails can be branded" do

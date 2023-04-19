@@ -5,36 +5,18 @@ require 'barby/outputter/png_outputter'
 require 'chunky_png'
 
 class GenerateEpcQr
-  def initialize(registration)
-    @registration = registration
+  def initialize(epc_data)
+    @epc_data = epc_data
   end
 
   def call
-    qrcode = Barby::QrCode.new(epc_from_registration)
+    qrcode = Barby::QrCode.new(@epc_data)
 
     png_outputter = Barby::PngOutputter.new(qrcode)
     png_outputter.xdim = 4
     png_outputter.ydim = 4
 
-    barcode_canvas = png_outputter.to_image
-
-    barcode_canvas.to_blob
-  end
-
-  def epc_from_registration
-    <<~HEREDOC
-      BCD
-      002
-      1
-      SCT
-
-      #{@registration.event.club.name}
-      #{@registration.event.bank_number}
-      EUR#{format '%.2f', @registration.to_pay}
-
-
-      #{@registration.payment_code}
-
-    HEREDOC
+    qrcode_canvas = png_outputter.to_image
+    qrcode_canvas.to_blob
   end
 end
