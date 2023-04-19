@@ -6,6 +6,9 @@
 In short, Gandalf is a project that does everything that makes organising and managing an event a lot easier for FK-clubs of the University of Ghent. The application is written specifically for the UGent FakulteitenKonvent. It allows students to register for events and it also interacts with the FK-Enrolment database and allows members of student unions to subscribe to member-only events from their clubs.
 
 # Getting started
+
+If you have NixOS or Nix installed, you can use the `flake.nix` to avoid the hassle of installing the right dependencies. Scroll down for more info.
+
 0. Install the prerequisites: ruby 3.0.6, preferably using [asdf](https://asdf-vm.com/), and some system libraries depending on your OS (e.g. imagemagick)
 1. Install the ruby dependencies: `bin/bundle`
 2. Start up the database, sidekiq and rails server by running `bin/dev`
@@ -13,6 +16,14 @@ In short, Gandalf is a project that does everything that makes organising and ma
 4. Browse to http://localhost:3000
 
 In case you want to start the webserver in your IDE, just run `docker-compose up -d` and start Sidekiq manually (`bundle exec sidekiq`)
+
+## Development using Nix
+
+- Make sure you have [Nix](https://nixos.org/download.html#download-nix) installed.
+- Run `nix develop`
+- Done! You have everything installed. You can now:
+    1. Install Ruby dependencies with `gems:refresh`
+    2. Start EVERYTHING with `server:start`
 
 # Manually adding users to clubs / making users admin
 
