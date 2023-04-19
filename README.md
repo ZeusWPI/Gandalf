@@ -6,7 +6,7 @@
 In short, Gandalf is a project that does everything that makes organising and managing an event a lot easier for FK-clubs of the University of Ghent. The application is written specifically for the UGent FakulteitenKonvent. It allows students to register for events and it also interacts with the FK-Enrolment database and allows members of student unions to subscribe to member-only events from their clubs.
 
 # Getting started
-0. Install the prerequisites: ruby 3.0.4, preferably using [asdf](https://asdf-vm.com/), and some system libraries depending on your OS (e.g. imagemagick)
+0. Install the prerequisites: ruby 3.0.6, preferably using [asdf](https://asdf-vm.com/), and some system libraries depending on your OS (e.g. imagemagick)
 1. Install the ruby dependencies: `bin/bundle`
 2. Start up the database, sidekiq and rails server by running `bin/dev`
 3. Set up some database data using `rails db:setup`
