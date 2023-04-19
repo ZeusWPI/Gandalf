@@ -17,6 +17,9 @@ class RegistrationsGrid
 
   column(:name)
   column(:email)
+  column(:created_at) do |registration|
+    registration.created_at.to_formatted_s(:long)
+  end
   column(:access_level, header: "Ticket", order: proc { |scope|
     scope.joins(:access_level).order("access_levels.name")
   }) do |registration|
