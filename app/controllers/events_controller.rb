@@ -27,19 +27,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html { render :show }
-      format.ics do
-        cal = Icalendar::Calendar.new
-        cal.event do |e|
-          e.dtstart = @event.start_date
-          e.dtend = @event.end_date
-          e.location = @event.location
-          e.summary = @event.name
-          e.organizer = "mailto:#{@event.contact_email}"
-          e.organizer = Icalendar::Values::CalAddress.new("mailto:#{@event.contact_email}", cn: @event.club.name)
-        end
-        cal.publish
-        render plain: cal.to_ical
-      end
+      format.ics { render plain: GenerateIcal.new(@event).call }
     end
   end
 
