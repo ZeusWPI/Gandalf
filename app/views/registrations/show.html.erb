@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-sm-6">
+    <%= render partial: 'events/event_details', locals: { event: @event } %>
+    <p>
+      <%= link_to "Register another ticket", event_path(@registration.event) %>
+    </p>
+  </div>
+
+  <div class="col-sm-5 col-sm-offset-1">
+    <h3>Your ticket</h3>
+    <table class="table word-break">
+      <tr>
+        <th class="col-md-3 col-xs-3">Name</th>
+        <td><%= @registration.name %></td>
+      </tr>
+      <tr>
+        <th class="col-md-3 col-xs-3">Email</th>
+        <td><%= @registration.email %></td>
+      </tr>
+      <tr>
+        <th class="col-md-3 col-xs-3">Ticket</th>
+        <td><%= @registration.access_level.name %></td>
+      </tr>
+    </table>
+
+    <% if @registration.paid? %>
+      <div>
+        <%= @barcode %>
+      </div>
+      <div style="transform: rotate(-90deg); transform-origin: top left; margin-top: 300px;">
+        <div>
+          <%= @barcode %>
+        </div>
+      </div>
+    <% else %>
+      <h3>Payment</h3>
+      <table class="table word-break">
+        <tr>
+          <th class="col-md-3 col-xs-3">Price</th>
+          <td><%= euro @registration.access_level.price %></td>
+        </tr>
+        <tr>
+          <th class="col-md-3 col-xs-3">Already paid</th>
+          <td>- <%= euro @registration.paid %></td>
+        </tr>
+        <tr>
+          <th class="col-md-3 col-xs-3">Remaining</th>
+          <td><%= euro @registration.to_pay %></td>
+        </tr>
+      </table>
+
+      <p>
+        Om uw ticket te ontvangen via e-mail, schrijft u <strong><%= nice_amount @registration.to_pay %> euro</strong>
+        over op het rekeningnummer <strong><%= @registration.event.bank_number || "our bank account" %></strong>. Plaats de code
+        <strong>"<%= @registration.payment_code %>"</strong> in de mededeling van de overschrijving (zonder aanhalingstekens). <br />
+        Als u de
+        code vergeet mee te geven of niet correct vermeldt in de beschrijving, dan kunnen wij uw betaling niet verwerken
+        en zal u uw ticket niet ontvangen. U mag maximaal één code ingeven per overschrijving.
+      </p>
+    <% end %>
+  </div>
+</div>

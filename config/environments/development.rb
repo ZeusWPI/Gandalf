@@ -36,7 +36,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   # Set base URL because emails don't have the Host header context
-  config.action_mailer.default_url_options = { :host => 'https://localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'http://localhost:3000' }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

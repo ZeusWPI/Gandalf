@@ -35,6 +35,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Set base URL because emails don't have the Host header context
+  config.action_mailer.default_url_options = { :host => 'http://example.com' }
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.

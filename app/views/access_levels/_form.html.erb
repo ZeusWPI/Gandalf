@@ -2,7 +2,7 @@
   <%= form_for [object.event, object], remote: true do |f| %>
     <td><%= f.text_field :name, class: 'form-control' %></td>
     <td><%= f.number_field :capacity, class: 'form-control', placeholder: 0 %></td>
-    <td><%= f.text_field :price, value: number_with_precision(f.object.price, precision: 2), class: 'form-control', placeholder: "0.00" %></td>
+    <td><%= f.text_field :price, value: nice_amount(f.object.price), class: 'form-control', placeholder: "0.00" %></td>
     <td width="130px">
       <%= f.collection_select :permit, AccessLevel.permits.keys, :itself, lambda {|k| translate(k)}, {}, class: 'form-control' %>
     </td>

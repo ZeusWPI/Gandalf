@@ -26,6 +26,8 @@ class Registration < ApplicationRecord
     record.payment_code = Registration.create_payment_code if record.payment_code.nil?
   end
 
+  before_save :ensure_token
+
   after_save do |record|
     if !record.access_level.capacity.nil? && (record.access_level.registrations.count > record.access_level.capacity)
       record.errors.add :access_level, "type is sold out."
@@ -95,6 +97,10 @@ class Registration < ApplicationRecord
     end
   end
 
+  def ensure_token
+    self.token ||= SecureRandom.uuid
+  end
+
   private
 
   def from_cents(value)
@@ -122,6 +128,7 @@ end
 #  payment_code    :string(255)
 #  price           :integer
 #  student_number  :string(255)
+#  token           :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
 #  access_level_id :integer          not null
@@ -132,6 +139,7 @@ end
 #  index_registrations_on_access_level_id  (access_level_id)
 #  index_registrations_on_event_id         (event_id)
 #  index_registrations_on_payment_code     (payment_code) UNIQUE
+#  index_registrations_on_token            (token)
 #
 # Foreign Keys
 #

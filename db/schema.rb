@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_09_134241) do
+ActiveRecord::Schema.define(version: 2022_10_09_173017) do
 
   create_table "access_levels", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
@@ -142,9 +142,11 @@ ActiveRecord::Schema.define(version: 2022_10_09_134241) do
     t.string "barcode_data"
     t.string "payment_code"
     t.integer "access_level_id", null: false
+    t.string "token", null: false
     t.index ["access_level_id"], name: "index_registrations_on_access_level_id"
     t.index ["event_id"], name: "index_registrations_on_event_id"
     t.index ["payment_code"], name: "index_registrations_on_payment_code", unique: true
+    t.index ["token"], name: "index_registrations_on_token"
   end
 
   create_table "users", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
