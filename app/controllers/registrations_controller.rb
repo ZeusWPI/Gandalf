@@ -25,25 +25,6 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new
   end
 
-  def destroy
-    @event = Event.find params.require(:event_id)
-    authorize! :destroy, @event
-    registration = Registration.find params.require(:id)
-    @id = registration.id
-    registration.destroy!
-  end
-
-  def info
-    @registration = Registration.find params.require(:id)
-    authorize! :read, @registration.event
-  end
-
-  def resend
-    @registration = Registration.find params.require(:id)
-    authorize! :update, @registration.event
-    @registration.deliver
-  end
-
   def create
     @event = Event.find params.require(:event_id)
 
@@ -81,6 +62,25 @@ class RegistrationsController < ApplicationController
     @registration.deliver if @registration.paid != paid
 
     respond_with @registration
+  end
+
+  def destroy
+    @event = Event.find params.require(:event_id)
+    authorize! :destroy, @event
+    registration = Registration.find params.require(:id)
+    @id = registration.id
+    registration.destroy!
+  end
+
+  def info
+    @registration = Registration.find params.require(:id)
+    authorize! :read, @registration.event
+  end
+
+  def resend
+    @registration = Registration.find params.require(:id)
+    authorize! :update, @registration.event
+    @registration.deliver
   end
 
   def email
