@@ -41,7 +41,7 @@ $(document).on('turbolinks:load', function() {
 
   const hidePaymentInfoIfNeeded = function(value) {
     const val = parseInt(value);
-    if (window.freeTickets && (window.freeTickets.indexOf(val) !== -1)) {
+    if (window.freeTickets && window.freeTickets.includes(val)) {
       $("#payment-info").hide();
     } else {
       $("#payment-info").show();
@@ -50,10 +50,10 @@ $(document).on('turbolinks:load', function() {
 
   $("#registration_access_level").on('change', function() {
     hidePaymentInfoIfNeeded($(this).val());
-    return hideCommentFieldIfNeeded($(this).val());
+    hideCommentFieldIfNeeded($(this).val());
   });
 
   hidePaymentInfoIfNeeded($("#registration_access_level").val());
-  return hideCommentFieldIfNeeded($("#registration_access_level").val());
+  hideCommentFieldIfNeeded($("#registration_access_level").val());
 
 });
