@@ -36,7 +36,9 @@ class AccessLevelsController < ApplicationController
     authorize! :update, @event
     @access_level = @event.access_levels.find(params.require(:id))
 
-    flash.now[:error] = "Something went wrong updating the ticket" unless @access_level.update(access_level_params)
+    flash.now[:error] = "Something went wrong updating the ticket" unless @access_level.update(
+      @access_level.registrations.any? ? access_level_params_strict : access_level_params
+    )
 
     respond_with @access_level
   end
@@ -67,5 +69,9 @@ class AccessLevelsController < ApplicationController
 
   def access_level_params
     params.require(:access_level).permit(:name, :capacity, :price, :has_comment, :hidden, :permit)
+  end
+
+  def access_level_params_strict
+    params.require(:access_level).permit(:name, :capacity)
   end
 end
