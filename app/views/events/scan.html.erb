@@ -47,7 +47,7 @@
           <div id="scan-by-name" class="input-group">
             <div class="input-group">
               <input required type="text" class="form-control typeahead"
-                placeholder="Start searching by entering a name or an email" name="name" id="name">
+                placeholder="Start searching by entering a name, email or barcode" name="name" id="name">
               <span class="input-group-btn">
                 <button class="btn btn-primary" name="button" type="submit">
                   Submit
@@ -67,7 +67,7 @@
 <script>
 var json = '<%= list_registrations_event_path %>';
 var registrations = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'email'),
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'email', 'barcode'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     prefetch: '<%= list_registrations_event_path %>'
 });
@@ -89,13 +89,13 @@ $('#name').typeahead(
                 var container = $('<div/>');
                 var name = $('<span/>', {
                     class: "typeahead-scan-name",
-                    text: registration.name
+                    text: `${registration.name} (${registration.email})`
                 });
-                var email = $('<span/>', {
-                    class: "typeahead-scan-email",
-                    text: registration.email
-                })
-                return container.append(name).append(email);
+                var barcode = $('<span/>', {
+                  class: "typeahead-scan-barcode",
+                  text: registration.barcode
+                });
+                return container.append(name).append(barcode);
             }
         }
     }
