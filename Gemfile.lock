@@ -360,7 +360,7 @@ GEM
       redis-client (>= 0.11.0)
     simple_enum (2.3.2)
       activesupport (>= 4.0.0)
-    simple_form (5.1.0)
+    simple_form (5.2.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     simple_token_authentication (1.18.1)
