@@ -93,7 +93,7 @@ gem 'webmock', require: false
 gem 'icalendar'
 
 # Easy date validations
-gem 'validates_timeliness', '~> 6.0.0'
+gem 'validates_timeliness', '~> 6.0.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
