@@ -92,7 +92,7 @@ GEM
     bootsnap (1.15.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    cancancan (3.4.0)
+    cancancan (3.5.0)
     capistrano (3.17.1)
       airbrussh (>= 1.0.0)
       i18n
