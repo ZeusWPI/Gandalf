@@ -382,7 +382,7 @@ GEM
     stringio (3.0.5)
     thor (1.2.1)
     tilt (2.0.10)
-    timeliness (0.4.4)
+    timeliness (0.4.5)
     timeout (0.3.2)
     tinymce-rails (6.4.1)
       railties (>= 3.1.1)
@@ -398,7 +398,7 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.4.2)
-    validates_timeliness (6.0.0)
+    validates_timeliness (6.0.1)
       activemodel (>= 6.0.0, < 7)
       timeliness (>= 0.3.10, < 1)
     warden (1.2.9)
@@ -481,7 +481,7 @@ DEPENDENCIES
   turbolinks
   twitter-typeahead-rails
   uglifier
-  validates_timeliness (~> 6.0.0)
+  validates_timeliness (~> 6.0.1)
   web-console
   webmock
   whenever
