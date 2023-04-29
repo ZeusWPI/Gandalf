@@ -117,8 +117,8 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    datagrid (1.6.3)
-      rails (>= 4.0)
+    datagrid (1.7.0)
+      railties (>= 6.0)
     date (3.3.3)
     devise (4.9.2)
       bcrypt (~> 3.0)
