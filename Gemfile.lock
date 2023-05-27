@@ -113,7 +113,7 @@ GEM
     chunky_png (1.4.0)
     cliver (0.3.2)
     concurrent-ruby (1.2.2)
-    connection_pool (2.4.0)
+    connection_pool (2.4.1)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -353,11 +353,11 @@ GEM
       sentry-ruby (~> 5.9.0)
     sentry-ruby (5.9.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sidekiq (7.0.9)
+    sidekiq (7.1.1)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
-      redis-client (>= 0.11.0)
+      redis-client (>= 0.14.0)
     simple_enum (2.3.2)
       activesupport (>= 4.0.0)
     simple_form (5.2.0)
@@ -472,7 +472,7 @@ DEPENDENCIES
   select2-rails
   sentry-rails
   sentry-ruby
-  sidekiq (~> 7.0)
+  sidekiq (~> 7.1)
   simple_enum
   simple_form
   simple_token_authentication

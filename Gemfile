@@ -149,4 +149,4 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem "sidekiq", "~> 7.0"
+gem "sidekiq", "~> 7.1"
