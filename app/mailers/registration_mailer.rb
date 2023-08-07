@@ -5,6 +5,9 @@ class RegistrationMailer < ApplicationMailer
 
   def confirm_registration(registration)
     @registration = registration
+
+    attachments.inline['epc.png'] = GenerateEpcQr.new(@registration.epc_data).call
+
     mail to: "#{registration.name} <#{registration.email}>", subject: "Registration for #{registration.event.name}"
   end
 

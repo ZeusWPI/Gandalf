@@ -49,6 +49,10 @@
         </tr>
       </table>
 
+      <div>
+          <img src="data:image/png;base64,<%= Base64.encode64 @qr_code %>">
+      </div>
+
       <p>
         Om uw ticket te ontvangen via e-mail, schrijft u <strong><%= nice_amount @registration.to_pay %> euro</strong>
         over op het rekeningnummer <strong><%= @registration.event.bank_number || "our bank account" %></strong>. Plaats de code
