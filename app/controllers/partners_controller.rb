@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PartnersController < ApplicationController
+  include ActionView::Helpers::OutputSafetyHelper
+
   before_action :authenticate_user!, except: [:show, :confirm]
   before_action :authenticate_partner!, only: [:show, :confirm]
 
