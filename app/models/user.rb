@@ -34,7 +34,13 @@ class User < ApplicationRecord
         self.cas_uid = value
       end
     end
+
     self.save!
+
+    if self.cas_ugentStudentID # rubocop:disable Style/GuardClause
+      enqueue_fetch_club
+      enqueue_fetch_enrolled_clubs
+    end
   end
 
   # return Givenname + surname or username if these don't exist
