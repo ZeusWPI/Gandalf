@@ -188,7 +188,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
-    minitest (5.15.0)
+    minitest (5.22.3)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
@@ -485,7 +485,7 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   listen
-  minitest (= 5.15.0)
+  minitest (= 5.22.3)
   mysql2
   omniauth-rails_csrf_protection
   omniauth-zeuswpi
