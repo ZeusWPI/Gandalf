@@ -17,7 +17,7 @@ gem 'bootsnap'
 gem 'turbolinks'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sassc-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
