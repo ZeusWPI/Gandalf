@@ -23,5 +23,7 @@ module Isengard
 
     config.rack_cas.server_url = "https://login.ugent.be"
     config.rack_cas.exclude_path = "/sidekiq"
+
+    config.tinymce.install = :copy
   end
 end
