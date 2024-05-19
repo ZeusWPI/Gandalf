@@ -417,7 +417,7 @@ GEM
     tilt (2.3.0)
     timeliness (0.4.5)
     timeout (0.4.1)
-    tinymce-rails (6.8.3)
+    tinymce-rails (7.1.0)
       railties (>= 3.1.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
