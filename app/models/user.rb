@@ -62,7 +62,7 @@ class User < ApplicationRecord
 
   # specifies the daily update for a users (enrolled) clubs
   def self.daily_update
-    User.all.find_each do |u|
+    User.find_each do |u|
       User::FetchEnrolledClubsJob.set(wait: rand(240).minutes).perform_later(u.id)
       User::FetchClubJob.set(wait: rand(240).minutes).perform_later(u.id)
     end
