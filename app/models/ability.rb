@@ -32,7 +32,7 @@ class Ability
     if clubs.present?
       can :create, Event
       can :show, Event
-      can :crud, Event, ["? IN (?)", :club_id, clubs.pluck(:id)] do |e|
+      can :crud, Event, ["club_id IN (?)", clubs.ids] do |e|
         clubs.include? e.club
       end
     else
