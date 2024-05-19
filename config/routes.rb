@@ -6,10 +6,9 @@ Isengard::Application.routes.draw do
 
   # Sidekiq UI
   require 'sidekiq/web'
-  Sidekiq::Web.use(Rack::Auth::Basic) do |username, password|
-    username == Rails.application.secrets.sidekiq[:basic_auth][:username] && password == Rails.application.secrets.sidekiq[:basic_auth][:password]
+  authenticate :user, -> (user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
-  mount Sidekiq::Web => '/sidekiq'
 
   # PG Hero
   authenticate :user, -> (user) { user.admin? } do
