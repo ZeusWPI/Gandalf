@@ -134,32 +134,32 @@ end
 #
 # Table name: registrations
 #
-#  id              :integer          not null, primary key
+#  id              :bigint           not null, primary key
 #  barcode         :string(255)
 #  barcode_data    :string(255)
 #  checked_in_at   :datetime
-#  comment         :text(65535)
+#  comment         :text
 #  email           :string(255)
 #  name            :string(255)
-#  paid            :integer
+#  paid            :bigint
 #  payment_code    :string(255)
-#  price           :integer
+#  price           :bigint
 #  student_number  :string(255)
 #  token           :string(255)      not null
 #  created_at      :datetime
 #  updated_at      :datetime
-#  access_level_id :integer          not null
-#  event_id        :integer
+#  access_level_id :bigint           not null
+#  event_id        :bigint
 #
 # Indexes
 #
-#  index_registrations_on_access_level_id  (access_level_id)
-#  index_registrations_on_event_id         (event_id)
-#  index_registrations_on_payment_code     (payment_code) UNIQUE
-#  index_registrations_on_token            (token)
+#  idx_16930_index_registrations_on_access_level_id  (access_level_id)
+#  idx_16930_index_registrations_on_event_id         (event_id)
+#  idx_16930_index_registrations_on_payment_code     (payment_code) UNIQUE
+#  idx_16930_index_registrations_on_token            (token)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (access_level_id => access_levels.id)
-#  fk_rails_...  (event_id => events.id) ON DELETE => cascade
+#  fk_rails_...  (access_level_id => access_levels.id) ON DELETE => restrict ON UPDATE => restrict
+#  fk_rails_...  (event_id => events.id) ON DELETE => cascade ON UPDATE => restrict
 #

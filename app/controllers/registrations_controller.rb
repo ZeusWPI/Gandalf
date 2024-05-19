@@ -49,7 +49,7 @@ class RegistrationsController < ApplicationController
     @registration.paid = 0
 
     # overwrite student_number so setting this will not work
-    @registration.student_number = current_user.cas_ugentStudentID if requested_access_level.requires_login?
+    @registration.student_number = current_user.cas_ugentstudentid if requested_access_level.requires_login?
 
     # Send the confirmation email.
     if @registration.save

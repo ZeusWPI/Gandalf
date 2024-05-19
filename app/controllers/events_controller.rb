@@ -22,7 +22,7 @@ class EventsController < ApplicationController
     return unless current_user
 
     @registration.name = current_user.display_name
-    @registration.student_number = current_user.cas_ugentStudentID
+    @registration.student_number = current_user.cas_ugentstudentid
     @registration.email = current_user.cas_mail
 
     respond_to do |format|
@@ -84,7 +84,7 @@ class EventsController < ApplicationController
       @data = @event.access_levels.map do |al|
         {
           name: al.name,
-          data: zeros.merge(al.registrations.group('date(registrations.created_at)').count.transform_keys { |key| key.strftime("%Y-%m-%d") })
+          data: zeros.merge(al.registrations.group('registrations.name, date(registrations.created_at)').count.transform_keys { |key| key.strftime("%Y-%m-%d") })
         }
       end
 
