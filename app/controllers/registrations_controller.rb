@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
 
     authorize! :read, @event
 
-    @registrationsgrid = RegistrationsGrid.new(params[:registrations_grid]) do |scope|
+    @registrationsgrid = RegistrationsGrid.new(order: :name, **params.fetch(:registrations_grid, {}).permit!) do |scope|
       scope.where(event_id: @event.id).order(Arel.sql("registrations.price - paid DESC"))
     end
 

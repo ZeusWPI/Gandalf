@@ -8,9 +8,9 @@ class EventsController < ApplicationController
   respond_to :html, :js, :ics
 
   def index
-    @events = Event.where('end_date > ?', DateTime.now).order(:start_date)
+    @events = Event.where('end_date > ?', DateTime.now).order(start_date: :asc)
     @past_events = if user_signed_in?
-                     Event.accessible_by(current_ability).order(:name)
+                     Event.accessible_by(current_ability).order(start_date: :desc)
                    else
                      []
                    end
@@ -84,7 +84,7 @@ class EventsController < ApplicationController
       @data = @event.access_levels.map do |al|
         {
           name: al.name,
-          data: zeros.merge(al.registrations.group('registrations.name, date(registrations.created_at)').count.transform_keys { |key| key.strftime("%Y-%m-%d") })
+          data: zeros.merge(al.registrations.group('date(registrations.created_at)').count.transform_keys { |key| key.strftime("%Y-%m-%d") })
         }
       end
 

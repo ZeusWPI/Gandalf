@@ -31,7 +31,6 @@ services:
       - "6379:6379"
 
 volumes:
-  db_data:
   gandalf_data:
   gandalf_test_data:
   redis_data:

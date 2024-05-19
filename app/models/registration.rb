@@ -35,8 +35,6 @@ class Registration < ApplicationRecord
     end
   end
 
-  default_scope { order "name ASC" }
-
   def paid
     from_cents read_attribute(:paid)
   end
