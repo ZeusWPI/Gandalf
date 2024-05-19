@@ -11,6 +11,11 @@ Isengard::Application.routes.draw do
   end
   mount Sidekiq::Web => '/sidekiq'
 
+  # PG Hero
+  authenticate :user, -> (user) { user.admin? } do
+    mount PgHero::Engine, at: "pghero"
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

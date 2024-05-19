@@ -111,6 +111,8 @@ gem 'record_tag_helper'
 
 # Database
 gem 'pg'
+gem 'pghero'
+gem "pg_query", ">= 2"
 
 group :development do
   gem 'rails-erd'
