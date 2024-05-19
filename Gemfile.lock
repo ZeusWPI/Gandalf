@@ -197,7 +197,6 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     mutex_m (0.2.0)
-    mysql2 (0.5.6)
     net-http (0.4.1)
       uri
     net-imap (0.4.11)
@@ -251,6 +250,7 @@ GEM
     parser (3.3.1.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.6)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
@@ -495,10 +495,10 @@ DEPENDENCIES
   letter_opener
   listen
   minitest (= 5.15.0)
-  mysql2
   omniauth-rails_csrf_protection
   omniauth-zeuswpi
   paper_trail
+  pg
   poltergeist
   puma
   rails (~> 6.1)

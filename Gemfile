@@ -110,7 +110,7 @@ gem 'simple_enum'
 gem 'record_tag_helper'
 
 # Database
-gem 'mysql2'
+gem 'pg'
 
 group :development do
   gem 'rails-erd'
