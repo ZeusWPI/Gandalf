@@ -10,7 +10,7 @@ class User
 
     def call
       resp = HTTParty.get("http://registratie.fkgent.be/api/v2/members/clubs_for_ugent_nr.json", query:
-        { key: Rails.application.secrets.enrollment_key, ugent_nr: user.cas_ugentStudentID })
+        { key: Rails.application.secrets.enrollment_key, ugent_nr: user.cas_ugentstudentid })
 
       return unless resp.code == 200
 

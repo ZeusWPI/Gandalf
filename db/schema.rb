@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 2022_10_09_173017) do
     t.datetime "updated_at"
     t.string "cas_givenname"
     t.string "cas_surname"
-    t.string "cas_ugentStudentID"
+    t.string "cas_ugentstudentid"
     t.string "cas_mail"
     t.string "cas_uid"
     t.boolean "admin"

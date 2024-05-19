@@ -16,7 +16,7 @@ class User < ApplicationRecord
   after_create :enqueue_fetch_club, :enqueue_fetch_enrolled_clubs
 
   # this should add all extra CAS attributes returned by the server to the current session
-  # extra var in session: cas_givenname, cas_surname, cas_ugentStudentID, cas_mail, cas_uid (= UGent login)
+  # extra var in session: cas_givenname, cas_surname, cas_ugentstudentid, cas_mail, cas_uid (= UGent login)
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       # I prefer a case over reflection; this is safer if we suddenly get an
@@ -27,7 +27,7 @@ class User < ApplicationRecord
       when :surname
         self.cas_surname = value
       when :ugentStudentID
-        self.cas_ugentStudentID = value
+        self.cas_ugentstudentid = value
       when :mail
         self.cas_mail = value
       when :uid
@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
     self.save!
 
-    if self.cas_ugentStudentID # rubocop:disable Style/GuardClause
+    if self.cas_ugentstudentid # rubocop:disable Style/GuardClause
       enqueue_fetch_club
       enqueue_fetch_enrolled_clubs
     end
@@ -79,24 +79,24 @@ end
 #
 # Table name: users
 #
-#  id                  :integer          not null, primary key
+#  id                  :bigint           not null, primary key
 #  admin               :boolean
 #  cas_givenname       :string(255)
 #  cas_mail            :string(255)
 #  cas_surname         :string(255)
-#  cas_ugentStudentID  :string(255)
+#  cas_ugentstudentid  :string(255)
 #  cas_uid             :string(255)
 #  current_sign_in_at  :datetime
 #  current_sign_in_ip  :string(255)
 #  last_sign_in_at     :datetime
 #  last_sign_in_ip     :string(255)
 #  remember_created_at :datetime
-#  sign_in_count       :integer          default(0), not null
+#  sign_in_count       :bigint           default(0), not null
 #  username            :string(255)      not null
 #  created_at          :datetime
 #  updated_at          :datetime
 #
 # Indexes
 #
-#  index_users_on_username  (username) UNIQUE
+#  idx_16946_index_users_on_username  (username) UNIQUE
 #
