@@ -9,7 +9,7 @@ In short, Gandalf is a project that does everything that makes organising and ma
 
 If you have NixOS or Nix installed, you can use the `flake.nix` to avoid the hassle of installing the right dependencies. Scroll down for more info.
 
-0. Install the prerequisites: ruby 3.3.0, preferably using [asdf](https://asdf-vm.com/), and some system libraries depending on your OS (e.g. imagemagick)
+0. Install the prerequisites: ruby 3.3.1, preferably using [asdf](https://asdf-vm.com/), and some system libraries depending on your OS (e.g. imagemagick)
 1. Install the ruby dependencies: `bin/bundle`
 2. Start up the database, sidekiq and rails server by running `bin/dev`
 3. Set up some database data using `rails db:setup`
