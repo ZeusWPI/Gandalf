@@ -245,7 +245,7 @@ GEM
     omniauth-oauth2 (1.7.3)
       oauth2 (>= 1.4, < 3)
       omniauth (>= 1.9, < 3)
-    omniauth-rails_csrf_protection (1.0.1)
+    omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     omniauth-zeuswpi (1.0.0)
@@ -507,7 +507,7 @@ DEPENDENCIES
   letter_opener
   listen
   minitest (= 5.15.0)
-  omniauth-rails_csrf_protection (= 1.0.1)
+  omniauth-rails_csrf_protection
   omniauth-zeuswpi
   paper_trail
   pg
