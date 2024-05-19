@@ -28,7 +28,7 @@ class SignInController < ApplicationController
     if partner
       sign_in partner, store: SimpleTokenAuthentication.sign_in_token
     else
-      flash[:error] = safe_join(
+      flash[:error] = ActionController::Base.helpers.safe_join(
         "Something went wrong. Make sure you click the link or copy the whole link (including parameters)! ",
         view_context.mail_to(@event.contact_email, 'Contact us'),
         " if the problem persists."

@@ -100,7 +100,7 @@ class PartnersController < ApplicationController
         @registration.deliver
         flash.now[:success] = "Your invitation has been confirmed. Your ticket should arrive shortly."
       else
-        flash.now[:error] = safe_join(
+        flash.now[:error] = ActionController::Base.helpers.safe_join(
           "It looks like there already is someone with your name and/or email registered for this event. ",
           view_context.mail_to(@event.contact_email, 'Contact us'),
           " if this is not correct."
