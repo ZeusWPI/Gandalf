@@ -64,7 +64,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtprelay.ugent.be',
+    address: 'flanagan.zeus.gent',
+    port: 465,
+    user_name: 'admin',
+    password: ENV["SMTP_PASSWORD"],
+    tls: true,
+    authentication:  "plain",
     open_timeout: 5,
     read_timeout: 5
   }
