@@ -1,4 +1,4 @@
-server 'gandalf', roles: %w{web app db},
+server 'pratchett.ugent.be', user: 'gandalf', roles: %w{web app db},
   ssh_options: {
     forward_agent: true,
     auth_methods: ['publickey'],
