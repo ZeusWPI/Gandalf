@@ -148,14 +148,18 @@ GEM
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (4.26.1)
-      rake (>= 13)
-    google-protobuf (4.26.1-arm64-darwin)
-      rake (>= 13)
-    google-protobuf (4.26.1-x86_64-darwin)
-      rake (>= 13)
-    google-protobuf (4.26.1-x86_64-linux)
-      rake (>= 13)
+    google-protobuf (4.34.1)
+      bigdecimal
+      rake (~> 13.3)
+    google-protobuf (4.34.1-arm64-darwin)
+      bigdecimal
+      rake (~> 13.3)
+    google-protobuf (4.34.1-x86_64-darwin)
+      bigdecimal
+      rake (~> 13.3)
+    google-protobuf (4.34.1-x86_64-linux-gnu)
+      bigdecimal
+      rake (~> 13.3)
     hashdiff (1.1.0)
     hashie (5.0.0)
     httparty (0.22.0)
@@ -259,8 +263,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.6)
-    pg_query (5.1.0)
-      google-protobuf (>= 3.22.3)
+    pg_query (6.2.2)
+      google-protobuf (>= 3.25.3)
     pghero (3.4.1)
       activerecord (>= 6)
     poltergeist (1.18.1)
@@ -321,7 +325,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rainbow (3.1.1)
-    rake (13.2.1)
+    rake (13.4.2)
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
@@ -546,4 +550,4 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 BUNDLED WITH
-   2.5.10
+  4.0.11

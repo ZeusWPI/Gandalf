@@ -9,7 +9,7 @@ In short, Gandalf is a project that does everything that makes organising and ma
 
 ## Common setup
 
-1. Install the prerequisites: ruby 3.3.1, preferably using [asdf](https://asdf-vm.com/), and some system libraries depending on your OS (e.g. imagemagick)
+1. Install the prerequisites: ruby 3.3.11, preferably using [asdf](https://asdf-vm.com/), and some system libraries depending on your OS (e.g. imagemagick)
 2. Install the ruby dependencies: `bin/bundle`
 3. Start up the database, sidekiq and rails server by running `bin/dev`
 4. Set up some database data using `rails db:setup`
