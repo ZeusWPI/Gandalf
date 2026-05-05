@@ -36,8 +36,8 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Prepare database
-        run: bundle exec rake db:prepare
+      - name: Load schema
+        run: bundle exec rake db:schema:load
         env:
           RAILS_ENV: test
 
