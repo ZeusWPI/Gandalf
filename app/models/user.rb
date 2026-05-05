@@ -69,10 +69,12 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(zeus_uid: auth.uid).first_or_create! do |user|
-      user.username = auth.dig(:extra, :raw_info, :username)
-      user.admin = auth.dig(:extra, :raw_info, :admin)
+    user = where(zeus_uid: auth.uid).first_or_create! do |u|
+      u.username = auth.dig(:extra, :raw_info, :username)
+      u.admin = auth.dig(:extra, :raw_info, :admin)
     end
+    user.update!(admin: auth.dig(:extra, :raw_info, :admin))
+    user
   end
 end
 
