@@ -22,14 +22,14 @@ end
 #
 # Table name: clubs
 #
-#  id            :bigint           not null, primary key
-#  display_name  :string(255)
-#  full_name     :string(255)
-#  internal_name :string(255)
+#  id            :integer          not null, primary key
+#  display_name  :string
+#  full_name     :string
+#  internal_name :string
 #  created_at    :datetime
 #  updated_at    :datetime
 #
 # Indexes
 #
-#  idx_16882_index_clubs_on_internal_name  (internal_name) UNIQUE
+#  index_clubs_on_internal_name  (internal_name) UNIQUE
 #

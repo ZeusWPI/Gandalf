@@ -68,22 +68,22 @@ students_only:
 #
 # Table name: access_levels
 #
-#  id          :bigint           not null, primary key
-#  capacity    :bigint
+#  id          :integer          not null, primary key
+#  capacity    :integer
 #  has_comment :boolean
 #  hidden      :boolean
-#  name        :string(255)
-#  permit      :string(255)      default("everyone")
-#  price       :bigint
+#  name        :string
+#  permit      :string           default("everyone")
+#  price       :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  event_id    :bigint
+#  event_id    :integer
 #
 # Indexes
 #
-#  idx_16847_index_access_levels_on_event_id  (event_id)
+#  index_access_levels_on_event_id  (event_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (event_id => events.id) ON DELETE => cascade ON UPDATE => restrict
+#  fk_rails_...  (event_id => events.id) ON DELETE => cascade
 #
