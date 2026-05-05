@@ -53,9 +53,9 @@ gem 'cancancan'
 gem 'httparty'
 
 # Glitchtip
-gem 'stackprof'
-gem 'sentry-ruby'
 gem 'sentry-rails'
+gem 'sentry-ruby'
+gem 'stackprof'
 
 # Logging is awesome, and paper_trail even more
 gem 'paper_trail'
